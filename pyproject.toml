@@ -1,0 +1,21 @@
+[project]
+name = "inventory-api"
+version = "0.1.0"
+description = "A backend API for managing product inventory, suppliers, and stock levels."
+authors = [
+    {name = "mrdsx"}
+]
+license = {file = "LICENSE.txt"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi (>=0.116.1,<0.117.0)",
+    "uvicorn (>=0.35.0,<0.36.0)",
+    "pydantic (>=2.11.7,<3.0.0)",
+    "sqlalchemy (>=2.0.42,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
