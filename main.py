@@ -2,8 +2,6 @@ from fastapi import FastAPI
 from datetime import datetime
 import uvicorn
 
-from routes.suppliers import router as suppliers_router
-
 app = FastAPI()
 
 
@@ -14,9 +12,6 @@ def root():
         "status": "running",
         "timestamp": str(datetime.now()) + "Z",
     }
-
-
-app.include_router(suppliers_router)
 
 
 if __name__ == "__main__":
