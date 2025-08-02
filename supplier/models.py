@@ -3,7 +3,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from database import Base
 
 
-class DB_Supplier(Base):
+class Supplier(Base):
     __tablename__ = "suppliers"
 
     id: Mapped[int] = mapped_column(primary_key=True)

@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_db
 from prefixes import API_ROUTER_PREFIX
-from supplier.models import DB_Supplier
+from supplier.models import Supplier
 from supplier.schemas import SupplierPayload, SupplierSchema
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
@@ -12,7 +12,7 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 @router.get("/suppliers", response_model=list[SupplierSchema])
 async def get_suppliers(session: AsyncSession = Depends(get_db)):
-    suppliers = await session.execute(select(DB_Supplier))
+    suppliers = await session.execute(select(Supplier))
 
     return suppliers.scalars().all()
 
@@ -21,7 +21,7 @@ async def get_suppliers(session: AsyncSession = Depends(get_db)):
 async def create_supplier(
     supplier: SupplierPayload, session: AsyncSession = Depends(get_db)
 ):
-    new_supplier = DB_Supplier(name=supplier.name, contact_email=supplier.contact_email)
+    new_supplier = Supplier(name=supplier.name, contact_email=supplier.contact_email)
     session.add(new_supplier)
     await session.commit()
     await session.refresh(new_supplier)
@@ -31,7 +31,7 @@ async def create_supplier(
 
 @router.delete("/suppliers/{id}")
 async def delete_supplier_by_id(id: int, session: AsyncSession = Depends(get_db)):
-    result = await session.execute(select(DB_Supplier).where(DB_Supplier.id == id))
+    result = await session.execute(select(Supplier).where(Supplier.id == id))
     db_supplier = result.scalar()
     if db_supplier is None:
         raise HTTPException(
