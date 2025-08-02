@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -27,3 +27,17 @@ async def create_supplier(
     await session.refresh(new_supplier)
 
     return new_supplier
+
+
+@router.delete("/suppliers/{id}")
+async def delete_supplier_by_id(id: int, session: AsyncSession = Depends(get_db)):
+    result = await session.execute(select(DB_Supplier).where(DB_Supplier.id == id))
+    db_supplier = result.scalar()
+    if db_supplier is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Supplier not found"
+        )
+    await session.delete(db_supplier)
+    await session.commit()
+
+    return {"message": "Supplier successfully deleted"}
