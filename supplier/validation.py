@@ -3,13 +3,21 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from supplier.models import Supplier
+from supplier.schemas import SupplierPayload
 
 
-async def validate_supplier_not_exists(name: str, session: AsyncSession):
-    result = await session.execute(select(Supplier).where(Supplier.name == name))
+async def validate_supplier_not_exists(
+    supplier: SupplierPayload, session: AsyncSession
+):
+    result = await session.execute(
+        select(Supplier).where(
+            (Supplier.name == supplier.name)
+            | (Supplier.contact_email == supplier.contact_email)
+        )
+    )
     db_supplier = result.scalar()
     if db_supplier is not None:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=f"Supplier '{name}' already exists",
+            detail=f"Supplier already exists",
         )

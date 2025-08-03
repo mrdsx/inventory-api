@@ -23,7 +23,7 @@ async def get_suppliers(session: AsyncSession = Depends(get_db)):
 async def create_supplier(
     supplier: SupplierPayload, session: AsyncSession = Depends(get_db)
 ):
-    await validate_supplier_not_exists(supplier.name, session)
+    await validate_supplier_not_exists(supplier, session)
 
     new_supplier = Supplier(name=supplier.name, contact_email=supplier.contact_email)
     session.add(new_supplier)
