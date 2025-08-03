@@ -2,6 +2,7 @@ import uvicorn
 from datetime import datetime
 from fastapi import FastAPI
 
+from product.routes import router as router_products
 from supplier.routes import router as router_suppliers
 
 
@@ -18,6 +19,7 @@ def root():
 
 
 app.include_router(router_suppliers)
+app.include_router(router_products)
 
 
 if __name__ == "__main__":
