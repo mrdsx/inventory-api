@@ -18,7 +18,7 @@ async def get_suppliers(session: AsyncSession = Depends(get_db)):
     return result.scalars().all()
 
 
-@router.post("/suppliers")
+@router.post("/suppliers", response_model=SupplierSchema)
 async def create_supplier(
     supplier: SupplierPayload, session: AsyncSession = Depends(get_db)
 ):
