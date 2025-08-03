@@ -8,7 +8,7 @@ from .schemas import SupplierPayload
 
 async def validate_supplier_not_exists(
     supplier: SupplierPayload, session: AsyncSession
-):
+) -> None:
     result = await session.execute(
         select(Supplier).where(
             (Supplier.name == supplier.name)
