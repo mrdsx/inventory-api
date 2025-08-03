@@ -29,6 +29,23 @@ async def create_supplier(
     return new_supplier
 
 
+@router.put("/suppliers/{id}", response_model=SupplierSchema)
+async def asd(
+    id: int, supplier: SupplierPayload, session: AsyncSession = Depends(get_db)
+):
+    result = await session.execute(select(Supplier).where(Supplier.id == id))
+    db_supplier = result.scalar()
+    if db_supplier is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Supplier not found"
+        )
+
+    for key, value in supplier.model_dump().items():
+        setattr(db_supplier, key, value)
+
+    return db_supplier
+
+
 @router.delete("/suppliers/{id}")
 async def delete_supplier_by_id(id: int, session: AsyncSession = Depends(get_db)):
     result = await session.execute(select(Supplier).where(Supplier.id == id))
