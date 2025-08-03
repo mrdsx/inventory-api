@@ -4,10 +4,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_db
 from prefixes import API_ROUTER_PREFIX
-from supplier.models import Supplier
-from supplier.schemas import SupplierPayload, SupplierSchema
-from supplier.services import find_supplier_by_id
-from supplier.validation import validate_supplier_not_exists
+from . import (
+    find_supplier_by_id,
+    Supplier,
+    SupplierPayload,
+    SupplierSchema,
+    validate_supplier_not_exists,
+)
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 

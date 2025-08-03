@@ -2,8 +2,7 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from supplier.models import Supplier
-from supplier.schemas import SupplierPayload
+from . import Supplier, SupplierPayload
 
 
 async def validate_supplier_not_exists(

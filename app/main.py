@@ -3,7 +3,7 @@ from datetime import datetime
 from fastapi import FastAPI
 
 from product.routes import router as router_products
-from supplier.routes import router as router_suppliers
+from supplier import router_suppliers
 
 
 app = FastAPI()
