@@ -1,5 +1,3 @@
-from models import Product
-from routes import router as router_products
-from schemas import ProductSchema
+from .routes import router as router_products
 
-__all__ = ["Product", "ProductSchema", "router_products"]
+__all__ = ["router_products"]

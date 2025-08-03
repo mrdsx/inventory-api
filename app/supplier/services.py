@@ -2,7 +2,7 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from . import Supplier
+from .models import Supplier
 
 
 async def find_supplier_by_id(id: int, session: AsyncSession):
