@@ -12,9 +12,9 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 @router.get("/suppliers", response_model=list[SupplierSchema])
 async def get_suppliers(session: AsyncSession = Depends(get_db)):
-    suppliers = await session.execute(select(Supplier))
+    result = await session.execute(select(Supplier))
 
-    return suppliers.scalars().all()
+    return result.scalars().all()
 
 
 @router.post("/suppliers")
