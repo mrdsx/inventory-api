@@ -1,1 +1,1 @@
-API_ROUTER_PREFIX: str = "/api/v1"
+API_ROUTER_PREFIX = "/api/v1"
