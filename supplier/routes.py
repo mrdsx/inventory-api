@@ -31,7 +31,7 @@ async def create_supplier(
 
 
 @router.put("/suppliers/{id}", response_model=SupplierSchema)
-async def asd(
+async def update_supplier_by_id(
     id: int, supplier: SupplierPayload, session: AsyncSession = Depends(get_db)
 ):
     db_supplier = await find_supplier_by_id(id, session)
