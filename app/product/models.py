@@ -14,4 +14,6 @@ class Product(Base):
     category: Mapped[str] = mapped_column(nullable=False)
     cost: Mapped[float] = mapped_column(nullable=False)
     price: Mapped[float] = mapped_column(nullable=False)
-    supplier_id: Mapped[int] = mapped_column(Integer, ForeignKey("suppliers.id"))
+    supplier_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("suppliers.id"), nullable=False
+    )
