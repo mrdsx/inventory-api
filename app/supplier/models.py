@@ -7,6 +7,8 @@ from database import Base
 class Supplier(Base):
     __tablename__ = "suppliers"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(
+        Integer, primary_key=True, unique=True, autoincrement=True
+    )
     name: Mapped[str] = mapped_column(String, primary_key=True, unique=True)
     contact_email: Mapped[str] = mapped_column(String, nullable=False)
