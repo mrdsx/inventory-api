@@ -4,8 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_db
 from prefixes import API_ROUTER_PREFIX
-from product.models import Product
-from product.schemas import ProductSchema
+from . import Product, ProductSchema
 
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)

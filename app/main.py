@@ -2,7 +2,7 @@ import uvicorn
 from datetime import datetime
 from fastapi import FastAPI
 
-from product.routes import router as router_products
+from product import router_products
 from supplier import router_suppliers
 
 
