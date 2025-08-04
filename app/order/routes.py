@@ -1,12 +1,12 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_db
 from prefixes import API_ROUTER_PREFIX
 from order_item import (
+    find_order_item_by_id,
     find_order_items_by_order_id,
-    OrderItem,
     OrderItemSchema,
     save_order_items,
 )
@@ -82,15 +82,7 @@ async def delete_order_item_by_id(
 ):
     await validate_order_exists(order_id, session)
 
-    result = await session.execute(
-        select(OrderItem).where(
-            OrderItem.id == item_id and OrderItem.order_id == order_id
-        )
-    )
-    db_order_item = result.scalar()
-    if db_order_item is None:
-        raise HTTPException(status_code=404, detail="Order item not found")
-
+    db_order_item = await find_order_item_by_id(item_id, order_id, session)
     await session.delete(db_order_item)
     await session.commit()
 
