@@ -1,9 +1,23 @@
+from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from order import Order
 from .models import OrderItem
 from .schemas import OrderItemPayload
+
+
+async def find_order_item_by_id(item_id: int, order_id: int, session: AsyncSession):
+    result = await session.execute(
+        select(OrderItem).where(
+            OrderItem.id == item_id and OrderItem.order_id == order_id
+        )
+    )
+    db_order_item = result.scalar()
+    if db_order_item is None:
+        raise HTTPException(status_code=404, detail="Order item not found")
+
+    return db_order_item
 
 
 async def find_order_items_by_order_id(order_id: int, session: AsyncSession):
