@@ -4,13 +4,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_db
 from prefixes import API_ROUTER_PREFIX
-from order_item.models import OrderItem
 from order_item.services import save_order_items
 from supplier.models import Supplier
 from supplier.services import find_supplier_by_id, find_supplier_by_name
 from .models import Order
 from .schemas import OrderPayload, OrderSchema
 from .services import find_order_by_id, save_order
+from .utils import get_order_items_total_cost
 from .validation import validate_order_items
 
 
@@ -35,22 +35,14 @@ async def get_orders(session: AsyncSession = Depends(get_db)):
 @router.get("/orders/{order_id}")
 async def get_order_info_by_order_id(order_id: int, session: AsyncSession = Depends(get_db)):  # type: ignore
     order = await find_order_by_id(order_id, session)
-
-    result = await session.execute(
-        select(OrderItem).where(OrderItem.order_id == order_id)
-    )
-
-    total_cost: float = 0
-    for order_item in result.scalars().all():
-        total_cost += order_item.cost * order_item.quantity
-
-    supplier = await find_supplier_by_id(order.supplier_id, session)  # type: ignore
+    supplier = await find_supplier_by_id(order.supplier_id, session)
+    total_cost = await get_order_items_total_cost(order_id, session)
 
     return {
-        "id": order.id,  # type: ignore
+        "id": order.id,
         "supplier_name": supplier.name,
-        "date": order.date,  # type: ignore
-        "status": order.status,  # type: ignore
+        "date": order.date,
+        "status": order.status,
         "total_cost": total_cost,
     }  # type: ignore
 

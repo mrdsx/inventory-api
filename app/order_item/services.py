@@ -1,8 +1,17 @@
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from order.models import Order
 from .models import OrderItem
 from .schemas import OrderItemPayload
+
+
+async def find_order_items_by_order_id(order_id: int, session: AsyncSession):
+    result = await session.execute(
+        select(OrderItem).where(OrderItem.order_id == order_id)
+    )
+
+    return result.scalars().all()
 
 
 async def save_order_items(
