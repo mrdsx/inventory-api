@@ -4,8 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_db
 from prefixes import API_ROUTER_PREFIX
-from order_item.schemas import OrderItemSchema
-from order_item.services import save_order_items, find_order_items_by_order_id
+from order_item import find_order_items_by_order_id, OrderItemSchema, save_order_items
 from supplier.models import Supplier
 from supplier.services import find_supplier_by_id, find_supplier_by_name
 from .models import Order

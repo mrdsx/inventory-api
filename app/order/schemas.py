@@ -2,7 +2,7 @@ from typing import Annotated, Any
 from pydantic import BaseModel, Field
 from datetime import datetime
 
-from order_item.schemas import OrderItemPayload
+from order_item import OrderItemPayload
 from .constants import OrderStatuses
 
 

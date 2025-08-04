@@ -2,7 +2,7 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from order_item.schemas import OrderItemPayload
+from order_item import OrderItemPayload
 from .models import Order
 
 
