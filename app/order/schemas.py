@@ -1,5 +1,5 @@
 from typing import Annotated, Any
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime
 
 from order_item.schemas import OrderItemPayload
@@ -16,3 +16,9 @@ class OrderSchema(BaseModel):
     supplier_id: int
     date: Annotated[datetime, Any]
     status: OrderStatuses
+
+
+class OrderPublicSchema(OrderSchema):
+    supplier_id: int = Field(0, exclude=True)
+    supplier_name: str
+    total_cost: float
