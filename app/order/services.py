@@ -6,8 +6,8 @@ from .models import Order
 
 
 async def find_order_by_id(id: int, session: AsyncSession) -> Order:
-    result2 = await session.execute(select(Order).where(Order.id == id))
-    db_order = result2.scalar()
+    result = await session.execute(select(Order).where(Order.id == id))
+    db_order = result.scalar()
     if db_order is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Order not found"
