@@ -60,3 +60,12 @@ async def create_order(order: OrderPayload, session: AsyncSession = Depends(get_
     await save_order_items(new_order, order.items, session)
 
     return new_order
+
+
+@router.delete("/orders/{order_id}")
+async def delete_order_by_id(order_id: int, session: AsyncSession = Depends(get_db)):
+    db_order = await find_order_by_id(order_id, session)
+    await session.delete(db_order)
+    await session.commit()
+
+    return {"message": "Order successfully deleted"}
