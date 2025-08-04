@@ -18,7 +18,7 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 
 @router.get("/orders")
-async def get_orders(session: AsyncSession = Depends(get_db)):
+async def get_orders(session: AsyncSession = Depends(get_db)):  # type: ignore
     result = await session.execute(select(Order, Supplier).join(Supplier))
     return [
         {
@@ -26,9 +26,10 @@ async def get_orders(session: AsyncSession = Depends(get_db)):
             "supplier_name": supplier.name,
             "date": order.date,
             "status": order.status,
+            "total_cost": await get_order_items_total_cost(order.id, session),
         }
         for order, supplier in result
-    ]
+    ]  # type: ignore
 
 
 # TODO: Extract repeating code
