@@ -1,10 +1,15 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_db
 from prefixes import API_ROUTER_PREFIX
-from order_item import find_order_items_by_order_id, OrderItemSchema, save_order_items
+from order_item import (
+    find_order_items_by_order_id,
+    OrderItem,
+    OrderItemSchema,
+    save_order_items,
+)
 from supplier import find_supplier_by_id, find_supplier_by_name, Supplier
 from .models import Order
 from .schemas import OrderPayload, OrderPublicSchema, OrderSchema
@@ -69,3 +74,24 @@ async def delete_order_by_id(order_id: int, session: AsyncSession = Depends(get_
     await session.commit()
 
     return {"message": "Order successfully deleted"}
+
+
+@router.delete("/orders/{order_id}/items/{item_id}")
+async def delete_order_item_by_id(
+    item_id: int, order_id: int, session: AsyncSession = Depends(get_db)
+):
+    await validate_order_exists(order_id, session)
+
+    result = await session.execute(
+        select(OrderItem).where(
+            OrderItem.id == item_id and OrderItem.order_id == order_id
+        )
+    )
+    db_order_item = result.scalar()
+    if db_order_item is None:
+        raise HTTPException(status_code=404, detail="Order item not found")
+
+    await session.delete(db_order_item)
+    await session.commit()
+
+    return {"message": "Order item successfully deleted"}
