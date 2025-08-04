@@ -10,7 +10,7 @@ from supplier.services import find_supplier_by_id, find_supplier_by_name
 from .models import Order
 from .schemas import OrderPayload, OrderPublicSchema, OrderSchema
 from .services import find_order_by_id, save_order
-from .utils import get_order_items_total_cost
+from .utils import build_order_public_schema, get_order_items_total_cost
 from .validation import validate_order_items
 
 
@@ -20,14 +20,9 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 @router.get("/orders", response_model=list[OrderPublicSchema])
 async def get_orders(session: AsyncSession = Depends(get_db)):
     result = await session.execute(select(Order, Supplier).join(Supplier))
+
     return [
-        OrderPublicSchema(
-            id=order.id,
-            supplier_name=supplier.name,
-            date=order.date,
-            status=order.status,
-            total_cost=await get_order_items_total_cost(order.id, session),
-        )  # type: ignore
+        await build_order_public_schema(order, supplier, session)
         for order, supplier in result
     ]
 
