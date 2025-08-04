@@ -28,15 +28,15 @@ async def get_orders(session: AsyncSession = Depends(get_db)):
 
 @router.get("/orders/{order_id}", response_model=OrderPublicSchema)
 async def get_order_by_id(order_id: int, session: AsyncSession = Depends(get_db)):
-    order = await find_order_by_id(order_id, session)
-    supplier = await find_supplier_by_id(order.supplier_id, session)
+    db_order = await find_order_by_id(order_id, session)
+    db_supplier = await find_supplier_by_id(db_order.supplier_id, session)
     total_cost = await get_order_items_total_cost(order_id, session)
 
     return OrderPublicSchema(
-        id=order.id,
-        supplier_name=supplier.name,
-        date=order.date,
-        status=order.status,
+        id=db_order.id,
+        supplier_name=db_supplier.name,
+        date=db_order.date,
+        status=db_order.status,
         total_cost=total_cost,
     )  # type: ignore
 
@@ -46,17 +46,17 @@ async def get_order_items_by_order_id(
     order_id: int, session: AsyncSession = Depends(get_db)
 ):
     await validate_order_exists(order_id, session)
-    order_items = await find_order_items_by_order_id(order_id, session)
+    db_order_items = await find_order_items_by_order_id(order_id, session)
 
-    return order_items
+    return db_order_items
 
 
 @router.post("/orders", response_model=OrderSchema)
 async def create_order(order: OrderPayload, session: AsyncSession = Depends(get_db)):
     validate_order_items(order.items)
 
-    supplier = await find_supplier_by_name(order.supplier_name, session)
-    new_order = await save_order(supplier.id, session)
+    db_supplier = await find_supplier_by_name(order.supplier_name, session)
+    new_order = await save_order(db_supplier.id, session)
     await save_order_items(new_order, order.items, session)
 
     return new_order
