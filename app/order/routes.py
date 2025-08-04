@@ -4,14 +4,15 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_db
 from prefixes import API_ROUTER_PREFIX
-from order_item.services import save_order_items
+from order_item.schemas import OrderItemSchema
+from order_item.services import save_order_items, find_order_items_by_order_id
 from supplier.models import Supplier
 from supplier.services import find_supplier_by_id, find_supplier_by_name
 from .models import Order
 from .schemas import OrderPayload, OrderPublicSchema, OrderSchema
 from .services import find_order_by_id, save_order
 from .utils import build_order_public_schema, get_order_items_total_cost
-from .validation import validate_order_items
+from .validation import validate_order_exists, validate_order_items
 
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
@@ -42,6 +43,16 @@ async def get_order_info_by_order_id(
         status=order.status,
         total_cost=total_cost,
     )  # type: ignore
+
+
+@router.get("/orders/{order_id}/items", response_model=list[OrderItemSchema])
+async def get_order_items_by_order_id(
+    order_id: int, session: AsyncSession = Depends(get_db)
+):
+    await validate_order_exists(order_id, session)
+    order_items = await find_order_items_by_order_id(order_id, session)
+
+    return order_items
 
 
 @router.post("/orders", response_model=OrderSchema)
