@@ -1,4 +1,4 @@
-from fastapi import HTTPException
+from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -15,7 +15,9 @@ async def find_order_item_by_id(item_id: int, order_id: int, session: AsyncSessi
     )
     db_order_item = result.scalar()
     if db_order_item is None:
-        raise HTTPException(status_code=404, detail="Order item not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Order item not found"
+        )
 
     return db_order_item
 
