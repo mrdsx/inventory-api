@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from order.models import Order
+from order import Order
 from .models import OrderItem
 from .schemas import OrderItemPayload
 
