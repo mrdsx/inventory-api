@@ -7,6 +7,7 @@ from order_item.services import save_order_items
 from supplier.services import find_supplier_by_name
 from .schemas import OrderPayload, OrderSchema
 from .services import save_order
+from .validation import validate_order_items
 
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
@@ -14,6 +15,8 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 @router.post("/orders", response_model=OrderSchema)
 async def create_order(order: OrderPayload, session: AsyncSession = Depends(get_db)):
+    validate_order_items(order.items)
+
     supplier = await find_supplier_by_name(order.supplier_name, session)
     new_order = await save_order(supplier.id, session)
     await save_order_items(new_order, order.items, session)
