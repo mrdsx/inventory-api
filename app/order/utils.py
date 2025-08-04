@@ -8,7 +8,7 @@ from .schemas import OrderPublicSchema
 
 async def build_order_public_schema(
     order: Order, supplier: Supplier, session: AsyncSession
-):
+) -> OrderPublicSchema:
     return OrderPublicSchema(
         id=order.id,
         supplier_name=supplier.name,
@@ -18,7 +18,7 @@ async def build_order_public_schema(
     )  # type: ignore
 
 
-async def get_order_items_total_cost(order_id: int, session: AsyncSession):
+async def get_order_items_total_cost(order_id: int, session: AsyncSession) -> float:
     db_order_items = await find_order_items_by_order_id(order_id, session)
 
     total_cost: float = 0
