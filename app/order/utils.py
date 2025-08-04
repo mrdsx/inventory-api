@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from order_item import find_order_items_by_order_id
-from supplier.models import Supplier
+from supplier import Supplier
 from .models import Order
 from .schemas import OrderPublicSchema
 
