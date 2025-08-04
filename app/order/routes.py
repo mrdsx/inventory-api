@@ -29,9 +29,7 @@ async def get_orders(session: AsyncSession = Depends(get_db)):
 
 
 @router.get("/orders/{order_id}", response_model=OrderPublicSchema)
-async def get_order_info_by_order_id(
-    order_id: int, session: AsyncSession = Depends(get_db)
-):
+async def get_order_by_id(order_id: int, session: AsyncSession = Depends(get_db)):
     order = await find_order_by_id(order_id, session)
     supplier = await find_supplier_by_id(order.supplier_id, session)
     total_cost = await get_order_items_total_cost(order_id, session)
