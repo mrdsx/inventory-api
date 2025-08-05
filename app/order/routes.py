@@ -11,6 +11,7 @@ from order_item import (
     save_order_items,
 )
 from supplier import find_supplier_by_id, find_supplier_by_name, Supplier
+from .constants import OrderStatuses
 from .models import Order
 from .schemas import OrderPayload, OrderPublicSchema, OrderSchema
 from .services import find_order_by_id, save_order
@@ -66,6 +67,15 @@ async def create_order(order: OrderPayload, session: AsyncSession = Depends(get_
     await save_order_items(new_order, order.items, session)
 
     return new_order
+
+
+@router.patch("/orders/{order_id}")
+async def update_order_status(
+    order_id: int, status: OrderStatuses, session: AsyncSession = Depends(get_db)
+):
+    db_order = await find_order_by_id(order_id, session)
+    db_order.status = status
+    await session.commit()
 
 
 @router.delete("/orders/{order_id}")
