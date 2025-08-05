@@ -10,6 +10,7 @@ from order_item import (
     OrderItemSchema,
     save_order_items,
 )
+from product.services import save_products
 from supplier import find_supplier_by_id, find_supplier_by_name, Supplier
 from .constants import OrderStatuses
 from .models import Order
@@ -78,7 +79,12 @@ async def update_order_status(
     order_id: int, status: OrderStatuses, session: AsyncSession = Depends(get_db)
 ):
     db_order = await find_order_by_id(order_id, session)
-    handle_update_order_status(db_order.status)
+    handle_update_order_status(db_order.status)  # type: ignore
+
+    if status == OrderStatuses.DELIVERED:
+        db_order_items = await find_order_items_by_order_id(db_order.id, session)
+        await save_products(db_order, db_order_items, session)
+
     db_order.status = status
     await session.commit()
 
