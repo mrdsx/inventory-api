@@ -7,8 +7,10 @@ from database import Base
 class Product(Base):
     __tablename__ = "products"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    sku: Mapped[str] = mapped_column(String(30), primary_key=True)
+    id: Mapped[int] = mapped_column(
+        Integer, primary_key=True, unique=True, autoincrement=True
+    )
+    sku: Mapped[str] = mapped_column(String(30), primary_key=True, unique=True)
     supplier_id: Mapped[int] = mapped_column(
         Integer, ForeignKey("suppliers.id"), nullable=False
     )
