@@ -15,7 +15,11 @@ from .constants import OrderStatuses
 from .models import Order
 from .schemas import OrderPayload, OrderPublicSchema, OrderSchema
 from .services import find_order_by_id, save_order
-from .utils import build_order_public_schema, get_order_items_total_cost
+from .utils import (
+    build_order_public_schema,
+    get_order_items_total_cost,
+    handle_update_order_status,
+)
 from .validation import validate_order_exists, validate_order_items
 
 
@@ -74,8 +78,11 @@ async def update_order_status(
     order_id: int, status: OrderStatuses, session: AsyncSession = Depends(get_db)
 ):
     db_order = await find_order_by_id(order_id, session)
+    handle_update_order_status(db_order.status)
     db_order.status = status
     await session.commit()
+
+    return {"message": f"Order #{order_id} status changed to {status.value}"}
 
 
 @router.delete("/orders/{order_id}")
