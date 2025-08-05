@@ -18,6 +18,6 @@ class Order(Base):
     date: Mapped[datetime] = mapped_column(
         DateTime, nullable=False, default=datetime.now()
     )
-    status: Mapped[str] = mapped_column(
+    status: Mapped[OrderStatuses] = mapped_column(
         nullable=False, default=OrderStatuses.IN_TRANSIT
     )
