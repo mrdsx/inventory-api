@@ -35,7 +35,8 @@ async def get_orders(session: AsyncSession = Depends(get_db)):
 async def get_order_by_id(order_id: int, session: AsyncSession = Depends(get_db)):
     db_order = await find_order_by_id(order_id, session)
     db_supplier = await find_supplier_by_id(db_order.supplier_id, session)
-    total_cost = await get_order_items_total_cost(order_id, session)
+    db_order_items = await find_order_items_by_order_id(order_id, session)
+    total_cost = await get_order_items_total_cost(db_order_items)
 
     return OrderPublicSchema(
         id=db_order.id,
