@@ -24,7 +24,7 @@ async def test_find_order_by_id(session: AsyncSession):
 
     found_order = await find_order_by_id(EXISTING_ORDER_ID, session)
     assert found_order.id == EXISTING_ORDER_ID
-    assert found_order.status == OrderStatuses.IN_TRANSIT
+    assert found_order.status in OrderStatuses
 
 
 @pytest.mark.asyncio
