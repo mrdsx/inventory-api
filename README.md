@@ -34,10 +34,9 @@ Create `.env` file in root directory with following variables:
 
 ```
 DB_URL=YOUR_DB_URL
-TEST_DB_URL=YOUR_TEST_DB_URL
 ```
 
-Replace `YOUR_DB_URL` with actual url. `TEST_DB_URL` is for tests. If you're not gonna run tests, leave it blank.
+Replace `YOUR_DB_URL` with actual url.
 
 ### 3. Setup virtual environment
 
@@ -62,6 +61,14 @@ poetry run python main.py
 ```
 
 After running the project API can be accessed on http://127.0.0.1:3000.
+
+## Running tests
+
+To run tests enter this command in root directory of project (NOT IN `/app`)
+
+```bash
+pytest app\\tests
+```
 
 ## Tech Stack
 
