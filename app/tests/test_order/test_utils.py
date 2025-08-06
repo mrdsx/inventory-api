@@ -1,6 +1,5 @@
 import pytest
 from fastapi import HTTPException
-from typing import Sequence
 
 
 from order import (
@@ -31,8 +30,7 @@ async def test_get_order_items_total_cost():
     total_cost = await get_order_items_total_cost(order_items)
     assert total_cost == COST * QUANTITY
 
-    empty_order_items: Sequence[OrderItemSchema] = []
-    total_cost = await get_order_items_total_cost(empty_order_items)
+    total_cost = await get_order_items_total_cost([])
     assert total_cost == 0
 
 
