@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from database import get_db
+from database import get_session
 from prefixes import API_ROUTER_PREFIX
 from order_item import (
     find_order_item_by_id,
@@ -28,7 +28,7 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 
 @router.get("/orders", response_model=list[OrderPublicSchema])
-async def get_orders(session: AsyncSession = Depends(get_db)):
+async def get_orders(session: AsyncSession = Depends(get_session)):
     result = await session.execute(select(Order, Supplier).join(Supplier))
 
     return [
@@ -38,7 +38,7 @@ async def get_orders(session: AsyncSession = Depends(get_db)):
 
 
 @router.get("/orders/{order_id}", response_model=OrderPublicSchema)
-async def get_order_by_id(order_id: int, session: AsyncSession = Depends(get_db)):
+async def get_order_by_id(order_id: int, session: AsyncSession = Depends(get_session)):
     db_order = await find_order_by_id(order_id, session)
     db_supplier = await find_supplier_by_id(db_order.supplier_id, session)
     db_order_items = await find_order_items_by_order_id(order_id, session)
@@ -55,7 +55,7 @@ async def get_order_by_id(order_id: int, session: AsyncSession = Depends(get_db)
 
 @router.get("/orders/{order_id}/items", response_model=list[OrderItemSchema])
 async def get_order_items_by_order_id(
-    order_id: int, session: AsyncSession = Depends(get_db)
+    order_id: int, session: AsyncSession = Depends(get_session)
 ):
     await validate_order_exists(order_id, session)
     db_order_items = await find_order_items_by_order_id(order_id, session)
@@ -64,7 +64,9 @@ async def get_order_items_by_order_id(
 
 
 @router.post("/orders", response_model=OrderSchema)
-async def create_order(order: OrderPayload, session: AsyncSession = Depends(get_db)):
+async def create_order(
+    order: OrderPayload, session: AsyncSession = Depends(get_session)
+):
     validate_order_items(order.items)
 
     db_supplier = await find_supplier_by_name(order.supplier_name, session)
@@ -76,7 +78,7 @@ async def create_order(order: OrderPayload, session: AsyncSession = Depends(get_
 
 @router.patch("/orders/{order_id}")
 async def update_order_status(
-    order_id: int, status: OrderStatus, session: AsyncSession = Depends(get_db)
+    order_id: int, status: OrderStatus, session: AsyncSession = Depends(get_session)
 ):
     db_order = await find_order_by_id(order_id, session)
     handle_update_order_status(db_order.status)  # type: ignore
@@ -92,7 +94,9 @@ async def update_order_status(
 
 
 @router.delete("/orders/{order_id}")
-async def delete_order_by_id(order_id: int, session: AsyncSession = Depends(get_db)):
+async def delete_order_by_id(
+    order_id: int, session: AsyncSession = Depends(get_session)
+):
     db_order = await find_order_by_id(order_id, session)
     await session.delete(db_order)
     await session.commit()
@@ -102,7 +106,7 @@ async def delete_order_by_id(order_id: int, session: AsyncSession = Depends(get_
 
 @router.delete("/orders/{order_id}/items/{item_id}")
 async def delete_order_item_by_id(
-    item_id: int, order_id: int, session: AsyncSession = Depends(get_db)
+    item_id: int, order_id: int, session: AsyncSession = Depends(get_session)
 ):
     await validate_order_exists(order_id, session)
 

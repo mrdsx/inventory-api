@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from database import get_db
+from database import get_session
 from prefixes import API_ROUTER_PREFIX
 from .models import Supplier
 from .schemas import SupplierPayload, SupplierSchema
@@ -13,7 +13,7 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 
 @router.get("/suppliers", response_model=list[SupplierSchema])
-async def get_suppliers(session: AsyncSession = Depends(get_db)):
+async def get_suppliers(session: AsyncSession = Depends(get_session)):
     result = await session.execute(select(Supplier))
 
     return result.scalars().all()
@@ -21,7 +21,7 @@ async def get_suppliers(session: AsyncSession = Depends(get_db)):
 
 @router.post("/suppliers", response_model=SupplierSchema)
 async def create_supplier(
-    supplier: SupplierPayload, session: AsyncSession = Depends(get_db)
+    supplier: SupplierPayload, session: AsyncSession = Depends(get_session)
 ):
     await validate_supplier_not_exists(supplier, session)
 
@@ -35,7 +35,7 @@ async def create_supplier(
 
 @router.put("/suppliers/{id}", response_model=SupplierSchema)
 async def update_supplier_by_id(
-    id: int, supplier: SupplierPayload, session: AsyncSession = Depends(get_db)
+    id: int, supplier: SupplierPayload, session: AsyncSession = Depends(get_session)
 ):
     db_supplier = await find_supplier_by_id(id, session)
     for key, value in supplier.model_dump().items():
@@ -45,7 +45,7 @@ async def update_supplier_by_id(
 
 
 @router.delete("/suppliers/{id}")
-async def delete_supplier_by_id(id: int, session: AsyncSession = Depends(get_db)):
+async def delete_supplier_by_id(id: int, session: AsyncSession = Depends(get_session)):
     db_supplier = await find_supplier_by_id(id, session)
     await session.delete(db_supplier)
     await session.commit()
