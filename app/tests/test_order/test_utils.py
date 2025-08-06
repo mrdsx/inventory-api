@@ -3,9 +3,12 @@ from fastapi import HTTPException
 from typing import Sequence
 
 
-from order.constants import OrderStatuses
-from order.utils import get_order_items_total_cost, handle_update_order_status
-from order_item.schemas import OrderItemSchema
+from order import (
+    get_order_items_total_cost,
+    handle_update_order_status,
+    OrderStatuses,
+)
+from order_item import OrderItemSchema
 
 
 @pytest.mark.asyncio

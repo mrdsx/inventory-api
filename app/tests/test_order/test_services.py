@@ -9,9 +9,7 @@ from tests.test_order.constants import (
     MOCK_ORDER_SUPPLIER_ID,
     NOT_EXISTING_ORDER_ID,
 )
-from order.constants import OrderStatuses
-from order.models import Order
-from order.services import find_order_by_id, save_order
+from order import find_order_by_id, Order, OrderStatuses, save_order
 
 
 @pytest.mark.asyncio
