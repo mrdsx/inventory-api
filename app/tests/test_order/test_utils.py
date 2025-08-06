@@ -17,6 +17,9 @@ from supplier import Supplier
 from tests.test_order.constants import (
     MOCK_ORDER_DATE,
     MOCK_ORDER_ID,
+    MOCK_ORDER_ITEM_COST,
+    MOCK_ORDER_ITEM_ID,
+    MOCK_ORDER_ITEM_QUANTITY,
 )
 
 
@@ -46,23 +49,20 @@ async def test_build_order_public_schema():
 
 @pytest.mark.asyncio
 async def test_get_order_items_total_cost():
-    COST = 49.99
-    QUANTITY = 95
-
     order_items = [
         OrderItemSchema(
-            id=1,
-            order_id=1,
+            id=MOCK_ORDER_ITEM_ID,
+            order_id=MOCK_ORDER_ID,
             name="Test Order Item",
             description="",
             category="",
-            cost=COST,
-            quantity=QUANTITY,
+            cost=MOCK_ORDER_ITEM_COST,
+            quantity=MOCK_ORDER_ITEM_QUANTITY,
         )
     ]
 
     total_cost = await get_order_items_total_cost(order_items)
-    assert total_cost == COST * QUANTITY
+    assert total_cost == MOCK_ORDER_ITEM_COST * MOCK_ORDER_ITEM_QUANTITY
 
     total_cost = await get_order_items_total_cost([])
     assert total_cost == 0
