@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from unittest.mock import AsyncMock, MagicMock
 
 from order import Order, OrderStatus, validate_order_exists, validate_order_items
-from tests.test_order.constants import EXISTING_ORDER_ID, NOT_EXISTING_ORDER_ID
+from tests.constants import EXISTING_ORDER_ID, NOT_EXISTING_ORDER_ID
 
 
 @pytest.mark.asyncio

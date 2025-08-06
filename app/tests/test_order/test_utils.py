@@ -14,7 +14,7 @@ from order import (
 )
 from order_item import OrderItemSchema
 from supplier import Supplier
-from tests.test_order.constants import (
+from tests.constants import (
     MOCK_ORDER_DATE,
     MOCK_ORDER_ID,
     MOCK_ORDER_ITEM_COST,

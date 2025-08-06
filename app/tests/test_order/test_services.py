@@ -3,7 +3,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from unittest.mock import AsyncMock, MagicMock
 
-from tests.test_order.constants import (
+from tests.constants import (
     EXISTING_ORDER_ID,
     MOCK_ORDER_ID,
     MOCK_ORDER_SUPPLIER_ID,
