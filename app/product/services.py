@@ -10,11 +10,11 @@ async def save_products(
     order: Order, order_items: Sequence[OrderItem], session: AsyncSession
 ) -> None:
     products: list[OrderItem] = []
-    for order_item in order_items:
-        for index in range(order_item.quantity):
+    for i, order_item in enumerate(order_items):
+        for j in range(order_item.quantity):
             products.append(
                 Product(
-                    sku=f"SKU-{index}",
+                    sku=f"SKU-{order.id}-{i}-{j}",
                     supplier_id=order.supplier_id,
                     name=order_item.name,
                     description=order_item.description,
