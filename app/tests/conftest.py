@@ -16,8 +16,8 @@ async def session():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
-    db = SessionLocal()
+    session = SessionLocal()
     try:
-        yield db
+        yield session
     finally:
-        await db.close()
+        await session.close()
