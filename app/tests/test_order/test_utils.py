@@ -1,8 +1,10 @@
 import pytest
+from fastapi import HTTPException
 from typing import Sequence
 
 
-from order.utils import get_order_items_total_cost
+from order.constants import OrderStatuses
+from order.utils import get_order_items_total_cost, handle_update_order_status
 from order_item.schemas import OrderItemSchema
 
 
@@ -29,3 +31,19 @@ async def test_get_order_items_total_cost():
     empty_order_items: Sequence[OrderItemSchema] = []
     total_cost = await get_order_items_total_cost(empty_order_items)
     assert total_cost == 0
+
+
+def test_handle_update_order_status():
+    with pytest.raises(HTTPException) as exc_info:
+        handle_update_order_status(OrderStatuses.CANCELED)
+
+    assert f"Can't update status of {OrderStatuses.CANCELED.lower()} order" in str(
+        exc_info.value
+    )
+
+    with pytest.raises(HTTPException) as exc_info:
+        handle_update_order_status(OrderStatuses.DELIVERED)
+
+    assert f"Can't update status of {OrderStatuses.DELIVERED.lower()} order" in str(
+        exc_info.value
+    )
