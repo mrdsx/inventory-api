@@ -40,13 +40,15 @@ def test_handle_update_order_status():
     with pytest.raises(HTTPException) as exc_info:
         handle_update_order_status(OrderStatus.CANCELED)
 
-    assert f"Can't update status of {OrderStatus.CANCELED.lower()} order" in str(
-        exc_info.value
+    assert (
+        f"Can't update status of {OrderStatus.CANCELED.lower()} order"
+        in exc_info.value.detail
     )
 
     with pytest.raises(HTTPException) as exc_info:
         handle_update_order_status(OrderStatus.DELIVERED)
 
-    assert f"Can't update status of {OrderStatus.DELIVERED.lower()} order" in str(
-        exc_info.value
+    assert (
+        f"Can't update status of {OrderStatus.DELIVERED.lower()} order"
+        in exc_info.value.detail
     )
