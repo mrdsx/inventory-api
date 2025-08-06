@@ -32,7 +32,7 @@ async def get_order_items_total_cost(order_items: Sequence[OrderItemSchema]) -> 
     return total_cost
 
 
-def handle_update_order_status(order_status: OrderStatuses):
+def handle_update_order_status(order_status: OrderStatuses) -> None:
     match order_status:
         case OrderStatuses.CANCELED:
             raise HTTPException(
