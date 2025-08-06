@@ -25,7 +25,7 @@ async def test_find_order_by_id():
         await find_order_by_id(NOT_EXISTING_ORDER_ID, mock_session)
 
     assert exc_info.value.status_code == status.HTTP_404_NOT_FOUND
-    assert "Order not found" in str(exc_info.value.detail)
+    assert "Order not found" in exc_info.value.detail
 
     # * Test for success
     mock_result.scalar.return_value = Order(
