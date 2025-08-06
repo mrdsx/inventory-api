@@ -12,7 +12,7 @@ from order_item import (
 )
 from product.services import save_products
 from supplier import find_supplier_by_id, find_supplier_by_name, Supplier
-from .constants import OrderStatuses
+from .constants import OrderStatus
 from .models import Order
 from .schemas import OrderPayload, OrderPublicSchema, OrderSchema
 from .services import find_order_by_id, save_order
@@ -76,12 +76,12 @@ async def create_order(order: OrderPayload, session: AsyncSession = Depends(get_
 
 @router.patch("/orders/{order_id}")
 async def update_order_status(
-    order_id: int, status: OrderStatuses, session: AsyncSession = Depends(get_db)
+    order_id: int, status: OrderStatus, session: AsyncSession = Depends(get_db)
 ):
     db_order = await find_order_by_id(order_id, session)
     handle_update_order_status(db_order.status)  # type: ignore
 
-    if status == OrderStatuses.DELIVERED:
+    if status == OrderStatus.DELIVERED:
         db_order_items = await find_order_items_by_order_id(db_order.id, session)
         await save_products(db_order, db_order_items, session)
 

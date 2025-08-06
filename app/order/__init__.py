@@ -1,4 +1,4 @@
-from .constants import OrderStatuses
+from .constants import OrderStatus
 from .models import Order
 from .routes import router as router_orders
 from .schemas import OrderPayload, OrderSchema, OrderPublicSchema
@@ -12,7 +12,7 @@ from .validation import validate_order_exists, validate_order_items
 
 __all__ = [
     # constants
-    "OrderStatuses",
+    "OrderStatus",
     # models
     "Order",
     # routers

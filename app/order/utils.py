@@ -4,7 +4,7 @@ from typing import Sequence
 
 from order_item import find_order_items_by_order_id, OrderItemSchema
 from supplier import Supplier
-from .constants import OrderStatuses
+from .constants import OrderStatus
 from .models import Order
 from .schemas import OrderPublicSchema
 
@@ -32,17 +32,17 @@ async def get_order_items_total_cost(order_items: Sequence[OrderItemSchema]) -> 
     return total_cost
 
 
-def handle_update_order_status(order_status: OrderStatuses) -> None:
+def handle_update_order_status(order_status: OrderStatus) -> None:
     match order_status:
-        case OrderStatuses.CANCELED:
+        case OrderStatus.CANCELED:
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail=f"Can't update status of {OrderStatuses.CANCELED.lower()} order",
+                detail=f"Can't update status of {OrderStatus.CANCELED.lower()} order",
             )
-        case OrderStatuses.DELIVERED:
+        case OrderStatus.DELIVERED:
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail=f"Can't update status of {OrderStatuses.DELIVERED.lower()} order",
+                detail=f"Can't update status of {OrderStatus.DELIVERED.lower()} order",
             )
         case _:
             pass

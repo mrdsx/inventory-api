@@ -6,7 +6,7 @@ from typing import Sequence
 from order import (
     get_order_items_total_cost,
     handle_update_order_status,
-    OrderStatuses,
+    OrderStatus,
 )
 from order_item import OrderItemSchema
 
@@ -38,15 +38,15 @@ async def test_get_order_items_total_cost():
 
 def test_handle_update_order_status():
     with pytest.raises(HTTPException) as exc_info:
-        handle_update_order_status(OrderStatuses.CANCELED)
+        handle_update_order_status(OrderStatus.CANCELED)
 
-    assert f"Can't update status of {OrderStatuses.CANCELED.lower()} order" in str(
+    assert f"Can't update status of {OrderStatus.CANCELED.lower()} order" in str(
         exc_info.value
     )
 
     with pytest.raises(HTTPException) as exc_info:
-        handle_update_order_status(OrderStatuses.DELIVERED)
+        handle_update_order_status(OrderStatus.DELIVERED)
 
-    assert f"Can't update status of {OrderStatuses.DELIVERED.lower()} order" in str(
+    assert f"Can't update status of {OrderStatus.DELIVERED.lower()} order" in str(
         exc_info.value
     )

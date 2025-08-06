@@ -9,7 +9,7 @@ from tests.test_order.constants import (
     MOCK_ORDER_SUPPLIER_ID,
     NOT_EXISTING_ORDER_ID,
 )
-from order import find_order_by_id, Order, OrderStatuses, save_order
+from order import find_order_by_id, Order, OrderStatus, save_order
 
 
 @pytest.mark.asyncio
@@ -22,7 +22,7 @@ async def test_find_order_by_id(session: AsyncSession):
 
     found_order = await find_order_by_id(EXISTING_ORDER_ID, session)
     assert found_order.id == EXISTING_ORDER_ID
-    assert found_order.status in OrderStatuses
+    assert found_order.status in OrderStatus
 
 
 @pytest.mark.asyncio

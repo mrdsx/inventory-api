@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 
 from order_item import OrderItemPayload
-from .constants import OrderStatuses
+from .constants import OrderStatus
 
 
 class OrderPayload(BaseModel):
@@ -15,7 +15,7 @@ class OrderSchema(BaseModel):
     id: int
     supplier_id: int
     date: Annotated[datetime, Any]
-    status: OrderStatuses
+    status: OrderStatus
 
 
 class OrderPublicSchema(OrderSchema):

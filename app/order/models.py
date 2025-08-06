@@ -3,7 +3,7 @@ from sqlalchemy import ForeignKey, Integer, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
 
 from database import Base
-from .constants import OrderStatuses
+from .constants import OrderStatus
 
 
 class Order(Base):
@@ -18,6 +18,4 @@ class Order(Base):
     date: Mapped[datetime] = mapped_column(
         DateTime, nullable=False, default=datetime.now()
     )
-    status: Mapped[str] = mapped_column(
-        nullable=False, default=OrderStatuses.IN_TRANSIT
-    )
+    status: Mapped[str] = mapped_column(nullable=False, default=OrderStatus.IN_TRANSIT)
