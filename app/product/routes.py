@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -16,6 +16,20 @@ async def get_products(session: AsyncSession = Depends(get_session)):
     result = await session.execute(select(Product))
 
     return result.scalars().all()
+
+
+@router.get("/products/{product_id}", response_model=ProductSchema)
+async def get_product_by_id(
+    product_id: int, session: AsyncSession = Depends(get_session)
+):
+    result = await session.execute(select(Product).where(Product.id == product_id))
+    db_product = result.scalar()
+    if db_product is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=ResponseMsg.product_not_found
+        )
+
+    return db_product
 
 
 @router.delete("/products/{order_id}")
