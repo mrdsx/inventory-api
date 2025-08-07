@@ -1,10 +1,23 @@
 from math import floor
+from fastapi import HTTPException, status
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Sequence
 
 from order import Order
 from order_item import OrderItem
 from .models import Product
+
+
+async def find_product_by_id(id: int, session: AsyncSession):
+    result = await session.execute(select(Product).where(Product.id == id))
+    db_product = result.scalar()
+    if db_product is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Product not found"
+        )
+
+    return db_product
 
 
 async def save_products(
