@@ -13,6 +13,10 @@ class ProductSchema(BaseModel):
     price: NonNegativeFloat
 
 
+class CreateProductSchema(ProductSchema):
+    id: int = Field(0, validate_default=True, exclude=True)
+
+
 class UpdateProductSchema(BaseModel):
     name: str
     description: str = Field(max_length=1000)

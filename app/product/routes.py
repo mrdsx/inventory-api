@@ -6,7 +6,7 @@ from database import get_session
 from prefixes import API_ROUTER_PREFIX
 from .constants import ResponseMsg
 from .models import Product
-from .schemas import ProductSchema, UpdateProductSchema
+from .schemas import CreateProductSchema, ProductSchema, UpdateProductSchema
 from .services import find_product_by_id
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
@@ -26,6 +26,28 @@ async def get_product_by_id(
     db_product = await find_product_by_id(product_id, session)
 
     return db_product
+
+
+@router.post("/products", response_model=ProductSchema)
+async def create_product(
+    product: CreateProductSchema, session: AsyncSession = Depends(get_session)
+):
+    new_product = Product(
+        sku=product.sku,
+        order_id=product.order_id,
+        supplier_id=product.supplier_id,
+        name=product.name,
+        description=product.description,
+        category=product.category,
+        cost=product.cost,
+        price=product.price,
+    )
+
+    session.add(new_product)
+    await session.commit()
+    await session.refresh(new_product)
+
+    return new_product
 
 
 @router.put("/products/{product_id}", response_model=ProductSchema)
