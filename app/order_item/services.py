@@ -6,7 +6,7 @@ from typing import Sequence
 from order import Order
 from .constants import ResponseMsg
 from .models import OrderItem
-from .schemas import OrderItemPayload
+from .schemas import CreateOrderItemSchema
 
 
 async def find_order_item_by_id(
@@ -38,7 +38,7 @@ async def find_order_items_by_order_id(
 
 
 async def save_order_items(
-    order: Order, items: list[OrderItemPayload], session: AsyncSession
+    order: Order, items: list[CreateOrderItemSchema], session: AsyncSession
 ) -> None:
     order_items = [
         OrderItem(

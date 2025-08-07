@@ -1,7 +1,7 @@
 from pydantic import BaseModel, NonNegativeFloat
 
 
-class OrderItemPayload(BaseModel):
+class CreateOrderItemSchema(BaseModel):
     name: str
     description: str
     category: str

@@ -1,6 +1,6 @@
 from .constants import ResponseMsg
 from .models import OrderItem
-from .schemas import OrderItemPayload, OrderItemSchema
+from .schemas import CreateOrderItemSchema, OrderItemSchema
 from .services import (
     find_order_item_by_id,
     find_order_items_by_order_id,
@@ -13,7 +13,7 @@ __all__ = [
     # models
     "OrderItem",
     # schemas
-    "OrderItemPayload",
+    "CreateOrderItemSchema",
     "OrderItemSchema",
     # services
     "find_order_item_by_id",

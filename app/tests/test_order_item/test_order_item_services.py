@@ -7,7 +7,7 @@ from order import Order
 from order_item import (
     find_order_item_by_id,
     OrderItem,
-    OrderItemPayload,
+    CreateOrderItemSchema,
     ResponseMsg,
     save_order_items,
 )
@@ -49,7 +49,7 @@ async def test_save_order_items():
 
     mock_order = Order(id=MOCK_ORDER_ID)
     mock_order_items = [
-        OrderItemPayload(
+        CreateOrderItemSchema(
             name="Order Item",
             description="",
             category="",

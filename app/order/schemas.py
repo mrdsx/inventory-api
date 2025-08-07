@@ -2,13 +2,13 @@ from typing import Annotated, Any
 from pydantic import BaseModel, Field, NonNegativeFloat
 from datetime import datetime
 
-from order_item import OrderItemPayload
+from order_item import CreateOrderItemSchema
 from .constants import OrderStatus
 
 
 class CreateOrderSchema(BaseModel):
     supplier_name: str
-    items: list[OrderItemPayload]
+    items: list[CreateOrderItemSchema]
 
 
 class OrderSchema(BaseModel):
