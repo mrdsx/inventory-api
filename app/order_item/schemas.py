@@ -1,11 +1,11 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, NonNegativeFloat
 
 
 class OrderItemPayload(BaseModel):
     name: str
     description: str
     category: str
-    cost: float
+    cost: NonNegativeFloat
     quantity: int
 
 
@@ -15,5 +15,5 @@ class OrderItemSchema(BaseModel):
     name: str
     description: str
     category: str
-    cost: float
+    cost: NonNegativeFloat
     quantity: int

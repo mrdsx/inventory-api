@@ -1,5 +1,5 @@
 from typing import Annotated, Any
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, NonNegativeFloat
 from datetime import datetime
 
 from order_item import OrderItemPayload
@@ -21,4 +21,4 @@ class OrderSchema(BaseModel):
 class OrderPublicSchema(OrderSchema):
     supplier_id: int = Field(0, exclude=True)
     supplier_name: str
-    total_cost: float
+    total_cost: NonNegativeFloat
