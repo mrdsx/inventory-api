@@ -8,6 +8,7 @@ from order_item import (
     find_order_item_by_id,
     OrderItem,
     OrderItemPayload,
+    ResponseMsg,
     save_order_items,
 )
 from tests.constants import (
@@ -31,7 +32,7 @@ async def test_find_order_item_by_id():
         await find_order_item_by_id(MOCK_ORDER_ITEM_ID, MOCK_ORDER_ID, mock_session)
 
     assert exc_info.value.status_code == status.HTTP_404_NOT_FOUND
-    assert "Order item not found" in exc_info.value.detail
+    assert ResponseMsg.order_item_not_found in exc_info.value.detail
 
     # * Test for success
     mock_result.scalar.return_value = OrderItem(id=MOCK_ORDER_ITEM_ID)
