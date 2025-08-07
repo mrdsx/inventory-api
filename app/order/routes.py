@@ -11,7 +11,7 @@ from order_item import (
     ResponseMsg,
     save_order_items,
 )
-from product.services import save_products
+from product import save_products
 from supplier import find_supplier_by_id, find_supplier_by_name, Supplier
 from .constants import OrderStatus
 from .models import Order
