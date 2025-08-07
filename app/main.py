@@ -2,9 +2,9 @@ import uvicorn
 from datetime import datetime
 from fastapi import FastAPI
 
+from order import router_orders
 from product import router_products
 from supplier import router_suppliers
-from order import router_orders
 
 
 app = FastAPI()
@@ -19,9 +19,9 @@ def root():
     }
 
 
-app.include_router(router_suppliers)
-app.include_router(router_products)
 app.include_router(router_orders)
+app.include_router(router_products)
+app.include_router(router_suppliers)
 
 
 if __name__ == "__main__":
