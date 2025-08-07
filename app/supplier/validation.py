@@ -2,6 +2,7 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from .constants import ResponseMsg
 from .models import Supplier
 from .schemas import SupplierPayload
 
@@ -19,5 +20,5 @@ async def validate_supplier_not_exists(
     if db_supplier is not None:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=f"Supplier already exists",
+            detail=ResponseMsg.supplier_already_exists,
         )
