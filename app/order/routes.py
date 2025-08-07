@@ -15,7 +15,7 @@ from product.services import save_products
 from supplier import find_supplier_by_id, find_supplier_by_name, Supplier
 from .constants import OrderStatus
 from .models import Order
-from .schemas import OrderPayload, OrderPublicSchema, OrderSchema
+from .schemas import CreateOrderSchema, OrderPublicSchema, OrderSchema
 from .services import find_order_by_id, save_order
 from .utils import (
     build_order_public_schema,
@@ -66,7 +66,7 @@ async def get_order_items_by_order_id(
 
 @router.post("/orders", response_model=OrderSchema)
 async def create_order(
-    order: OrderPayload, session: AsyncSession = Depends(get_session)
+    order: CreateOrderSchema, session: AsyncSession = Depends(get_session)
 ):
     validate_order_items(order.items)
 

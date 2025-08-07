@@ -1,7 +1,7 @@
 from .constants import OrderStatus, ResponseMsg
 from .models import Order
 from .routes import router as router_orders
-from .schemas import OrderPayload, OrderSchema, OrderPublicSchema
+from .schemas import CreateOrderSchema, OrderSchema, OrderPublicSchema
 from .services import find_order_by_id, save_order
 from .utils import (
     build_order_public_schema,
@@ -19,7 +19,7 @@ __all__ = [
     # routers
     "router_orders",
     # schemas
-    "OrderPayload",
+    "CreateOrderSchema",
     "OrderSchema",
     "OrderPublicSchema",
     # services

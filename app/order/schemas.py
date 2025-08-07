@@ -6,7 +6,7 @@ from order_item import OrderItemPayload
 from .constants import OrderStatus
 
 
-class OrderPayload(BaseModel):
+class CreateOrderSchema(BaseModel):
     supplier_name: str
     items: list[OrderItemPayload]
 
