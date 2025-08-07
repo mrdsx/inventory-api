@@ -4,6 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Sequence
 
 from order import Order
+from .constants import ResponseMsg
 from .models import OrderItem
 from .schemas import OrderItemPayload
 
@@ -19,7 +20,8 @@ async def find_order_item_by_id(
     db_order_item = result.scalar()
     if db_order_item is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Order item not found"
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=ResponseMsg.order_item_not_found,
         )
 
     return db_order_item
