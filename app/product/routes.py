@@ -14,7 +14,7 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 @router.get("/products", response_model=list[ProductSchema])
 async def get_products(session: AsyncSession = Depends(get_session)):
-    result = await session.execute(select(Product))
+    result = await session.execute(select(Product).order_by(Product.id))
 
     return result.scalars().all()
 
