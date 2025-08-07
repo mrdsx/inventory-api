@@ -3,13 +3,13 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from unittest.mock import AsyncMock, MagicMock
 
+from order import find_order_by_id, Order, OrderStatus, ResponseMsg, save_order
 from tests.constants import (
     EXISTING_ORDER_ID,
     MOCK_ORDER_ID,
     MOCK_ORDER_SUPPLIER_ID,
     NOT_EXISTING_ORDER_ID,
 )
-from order import find_order_by_id, Order, OrderStatus, ResponseMsg, save_order
 
 
 @pytest.mark.asyncio
