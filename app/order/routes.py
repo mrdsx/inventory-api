@@ -30,7 +30,9 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 @router.get("/orders", response_model=list[OrderPublicSchema])
 async def get_orders(session: AsyncSession = Depends(get_session)):
-    result = await session.execute(select(Order, Supplier).join(Supplier))
+    result = await session.execute(
+        select(Order, Supplier).join(Supplier).order_by(Order.id)
+    )
 
     return [
         await build_order_public_schema(order, supplier, session)
