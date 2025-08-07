@@ -11,3 +11,10 @@ class ProductSchema(BaseModel):
     category: str
     cost: NonNegativeFloat
     price: NonNegativeFloat
+
+
+class UpdateProductSchema(BaseModel):
+    name: str
+    description: str = Field(max_length=1000)
+    category: str
+    price: NonNegativeFloat
