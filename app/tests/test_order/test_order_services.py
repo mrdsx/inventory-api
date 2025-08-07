@@ -9,7 +9,7 @@ from tests.constants import (
     MOCK_ORDER_SUPPLIER_ID,
     NOT_EXISTING_ORDER_ID,
 )
-from order import find_order_by_id, Order, OrderStatus, save_order
+from order import find_order_by_id, Order, OrderStatus, ResponseMsg, save_order
 
 
 @pytest.mark.asyncio
@@ -25,7 +25,7 @@ async def test_find_order_by_id():
         await find_order_by_id(NOT_EXISTING_ORDER_ID, mock_session)
 
     assert exc_info.value.status_code == status.HTTP_404_NOT_FOUND
-    assert "Order not found" in exc_info.value.detail
+    assert ResponseMsg.order_not_found in exc_info.value.detail
 
     # * Test for success
     mock_result.scalar.return_value = Order(
