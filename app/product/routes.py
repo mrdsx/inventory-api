@@ -44,6 +44,17 @@ async def update_product_by_id(
     return db_product
 
 
+@router.delete("/products/{product_id}")
+async def delete_product_by_id(
+    product_id: int, session: AsyncSession = Depends(get_session)
+):
+    db_product = await find_product_by_id(product_id, session)
+    await session.delete(db_product)
+    await session.commit()
+
+    return {"message": ResponseMsg.product_deleted}
+
+
 @router.delete("/products/{order_id}")
 async def delete_products_by_order_id(
     order_id: int, session: AsyncSession = Depends(get_session)
