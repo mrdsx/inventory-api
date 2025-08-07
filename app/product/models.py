@@ -12,6 +12,9 @@ class Product(Base):
         Integer, primary_key=True, unique=True, autoincrement=True
     )
     sku: Mapped[str] = mapped_column(String(30), primary_key=True, unique=True)
+    order_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("orders.id"), nullable=False
+    )
     supplier_id: Mapped[int] = mapped_column(
         Integer, ForeignKey("suppliers.id"), nullable=False
     )
