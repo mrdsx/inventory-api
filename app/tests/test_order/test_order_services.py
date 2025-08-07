@@ -16,7 +16,7 @@ from tests.constants import (
 async def test_find_order_by_id():
     mock_session = AsyncMock()
 
-    # * Test for error
+    # ! Test for error
     mock_result = MagicMock()
     mock_result.scalar.return_value = None
     mock_session.execute.return_value = mock_result

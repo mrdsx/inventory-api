@@ -18,7 +18,7 @@ from tests.constants import EXISTING_ORDER_ID, NOT_EXISTING_ORDER_ID
 async def test_validate_order_exists():
     mock_session = AsyncMock(spec=AsyncSession)
 
-    # * Test for error
+    # ! Test for error
     mock_result = MagicMock()
     mock_result.scalar.return_value = None
     mock_session.execute.return_value = mock_result
