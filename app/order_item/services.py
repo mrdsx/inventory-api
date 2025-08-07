@@ -31,7 +31,7 @@ async def find_order_items_by_order_id(
     order_id: int, session: AsyncSession
 ) -> Sequence[OrderItem]:
     result = await session.execute(
-        select(OrderItem).where(OrderItem.order_id == order_id)
+        select(OrderItem).where(OrderItem.order_id == order_id).order_by(OrderItem.id)
     )
 
     return result.scalars().all()
