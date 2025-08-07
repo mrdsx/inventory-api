@@ -8,6 +8,7 @@ from .constants import ResponseMsg
 from .models import Product
 from .schemas import CreateProductSchema, ProductSchema, UpdateProductSchema
 from .services import find_product_by_id
+from .utils import build_product_db_object
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 
@@ -32,17 +33,7 @@ async def get_product_by_id(
 async def create_product(
     product: CreateProductSchema, session: AsyncSession = Depends(get_session)
 ):
-    new_product = Product(
-        sku=product.sku,
-        order_id=product.order_id,
-        supplier_id=product.supplier_id,
-        name=product.name,
-        description=product.description,
-        category=product.category,
-        cost=product.cost,
-        price=product.price,
-    )
-
+    new_product = build_product_db_object(product)
     session.add(new_product)
     await session.commit()
     await session.refresh(new_product)

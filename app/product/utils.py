@@ -1,0 +1,15 @@
+from .models import Product
+from .schemas import CreateProductSchema
+
+
+def build_product_db_object(product: CreateProductSchema):
+    return Product(
+        sku=product.sku,
+        order_id=product.order_id,
+        supplier_id=product.supplier_id,
+        name=product.name,
+        description=product.description,
+        category=product.category,
+        cost=product.cost,
+        price=product.price,
+    )
