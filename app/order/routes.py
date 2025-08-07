@@ -8,11 +8,12 @@ from order_item import (
     find_order_item_by_id,
     find_order_items_by_order_id,
     OrderItemSchema,
+    ResponseMsg as OrderItemMsg,
     save_order_items,
 )
 from product.services import save_products
 from supplier import find_supplier_by_id, find_supplier_by_name, Supplier
-from .constants import OrderStatus
+from .constants import OrderStatus, ResponseMsg as OrderMsg
 from .models import Order
 from .schemas import OrderPayload, OrderPublicSchema, OrderSchema
 from .services import find_order_by_id, save_order
@@ -101,7 +102,7 @@ async def delete_order_by_id(
     await session.delete(db_order)
     await session.commit()
 
-    return {"message": "Order successfully deleted"}
+    return {"message": OrderMsg.order_deleted}
 
 
 @router.delete("/orders/{order_id}/items/{item_id}")
@@ -114,4 +115,4 @@ async def delete_order_item_by_id(
     await session.delete(db_order_item)
     await session.commit()
 
-    return {"message": "Order item successfully deleted"}
+    return {"message": OrderItemMsg.order_item_deleted}

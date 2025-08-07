@@ -2,6 +2,7 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from .constants import ResponseMsg
 from .models import Order
 
 
@@ -10,7 +11,7 @@ async def find_order_by_id(id: int, session: AsyncSession) -> Order:
     db_order = result.scalar()
     if db_order is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Order not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail=ResponseMsg.order_not_found
         )
 
     return db_order
