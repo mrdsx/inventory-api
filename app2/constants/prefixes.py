@@ -1,1 +1,0 @@
-API_ROUTER_PREFIX = "/api/v1"
