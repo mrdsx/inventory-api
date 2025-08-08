@@ -16,7 +16,11 @@ from services import (
     save_order_items,
     save_products,
 )
-from utils import build_order_public_schema, get_order_items_total_cost
+from utils import (
+    build_order_public_schema,
+    get_order_items_total_cost,
+    handle_update_order_status,
+)
 from validation import validate_order_exists, validate_order_items
 
 
