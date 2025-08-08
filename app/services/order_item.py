@@ -13,7 +13,7 @@ async def find_order_item_by_id(
 ) -> OrderItem:
     result = await session.execute(
         select(OrderItem).where(
-            OrderItem.id == item_id and OrderItem.order_id == order_id
+            (OrderItem.id == item_id) & (OrderItem.order_id == order_id)
         )
     )
     db_order_item = result.scalar()
