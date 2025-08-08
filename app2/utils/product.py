@@ -1,5 +1,5 @@
-from ..models.product import Product
-from ..schemas.product import CreateProductSchema
+from models import Product
+from schemas import CreateProductSchema
 
 
 def build_product_db_object(product: CreateProductSchema) -> Product:

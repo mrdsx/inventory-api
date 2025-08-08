@@ -2,11 +2,10 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Sequence
 
-from app2.constants.order_item import find_order_items_by_order_id, OrderItemSchema
-from app2.constants.supplier import Supplier
-from ..constants.order import OrderStatus
-from ..models.order import Order
-from ..schemas.order import OrderPublicSchema
+from constants import OrderStatus
+from models import Order, Supplier
+from schemas import OrderItemSchema, OrderPublicSchema
+from services import find_order_items_by_order_id
 
 
 async def build_order_public_schema(
