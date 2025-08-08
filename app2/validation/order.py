@@ -2,9 +2,9 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app2.constants.order_item import CreateOrderItemSchema, ResponseMsg as OrderItemMsg
-from ..constants.order import ResponseMsg as OrderMsg
-from ..models.order import Order
+from constants import OrderResponse, OrderItemResponse
+from models import Order
+from schemas import CreateOrderItemSchema
 
 
 async def validate_order_exists(order_id: int, session: AsyncSession) -> None:
@@ -12,7 +12,7 @@ async def validate_order_exists(order_id: int, session: AsyncSession) -> None:
     db_order = result.scalar()
     if db_order is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail=OrderMsg.order_not_found
+            status_code=status.HTTP_404_NOT_FOUND, detail=OrderResponse.order_not_found
         )
 
 
@@ -20,5 +20,5 @@ def validate_order_items(items: list[CreateOrderItemSchema]) -> None:
     if len(items) == 0:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=OrderItemMsg.order_items_list_is_empty,
+            detail=OrderItemResponse.order_items_list_is_empty,
         )

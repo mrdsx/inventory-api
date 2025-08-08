@@ -2,13 +2,13 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from ..constants.supplier import ResponseMsg
-from ..models.supplier import Supplier
-from ..schemas.supplier import SupplierPayload
+from constants import SupplierResponse
+from models import Supplier
+from schemas import CreateSupplierSchema
 
 
 async def validate_supplier_not_exists(
-    supplier: SupplierPayload, session: AsyncSession
+    supplier: CreateSupplierSchema, session: AsyncSession
 ) -> None:
     result = await session.execute(
         select(Supplier).where(
@@ -20,5 +20,5 @@ async def validate_supplier_not_exists(
     if db_supplier is not None:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=ResponseMsg.supplier_already_exists,
+            detail=SupplierResponse.supplier_already_exists,
         )
