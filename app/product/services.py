@@ -6,6 +6,7 @@ from typing import Sequence
 
 from order import Order
 from order_item import OrderItem
+from .constants import ResponseMsg
 from .models import Product
 
 
@@ -14,7 +15,7 @@ async def find_product_by_id(id: int, session: AsyncSession):
     db_product = result.scalar()
     if db_product is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Product not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail=ResponseMsg.product_not_found
         )
 
     return db_product
