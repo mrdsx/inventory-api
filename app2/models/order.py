@@ -2,8 +2,8 @@ from datetime import datetime
 from sqlalchemy import ForeignKey, Integer, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
 
+from constants import OrderStatus
 from database import Base
-from ..constants.order import OrderStatus
 
 
 class Order(Base):
