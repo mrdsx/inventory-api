@@ -31,3 +31,8 @@ name = "inventory-api"
 packages = [
     { include = "app" },
 ]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  ".", "app",
+]
