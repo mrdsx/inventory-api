@@ -2,9 +2,7 @@ import uvicorn
 from datetime import datetime
 from fastapi import FastAPI
 
-from order import router_orders
-from product import router_products
-from supplier import router_suppliers
+from routes import router_orders, router_products, router_suppliers
 
 
 app = FastAPI()
