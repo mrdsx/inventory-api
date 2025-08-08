@@ -10,7 +10,7 @@ from .constants import ResponseMsg
 from .models import Product
 
 
-async def find_product_by_id(id: int, session: AsyncSession):
+async def find_product_by_id(id: int, session: AsyncSession) -> Product:
     result = await session.execute(select(Product).where(Product.id == id))
     db_product = result.scalar()
     if db_product is None:
