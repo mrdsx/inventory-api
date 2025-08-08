@@ -3,12 +3,11 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_session
-from prefixes import API_ROUTER_PREFIX
-from ..constants.supplier import ResponseMsg
-from ..models.supplier import Supplier
-from ..schemas.supplier import SupplierPayload, SupplierSchema
-from ..services.supplier import find_supplier_by_id
-from ..validation.supplier import validate_supplier_not_exists
+from constants import API_ROUTER_PREFIX, SupplierResponse
+from models import Supplier
+from schemas import CreateSupplierSchema, SupplierSchema
+from services import find_supplier_by_id
+from validation import validate_supplier_not_exists
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 
@@ -22,7 +21,7 @@ async def get_suppliers(session: AsyncSession = Depends(get_session)):
 
 @router.post("/suppliers", response_model=SupplierSchema)
 async def create_supplier(
-    supplier: SupplierPayload, session: AsyncSession = Depends(get_session)
+    supplier: CreateSupplierSchema, session: AsyncSession = Depends(get_session)
 ):
     await validate_supplier_not_exists(supplier, session)
 
@@ -36,7 +35,9 @@ async def create_supplier(
 
 @router.put("/suppliers/{id}", response_model=SupplierSchema)
 async def update_supplier_by_id(
-    id: int, supplier: SupplierPayload, session: AsyncSession = Depends(get_session)
+    id: int,
+    supplier: CreateSupplierSchema,
+    session: AsyncSession = Depends(get_session),
 ):
     db_supplier = await find_supplier_by_id(id, session)
     for key, value in supplier.model_dump().items():
@@ -51,4 +52,4 @@ async def delete_supplier_by_id(id: int, session: AsyncSession = Depends(get_ses
     await session.delete(db_supplier)
     await session.commit()
 
-    return {"message": ResponseMsg.supplier_deleted}
+    return {"message": SupplierResponse.supplier_deleted}

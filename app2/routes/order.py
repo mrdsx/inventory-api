@@ -2,27 +2,22 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from constants import API_ROUTER_PREFIX, OrderItemResponse, OrderStatus
 from database import get_session
-from app2.constants.prefixes import API_ROUTER_PREFIX
-from app2.constants.order_item import (
+from models import Order, Supplier
+from schemas import CreateOrderSchema, OrderItemSchema, OrderPublicSchema, OrderSchema
+from services import (
+    find_order_by_id,
     find_order_item_by_id,
     find_order_items_by_order_id,
-    OrderItemSchema,
-    ResponseMsg,
+    find_supplier_by_id,
+    find_supplier_by_name,
+    save_order,
     save_order_items,
+    save_products,
 )
-from app2.constants.product import save_products
-from app2.constants.supplier import find_supplier_by_id, find_supplier_by_name, Supplier
-from ..constants.order import OrderStatus
-from ..models.order import Order
-from ..schemas.order import CreateOrderSchema, OrderPublicSchema, OrderSchema
-from ..services.order import find_order_by_id, save_order
-from ..utils.order import (
-    build_order_public_schema,
-    get_order_items_total_cost,
-    handle_update_order_status,
-)
-from ..validation.order import validate_order_exists, validate_order_items
+from utils import build_order_public_schema, get_order_items_total_cost
+from validation import validate_order_exists, validate_order_items
 
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
@@ -106,4 +101,4 @@ async def delete_order_item_by_id(
     await session.delete(db_order_item)
     await session.commit()
 
-    return {"message": ResponseMsg.order_item_deleted}
+    return {"message": OrderItemResponse.order_item_deleted}
