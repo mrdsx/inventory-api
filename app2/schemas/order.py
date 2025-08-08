@@ -2,8 +2,8 @@ from typing import Annotated, Any
 from pydantic import BaseModel, Field, NonNegativeFloat
 from datetime import datetime
 
-from app2.constants.order_item import CreateOrderItemSchema
-from ..constants.order import OrderStatus
+from constants import OrderStatus
+from .order_item import CreateOrderItemSchema
 
 
 class CreateOrderSchema(BaseModel):
