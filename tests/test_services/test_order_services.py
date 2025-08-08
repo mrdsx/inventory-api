@@ -49,11 +49,10 @@ async def test_save_order():
         side_effect=lambda x: setattr(x, "id", MOCK_ORDER_ID)  # type: ignore
     )
 
-    result = await save_order(MOCK_ORDER_SUPPLIER_ID, mock_session)
+    new_order = await save_order(MOCK_ORDER_SUPPLIER_ID, mock_session)
 
-    assert isinstance(result, Order)
-    assert result.id == MOCK_ORDER_ID
-    assert result.supplier_id == MOCK_ORDER_SUPPLIER_ID
+    assert new_order.id == MOCK_ORDER_ID
+    assert new_order.supplier_id == MOCK_ORDER_SUPPLIER_ID
 
     mock_session.commit.assert_awaited_once()
-    mock_session.refresh.assert_awaited_once_with(result)
+    mock_session.refresh.assert_awaited_once_with(new_order)

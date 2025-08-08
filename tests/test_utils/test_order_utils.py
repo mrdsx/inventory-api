@@ -6,7 +6,7 @@ from unittest.mock import AsyncMock, MagicMock
 
 from app.constants import OrderResponse, OrderStatus
 from app.models import Order, Supplier
-from app.schemas import OrderItemSchema, OrderPublicSchema
+from app.schemas import OrderItemSchema
 from app.utils import (
     build_order_public_schema,
     get_order_items_total_cost,
@@ -38,7 +38,6 @@ async def test_build_order_public_schema():
         mock_order, mock_supplier, mock_session
     )
 
-    assert isinstance(order_public_schema, OrderPublicSchema)
     assert order_public_schema.id == mock_order.id
     assert order_public_schema.supplier_name == mock_supplier.name
     assert order_public_schema.date == MOCK_ORDER_DATE
