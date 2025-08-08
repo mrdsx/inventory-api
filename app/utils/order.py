@@ -2,7 +2,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Sequence
 
-from constants import OrderStatus
+from constants import OrderResponse, OrderStatus
 from models import Order, Supplier
 from schemas import OrderItemSchema, OrderPublicSchema
 from services import find_order_items_by_order_id
@@ -36,12 +36,12 @@ def handle_update_order_status(order_status: OrderStatus) -> None:
         case OrderStatus.CANCELED:
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail=f"Can't update status of {OrderStatus.CANCELED.lower()} order",
+                detail=OrderResponse.canceled_order_status_not_updated,
             )
         case OrderStatus.DELIVERED:
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail=f"Can't update status of {OrderStatus.DELIVERED.lower()} order",
+                detail=OrderResponse.delivered_order_status_not_updated,
             )
         case _:
             pass

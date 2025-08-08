@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from unittest.mock import AsyncMock, MagicMock
 
 
-from app.constants import OrderStatus
+from app.constants import OrderResponse, OrderStatus
 from app.models import Order, Supplier
 from app.schemas import OrderItemSchema, OrderPublicSchema
 from app.utils import (
@@ -70,15 +70,9 @@ def test_handle_update_order_status():
     with pytest.raises(HTTPException) as exc_info:
         handle_update_order_status(OrderStatus.CANCELED)
 
-    assert (
-        f"Can't update status of {OrderStatus.CANCELED.lower()} order"
-        in exc_info.value.detail
-    )
+    assert OrderResponse.canceled_order_status_not_updated in exc_info.value.detail
 
     with pytest.raises(HTTPException) as exc_info:
         handle_update_order_status(OrderStatus.DELIVERED)
 
-    assert (
-        f"Can't update status of {OrderStatus.DELIVERED.lower()} order"
-        in exc_info.value.detail
-    )
+    assert OrderResponse.delivered_order_status_not_updated in exc_info.value.detail
