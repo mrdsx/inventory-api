@@ -4,10 +4,8 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Sequence
 
-from order import Order
-from order_item import OrderItem
-from ..constants.product import ResponseMsg
-from ..models.product import Product
+from constants import ProductResponse
+from models import Order, OrderItem, Product
 
 
 async def find_product_by_id(id: int, session: AsyncSession) -> Product:
@@ -15,7 +13,8 @@ async def find_product_by_id(id: int, session: AsyncSession) -> Product:
     db_product = result.scalar()
     if db_product is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail=ResponseMsg.product_not_found
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=ProductResponse.product_not_found,
         )
 
     return db_product
