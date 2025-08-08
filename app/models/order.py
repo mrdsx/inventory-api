@@ -7,6 +7,7 @@ from database import Base
 
 
 class Order(Base):
+    __table_args__ = {"extend_existing": True}
     __tablename__ = "orders"
 
     id: Mapped[int] = mapped_column(primary_key=True)

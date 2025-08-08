@@ -6,6 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 # TODO: EXTRACT 1000 from OrderItem and Product into constant
 class OrderItem(Base):
+    __table_args__ = {"extend_existing": True}
     __tablename__ = "order_items"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)

@@ -6,6 +6,7 @@ from database import Base
 
 
 class Product(Base):
+    __table_args__ = {"extend_existing": True}
     __tablename__ = "products"
 
     id: Mapped[int] = mapped_column(
