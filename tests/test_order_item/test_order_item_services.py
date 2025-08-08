@@ -3,14 +3,11 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from unittest.mock import AsyncMock, MagicMock
 
-from order import Order
-from order_item import (
-    find_order_item_by_id,
-    OrderItem,
-    CreateOrderItemSchema,
-    ResponseMsg,
-    save_order_items,
-)
+
+from app.constants import OrderItemResponse
+from app.models import Order, OrderItem
+from app.schemas import CreateOrderItemSchema
+from app.services import find_order_item_by_id, save_order_items
 from tests.constants import (
     MOCK_ORDER_ID,
     MOCK_ORDER_ITEM_COST,
@@ -32,7 +29,7 @@ async def test_find_order_item_by_id():
         await find_order_item_by_id(MOCK_ORDER_ITEM_ID, MOCK_ORDER_ID, mock_session)
 
     assert exc_info.value.status_code == status.HTTP_404_NOT_FOUND
-    assert ResponseMsg.order_item_not_found in exc_info.value.detail
+    assert OrderItemResponse.order_item_not_found in exc_info.value.detail
 
     # * Test for success
     mock_result.scalar.return_value = OrderItem(id=MOCK_ORDER_ITEM_ID)

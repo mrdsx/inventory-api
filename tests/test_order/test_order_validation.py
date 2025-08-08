@@ -3,14 +3,9 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from unittest.mock import AsyncMock, MagicMock
 
-from order import (
-    Order,
-    OrderStatus,
-    ResponseMsg as OrderMsg,
-    validate_order_exists,
-    validate_order_items,
-)
-from order_item import ResponseMsg as OrderItemMsg
+from app.constants import OrderItemResponse, OrderResponse, OrderStatus
+from app.models import Order
+from app.validation import validate_order_exists, validate_order_items
 from tests.constants import EXISTING_ORDER_ID, NOT_EXISTING_ORDER_ID
 
 
@@ -27,7 +22,7 @@ async def test_validate_order_exists():
         await validate_order_exists(NOT_EXISTING_ORDER_ID, mock_session)
 
     assert exc_info.value.status_code == status.HTTP_404_NOT_FOUND
-    assert OrderMsg.order_not_found in exc_info.value.detail
+    assert OrderResponse.order_not_found in exc_info.value.detail
 
     # * Test for success result
     mock_result.scalar.return_value = Order(
@@ -43,4 +38,4 @@ def test_validate_order_items():
         validate_order_items([])
 
     assert exc_info.value.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
-    assert OrderItemMsg.order_items_list_is_empty in exc_info.value.detail
+    assert OrderItemResponse.order_items_list_is_empty in exc_info.value.detail

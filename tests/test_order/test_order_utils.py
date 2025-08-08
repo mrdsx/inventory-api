@@ -4,16 +4,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from unittest.mock import AsyncMock, MagicMock
 
 
-from order import (
+from app.constants import OrderStatus
+from app.models import Order, Supplier
+from app.schemas import OrderItemSchema, OrderPublicSchema
+from app.utils import (
     build_order_public_schema,
     get_order_items_total_cost,
     handle_update_order_status,
-    Order,
-    OrderPublicSchema,
-    OrderStatus,
 )
-from order_item import OrderItemSchema
-from supplier import Supplier
 from tests.constants import (
     MOCK_ORDER_DATE,
     MOCK_ORDER_ID,
