@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -100,6 +100,13 @@ async def delete_order_item_by_id(
     item_id: int, order_id: int, session: AsyncSession = Depends(get_session)
 ):
     await validate_order_exists(order_id, session)
+
+    db_order = await find_order_by_id(order_id, session)
+    if db_order.status != OrderStatus.IN_TRANSIT:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Can't delete item from {db_order.status.lower()} order",
+        )
 
     db_order_item = await find_order_item_by_id(item_id, order_id, session)
     await session.delete(db_order_item)
