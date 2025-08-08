@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class SupplierPayload(BaseModel):
+class CreateSupplierSchema(BaseModel):
     name: str
     contact_email: str
 

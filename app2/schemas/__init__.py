@@ -1,7 +1,7 @@
 from .order import CreateOrderSchema, OrderPublicSchema, OrderSchema
 from .order_item import CreateOrderItemSchema, OrderItemSchema
 from .product import CreateProductSchema, ProductSchema, UpdateProductSchema
-from .supplier import SupplierPayload, SupplierSchema
+from .supplier import CreateSupplierSchema, SupplierSchema
 
 __all__ = [
     # * order
@@ -16,6 +16,6 @@ __all__ = [
     "ProductSchema",
     "UpdateProductSchema",
     # * supplier
-    "SupplierPayload",
+    "CreateSupplierSchema",
     "SupplierSchema",
 ]
