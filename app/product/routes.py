@@ -9,6 +9,7 @@ from .models import Product
 from .schemas import CreateProductSchema, ProductSchema, UpdateProductSchema
 from .services import find_product_by_id
 from .utils import build_product_db_object
+from .validation import validate_product_not_exists_by_sku
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 
@@ -33,6 +34,8 @@ async def get_product_by_id(
 async def create_product(
     product: CreateProductSchema, session: AsyncSession = Depends(get_session)
 ):
+    await validate_product_not_exists_by_sku(product.sku, session)
+
     new_product = build_product_db_object(product)
     session.add(new_product)
     await session.commit()
