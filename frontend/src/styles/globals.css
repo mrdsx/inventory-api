@@ -117,4 +117,9 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  input[type="button"],
+  button {
+    @apply cursor-pointer w-fit;
+  }
 }
