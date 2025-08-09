@@ -56,3 +56,6 @@ async def test_save_order_items():
     ]
 
     await save_order_items(mock_order, mock_order_items, mock_session)
+
+    mock_session.commit.assert_awaited_once()
+    mock_session.refresh.assert_awaited_once_with(mock_order)
