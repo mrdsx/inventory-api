@@ -1,5 +1,8 @@
 from enum import Enum
 
+PRODUCT_SKU_LENGTH = 30
+PRODUCT_DESCRIPTION_LENGTH = 1000
+
 
 class ProductResponse(str, Enum):
     product_already_exists = "Product already exists"
