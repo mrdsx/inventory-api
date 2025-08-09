@@ -57,9 +57,9 @@ poetry install
 ### 5. Run project
 
 ```bash
-poetry run python app\\main.py
+poetry run python app\main.py
 OR
-python app\\main.py
+python app\main.py
 ```
 
 After running the project API can be accessed on http://127.0.0.1:3000.
