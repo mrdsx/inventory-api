@@ -1,3 +1,4 @@
+import { ROUTES } from "@/app/routes";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -9,10 +10,10 @@ import { ChartLine, ListChecks, Package2, Users } from "lucide-react";
 import { MenuItem } from "./AppSidebar";
 
 const items: MenuItem[] = [
-  { link: "#", icon: ChartLine, title: "Dashboard" },
-  { link: "#", icon: Package2, title: "Products" },
-  { link: "#", icon: ListChecks, title: "Orders" },
-  { link: "#", icon: Users, title: "Suppliers" },
+  { link: ROUTES.DASHBOARD, icon: ChartLine, title: "Dashboard" },
+  { link: ROUTES.PRODUCTS, icon: Package2, title: "Products" },
+  { link: ROUTES.ORDERS, icon: ListChecks, title: "Orders" },
+  { link: ROUTES.SUPPLIERS, icon: Users, title: "Suppliers" },
 ];
 
 export function Workspace() {

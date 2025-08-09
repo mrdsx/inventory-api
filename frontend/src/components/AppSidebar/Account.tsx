@@ -1,3 +1,4 @@
+import { ROUTES } from "@/app/routes";
 import { LogOut, Settings } from "lucide-react";
 import {
   SidebarGroup,
@@ -9,7 +10,7 @@ import {
 import { MenuItem } from "./AppSidebar";
 
 const items: MenuItem[] = [
-  { link: "#", icon: Settings, title: "Settings" },
+  { link: ROUTES.SETTINGS, icon: Settings, title: "Settings" },
   { link: "#", icon: LogOut, title: "Log Out" },
 ];
 
