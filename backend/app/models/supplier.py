@@ -1,12 +1,13 @@
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
+from constants import TableName
 from database import Base
 
 
 class Supplier(Base):
     __table_args__ = {"extend_existing": True}
-    __tablename__ = "suppliers"
+    __tablename__ = TableName.SUPPLIERS
 
     id: Mapped[int] = mapped_column(
         Integer, primary_key=True, unique=True, autoincrement=True

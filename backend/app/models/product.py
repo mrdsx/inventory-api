@@ -2,22 +2,23 @@ from pydantic import NonNegativeFloat
 from sqlalchemy import Float, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
+from constants import TableName
 from database import Base
 
 
 class Product(Base):
     __table_args__ = {"extend_existing": True}
-    __tablename__ = "products"
+    __tablename__ = TableName.PRODUCTS
 
     id: Mapped[int] = mapped_column(
         Integer, primary_key=True, unique=True, autoincrement=True
     )
     sku: Mapped[str] = mapped_column(String(30), primary_key=True, unique=True)
     order_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey("orders.id"), nullable=False
+        Integer, ForeignKey(f"{TableName.ORDERS}.id"), nullable=False
     )
     supplier_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey("suppliers.id"), nullable=False
+        Integer, ForeignKey(f"{TableName.SUPPLIERS}.id"), nullable=False
     )
     name: Mapped[str] = mapped_column(String, nullable=False)
     description: Mapped[str] = mapped_column(String(1000), nullable=False)

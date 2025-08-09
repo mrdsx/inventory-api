@@ -3,15 +3,19 @@ from sqlalchemy import Float, ForeignKey, Integer, String
 from database import Base
 from sqlalchemy.orm import Mapped, mapped_column
 
+from constants import TableName
+
 
 # TODO: EXTRACT 1000 from OrderItem and Product into constant
 class OrderItem(Base):
     __table_args__ = {"extend_existing": True}
-    __tablename__ = "order_items"
+    __tablename__ = TableName.ORDER_ITEMS
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     order_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey("orders.id", ondelete="CASCADE"), nullable=False
+        Integer,
+        ForeignKey(f"{TableName.ORDERS}.id", ondelete="CASCADE"),
+        nullable=False,
     )
     name: Mapped[str] = mapped_column(String, nullable=False)
     description: Mapped[str] = mapped_column(String(1000), nullable=False)
