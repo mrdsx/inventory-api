@@ -1,3 +1,5 @@
+import { AppSidebar } from "@/components/AppSidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 
@@ -14,7 +16,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div>{children}</div>
+        <SidebarProvider>
+          <div className="flex min-h-screen">
+            <AppSidebar />
+            {children}
+          </div>
+        </SidebarProvider>
       </body>
     </html>
   );
