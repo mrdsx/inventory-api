@@ -30,7 +30,7 @@ cd inventory-api
 
 ### 2. Setup environment variables
 
-Create `.env` file in root directory with following variables:
+Create `.env` file in 'backend' folder with following variables:
 
 ```
 DB_URL=YOUR_DB_URL
@@ -43,6 +43,7 @@ Replace `YOUR_DB_URL` with actual url.
 Run following commands in project directory:
 
 ```bash
+cd backend
 python -m venv .venv
 .venv\Scripts\activate
 ```
