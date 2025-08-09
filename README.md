@@ -4,11 +4,11 @@ A backend service for managing products, suppliers, stock levels, and restocking
 
 ## Features
 
-- Add, delete suppliers
-<!-- - Add, update, and soft-delete products with unique SKUs (TODO)
-- Track real-time stock levels for each product (TODO)
-- Link products to specific suppliers (TODO)
-- Create and process purchase orders to restock inventory (TODO)
+Backend:
+
+- CRUD operations with suppliers, products and orders
+- Create and process purchase orders to restock inventory
+<!-- - Track real-time stock levels for each product (TODO)
 - Low stock alert system based on configurable thresholds (TODO)
 - Search and filter products by name or SKU (TODO)
 - Supplier-based reporting and inventory insights (TODO) -->
@@ -17,9 +17,15 @@ A backend service for managing products, suppliers, stock levels, and restocking
 
 ### Prerequisites
 
+- [NodeJS](https://nodejs.org/en)
+- [npm](https://www.npmjs.com/)
 - [Python](https://www.python.org/)
 
-Also, this project uses [Poetry](https://python-poetry.org/) as main package manager, so you'll need to install it as you go through the installation process.
+Before setting up the project install bun package manager by running this command:
+
+```bash
+npm install -g bun
+```
 
 ### 1. Clone the repository
 
@@ -38,9 +44,14 @@ DB_URL=YOUR_DB_URL
 
 Replace `YOUR_DB_URL` with actual url.
 
-### 3. Setup virtual environment
+### 3. Install dependencies for client
 
-Run following commands in project directory:
+```bash
+cd frontend
+bun install
+```
+
+### 4. Setup virtual environment for server
 
 ```bash
 cd backend
@@ -48,28 +59,40 @@ python -m venv .venv
 .venv\Scripts\activate
 ```
 
-### 4. Install dependencies
+### 5. Install dependencies for server
 
 ```bash
 pip install poetry
 poetry install
 ```
 
-### 5. Run project
+### 6. Run project
+
+Run client:
 
 ```bash
+cd frontend
+bun dev
+```
+
+Run server:
+
+```bash
+cd backend
+
 poetry run python app\main.py
 OR
 python app\main.py
 ```
 
-After running the project API can be accessed on http://127.0.0.1:3000.
+After running the frontend is accessible at http://localhost:3000 and backend API at http://127.0.0.1:3000.
 
 ## Running tests
 
-To run tests enter this command in root directory of project (NOT IN `/app`)
+To run tests for server run these commands:
 
 ```bash
+cd backend
 pytest tests
 ```
 
