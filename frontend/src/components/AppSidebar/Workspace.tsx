@@ -9,11 +9,12 @@ import {
 import { ChartLine, ListChecks, Package2, Users } from "lucide-react";
 import { MenuItem } from "./AppSidebar";
 
+const { workspace } = ROUTES;
 const items: MenuItem[] = [
-  { link: ROUTES.DASHBOARD, icon: ChartLine, title: "Dashboard" },
-  { link: ROUTES.PRODUCTS, icon: Package2, title: "Products" },
-  { link: ROUTES.ORDERS, icon: ListChecks, title: "Orders" },
-  { link: ROUTES.SUPPLIERS, icon: Users, title: "Suppliers" },
+  { link: workspace.dashboard, icon: ChartLine, title: "Dashboard" },
+  { link: workspace.products, icon: Package2, title: "Products" },
+  { link: workspace.orders, icon: ListChecks, title: "Orders" },
+  { link: workspace.suppliers, icon: Users, title: "Suppliers" },
 ];
 
 export function Workspace() {

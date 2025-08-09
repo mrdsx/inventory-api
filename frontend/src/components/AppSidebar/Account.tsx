@@ -10,7 +10,7 @@ import {
 import { MenuItem } from "./AppSidebar";
 
 const items: MenuItem[] = [
-  { link: ROUTES.SETTINGS, icon: Settings, title: "Settings" },
+  { link: ROUTES.settings, icon: Settings, title: "Settings" },
   { link: "#", icon: LogOut, title: "Log Out" },
 ];
 
