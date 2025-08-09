@@ -7,7 +7,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components";
+} from "@/components/ui";
 
 export function AppSidebar() {
   return (
@@ -21,7 +21,7 @@ export function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="/">Dashboard</a>
+                  <a href="#">Dashboard</a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
