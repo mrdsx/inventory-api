@@ -1,19 +1,21 @@
-import { LogOut, Settings } from "lucide-react";
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "../ui";
+} from "@/components/ui";
+import { ChartLine, ListChecks, Package2, Users } from "lucide-react";
 import { MenuItem } from "./AppSidebar";
 
 const items: MenuItem[] = [
-  { link: "#", icon: Settings, title: "Settings" },
-  { link: "#", icon: LogOut, title: "Log Out" },
+  { link: "#", icon: ChartLine, title: "Dashboard" },
+  { link: "#", icon: Package2, title: "Products" },
+  { link: "#", icon: ListChecks, title: "Orders" },
+  { link: "#", icon: Users, title: "Suppliers" },
 ];
 
-export function Actions() {
+export function Workspace() {
   return (
     <SidebarGroup>
       <SidebarGroupContent>

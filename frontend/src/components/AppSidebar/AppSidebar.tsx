@@ -7,8 +7,8 @@ import {
 } from "@/components/ui";
 import { ToggleThemeBtn } from "@/features/theme";
 import { Component as LucideIcon } from "lucide-react";
-import { Actions } from "./Actions";
-import { Navigation } from "./Navigation";
+import { Account } from "./Account";
+import { Workspace } from "./Workspace";
 
 export type MenuItem = {
   link: string;
@@ -24,9 +24,9 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarSeparator />
       <SidebarContent>
-        <Navigation />
+        <Workspace />
         <SidebarSeparator />
-        <Actions />
+        <Account />
       </SidebarContent>
       <SidebarFooter>
         <ToggleThemeBtn />
