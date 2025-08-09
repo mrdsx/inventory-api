@@ -1,6 +1,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
@@ -8,6 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui";
+import { ToggleThemeBtn } from "@/features/theme";
 
 export function AppSidebar() {
   return (
@@ -28,6 +30,9 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <ToggleThemeBtn />
+      </SidebarFooter>
     </Sidebar>
   );
 }
