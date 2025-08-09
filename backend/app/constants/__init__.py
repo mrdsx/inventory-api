@@ -1,6 +1,6 @@
 from .database import TableName
 from .order import OrderStatus, OrderResponse
-from .order_item import OrderItemResponse
+from .order_item import ORDER_ITEM_DESCRIPTION_LENGTH, OrderItemResponse
 from .product import PRODUCT_DESCRIPTION_LENGTH, PRODUCT_SKU_LENGTH, ProductResponse
 from .supplier import SupplierResponse
 
@@ -15,6 +15,7 @@ __all__ = [
     "OrderResponse",
     "OrderStatus",
     # * order_item
+    "ORDER_ITEM_DESCRIPTION_LENGTH",
     "OrderItemResponse",
     # * product
     "PRODUCT_DESCRIPTION_LENGTH",

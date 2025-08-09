@@ -1,5 +1,9 @@
 from enum import Enum
 
+from .product import PRODUCT_DESCRIPTION_LENGTH
+
+ORDER_ITEM_DESCRIPTION_LENGTH = PRODUCT_DESCRIPTION_LENGTH
+
 
 class OrderItemResponse(str, Enum):
     order_item_deleted = "Order item successfully deleted"

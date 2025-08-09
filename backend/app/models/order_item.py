@@ -3,10 +3,9 @@ from sqlalchemy import Float, ForeignKey, Integer, String
 from database import Base
 from sqlalchemy.orm import Mapped, mapped_column
 
-from constants import TableName
+from constants import ORDER_ITEM_DESCRIPTION_LENGTH, TableName
 
 
-# TODO: EXTRACT 1000 from OrderItem and Product into constant
 class OrderItem(Base):
     __table_args__ = {"extend_existing": True}
     __tablename__ = TableName.ORDER_ITEMS
@@ -18,7 +17,9 @@ class OrderItem(Base):
         nullable=False,
     )
     name: Mapped[str] = mapped_column(String, nullable=False)
-    description: Mapped[str] = mapped_column(String(1000), nullable=False)
+    description: Mapped[str] = mapped_column(
+        String(ORDER_ITEM_DESCRIPTION_LENGTH), nullable=False
+    )
     category: Mapped[str] = mapped_column(String, nullable=False)
     cost: Mapped[NonNegativeFloat] = mapped_column(Float, nullable=False)
     quantity: Mapped[int] = mapped_column(Integer, nullable=False)
