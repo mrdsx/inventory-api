@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/AppSidebar";
+import { AppSidebar } from "@/components";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
