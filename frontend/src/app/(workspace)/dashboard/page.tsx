@@ -1,21 +1,10 @@
-import { StatsCard } from "./components/StatsCard";
-
-const statsData = [
-  { title: "Total Order", value: "1000" },
-  { title: "Total Sales", value: "$10,000" },
-  { title: "Total Canceled", value: "50" },
-  { title: "Total Pending", value: "500" },
-];
+import { StatsSection } from "./components/StatsSection/StatsSection";
 
 export default function DashboardPage() {
   return (
     <div className="grid gap-4 p-4">
       <div className="text-2xl">Dashboard</div>
-      <div className="grid grid-cols-4 gap-4">
-        {statsData.map((stats, index) => (
-          <StatsCard stats={stats} key={stats.title + index} />
-        ))}
-      </div>
+      <StatsSection />
       <div className="card grid gap-2">
         <span className="text-lg">Recent Orders</span>
         <table className="w-full">
