@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class TableName(Enum, str):
+class TableName(str, Enum):
     ORDER_ITEMS = "order_items"
     ORDERS = "orders"
     PRODUCTS = "products"
