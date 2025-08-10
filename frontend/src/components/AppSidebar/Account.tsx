@@ -1,13 +1,8 @@
 import { ROUTES } from "@/app/routes";
 import { LogOut, Settings } from "lucide-react";
-import {
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "../ui";
+import { SidebarGroup, SidebarGroupContent, SidebarMenu } from "../ui";
 import { SidebarItem } from "./AppSidebar";
+import { AppSidebarItem } from "./AppSidebarItem";
 
 const items: SidebarItem[] = [
   { link: ROUTES.settings, icon: <Settings />, title: "Settings" },
@@ -20,14 +15,7 @@ export function Account() {
       <SidebarGroupContent>
         <SidebarMenu>
           {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild>
-                <a href={item.link}>
-                  {item.icon}
-                  {item.title}
-                </a>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            <AppSidebarItem item={item} key={item.title} />
           ))}
         </SidebarMenu>
       </SidebarGroupContent>

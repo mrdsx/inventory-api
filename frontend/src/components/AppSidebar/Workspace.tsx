@@ -3,11 +3,10 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/components/ui";
 import { ChartLine, ListChecks, Package2, Users } from "lucide-react";
 import { SidebarItem } from "./AppSidebar";
+import { AppSidebarItem } from "./AppSidebarItem";
 
 const { workspace } = ROUTES;
 const items: SidebarItem[] = [
@@ -23,14 +22,7 @@ export function Workspace() {
       <SidebarGroupContent>
         <SidebarMenu>
           {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild>
-                <a href={item.link}>
-                  {item.icon}
-                  {item.title}
-                </a>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            <AppSidebarItem item={item} key={item.title} />
           ))}
         </SidebarMenu>
       </SidebarGroupContent>
