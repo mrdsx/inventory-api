@@ -9,15 +9,21 @@ export async function RecentOrdersSection() {
       <span className="text-lg">Recent Orders ({orders.length})</span>
       <div className="max-h-60 overflow-y-auto">
         <table className="w-full">
-          <thead className="bg-neutral-300 dark:bg-neutral-700">
+          <thead>
             <tr>
-              <th className="sticky top-0 bg-neutral-300 p-2 text-start">ID</th>
-              <th className="sticky top-0 bg-neutral-300 text-start">
+              <th className="sticky top-0 bg-neutral-300 p-2 text-start dark:bg-gray-800">
+                ID
+              </th>
+              <th className="sticky top-0 bg-neutral-300 text-start dark:bg-gray-800">
                 Supplier Name
               </th>
-              <th className="sticky top-0 bg-neutral-300 text-start">Date</th>
-              <th className="sticky top-0 bg-neutral-300 text-start">Status</th>
-              <th className="sticky top-0 bg-neutral-300 text-start">
+              <th className="sticky top-0 bg-neutral-300 text-start dark:bg-gray-800">
+                Date
+              </th>
+              <th className="sticky top-0 bg-neutral-300 text-start dark:bg-gray-800">
+                Status
+              </th>
+              <th className="sticky top-0 bg-neutral-300 text-start dark:bg-gray-800">
                 Total Cost
               </th>
             </tr>
