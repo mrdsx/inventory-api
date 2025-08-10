@@ -16,7 +16,7 @@ export default function DashboardPage() {
           <StatsCard stats={stats} key={stats.title + index} />
         ))}
       </div>
-      <div className="grid gap-2 rounded-lg border-1 p-4 shadow-md">
+      <div className="grid gap-2 card">
         <span className="text-lg">Recent Orders</span>
         <table className="w-full">
           <thead className="bg-neutral-300 dark:bg-neutral-700">
