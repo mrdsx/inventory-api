@@ -10,8 +10,8 @@ import {
 import { SidebarItem } from "./AppSidebar";
 
 const items: SidebarItem[] = [
-  { link: ROUTES.settings, icon: Settings, title: "Settings" },
-  { link: "#", icon: LogOut, title: "Log Out" },
+  { link: ROUTES.settings, icon: <Settings />, title: "Settings" },
+  { link: "#", icon: <LogOut />, title: "Log Out" },
 ];
 
 export function Account() {
@@ -23,7 +23,7 @@ export function Account() {
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild>
                 <a href={item.link}>
-                  <item.icon />
+                  {item.icon}
                   {item.title}
                 </a>
               </SidebarMenuButton>

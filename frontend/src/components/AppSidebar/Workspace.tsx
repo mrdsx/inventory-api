@@ -11,10 +11,10 @@ import { SidebarItem } from "./AppSidebar";
 
 const { workspace } = ROUTES;
 const items: SidebarItem[] = [
-  { link: workspace.dashboard, icon: ChartLine, title: "Dashboard" },
-  { link: workspace.products, icon: Package2, title: "Products" },
-  { link: workspace.orders, icon: ListChecks, title: "Orders" },
-  { link: workspace.suppliers, icon: Users, title: "Suppliers" },
+  { link: workspace.dashboard, icon: <ChartLine />, title: "Dashboard" },
+  { link: workspace.products, icon: <Package2 />, title: "Products" },
+  { link: workspace.orders, icon: <ListChecks />, title: "Orders" },
+  { link: workspace.suppliers, icon: <Users />, title: "Suppliers" },
 ];
 
 export function Workspace() {
@@ -26,7 +26,7 @@ export function Workspace() {
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild>
                 <a href={item.link}>
-                  <item.icon />
+                  {item.icon}
                   {item.title}
                 </a>
               </SidebarMenuButton>

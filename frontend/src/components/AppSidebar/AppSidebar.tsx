@@ -6,13 +6,12 @@ import {
   SidebarSeparator,
 } from "@/components/ui";
 import { ToggleThemeBtn } from "@/features/theme";
-import { Component as LucideIcon } from "lucide-react";
 import { Account } from "./Account";
 import { Workspace } from "./Workspace";
 
 export type SidebarItem = {
   link: string;
-  icon: typeof LucideIcon;
+  icon: React.ReactElement;
   title: string;
 };
 
