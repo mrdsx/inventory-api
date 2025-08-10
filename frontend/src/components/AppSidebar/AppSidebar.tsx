@@ -10,7 +10,7 @@ import { Component as LucideIcon } from "lucide-react";
 import { Account } from "./Account";
 import { Workspace } from "./Workspace";
 
-export type MenuItem = {
+export type SidebarItem = {
   link: string;
   icon: typeof LucideIcon;
   title: string;

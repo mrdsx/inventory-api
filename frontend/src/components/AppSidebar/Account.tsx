@@ -7,9 +7,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "../ui";
-import { MenuItem } from "./AppSidebar";
+import { SidebarItem } from "./AppSidebar";
 
-const items: MenuItem[] = [
+const items: SidebarItem[] = [
   { link: ROUTES.settings, icon: Settings, title: "Settings" },
   { link: "#", icon: LogOut, title: "Log Out" },
 ];

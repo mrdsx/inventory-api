@@ -7,10 +7,10 @@ import {
   SidebarMenuItem,
 } from "@/components/ui";
 import { ChartLine, ListChecks, Package2, Users } from "lucide-react";
-import { MenuItem } from "./AppSidebar";
+import { SidebarItem } from "./AppSidebar";
 
 const { workspace } = ROUTES;
-const items: MenuItem[] = [
+const items: SidebarItem[] = [
   { link: workspace.dashboard, icon: ChartLine, title: "Dashboard" },
   { link: workspace.products, icon: Package2, title: "Products" },
   { link: workspace.orders, icon: ListChecks, title: "Orders" },
