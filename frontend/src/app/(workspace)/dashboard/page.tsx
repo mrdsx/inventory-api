@@ -9,19 +9,19 @@ const statsData = [
 
 export default function DashboardPage() {
   return (
-    <div className="p-4 grid gap-4">
+    <div className="grid gap-4 p-4">
       <div className="text-2xl">Dashboard</div>
       <div className="grid grid-cols-4 gap-4">
         {statsData.map((stats, index) => (
           <StatsCard stats={stats} key={stats.title + index} />
         ))}
       </div>
-      <div className="grid gap-2 card">
+      <div className="card grid gap-2">
         <span className="text-lg">Recent Orders</span>
         <table className="w-full">
           <thead className="bg-neutral-300 dark:bg-neutral-700">
             <tr>
-              <th className="text-start p-2">ID</th>
+              <th className="p-2 text-start">ID</th>
               <th className="text-start">Supplier Name</th>
               <th className="text-start">Date</th>
               <th className="text-start">Status</th>
