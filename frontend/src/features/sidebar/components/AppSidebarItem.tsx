@@ -1,7 +1,7 @@
 "use client";
+import { SidebarMenuButton, SidebarMenuItem } from "@/components/ui";
 import { SidebarItem, useActiveSidebarRouteStore } from "@/features/sidebar";
 import Link from "next/link";
-import { SidebarMenuButton, SidebarMenuItem } from "../ui";
 
 export function AppSidebarItem({ item }: { item: SidebarItem }) {
   const { activeSidebarRoute, setActiveSidebarRoute } =

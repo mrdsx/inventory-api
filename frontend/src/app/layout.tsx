@@ -1,5 +1,5 @@
-import { AppSidebar } from "@/components";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/features/sidebar";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 

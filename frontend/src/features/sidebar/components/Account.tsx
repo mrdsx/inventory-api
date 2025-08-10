@@ -1,7 +1,11 @@
 import { ROUTES } from "@/app/routes";
+import {
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarMenu,
+} from "@/components/ui";
 import { SidebarItem } from "@/features/sidebar";
 import { LogOut, Settings } from "lucide-react";
-import { SidebarGroup, SidebarGroupContent, SidebarMenu } from "../ui";
 import { AppSidebarItem } from "./AppSidebarItem";
 
 const items: SidebarItem[] = [
