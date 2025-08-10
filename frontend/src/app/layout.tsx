@@ -1,4 +1,4 @@
-import { Header } from "@/components";
+import { NavBar } from "@/components";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/features/sidebar";
 import "@/styles/globals.css";
@@ -20,7 +20,7 @@ export default function RootLayout({
         <SidebarProvider>
           <AppSidebar />
           <main className="w-full">
-            <Header />
+            <NavBar />
             {children}
           </main>
         </SidebarProvider>
