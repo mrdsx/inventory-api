@@ -1,5 +1,4 @@
-import { RecentOrdersSection } from "./components/RecentOrdersSection/RecentOrdersSection";
-import { StatsSection } from "./components/StatsSection/StatsSection";
+import { RecentOrdersSection, StatsSection } from "./components";
 
 export default function DashboardPage() {
   return (
