@@ -4,8 +4,8 @@ import {
   SidebarGroupContent,
   SidebarMenu,
 } from "@/components/ui";
+import { SidebarItem } from "@/features/sidebar";
 import { ChartLine, ListChecks, Package2, Users } from "lucide-react";
-import { SidebarItem } from "./AppSidebar";
 import { AppSidebarItem } from "./AppSidebarItem";
 
 const { workspace } = ROUTES;

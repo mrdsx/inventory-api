@@ -1,7 +1,7 @@
 "use client";
+import { SidebarItem } from "@/features/sidebar";
 import Link from "next/link";
 import { SidebarMenuButton, SidebarMenuItem } from "../ui";
-import { SidebarItem } from "./AppSidebar";
 
 export function AppSidebarItem({ item }: { item: SidebarItem }) {
   return (

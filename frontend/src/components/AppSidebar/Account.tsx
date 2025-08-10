@@ -1,12 +1,12 @@
 import { ROUTES } from "@/app/routes";
+import { SidebarItem } from "@/features/sidebar";
 import { LogOut, Settings } from "lucide-react";
 import { SidebarGroup, SidebarGroupContent, SidebarMenu } from "../ui";
-import { SidebarItem } from "./AppSidebar";
 import { AppSidebarItem } from "./AppSidebarItem";
 
 const items: SidebarItem[] = [
   { link: ROUTES.settings, icon: <Settings />, title: "Settings" },
-  { link: "#", icon: <LogOut />, title: "Log Out" },
+  { link: "/", icon: <LogOut />, title: "Log Out" },
 ];
 
 export function Account() {

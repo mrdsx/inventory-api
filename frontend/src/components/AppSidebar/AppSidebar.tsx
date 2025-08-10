@@ -9,12 +9,6 @@ import { ToggleThemeBtn } from "@/features/theme";
 import { Account } from "./Account";
 import { Workspace } from "./Workspace";
 
-export type SidebarItem = {
-  link: string;
-  icon: React.ReactElement;
-  title: string;
-};
-
 export function AppSidebar() {
   return (
     <Sidebar>
