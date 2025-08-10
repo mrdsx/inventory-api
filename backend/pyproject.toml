@@ -5,8 +5,8 @@ description = "A backend API for managing product inventory, suppliers, and stoc
 authors = [
     {name = "mrdsx"}
 ]
-license = {file = "LICENSE.txt"}
-readme = "README.md"
+license = {file = "../LICENSE.txt"}
+readme = "../README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi (>=0.116.1,<0.117.0)",
