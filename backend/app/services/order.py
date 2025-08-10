@@ -1,3 +1,4 @@
+from datetime import datetime
 from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -18,7 +19,7 @@ async def find_order_by_id(id: int, session: AsyncSession) -> Order:
 
 
 async def save_order(supplier_id: int, session: AsyncSession) -> Order:
-    new_order = Order(supplier_id=supplier_id)
+    new_order = Order(supplier_id=supplier_id, date=datetime.now())
     session.add(new_order)
     await session.commit()
     await session.refresh(new_order)
