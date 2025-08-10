@@ -1,6 +1,4 @@
-from typing import Annotated, Any
 from pydantic import BaseModel, Field, NonNegativeFloat
-from datetime import datetime
 
 from constants import OrderStatus
 from .order_item import CreateOrderItemSchema
@@ -14,7 +12,7 @@ class CreateOrderSchema(BaseModel):
 class OrderSchema(BaseModel):
     id: int
     supplier_id: int
-    date: Annotated[datetime, Any]
+    date: str
     status: OrderStatus
 
 
