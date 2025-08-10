@@ -28,10 +28,18 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 
 @router.get("/orders", response_model=list[OrderPublicSchema])
-async def get_orders(session: AsyncSession = Depends(get_session)):
-    result = await session.execute(
-        select(Order, Supplier).join(Supplier).order_by(Order.id)
-    )
+async def get_orders(
+    limit: int | None = None,
+    order_by_recent: bool = False,
+    session: AsyncSession = Depends(get_session),
+):
+    query = select(Order, Supplier).join(Supplier).limit(limit)
+    if order_by_recent:
+        query = query.order_by(Order.date.desc())
+    else:
+        query = query.order_by(Order.id)
+
+    result = await session.execute(query)
 
     return [
         await build_order_public_schema(order, supplier, session)
