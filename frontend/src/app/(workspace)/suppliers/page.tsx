@@ -1,3 +1,3 @@
-export default function Suppliers() {
+export default function SuppliersPage() {
   return <div>Suppliers</div>;
 }
