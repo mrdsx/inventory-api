@@ -8,12 +8,12 @@ from database import Base
 
 class Order(Base):
     __table_args__ = {"extend_existing": True}
-    __tablename__ = TableName.ORDERS
+    __tablename__ = TableName.ORDERS.value
 
     id: Mapped[int] = mapped_column(primary_key=True)
     supplier_id: Mapped[int] = mapped_column(
         Integer,
-        ForeignKey(f"{TableName.SUPPLIERS}.id"),
+        ForeignKey(f"{TableName.SUPPLIERS.value}.id"),
         nullable=False,
     )
     date: Mapped[datetime] = mapped_column(

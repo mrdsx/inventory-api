@@ -7,7 +7,7 @@ from database import Base
 
 class Supplier(Base):
     __table_args__ = {"extend_existing": True}
-    __tablename__ = TableName.SUPPLIERS
+    __tablename__ = TableName.SUPPLIERS.value
 
     id: Mapped[int] = mapped_column(
         Integer, primary_key=True, unique=True, autoincrement=True

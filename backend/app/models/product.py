@@ -8,7 +8,7 @@ from database import Base
 
 class Product(Base):
     __table_args__ = {"extend_existing": True}
-    __tablename__ = TableName.PRODUCTS
+    __tablename__ = TableName.PRODUCTS.value
 
     id: Mapped[int] = mapped_column(
         Integer, primary_key=True, unique=True, autoincrement=True
@@ -17,10 +17,10 @@ class Product(Base):
         String(PRODUCT_SKU_LENGTH), primary_key=True, unique=True
     )
     order_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey(f"{TableName.ORDERS}.id"), nullable=False
+        Integer, ForeignKey(f"{TableName.ORDERS.value}.id"), nullable=False
     )
     supplier_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey(f"{TableName.SUPPLIERS}.id"), nullable=False
+        Integer, ForeignKey(f"{TableName.SUPPLIERS.value}.id"), nullable=False
     )
     name: Mapped[str] = mapped_column(String, nullable=False)
     description: Mapped[str] = mapped_column(

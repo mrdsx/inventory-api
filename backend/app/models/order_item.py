@@ -8,12 +8,12 @@ from constants import ORDER_ITEM_DESCRIPTION_LENGTH, TableName
 
 class OrderItem(Base):
     __table_args__ = {"extend_existing": True}
-    __tablename__ = TableName.ORDER_ITEMS
+    __tablename__ = TableName.ORDER_ITEMS.value
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     order_id: Mapped[int] = mapped_column(
         Integer,
-        ForeignKey(f"{TableName.ORDERS}.id", ondelete="CASCADE"),
+        ForeignKey(f"{TableName.ORDERS.value}.id", ondelete="CASCADE"),
         nullable=False,
     )
     name: Mapped[str] = mapped_column(String, nullable=False)
