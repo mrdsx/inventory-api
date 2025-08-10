@@ -20,7 +20,7 @@ export function AppSidebar() {
         <Account />
       </SidebarContent>
       <SidebarFooter>
-        <ToggleThemeBtn />
+        <ToggleThemeBtn className="hover:bg-sidebar-accent" size="icon" />
       </SidebarFooter>
     </Sidebar>
   );
