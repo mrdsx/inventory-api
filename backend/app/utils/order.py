@@ -1,3 +1,4 @@
+from datetime import datetime
 from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Sequence
@@ -13,11 +14,13 @@ async def build_order_public_schema(
 ) -> OrderPublicSchema:
     db_order_items = await find_order_items_by_order_id(order.id, session)
     total_cost = await get_order_items_total_cost(db_order_items)
+    dt = datetime.fromisoformat(str(order.date))
+    formatted_date = dt.strftime("%d/%m/%Y, %H:%M:%S")
 
     return OrderPublicSchema(
         id=order.id,
         supplier_name=supplier.name,
-        date=order.date,
+        date=formatted_date,
         status=order.status,
         total_cost=total_cost,
     )  # type: ignore
