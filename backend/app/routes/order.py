@@ -18,7 +18,6 @@ from services import (
 )
 from utils import (
     build_order_public_schema,
-    get_order_items_total_cost,
     handle_update_order_status,
 )
 from validation import validate_order_exists, validate_order_items
@@ -51,16 +50,8 @@ async def get_orders(
 async def get_order_by_id(order_id: int, session: AsyncSession = Depends(get_session)):
     db_order = await find_order_by_id(order_id, session)
     db_supplier = await find_supplier_by_id(db_order.supplier_id, session)
-    db_order_items = await find_order_items_by_order_id(order_id, session)
-    total_cost = await get_order_items_total_cost(db_order_items)
 
-    return OrderPublicSchema(
-        id=db_order.id,
-        supplier_name=db_supplier.name,
-        date=db_order.date,
-        status=db_order.status,
-        total_cost=total_cost,
-    )  # type: ignore
+    return await build_order_public_schema(db_order, db_supplier, session)
 
 
 @router.get("/orders/{order_id}/items", response_model=list[OrderItemSchema])
