@@ -9,7 +9,7 @@ export function AppSidebarHeader() {
   return (
     <SidebarHeader className={`${isCollapsed && "items-center"}`}>
       {isCollapsed && <Webhook />}
-      {!isCollapsed && <h1 className="text-lg">Inventory API</h1>}
+      {!isCollapsed && <span className="text-lg">Inventory API</span>}
     </SidebarHeader>
   );
 }
