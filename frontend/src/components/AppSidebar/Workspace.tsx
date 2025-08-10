@@ -10,10 +10,30 @@ import { AppSidebarItem } from "./AppSidebarItem";
 
 const { workspace } = ROUTES;
 const items: SidebarItem[] = [
-  { link: workspace.dashboard, icon: <ChartLine />, title: "Dashboard" },
-  { link: workspace.products, icon: <Package2 />, title: "Products" },
-  { link: workspace.orders, icon: <ListChecks />, title: "Orders" },
-  { link: workspace.suppliers, icon: <Users />, title: "Suppliers" },
+  {
+    link: workspace.dashboard,
+    icon: <ChartLine />,
+    title: "Dashboard",
+    isWorkspaceRoute: true,
+  },
+  {
+    link: workspace.products,
+    icon: <Package2 />,
+    title: "Products",
+    isWorkspaceRoute: true,
+  },
+  {
+    link: workspace.orders,
+    icon: <ListChecks />,
+    title: "Orders",
+    isWorkspaceRoute: true,
+  },
+  {
+    link: workspace.suppliers,
+    icon: <Users />,
+    title: "Suppliers",
+    isWorkspaceRoute: true,
+  },
 ];
 
 export function Workspace() {

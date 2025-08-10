@@ -13,7 +13,7 @@ export function AppSidebarItem({ item }: { item: SidebarItem }) {
   }`;
 
   function handleClick(): void {
-    setActiveSidebarRoute(item.link);
+    if (item.isWorkspaceRoute) setActiveSidebarRoute(item.link);
   }
 
   return (
