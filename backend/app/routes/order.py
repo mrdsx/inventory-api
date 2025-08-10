@@ -18,6 +18,7 @@ from services import (
 )
 from utils import (
     build_order_public_schema,
+    build_order_schema,
     handle_update_order_status,
 )
 from validation import validate_order_exists, validate_order_items
@@ -74,7 +75,7 @@ async def create_order(
     new_order = await save_order(db_supplier.id, session)
     await save_order_items(new_order, order.items, session)
 
-    return new_order
+    return build_order_schema(new_order)
 
 
 @router.patch("/orders/{order_id}")

@@ -4,7 +4,7 @@ from typing import Sequence
 
 from constants import OrderResponse, OrderStatus
 from models import Order, Supplier
-from schemas import OrderItemSchema, OrderPublicSchema
+from schemas import OrderItemSchema, OrderPublicSchema, OrderSchema
 from services import find_order_items_by_order_id
 from utils import format_date_from_iso_format
 
@@ -23,6 +23,15 @@ async def build_order_public_schema(
         status=order.status,
         total_cost=total_cost,
     )  # type: ignore
+
+
+def build_order_schema(order: Order) -> OrderSchema:
+    return OrderSchema(
+        id=order.id,
+        supplier_id=order.supplier_id,
+        date=format_date_from_iso_format(order.date),
+        status=order.status,  # type: ignore
+    )
 
 
 async def get_order_items_total_cost(order_items: Sequence[OrderItemSchema]) -> float:
