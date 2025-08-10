@@ -1,9 +1,15 @@
 "use client";
-import { Button } from "@/components/ui";
+import { Button, buttonVariants } from "@/components/ui";
 import { useThemeStore } from "@/features/theme";
+import { VariantProps } from "class-variance-authority";
 import { Moon, Sun } from "lucide-react";
 
-export function ToggleThemeBtn() {
+type ToggleThemeBtnProps = React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean;
+  };
+
+export function ToggleThemeBtn({ size, className }: ToggleThemeBtnProps) {
   const { isDarkMode, setIsDarkMode } = useThemeStore();
 
   function handleClick() {
@@ -13,9 +19,10 @@ export function ToggleThemeBtn() {
 
   return (
     <Button
+      className={className}
       variant="outline"
-      className="border-(--border-color)"
       onClick={handleClick}
+      size={size}
     >
       {isDarkMode ? <Sun /> : <Moon />}
     </Button>
