@@ -1,7 +1,7 @@
 import { TableCell, TableRow } from "@/components/ui";
 import { ORDER_STATUS, OrderResponse } from "@/features/order";
 
-export function OrderRow({ order }: { order: OrderResponse }) {
+export function OrdersTableRow({ order }: { order: OrderResponse }) {
   const orderStatusStyles =
     order.status === ORDER_STATUS.DELIVERED
       ? "text-green-500"
