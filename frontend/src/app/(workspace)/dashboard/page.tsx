@@ -1,3 +1,5 @@
+import { WorkspacePageContentLoader } from "@/features/workspace";
+import { Suspense } from "react";
 import { RecentOrdersSection, StatsSection } from "./components";
 
 export default function DashboardPage() {
@@ -5,7 +7,9 @@ export default function DashboardPage() {
     <>
       <div className="text-2xl">Dashboard</div>
       <StatsSection />
-      <RecentOrdersSection />
+      <Suspense fallback={<WorkspacePageContentLoader />}>
+        <RecentOrdersSection />
+      </Suspense>
     </>
   );
 }
