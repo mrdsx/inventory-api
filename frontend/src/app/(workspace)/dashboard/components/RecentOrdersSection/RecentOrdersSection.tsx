@@ -1,7 +1,13 @@
-// TODO: add type OrderResponse
-// TODO: replace table row in orders.map() with OrderRow
-
 import { OrderResponse } from "@/features/order";
+import { OrderRow } from "./OrderRow";
+
+const THEAD_ITEMS = [
+  "ID",
+  "Supplier Name",
+  "Created at",
+  "Status",
+  "Total Cost",
+];
 
 // TODO: extract repeating styles
 export async function RecentOrdersSection() {
@@ -17,36 +23,19 @@ export async function RecentOrdersSection() {
         <table className="w-full">
           <thead>
             <tr>
-              <th className="sticky top-0 bg-neutral-300 p-2 text-start dark:bg-gray-800">
-                ID
-              </th>
-              <th className="sticky top-0 bg-neutral-300 text-start dark:bg-gray-800">
-                Supplier Name
-              </th>
-              <th className="sticky top-0 bg-neutral-300 text-start dark:bg-gray-800">
-                Date
-              </th>
-              <th className="sticky top-0 bg-neutral-300 text-start dark:bg-gray-800">
-                Status
-              </th>
-              <th className="sticky top-0 bg-neutral-300 text-start dark:bg-gray-800">
-                Total Cost
-              </th>
+              {THEAD_ITEMS.map((item, index) => (
+                <th
+                  className="sticky top-0 bg-neutral-300 p-2 text-start dark:bg-gray-800"
+                  key={item + index}
+                >
+                  {item}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
             {orders.map((order) => (
-              <tr key={order.id}>
-                <th className="p-2 text-start font-normal">
-                  Order #{order.id}
-                </th>
-                <th className="text-start font-normal">
-                  {order.supplier_name}
-                </th>
-                <th className="text-start font-normal">{order.date}</th>
-                <th className="text-start font-normal">{order.status}</th>
-                <th className="text-start font-normal">{order.total_cost}</th>
-              </tr>
+              <OrderRow order={order} key={order.id} />
             ))}
           </tbody>
         </table>
