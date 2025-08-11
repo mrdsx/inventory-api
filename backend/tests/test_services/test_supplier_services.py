@@ -53,8 +53,8 @@ async def test_find_supplier_by_name():
     assert SupplierResponseMsg.supplier_not_found in exc_info.value.detail
 
     # * Test for success
-    mock_result.scalar.return_value = Supplier(id=NOT_EXISTING_SUPPLIER_NAME)
-    db_supplier = await find_supplier_by_name(NOT_EXISTING_SUPPLIER_NAME, mock_session)
+    mock_result.scalar.return_value = Supplier(id=EXISTING_SUPPLIER_NAME)
+    db_supplier = await find_supplier_by_name(EXISTING_SUPPLIER_NAME, mock_session)
 
     assert isinstance(db_supplier, Supplier)
-    assert db_supplier.id == NOT_EXISTING_SUPPLIER_NAME
+    assert db_supplier.id == EXISTING_SUPPLIER_NAME
