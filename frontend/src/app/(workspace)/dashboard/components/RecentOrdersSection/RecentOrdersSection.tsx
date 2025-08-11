@@ -1,5 +1,7 @@
 import { apiClient, ENDPOINTS } from "@/app/lib";
 import { OrderResponse, OrderRow } from "@/features/order";
+import { Suspense } from "react";
+import { RecentOrdersTableBodySkeleton } from "./RecentOrdersTableBodySkeleton";
 import { RecentOrdersTableHead } from "./RecentOrdersTableHead";
 
 export async function RecentOrdersSection() {
@@ -14,9 +16,11 @@ export async function RecentOrdersSection() {
         <table className="w-full">
           <RecentOrdersTableHead />
           <tbody>
-            {orders.map((order) => (
-              <OrderRow order={order} key={order.id} />
-            ))}
+            <Suspense fallback={<RecentOrdersTableBodySkeleton />}>
+              {orders.map((order) => (
+                <OrderRow order={order} key={order.id} />
+              ))}
+            </Suspense>
           </tbody>
         </table>
       </div>
