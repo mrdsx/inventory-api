@@ -39,6 +39,16 @@ export {
 } from "./sidebar";
 export { Skeleton } from "./skeleton";
 export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./table";
+export {
   Tooltip,
   TooltipContent,
   TooltipProvider,
