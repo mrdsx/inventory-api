@@ -7,7 +7,7 @@ export function AppSidebarHeader() {
   const isCollapsed = state === "collapsed";
 
   return (
-    <SidebarHeader className={`${isCollapsed && "items-center"}`}>
+    <SidebarHeader>
       {isCollapsed && <Webhook />}
       {!isCollapsed && <span className="text-lg">Inventory API</span>}
     </SidebarHeader>
