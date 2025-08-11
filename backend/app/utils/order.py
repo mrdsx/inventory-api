@@ -1,20 +1,20 @@
 from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from typing import Sequence
 
 from constants import OrderResponseMsg, OrderStatus
 from models import Order, Supplier
-from schemas import OrderItemSchema, OrderPublicSchema, OrderSchema
+from schemas import OrderPublicSchema, OrderSchema
 from services import find_order_items_by_order_id
 from utils import format_date_from_iso_format
+from .order_item import get_order_items_total_cost
 
 
 async def build_order_public_schema(
     order: Order, supplier: Supplier, session: AsyncSession
 ) -> OrderPublicSchema:
     db_order_items = await find_order_items_by_order_id(order.id, session)
-    total_cost = await get_order_items_total_cost(db_order_items)
+    total_cost = get_order_items_total_cost(db_order_items)
     formatted_date = format_date_from_iso_format(order.date)
 
     return OrderPublicSchema(
@@ -40,14 +40,6 @@ def build_get_orders_query(order_by_recent: bool, limit: int | None = None):
     if order_by_recent:
         return query.order_by(Order.date.desc())
     return query.order_by(Order.id)
-
-
-async def get_order_items_total_cost(order_items: Sequence[OrderItemSchema]) -> float:
-    total_cost: float = 0
-    for order_item in order_items:
-        total_cost += order_item.cost * order_item.quantity
-
-    return total_cost
 
 
 def handle_update_order_status(order_status: OrderStatus) -> None:
