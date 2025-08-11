@@ -22,7 +22,7 @@ export default function RootLayout({
           <AppSidebar />
           <main className="w-full">
             <NavBar />
-            {children}
+            <div className="grid gap-4 p-4">{children}</div>
           </main>
         </SidebarProvider>
       </body>
