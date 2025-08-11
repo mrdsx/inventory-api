@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from constants import API_ROUTER_PREFIX, OrderItemResponse, OrderStatus
+from constants import API_ROUTER_PREFIX, OrderItemResponseMsg, OrderStatus
 from database import get_session
 from models import Order, Supplier
 from schemas import CreateOrderSchema, OrderItemSchema, OrderPublicSchema, OrderSchema
@@ -112,4 +112,4 @@ async def delete_order_item_by_id(
     await session.delete(db_order_item)
     await session.commit()
 
-    return {"message": OrderItemResponse.order_item_deleted}
+    return {"message": OrderItemResponseMsg.order_item_deleted}

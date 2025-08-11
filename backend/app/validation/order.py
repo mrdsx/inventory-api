@@ -2,7 +2,7 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from constants import OrderResponse, OrderItemResponse
+from constants import OrderResponse, OrderItemResponseMsg
 from models import Order
 from schemas import CreateOrderItemSchema
 
@@ -20,5 +20,5 @@ def validate_order_items(items: list[CreateOrderItemSchema]) -> None:
     if len(items) == 0:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=OrderItemResponse.order_items_list_is_empty,
+            detail=OrderItemResponseMsg.order_items_list_is_empty,
         )
