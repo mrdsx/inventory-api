@@ -1,13 +1,6 @@
 import { OrderResponse } from "@/features/order";
 import { OrderRow } from "./OrderRow";
-
-const THEAD_ITEMS = [
-  "ID",
-  "Supplier Name",
-  "Created at",
-  "Status",
-  "Total Cost",
-];
+import { RecentOrdersTHead } from "./RecentOrdersTHead";
 
 // TODO: extract repeating styles
 export async function RecentOrdersSection() {
@@ -21,18 +14,7 @@ export async function RecentOrdersSection() {
       <span className="text-lg">Recent Orders ({orders.length})</span>
       <div className="max-h-60 overflow-y-auto">
         <table className="w-full">
-          <thead>
-            <tr>
-              {THEAD_ITEMS.map((item, index) => (
-                <th
-                  className="sticky top-0 bg-neutral-300 p-2 text-start dark:bg-gray-800"
-                  key={item + index}
-                >
-                  {item}
-                </th>
-              ))}
-            </tr>
-          </thead>
+          <RecentOrdersTHead />
           <tbody>
             {orders.map((order) => (
               <OrderRow order={order} key={order.id} />
