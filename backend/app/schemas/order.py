@@ -20,3 +20,7 @@ class OrderPublicSchema(OrderSchema):
     supplier_id: int = Field(0, exclude=True)
     supplier_name: str
     total_cost: NonNegativeFloat
+
+
+class OrdersCountSchema(BaseModel):
+    orders_count: int

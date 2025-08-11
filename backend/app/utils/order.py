@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from constants import OrderResponseMsg, OrderStatus
 from models import Order, Supplier
-from schemas import OrderPublicSchema, OrderSchema
+from schemas import OrderPublicSchema, OrderSchema, OrdersCountSchema
 from services import find_order_items_by_order_id
 from utils import format_date_from_iso_format
 from .order_item import get_order_items_total_cost
@@ -46,11 +46,12 @@ def build_get_orders_query(
 
 def get_orders_count(
     status: OrderStatus | None, result: Result[tuple[Order, Supplier]]
-) -> dict[str, int]:
+) -> OrdersCountSchema:
     if status is not None:
         orders = [order for order, _supplier in result if order.status == status]
-        return {"orders_count": len(orders)}
-    return {"orders_count": len([row for row in result])}
+        return OrdersCountSchema(orders_count=len(orders))
+
+    return OrdersCountSchema(orders_count=len([row for row in result]))
 
 
 def handle_update_order_status(order_status: OrderStatus) -> None:
