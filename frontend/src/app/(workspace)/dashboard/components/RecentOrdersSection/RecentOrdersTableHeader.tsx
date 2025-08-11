@@ -8,7 +8,7 @@ const THEAD_ITEMS = [
   "Total Cost",
 ] as const;
 
-export function RecentOrdersTableHead() {
+export function RecentOrdersTableHeader() {
   return (
     <TableHeader>
       <TableRow>

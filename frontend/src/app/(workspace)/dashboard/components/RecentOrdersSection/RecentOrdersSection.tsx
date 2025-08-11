@@ -3,7 +3,7 @@ import { Table, TableBody } from "@/components/ui";
 import { OrderResponse, OrdersTableRow } from "@/features/order";
 import { Suspense } from "react";
 import { RecentOrdersTableBodySkeleton } from "./RecentOrdersTableBodySkeleton";
-import { RecentOrdersTableHead } from "./RecentOrdersTableHead";
+import { RecentOrdersTableHeader } from "./RecentOrdersTableHeader";
 
 export async function RecentOrdersSection() {
   const orders = await apiClient<OrderResponse[]>(
@@ -15,7 +15,7 @@ export async function RecentOrdersSection() {
       <span className="text-lg">Recent Orders ({orders.length})</span>
       <div className="max-h-60 overflow-y-auto">
         <Table className="w-full">
-          <RecentOrdersTableHead />
+          <RecentOrdersTableHeader />
           <TableBody>
             <Suspense fallback={<RecentOrdersTableBodySkeleton />}>
               {orders.map((order) => (
