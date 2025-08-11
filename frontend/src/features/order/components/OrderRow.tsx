@@ -10,7 +10,7 @@ export function OrderRow({ order }: { order: OrderResponse }) {
 
   return (
     <tr>
-      <th className="p-2 text-start font-normal">Order #{order.id}</th>
+      <th className="p-2 text-start font-normal">{order.id}</th>
       <th className="text-start font-normal">{order.supplier_name}</th>
       <th className="text-start font-normal">{order.date}</th>
       <th className="text-start font-normal">
