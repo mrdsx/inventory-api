@@ -1,4 +1,4 @@
-import { Path } from "@/app/types";
+import { Path } from "@/app/lib/types";
 
 export type SidebarItem = {
   link: Path;
