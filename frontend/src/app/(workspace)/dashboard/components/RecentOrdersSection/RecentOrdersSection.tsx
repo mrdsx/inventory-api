@@ -1,5 +1,4 @@
-import { OrderResponse } from "@/features/order";
-import { OrderRow } from "./OrderRow";
+import { OrderResponse, OrderRow } from "@/features/order";
 import { RecentOrdersTHead } from "./RecentOrdersTHead";
 
 // TODO: extract repeating styles
