@@ -13,7 +13,7 @@ export async function RecentOrdersSection() {
   return (
     <div className="card grid gap-2">
       <span className="text-lg">Recent Orders ({orders.length})</span>
-      <div className="max-h-60 overflow-y-auto">
+      <div className="max-h-60 overflow-y-auto rounded-sm border-1">
         <Table className="w-full">
           <RecentOrdersTableHeader />
           <TableBody>
