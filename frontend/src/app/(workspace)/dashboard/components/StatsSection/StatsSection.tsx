@@ -1,6 +1,8 @@
 import { apiClient, ENDPOINTS } from "@/app/lib";
 import { OrdersCountResponse } from "@/features/order";
+import { Suspense } from "react";
 import { StatsCard } from "./StatsCard";
+import { StatsSectionSkeleton } from "./StatsSectionSkeleton";
 
 const statsData = [
   { title: "Total Order", value: 1000 },
@@ -26,9 +28,13 @@ export async function StatsSection() {
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      {statsData.map((stats, index) => (
-        <StatsCard stats={stats} key={stats.title + index} />
-      ))}
+      <Suspense
+        fallback={<StatsSectionSkeleton childrenCount={statsData.length} />}
+      >
+        {statsData.map((stats, index) => (
+          <StatsCard stats={stats} key={stats.title + index} />
+        ))}
+      </Suspense>
     </div>
   );
 }
