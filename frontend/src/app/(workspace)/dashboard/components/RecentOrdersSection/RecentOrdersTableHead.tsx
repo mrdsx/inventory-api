@@ -1,3 +1,5 @@
+import { TableHead, TableHeader, TableRow } from "@/components/ui";
+
 const THEAD_ITEMS = [
   "ID",
   "Supplier Name",
@@ -8,17 +10,17 @@ const THEAD_ITEMS = [
 
 export function RecentOrdersTableHead() {
   return (
-    <thead>
-      <tr>
+    <TableHeader>
+      <TableRow>
         {THEAD_ITEMS.map((item, index) => (
-          <th
-            className="sticky top-0 bg-neutral-300 p-2 text-start dark:bg-gray-800"
+          <TableHead
+            className="sticky top-0 p-2 text-start font-semibold"
             key={item + index}
           >
             {item}
-          </th>
+          </TableHead>
         ))}
-      </tr>
-    </thead>
+      </TableRow>
+    </TableHeader>
   );
 }

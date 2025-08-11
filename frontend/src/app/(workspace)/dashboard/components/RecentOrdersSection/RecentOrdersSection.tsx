@@ -1,4 +1,5 @@
 import { apiClient, ENDPOINTS } from "@/app/lib";
+import { Table, TableBody } from "@/components/ui";
 import { OrderResponse, OrderRow } from "@/features/order";
 import { Suspense } from "react";
 import { RecentOrdersTableBodySkeleton } from "./RecentOrdersTableBodySkeleton";
@@ -13,16 +14,16 @@ export async function RecentOrdersSection() {
     <div className="card grid gap-2">
       <span className="text-lg">Recent Orders ({orders.length})</span>
       <div className="max-h-60 overflow-y-auto">
-        <table className="w-full">
+        <Table className="w-full">
           <RecentOrdersTableHead />
-          <tbody>
+          <TableBody>
             <Suspense fallback={<RecentOrdersTableBodySkeleton />}>
               {orders.map((order) => (
                 <OrderRow order={order} key={order.id} />
               ))}
             </Suspense>
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

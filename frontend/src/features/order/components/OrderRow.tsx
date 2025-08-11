@@ -1,3 +1,4 @@
+import { TableCell, TableRow } from "@/components/ui";
 import { ORDER_STATUS, OrderResponse } from "@/features/order";
 
 export function OrderRow({ order }: { order: OrderResponse }) {
@@ -9,16 +10,20 @@ export function OrderRow({ order }: { order: OrderResponse }) {
         : "text-blue-500";
 
   return (
-    <tr>
-      <th className="p-2 text-start font-normal">{order.id}</th>
-      <th className="text-start font-normal">{order.supplier_name}</th>
-      <th className="text-start font-normal">{order.date}</th>
-      <th className="text-start font-normal">
+    <TableRow>
+      <TableCell className="p-2 text-start font-normal">{order.id}</TableCell>
+      <TableCell className="text-start font-normal">
+        {order.supplier_name}
+      </TableCell>
+      <TableCell className="text-start font-normal">{order.date}</TableCell>
+      <TableCell className="text-start font-normal">
         <span className={`rounded-full px-3 py-1 ${orderStatusStyles}`}>
           {order.status}
         </span>
-      </th>
-      <th className="text-start font-normal">{order.total_cost}</th>
-    </tr>
+      </TableCell>
+      <TableCell className="text-start font-normal">
+        {order.total_cost}
+      </TableCell>
+    </TableRow>
   );
 }
