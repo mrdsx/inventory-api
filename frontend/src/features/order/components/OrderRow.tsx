@@ -3,10 +3,10 @@ import { ORDER_STATUS, OrderResponse } from "@/features/order";
 export function OrderRow({ order }: { order: OrderResponse }) {
   const orderStatusStyles =
     order.status === ORDER_STATUS.DELIVERED
-      ? "bg-green-500"
+      ? "text-green-500"
       : order.status === ORDER_STATUS.CANCELED
-        ? "bg-red-500"
-        : "bg-blue-500";
+        ? "text-red-500"
+        : "text-blue-500";
 
   return (
     <tr>
