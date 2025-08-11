@@ -1,8 +1,14 @@
+// TODO: add type OrderResponse
+// TODO: replace table row in orders.map() with OrderRow
+
+import { OrderResponse } from "@/features/order";
+
+// TODO: extract repeating styles
 export async function RecentOrdersSection() {
   const res = await fetch(
     "http://127.0.0.1:3000/api/v1/orders?limit=10&order_by_recent=true",
   );
-  const orders = await res.json();
+  const orders: OrderResponse[] = await res.json();
 
   return (
     <div className="card grid gap-2">
