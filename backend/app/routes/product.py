@@ -3,7 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_session
-from constants import API_ROUTER_PREFIX, ProductResponse
+from constants import API_ROUTER_PREFIX, ProductResponseMsg
 from models import Product
 from schemas import CreateProductSchema, ProductSchema, UpdateProductSchema
 from services import find_product_by_id
@@ -67,7 +67,7 @@ async def delete_product_by_id(
     await session.delete(db_product)
     await session.commit()
 
-    return {"message": ProductResponse.product_deleted}
+    return {"message": ProductResponseMsg.product_deleted}
 
 
 @router.delete("/products/{order_id}")
@@ -79,4 +79,4 @@ async def delete_products_by_order_id(
     await session.delete(db_products)
     await session.commit()
 
-    return {"message": ProductResponse.products_deleted}
+    return {"message": ProductResponseMsg.products_deleted}
