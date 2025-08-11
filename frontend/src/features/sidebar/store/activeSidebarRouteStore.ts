@@ -1,5 +1,4 @@
-import { ROUTES } from "@/app/lib/constants";
-import { Path } from "@/app/lib/types";
+import { Path, ROUTES } from "@/app/lib";
 import { create } from "zustand";
 
 type ActiveSidebarRouteStore = {

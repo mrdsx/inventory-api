@@ -1,5 +1,4 @@
-import { apiClient } from "@/app/lib/api/client";
-import { ENDPOINTS } from "@/app/lib/api/constants";
+import { apiClient, ENDPOINTS } from "@/app/lib";
 import { OrderResponse, OrderRow } from "@/features/order";
 import { RecentOrdersTHead } from "./RecentOrdersTHead";
 
