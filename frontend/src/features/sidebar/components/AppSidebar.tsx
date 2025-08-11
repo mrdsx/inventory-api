@@ -1,6 +1,11 @@
-import { Sidebar, SidebarContent, SidebarSeparator } from "@/components/ui";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarSeparator,
+} from "@/components/ui";
+import { ToggleThemeBtn } from "@/features/theme";
 import { Account } from "./Account";
-import { AppSidebarFooter } from "./AppSidebarFooter";
 import { AppSidebarHeader } from "./AppSidebarHeader";
 import { Workspace } from "./Workspace";
 
@@ -14,7 +19,9 @@ export function AppSidebar() {
         <SidebarSeparator />
         <Account />
       </SidebarContent>
-      <AppSidebarFooter />
+      <SidebarFooter>
+        <ToggleThemeBtn className="hover:bg-sidebar-accent" size="icon" />
+      </SidebarFooter>
     </Sidebar>
   );
 }
