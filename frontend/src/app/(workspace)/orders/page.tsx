@@ -1,9 +1,12 @@
 import { apiClient } from "@/app/lib";
 import { Table, TableBody } from "@/components/ui";
-import { OrderResponse, OrdersTableRow } from "@/features/order";
+import {
+  OrderResponse,
+  OrdersTableHeader,
+  OrdersTableRow,
+} from "@/features/order";
 import { WorkspacePageContentLoader } from "@/features/workspace";
 import { Suspense } from "react";
-import { RecentOrdersTableHeader } from "../dashboard/components/RecentOrdersSection/RecentOrdersTableHeader";
 import { OrdersActions } from "./components/OrdersActions";
 
 export default async function OrdersPage() {
@@ -18,7 +21,7 @@ export default async function OrdersPage() {
         <Suspense fallback={<WorkspacePageContentLoader />}>
           <div className="max-h-100 overflow-auto rounded-md border-1">
             <Table>
-              <RecentOrdersTableHeader />
+              <OrdersTableHeader />
               <TableBody>
                 {orders.map((order) => (
                   <OrdersTableRow order={order} key={order.id} />

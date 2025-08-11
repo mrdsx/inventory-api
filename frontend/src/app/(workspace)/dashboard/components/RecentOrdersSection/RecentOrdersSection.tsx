@@ -1,7 +1,10 @@
 import { apiClient, ENDPOINTS } from "@/app/lib";
 import { Table, TableBody } from "@/components/ui";
-import { OrderResponse, OrdersTableRow } from "@/features/order";
-import { RecentOrdersTableHeader } from "./RecentOrdersTableHeader";
+import {
+  OrderResponse,
+  OrdersTableHeader,
+  OrdersTableRow,
+} from "@/features/order";
 
 export async function RecentOrdersSection() {
   const orders = await apiClient<OrderResponse[]>(
@@ -13,7 +16,7 @@ export async function RecentOrdersSection() {
       <span className="text-lg">Recent Orders ({orders.length})</span>
       <div className="max-h-60 overflow-y-auto rounded-sm border">
         <Table>
-          <RecentOrdersTableHeader />
+          <OrdersTableHeader />
           <TableBody>
             {orders.map((order) => (
               <OrdersTableRow order={order} key={order.id} />

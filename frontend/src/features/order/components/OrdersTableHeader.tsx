@@ -8,7 +8,7 @@ const THEAD_ITEMS = [
   "Total Cost",
 ] as const;
 
-export function RecentOrdersTableHeader() {
+export function OrdersTableHeader() {
   return (
     <TableHeader>
       <TableRow className="bg-gray-100 hover:bg-gray-200 dark:bg-neutral-900 dark:hover:bg-neutral-800">
