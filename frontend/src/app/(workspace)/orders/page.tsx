@@ -1,5 +1,5 @@
 import { apiClient } from "@/app/lib";
-import { Table, TableBody } from "@/components/ui";
+import { ScrollArea, Table, TableBody } from "@/components/ui";
 import {
   OrderResponse,
   OrdersTableHeader,
@@ -19,7 +19,7 @@ export default async function OrdersPage() {
         <OrdersActions />
 
         <Suspense fallback={<WorkspacePageContentLoader />}>
-          <div className="max-h-100 overflow-auto rounded-md border-1">
+          <ScrollArea className="h-100 rounded-md border-1">
             <Table>
               <OrdersTableHeader />
               <TableBody>
@@ -28,7 +28,7 @@ export default async function OrdersPage() {
                 ))}
               </TableBody>
             </Table>
-          </div>
+          </ScrollArea>
         </Suspense>
       </div>
     </>
