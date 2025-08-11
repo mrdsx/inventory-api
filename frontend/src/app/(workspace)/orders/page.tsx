@@ -1,10 +1,6 @@
 import { apiClient } from "@/app/lib";
-import { ScrollArea, Table, TableBody } from "@/components/ui";
-import {
-  OrderResponse,
-  OrdersTableHeader,
-  OrdersTableRow,
-} from "@/features/order";
+import { TableBody } from "@/components/ui";
+import { OrderResponse, OrdersTable, OrdersTableRow } from "@/features/order";
 import { WorkspacePageContentLoader } from "@/features/workspace";
 import { Suspense } from "react";
 import { OrdersActions } from "./components/OrdersActions";
@@ -19,16 +15,13 @@ export default async function OrdersPage() {
         <OrdersActions />
 
         <Suspense fallback={<WorkspacePageContentLoader />}>
-          <ScrollArea className="h-100 rounded-md border-1">
-            <Table>
-              <OrdersTableHeader />
-              <TableBody>
-                {orders.map((order) => (
-                  <OrdersTableRow order={order} key={order.id} />
-                ))}
-              </TableBody>
-            </Table>
-          </ScrollArea>
+          <OrdersTable>
+            <TableBody>
+              {orders.map((order) => (
+                <OrdersTableRow order={order} key={order.id} />
+              ))}
+            </TableBody>
+          </OrdersTable>
         </Suspense>
       </div>
     </>

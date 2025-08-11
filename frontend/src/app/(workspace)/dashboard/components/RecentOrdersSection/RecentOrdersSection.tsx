@@ -1,10 +1,6 @@
 import { apiClient, ENDPOINTS } from "@/app/lib";
-import { ScrollArea, Table, TableBody } from "@/components/ui";
-import {
-  OrderResponse,
-  OrdersTableHeader,
-  OrdersTableRow,
-} from "@/features/order";
+import { ScrollArea, TableBody } from "@/components/ui";
+import { OrderResponse, OrdersTable, OrdersTableRow } from "@/features/order";
 
 export async function RecentOrdersSection() {
   const orders = await apiClient<OrderResponse[]>(
@@ -15,14 +11,13 @@ export async function RecentOrdersSection() {
     <div className="card grid gap-2">
       <span className="text-lg">Recent Orders ({orders.length})</span>
       <ScrollArea className="h-60 rounded-sm border">
-        <Table>
-          <OrdersTableHeader />
+        <OrdersTable>
           <TableBody>
             {orders.map((order) => (
               <OrdersTableRow order={order} key={order.id} />
             ))}
           </TableBody>
-        </Table>
+        </OrdersTable>
       </ScrollArea>
     </div>
   );
