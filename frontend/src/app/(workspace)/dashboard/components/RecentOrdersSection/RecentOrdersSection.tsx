@@ -1,6 +1,6 @@
 import { apiClient, ENDPOINTS } from "@/app/lib";
 import { OrderResponse, OrderRow } from "@/features/order";
-import { RecentOrdersTHead } from "./RecentOrdersTHead";
+import { RecentOrdersTableHead } from "./RecentOrdersTableHead";
 
 export async function RecentOrdersSection() {
   const orders = await apiClient<OrderResponse[]>(
@@ -12,7 +12,7 @@ export async function RecentOrdersSection() {
       <span className="text-lg">Recent Orders ({orders.length})</span>
       <div className="max-h-60 overflow-y-auto">
         <table className="w-full">
-          <RecentOrdersTHead />
+          <RecentOrdersTableHead />
           <tbody>
             {orders.map((order) => (
               <OrderRow order={order} key={order.id} />
