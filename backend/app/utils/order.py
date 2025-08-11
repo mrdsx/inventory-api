@@ -1,4 +1,5 @@
 from fastapi import HTTPException, status
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Sequence
 
@@ -32,6 +33,13 @@ def build_order_schema(order: Order) -> OrderSchema:
         date=format_date_from_iso_format(order.date),
         status=order.status,  # type: ignore
     )
+
+
+def build_get_orders_query(order_by_recent: bool, limit: int | None = None):
+    query = select(Order, Supplier).join(Supplier).limit(limit)
+    if order_by_recent:
+        return query.order_by(Order.date.desc())
+    return query.order_by(Order.id)
 
 
 async def get_order_items_total_cost(order_items: Sequence[OrderItemSchema]) -> float:

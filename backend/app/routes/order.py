@@ -1,11 +1,9 @@
 from typing import Any, Union
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from constants import API_ROUTER_PREFIX, OrderItemResponseMsg, OrderStatus
 from database import get_session
-from models import Order, Supplier
 from schemas import CreateOrderSchema, OrderItemSchema, OrderPublicSchema, OrderSchema
 from services import (
     find_order_by_id,
@@ -20,6 +18,7 @@ from services import (
 from utils import (
     build_order_public_schema,
     build_order_schema,
+    build_get_orders_query,
     handle_update_order_status,
 )
 from validation import validate_order_exists, validate_order_items
@@ -36,12 +35,7 @@ async def get_orders(
     status: OrderStatus | None = None,
     session: AsyncSession = Depends(get_session),
 ):
-    query = select(Order, Supplier).join(Supplier).limit(limit)
-    if order_by_recent:
-        query = query.order_by(Order.date.desc())
-    else:
-        query = query.order_by(Order.id)
-
+    query = build_get_orders_query(order_by_recent, limit)
     result = await session.execute(query)
 
     if not count:
