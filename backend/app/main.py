@@ -5,7 +5,10 @@ from fastapi import FastAPI
 from routes import router_orders, router_products, router_suppliers
 
 
-app = FastAPI()
+app = FastAPI(
+    title="Inventory API",
+    description="A backend API for managing product inventory, suppliers, and stock levels.",
+)
 
 
 @app.get("/")
