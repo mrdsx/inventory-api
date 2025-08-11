@@ -1,10 +1,11 @@
 import { apiClient } from "@/app/lib/api/client";
+import { ENDPOINTS } from "@/app/lib/api/constants";
 import { OrderResponse, OrderRow } from "@/features/order";
 import { RecentOrdersTHead } from "./RecentOrdersTHead";
 
 export async function RecentOrdersSection() {
   const orders = await apiClient<OrderResponse[]>(
-    "/orders?limit=10&order_by_recent=true",
+    `${ENDPOINTS.orders}?limit=10&order_by_recent=true`,
   );
 
   return (
