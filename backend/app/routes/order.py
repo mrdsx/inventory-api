@@ -33,6 +33,7 @@ async def get_orders(
     limit: int | None = None,
     order_by_recent: bool = False,
     count: bool = False,
+    status: OrderStatus | None = None,
     session: AsyncSession = Depends(get_session),
 ):
     query = select(Order, Supplier).join(Supplier).limit(limit)
@@ -43,13 +44,19 @@ async def get_orders(
 
     result = await session.execute(query)
 
-    if count:
-        return {"orders_count": len([order for order in result])}
+    if not count:
+        return [
+            await build_order_public_schema(order, supplier, session)
+            for order, supplier in result
+        ]
 
-    return [
-        await build_order_public_schema(order, supplier, session)
-        for order, supplier in result
-    ]
+    if status:
+        return {
+            "orders_count": len(
+                [order for order, _ in result if order.status == status]
+            )
+        }
+    return {"orders_count": len([order for order in result])}
 
 
 @router.get("/orders/{order_id}", response_model=OrderPublicSchema)
