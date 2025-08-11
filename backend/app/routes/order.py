@@ -1,3 +1,4 @@
+from typing import Any, Union
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -27,10 +28,11 @@ from validation import validate_order_exists, validate_order_items
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 
-@router.get("/orders", response_model=list[OrderPublicSchema])
+@router.get("/orders", response_model=Union[list[OrderPublicSchema], dict[str, Any]])
 async def get_orders(
     limit: int | None = None,
     order_by_recent: bool = False,
+    count: bool = False,
     session: AsyncSession = Depends(get_session),
 ):
     query = select(Order, Supplier).join(Supplier).limit(limit)
@@ -40,6 +42,9 @@ async def get_orders(
         query = query.order_by(Order.id)
 
     result = await session.execute(query)
+
+    if count:
+        return {"orders_count": len([order for order in result])}
 
     return [
         await build_order_public_schema(order, supplier, session)
