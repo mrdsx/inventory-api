@@ -9,6 +9,7 @@ from app.models import Order, Supplier
 from app.schemas import OrderItemSchema
 from app.utils import (
     build_order_public_schema,
+    format_date_from_iso_format,
     get_order_items_total_cost,
     handle_update_order_status,
 )
@@ -40,7 +41,7 @@ async def test_build_order_public_schema():
 
     assert order_public_schema.id == mock_order.id
     assert order_public_schema.supplier_name == mock_supplier.name
-    assert order_public_schema.date == MOCK_ORDER_DATE
+    assert order_public_schema.date == format_date_from_iso_format(MOCK_ORDER_DATE)
     assert order_public_schema.status == OrderStatus.IN_TRANSIT
 
 
