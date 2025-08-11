@@ -1,13 +1,9 @@
 import { TableCell, TableRow } from "@/components/ui";
-import { ORDER_STATUS, OrderResponse } from "@/features/order";
+import { OrderResponse } from "@/features/order";
+import { getOrderStatusTableCellStyles } from "../utils/orderStatusUtils";
 
 export function OrdersTableRow({ order }: { order: OrderResponse }) {
-  const orderStatusStyles =
-    order.status === ORDER_STATUS.DELIVERED
-      ? "text-green-800 bg-green-300/50 dark:bg-green-300/80"
-      : order.status === ORDER_STATUS.CANCELED
-        ? "text-red-800 bg-red-300/50 dark:bg-red-300/80"
-        : "text-blue-800 bg-blue-300/50 dark:bg-blue-300/80";
+  const orderStatusStyles = getOrderStatusTableCellStyles(order.status);
 
   return (
     <TableRow>
