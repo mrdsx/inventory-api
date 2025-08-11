@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from unittest.mock import AsyncMock, MagicMock
 
 
-from app.constants import OrderResponse, OrderStatus
+from app.constants import OrderResponseMsg, OrderStatus
 from app.models import Order
 from app.services import find_order_by_id, save_order
 from tests.constants import (
@@ -28,7 +28,7 @@ async def test_find_order_by_id():
         await find_order_by_id(NOT_EXISTING_ORDER_ID, mock_session)
 
     assert exc_info.value.status_code == status.HTTP_404_NOT_FOUND
-    assert OrderResponse.order_not_found in exc_info.value.detail
+    assert OrderResponseMsg.order_not_found in exc_info.value.detail
 
     # * Test for success
     mock_result.scalar.return_value = Order(

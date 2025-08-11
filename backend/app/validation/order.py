@@ -2,7 +2,7 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from constants import OrderResponse, OrderItemResponseMsg
+from constants import OrderResponseMsg, OrderItemResponseMsg
 from models import Order
 from schemas import CreateOrderItemSchema
 
@@ -12,7 +12,8 @@ async def validate_order_exists(order_id: int, session: AsyncSession) -> None:
     db_order = result.scalar()
     if db_order is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail=OrderResponse.order_not_found
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=OrderResponseMsg.order_not_found,
         )
 
 

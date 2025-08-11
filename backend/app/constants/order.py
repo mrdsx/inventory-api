@@ -7,7 +7,7 @@ class OrderStatus(str, Enum):
     DELIVERED = "Delivered"
 
 
-class OrderResponse(str, Enum):
+class OrderResponseMsg(str, Enum):
     canceled_order_status_not_updated = (
         f"Can't update status of {OrderStatus.CANCELED.lower()} order"
     )
