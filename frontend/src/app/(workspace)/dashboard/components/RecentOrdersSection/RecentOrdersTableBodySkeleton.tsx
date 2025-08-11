@@ -1,18 +1,24 @@
 import { Skeleton } from "@/components/ui";
 
-const COLUMNS_COUNT = 5;
-const ROWS_COUNT = 3;
+const COLUMNS = Array(5).fill(0);
+const ROWS = Array(3).fill(0);
+const SUPPLIER_NAME_COLUMN_INDEX = 1;
 
 export function RecentOrdersTableBodySkeleton() {
   return (
     <>
-      {new Array(ROWS_COUNT).fill(null).map((_) => (
+      {ROWS.map((_) => (
         <tr>
-          {new Array(COLUMNS_COUNT).fill(null).map((_) => (
-            <th className="p-2">
-              <Skeleton className="h-5 w-full" />
-            </th>
-          ))}
+          {COLUMNS.map((_, index) => {
+            const skeletonStyles =
+              index === SUPPLIER_NAME_COLUMN_INDEX ? "w-[60%]" : "w-full";
+
+            return (
+              <th className="p-2">
+                <Skeleton className={`h-5 ${skeletonStyles}`} />
+              </th>
+            );
+          })}
         </tr>
       ))}
     </>
