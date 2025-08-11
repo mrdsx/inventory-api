@@ -1,4 +1,4 @@
-import { ROUTES } from "@/app/lib/routes";
+import { ROUTES } from "@/app/lib/constants";
 import {
   SidebarGroup,
   SidebarGroupContent,
