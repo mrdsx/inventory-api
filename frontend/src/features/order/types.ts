@@ -7,3 +7,7 @@ export type OrderResponse = {
   status: ORDER_STATUS;
   total_cost: number;
 };
+
+export type OrdersCountResponse = {
+  orders_count: number;
+};
