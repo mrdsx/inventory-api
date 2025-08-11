@@ -3,7 +3,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from unittest.mock import AsyncMock, MagicMock
 
-from app.constants import SupplierResponse
+from app.constants import SupplierResponseMsg
 from app.models import Supplier
 from app.services import find_supplier_by_id, find_supplier_by_name
 from tests.constants import (
@@ -27,7 +27,7 @@ async def test_find_supplier_by_id():
         await find_supplier_by_id(NOT_EXISTING_SUPPLIER_ID, mock_session)
 
     assert exc_info.value.status_code == status.HTTP_404_NOT_FOUND
-    assert SupplierResponse.supplier_not_found in exc_info.value.detail
+    assert SupplierResponseMsg.supplier_not_found in exc_info.value.detail
 
     # * Test for success
     mock_result.scalar.return_value = Supplier(id=EXISTING_SUPPLIER_ID)
@@ -50,7 +50,7 @@ async def test_find_supplier_by_name():
         await find_supplier_by_name(NOT_EXISTING_SUPPLIER_NAME, mock_session)
 
     assert exc_info.value.status_code == status.HTTP_404_NOT_FOUND
-    assert SupplierResponse.supplier_not_found in exc_info.value.detail
+    assert SupplierResponseMsg.supplier_not_found in exc_info.value.detail
 
     # * Test for success
     mock_result.scalar.return_value = Supplier(id=NOT_EXISTING_SUPPLIER_NAME)

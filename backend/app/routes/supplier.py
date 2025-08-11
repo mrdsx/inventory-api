@@ -3,7 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_session
-from constants import API_ROUTER_PREFIX, SupplierResponse
+from constants import API_ROUTER_PREFIX, SupplierResponseMsg
 from models import Supplier
 from schemas import CreateSupplierSchema, SupplierSchema
 from services import find_supplier_by_id
@@ -52,4 +52,4 @@ async def delete_supplier_by_id(id: int, session: AsyncSession = Depends(get_ses
     await session.delete(db_supplier)
     await session.commit()
 
-    return {"message": SupplierResponse.supplier_deleted}
+    return {"message": SupplierResponseMsg.supplier_deleted}

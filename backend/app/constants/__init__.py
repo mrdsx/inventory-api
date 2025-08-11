@@ -2,7 +2,7 @@ from .database import TableName
 from .order import OrderStatus, OrderResponseMsg
 from .order_item import ORDER_ITEM_DESCRIPTION_LENGTH, OrderItemResponseMsg
 from .product import PRODUCT_DESCRIPTION_LENGTH, PRODUCT_SKU_LENGTH, ProductResponseMsg
-from .supplier import SupplierResponse
+from .supplier import SupplierResponseMsg
 
 API_ROUTER_PREFIX = "/api/v1"
 
@@ -22,5 +22,5 @@ __all__ = [
     "PRODUCT_SKU_LENGTH",
     "ProductResponseMsg",
     # * supplier
-    "SupplierResponse",
+    "SupplierResponseMsg",
 ]
