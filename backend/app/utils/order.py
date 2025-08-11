@@ -1,5 +1,5 @@
 from fastapi import HTTPException, status
-from sqlalchemy import Result, select
+from sqlalchemy import Result, Select, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from constants import OrderResponseMsg, OrderStatus
@@ -35,7 +35,9 @@ def build_order_schema(order: Order) -> OrderSchema:
     )
 
 
-def build_get_orders_query(order_by_recent: bool, limit: int | None = None):
+def build_get_orders_query(
+    order_by_recent: bool, limit: int | None = None
+) -> Select[tuple[Order, Supplier]]:
     query = select(Order, Supplier).join(Supplier).limit(limit)
     if order_by_recent:
         return query.order_by(Order.date.desc())
@@ -44,7 +46,7 @@ def build_get_orders_query(order_by_recent: bool, limit: int | None = None):
 
 def get_orders_count(
     status: OrderStatus | None, result: Result[tuple[Order, Supplier]]
-):
+) -> dict[str, int]:
     if status is not None:
         orders = [order for order, _supplier in result if order.status == status]
         return {"orders_count": len(orders)}
