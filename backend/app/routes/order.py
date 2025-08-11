@@ -19,6 +19,7 @@ from utils import (
     build_order_public_schema,
     build_order_schema,
     build_get_orders_query,
+    get_orders_count,
     handle_update_order_status,
 )
 from validation import validate_order_exists, validate_order_items
@@ -43,14 +44,7 @@ async def get_orders(
             await build_order_public_schema(order, supplier, session)
             for order, supplier in result
         ]
-
-    if status:
-        return {
-            "orders_count": len(
-                [order for order, _ in result if order.status == status]
-            )
-        }
-    return {"orders_count": len([order for order in result])}
+    return get_orders_count(status, result)
 
 
 @router.get("/orders/{order_id}", response_model=OrderPublicSchema)
