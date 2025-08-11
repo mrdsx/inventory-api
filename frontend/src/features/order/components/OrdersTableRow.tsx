@@ -12,14 +12,12 @@ export function OrdersTableRow({ order }: { order: OrderResponse }) {
   return (
     <TableRow>
       <TableCell className="p-2 text-start font-normal">{order.id}</TableCell>
-      <TableCell className="text-start font-normal">
+      <TableCell className="w-[20%] text-start font-normal">
         {order.supplier_name}
       </TableCell>
       <TableCell className="text-start font-normal">{order.date}</TableCell>
-      <TableCell className="text-start font-normal">
-        <span className={`rounded-full px-3 py-1 ${orderStatusStyles}`}>
-          {order.status}
-        </span>
+      <TableCell className={`text-start font-normal ${orderStatusStyles}`}>
+        {order.status}
       </TableCell>
       <TableCell className="text-start font-normal">
         {order.total_cost}
