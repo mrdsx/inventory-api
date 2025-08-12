@@ -54,7 +54,7 @@ def get_orders_count(
         orders = [order for order, _supplier in result if order.status == status]
         return OrdersCountSchema(orders_count=len(orders))
 
-    return OrdersCountSchema(orders_count=len([row for row in result]))
+    return OrdersCountSchema(orders_count=len(result.scalars().all()))
 
 
 def handle_update_order_status(order_status: OrderStatus) -> None:
