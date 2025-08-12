@@ -1,3 +1,4 @@
+import { PaginatedResponse } from "@/app/lib";
 import { ORDER_STATUS } from "./constants";
 
 export interface OrderResponse {
@@ -11,3 +12,5 @@ export interface OrderResponse {
 export interface OrdersCountResponse {
   orders_count: number;
 }
+
+export type PaginatedOrdersResponse = PaginatedResponse<OrderResponse[]>;
