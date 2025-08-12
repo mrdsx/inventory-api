@@ -5,8 +5,13 @@ export async function getOrders() {
   return await apiClient<OrderResponse[]>("/orders");
 }
 
-export async function getPaginatedOrders() {
-  return await apiClient<PaginatedOrdersResponse>("/paginated-orders");
+export async function getPaginatedOrders(
+  page: number = 1,
+  itemsPerPage: number = 10,
+) {
+  return await apiClient<PaginatedOrdersResponse>(
+    `/paginated-orders?page=${page}&limit=${itemsPerPage}`,
+  );
 }
 
 export async function getRecentOrders() {
