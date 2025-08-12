@@ -10,8 +10,8 @@ import { ordersTableColumns } from "./orders-table-columns";
 
 export function OrdersSection() {
   const params = useSearchParams();
-  const page = parseInt(params.get("page") ?? "1");
-  const itemsPerPage = parseInt(params.get("items-per-page") ?? "10");
+  const page = Number(params.get("page") ?? "1");
+  const itemsPerPage = Number(params.get("items-per-page") ?? "10");
 
   const [paginatedOrders, setPaginatedOrders] =
     useState<PaginatedOrdersResponse>({
