@@ -7,7 +7,9 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import { cn } from "@/lib/utils";
 import { Button } from "./button";
+import { ScrollArea } from "./scroll-area";
 import {
   Table,
   TableBody,
@@ -25,7 +27,8 @@ interface DataTableProps<TData, TValue> {
 function DataTable<TData, TValue>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+  className,
+}: DataTableProps<TData, TValue> & React.ComponentProps<"div">) {
   const table = useReactTable({
     data,
     columns,
@@ -35,9 +38,9 @@ function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="overflow-hidden rounded-md border">
+      <ScrollArea className={cn("rounded-md border", className)}>
         <Table>
-          <TableHeader>
+          <TableHeader className="sticky top-0">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
                 className="bg-gray-100 hover:bg-gray-200 dark:bg-neutral-900 dark:hover:bg-neutral-800"
@@ -87,7 +90,7 @@ function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-      </div>
+      </ScrollArea>
 
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
