@@ -36,7 +36,7 @@ def build_order_schema(order: Order) -> OrderSchema:
 
 
 def build_get_orders_query(
-    count: bool, order_by_recent: bool, limit: int | None = None
+    count: bool = False, order_by_recent: bool = False, limit: int | None = None
 ) -> Select[tuple[Order, Supplier]]:
     query = select(Order, Supplier).join(Supplier)
     if not count:
