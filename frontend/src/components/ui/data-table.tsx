@@ -7,8 +7,10 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import { PaginatedOrdersResponse } from "@/features/order/types";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "./button";
 import { ScrollArea } from "./scroll-area";
 import {
@@ -27,9 +29,11 @@ interface DataTableProps<TData, TValue> {
 
 function DataTable<TData, TValue>({
   columns,
-  data,
   className,
-}: DataTableProps<TData, TValue> & React.ComponentProps<"div">) {
+  data,
+  paginatedData,
+}: DataTableProps<TData, TValue> &
+  React.ComponentProps<"div"> & { paginatedData: PaginatedOrdersResponse }) {
   const table = useReactTable({
     data,
     columns,
@@ -93,26 +97,49 @@ function DataTable<TData, TValue>({
         </Table>
       </ScrollArea>
 
-      <DataTableActions />
+      <DataTableActions paginatedData={paginatedData} />
     </div>
   );
 }
 
-function DataTableActions() {
+function DataTableActions({
+  paginatedData,
+}: {
+  paginatedData: PaginatedOrdersResponse;
+}) {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  const { page, total: totalItems, pages, size, items } = paginatedData;
+  const range = `${size * page - (size - 1)}-${size * (page - 1) + items.length}`;
+
+  function handleClick(newPage: number) {
+    const params = new URLSearchParams(searchParams);
+
+    params.set("page", String(newPage));
+    replace(`${pathname}?${params.toString()}`);
+  }
+
   return (
     <div className="mt-5 flex h-5 items-center justify-end gap-3">
       <div className="grid h-8 place-content-center rounded-md border px-3 text-sm">
-        1-10 of 193
+        {range} of {totalItems}
       </div>
       <div className="rounded-md border">
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => console.log("Previous")}
+          onClick={() => handleClick(page - 1)}
+          disabled={page <= 1}
         >
           <ChevronLeft />
         </Button>
-        <Button variant="ghost" size="sm" onClick={() => console.log("Next")}>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => handleClick(page + 1)}
+          disabled={page >= pages}
+        >
           <ChevronRight />
         </Button>
       </div>
