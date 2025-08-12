@@ -12,13 +12,13 @@ const statsData = [
 ];
 
 export async function StatsSection() {
-  const ordersCount: OrdersCountResponse = await apiClient(
+  const ordersCount = await apiClient<OrdersCountResponse>(
     `${ENDPOINTS.orders}?count=true`,
   );
-  const canceledOrdersCount: OrdersCountResponse = await apiClient(
+  const canceledOrdersCount = await apiClient<OrdersCountResponse>(
     `${ENDPOINTS.orders}?count=true&status=Canceled`,
   );
-  const pendingOrdersCount: OrdersCountResponse = await apiClient(
+  const pendingOrdersCount = await apiClient<OrdersCountResponse>(
     `${ENDPOINTS.orders}?count=true&status=Canceled`,
   );
 
