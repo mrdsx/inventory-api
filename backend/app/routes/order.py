@@ -49,6 +49,7 @@ async def get_orders(
         return [
             await build_order_public_schema(order, supplier, session)
             for order, supplier in result
+            if status is None or order.status == status
         ]
     return get_orders_count(status, result)
 
