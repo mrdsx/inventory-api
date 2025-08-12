@@ -1,5 +1,7 @@
 from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi_pagination import paginate, set_page, set_params
+from fastapi_pagination.default import Page, Params
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from constants import API_ROUTER_PREFIX, OrderItemResponseMsg, OrderStatus
@@ -36,7 +38,7 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 @router.get("/orders", response_model=Union[list[OrderPublicSchema], OrdersCountSchema])
 async def get_orders(
-    limit: int | None = 10,
+    limit: int | None = None,
     order_by_recent: bool = False,
     count: bool = False,
     status: OrderStatus | None = None,
@@ -52,6 +54,23 @@ async def get_orders(
             if status is None or order.status == status
         ]
     return get_orders_count(status, result)
+
+
+@router.get("/paginated-orders")
+async def get_paginated_orders(
+    page: int = 1, limit: int = 10, session: AsyncSession = Depends(get_session)
+):
+    set_page(Page[OrderPublicSchema])
+    set_params(Params(page=page, size=limit))
+
+    query = build_get_orders_query()
+    result = await session.execute(query)
+    db_orders = [
+        await build_order_public_schema(order, supplier, session)
+        for order, supplier in result
+    ]
+
+    return paginate(db_orders)
 
 
 @router.get("/orders/{order_id}", response_model=OrderPublicSchema)
