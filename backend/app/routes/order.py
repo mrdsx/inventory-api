@@ -36,13 +36,13 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 @router.get("/orders", response_model=Union[list[OrderPublicSchema], OrdersCountSchema])
 async def get_orders(
-    limit: int | None = None,
+    limit: int | None = 10,
     order_by_recent: bool = False,
     count: bool = False,
     status: OrderStatus | None = None,
     session: AsyncSession = Depends(get_session),
 ):
-    query = build_get_orders_query(order_by_recent, limit)
+    query = build_get_orders_query(count, order_by_recent, limit)
     result = await session.execute(query)
 
     if not count:

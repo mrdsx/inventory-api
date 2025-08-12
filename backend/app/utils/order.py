@@ -36,9 +36,12 @@ def build_order_schema(order: Order) -> OrderSchema:
 
 
 def build_get_orders_query(
-    order_by_recent: bool, limit: int | None = None
+    count: bool, order_by_recent: bool, limit: int | None = None
 ) -> Select[tuple[Order, Supplier]]:
-    query = select(Order, Supplier).join(Supplier).limit(limit)
+    query = select(Order, Supplier).join(Supplier)
+    if not count:
+        query = query.limit(limit)
+
     if order_by_recent:
         return query.order_by(Order.date.desc())
     return query.order_by(Order.id)
