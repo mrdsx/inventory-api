@@ -1,12 +1,11 @@
-import { apiClient } from "@/app/lib";
 import { TableBody } from "@/components/ui";
-import { OrderResponse, OrdersTable, OrdersTableRow } from "@/features/order";
+import { getOrders, OrdersTable, OrdersTableRow } from "@/features/order";
 import { WorkspacePageContentLoader } from "@/features/workspace";
 import { Suspense } from "react";
 import { OrdersActions } from "./components/OrdersActions";
 
 export default async function OrdersPage() {
-  const orders = await apiClient<OrderResponse[]>("/orders");
+  const orders = await getOrders();
 
   return (
     <>

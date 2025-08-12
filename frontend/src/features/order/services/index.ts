@@ -1,1 +1,1 @@
-export { getRecentOrders } from "./order";
+export { getOrders, getRecentOrders } from "./order";
