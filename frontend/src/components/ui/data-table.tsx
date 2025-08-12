@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-table";
 
 import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "./button";
 import { ScrollArea } from "./scroll-area";
 import {
@@ -92,22 +93,27 @@ function DataTable<TData, TValue>({
         </Table>
       </ScrollArea>
 
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <DataTableActions />
+    </div>
+  );
+}
+
+function DataTableActions() {
+  return (
+    <div className="mt-5 flex h-5 items-center justify-end gap-3">
+      <div className="grid h-8 place-content-center rounded-md border px-3 text-sm">
+        1-10 of 193
+      </div>
+      <div className="rounded-md border">
         <Button
-          variant="outline"
+          variant="ghost"
           size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
+          onClick={() => console.log("Previous")}
         >
-          Previous
+          <ChevronLeft />
         </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
+        <Button variant="ghost" size="sm" onClick={() => console.log("Next")}>
+          <ChevronRight />
         </Button>
       </div>
     </div>
