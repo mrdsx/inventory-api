@@ -1,5 +1,5 @@
 @import "tailwindcss";
 
 .card {
-  @apply rounded-xl border p-4 shadow-md;
+  @apply rounded-xl border-1 border-(--border) p-4 shadow-md;
 }
