@@ -1,11 +1,12 @@
-import { TableBody } from "@/components/ui";
-import { getOrders, OrdersTable, OrdersTableRow } from "@/features/order";
+import { DataTable } from "@/components/ui";
+import { getPaginatedOrders } from "@/features/order";
 import { WorkspacePageContentLoader } from "@/features/workspace";
 import { Suspense } from "react";
 import { OrdersActions } from "./components/OrdersActions";
+import { ordersTableColumns } from "./components/orders-table-columns";
 
 export default async function OrdersPage() {
-  const orders = await getOrders();
+  const paginatedOrders = await getPaginatedOrders();
 
   return (
     <>
@@ -14,13 +15,10 @@ export default async function OrdersPage() {
         <OrdersActions />
 
         <Suspense fallback={<WorkspacePageContentLoader />}>
-          <OrdersTable>
-            <TableBody>
-              {orders.map((order) => (
-                <OrdersTableRow order={order} key={order.id} />
-              ))}
-            </TableBody>
-          </OrdersTable>
+          <DataTable
+            columns={ordersTableColumns}
+            data={paginatedOrders.items}
+          />
         </Suspense>
       </div>
     </>
