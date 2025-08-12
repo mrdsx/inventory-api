@@ -110,8 +110,14 @@ function DataTableActions({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  const { page, total: totalItems, pages, size, items } = paginatedData;
-  const range = `${size * page - (size - 1)}-${size * (page - 1) + items.length}`;
+  const {
+    page: currentPage,
+    total: totalItems,
+    pages: totalPages,
+    size: pageSize,
+    items,
+  } = paginatedData;
+  const range = `${pageSize * currentPage - (pageSize - 1)}-${pageSize * (currentPage - 1) + items.length}`;
 
   function handleClick(newPage: number) {
     const params = new URLSearchParams(searchParams);
@@ -125,20 +131,20 @@ function DataTableActions({
       <div className="grid h-8 place-content-center rounded-md border px-3 text-sm">
         {range} of {totalItems}
       </div>
-      <div className="rounded-md border">
+      <div className="flex items-center rounded-md border">
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => handleClick(page - 1)}
-          disabled={page <= 1}
+          onClick={() => handleClick(currentPage - 1)}
+          disabled={currentPage <= 1}
         >
           <ChevronLeft />
         </Button>
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => handleClick(page + 1)}
-          disabled={page >= pages}
+          onClick={() => handleClick(currentPage + 1)}
+          disabled={currentPage >= totalPages}
         >
           <ChevronRight />
         </Button>
