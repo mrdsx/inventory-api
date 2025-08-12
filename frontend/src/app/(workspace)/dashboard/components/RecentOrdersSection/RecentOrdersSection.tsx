@@ -1,5 +1,5 @@
 import { apiClient, ENDPOINTS } from "@/app/lib";
-import { ScrollArea, TableBody } from "@/components/ui";
+import { TableBody } from "@/components/ui";
 import { OrderResponse, OrdersTable, OrdersTableRow } from "@/features/order";
 
 export async function RecentOrdersSection() {
@@ -10,15 +10,13 @@ export async function RecentOrdersSection() {
   return (
     <div className="card grid gap-2">
       <span className="text-lg">Recent Orders ({orders.length})</span>
-      <ScrollArea className="h-60 rounded-sm border">
-        <OrdersTable>
-          <TableBody>
-            {orders.map((order) => (
-              <OrdersTableRow order={order} key={order.id} />
-            ))}
-          </TableBody>
-        </OrdersTable>
-      </ScrollArea>
+      <OrdersTable className="h-60">
+        <TableBody>
+          {orders.map((order) => (
+            <OrdersTableRow order={order} key={order.id} />
+          ))}
+        </TableBody>
+      </OrdersTable>
     </div>
   );
 }
