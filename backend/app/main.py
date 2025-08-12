@@ -1,6 +1,7 @@
 import uvicorn
 from datetime import datetime
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from routes import router_orders, router_products, router_suppliers
 
@@ -8,6 +9,16 @@ from routes import router_orders, router_products, router_suppliers
 app = FastAPI(
     title="Inventory API",
     description="A backend API for managing product inventory, suppliers, and stock levels.",
+)
+
+origins = ["http://localhost:3000", "localhost:3000"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
