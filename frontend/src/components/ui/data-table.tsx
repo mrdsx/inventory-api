@@ -70,6 +70,9 @@ function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const { setPaginatedData } = useDataTable();
+  setPaginatedData(paginatedData);
+
   return (
     <div>
       <ScrollArea className={cn("rounded-md border", className)}>
@@ -126,16 +129,13 @@ function DataTable<TData, TValue>({
         </Table>
       </ScrollArea>
 
-      <DataTableActions paginatedData={paginatedData} />
+      <DataTableActions />
     </div>
   );
 }
 
-function DataTableActions({
-  paginatedData,
-}: {
-  paginatedData: PaginatedResponse<any>;
-}) {
+function DataTableActions() {
+  const { paginatedData } = useDataTable();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
