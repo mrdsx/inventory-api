@@ -28,9 +28,9 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-type DataTableContextType = {
-  paginatedData: any;
-  setPaginatedData: (data: any) => void;
+type DataTableContextType<TData = any> = {
+  paginatedData: PaginatedResponse<TData>;
+  setPaginatedData: (data: PaginatedResponse<TData>) => void;
 };
 
 const DataTableContext = createContext<DataTableContextType | null>(null);
@@ -46,9 +46,11 @@ function useDataTable() {
   return context;
 }
 
-function DataTableProvider<TData>({ children }: { children: React.ReactNode }) {
-  const [paginatedData, setPaginatedData] = useState<PaginatedResponse<TData>>({
-    items: [] as TData,
+function DataTableProvider({ children }: { children: React.ReactNode }) {
+  const [paginatedData, setPaginatedData] = useState<
+    PaginatedResponse<unknown>
+  >({
+    items: [],
     total: 0,
     page: 0,
     size: 0,
@@ -68,7 +70,7 @@ function DataTable<TData, TValue>({
   data,
   paginatedData,
 }: DataTableProps<TData, TValue> &
-  React.ComponentProps<"div"> & { paginatedData: PaginatedResponse<any> }) {
+  React.ComponentProps<"div"> & { paginatedData: PaginatedResponse<TData> }) {
   const table = useReactTable({
     data,
     columns,
