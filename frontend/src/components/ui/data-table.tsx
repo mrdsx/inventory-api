@@ -7,10 +7,11 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { PaginatedOrdersResponse } from "@/features/order/types";
+import { PaginatedResponse } from "@/app/lib";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { createContext, useContext, useState } from "react";
 import { Button } from "./button";
 import { ScrollArea } from "./scroll-area";
 import {
@@ -27,13 +28,41 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
+type DataTableContextType = {
+  paginatedData: any;
+  setPaginatedData: (data: any) => void;
+};
+
+const DataTableContext = createContext<DataTableContextType | null>(null);
+
+function useDataTable() {
+  const context = useContext(DataTableContext);
+  if (context === null) {
+    throw new Error(
+      "DataTableContext must be used inside DataTableContextProvider",
+    );
+  }
+
+  return context;
+}
+
+function DataTableProvider({ children }: { children: React.ReactNode }) {
+  const [paginatedData, setPaginatedData] = useState<any>(null);
+
+  return (
+    <DataTableContext.Provider value={{ paginatedData, setPaginatedData }}>
+      {children}
+    </DataTableContext.Provider>
+  );
+}
+
 function DataTable<TData, TValue>({
   columns,
   className,
   data,
   paginatedData,
 }: DataTableProps<TData, TValue> &
-  React.ComponentProps<"div"> & { paginatedData: PaginatedOrdersResponse }) {
+  React.ComponentProps<"div"> & { paginatedData: PaginatedResponse<any> }) {
   const table = useReactTable({
     data,
     columns,
@@ -105,7 +134,7 @@ function DataTable<TData, TValue>({
 function DataTableActions({
   paginatedData,
 }: {
-  paginatedData: PaginatedOrdersResponse;
+  paginatedData: PaginatedResponse<any>;
 }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -153,4 +182,4 @@ function DataTableActions({
   );
 }
 
-export { DataTable };
+export { DataTable, DataTableProvider, useDataTable };
