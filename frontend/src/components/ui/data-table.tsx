@@ -145,31 +145,23 @@ function DataTable<TData, TValue = unknown>({
 }
 
 function DataTableActions() {
-  const { paginatedData } = useDataTable();
+  const { paginatedData, setPaginatedData } = useDataTable();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  const {
-    page: currentPage,
-    total: totalItems,
-    pages: totalPages,
-    size: pageSize,
-    items,
-  } = paginatedData;
-  const range = `${pageSize * currentPage - (pageSize - 1)}-${pageSize * (currentPage - 1) + items.length}`;
+  const { page: currentPage, pages: totalPages } = paginatedData;
 
   function handleClick(newPage: number) {
     const params = new URLSearchParams(searchParams);
 
     params.set("page", String(newPage));
     replace(`${pathname}?${params.toString()}`);
+    setPaginatedData({ ...paginatedData, page: newPage });
   }
 
   return (
     <div className="mt-5 flex h-5 items-center justify-end gap-3">
-      <div className="grid h-8 place-content-center rounded-md border px-3 text-sm">
-        {range} of {totalItems}
-      </div>
+      <PaginationInfo />
       <div className="flex items-center rounded-md border">
         <Button
           variant="ghost"
@@ -188,6 +180,26 @@ function DataTableActions() {
           <ChevronRight />
         </Button>
       </div>
+    </div>
+  );
+}
+
+function PaginationInfo() {
+  const { paginatedData } = useDataTable();
+  const {
+    items,
+    page: currentPage,
+    size: pageSize,
+    total: totalItemsCount,
+  } = paginatedData;
+
+  const rangeStart = pageSize * currentPage - pageSize + 1;
+  const rangeEnd = pageSize * (currentPage - 1) + items.length;
+  const range = `${rangeStart}-${rangeEnd}`;
+
+  return (
+    <div className="grid h-8 place-content-center rounded-md border px-3 text-sm">
+      {range} of {totalItemsCount}
     </div>
   );
 }
