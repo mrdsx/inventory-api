@@ -1,11 +1,11 @@
 "use client";
 
 import { DataTable } from "@/components/ui";
-import { useGetOrdersQuery } from "@/features/order";
+import { useGetPaginatedOrdersQuery } from "@/features/order";
 import { ordersTableColumns } from "./orders-table-columns";
 
 export function OrdersSection() {
-  const { data: paginatedOrders, isPending } = useGetOrdersQuery();
+  const { data: paginatedOrders, isPending } = useGetPaginatedOrdersQuery();
 
   return (
     <DataTable

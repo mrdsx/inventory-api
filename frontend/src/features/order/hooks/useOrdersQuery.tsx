@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getPaginatedOrders } from "../services";
 import { PaginatedOrdersResponse } from "../types";
 
-export function useGetOrdersQuery() {
+export function useGetPaginatedOrdersQuery() {
   const params = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
