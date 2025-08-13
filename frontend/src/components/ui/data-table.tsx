@@ -25,21 +25,18 @@ import {
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-};
+} & PropsWithPaginationData;
 
 type PropsWithPaginationData = {
   paginationData: PaginatedResponse<any>;
 };
-
-type CustomDataTableProps = React.ComponentProps<"div"> &
-  PropsWithPaginationData;
 
 function DataTable<TData, TValue = unknown>({
   columns,
   className,
   data,
   paginationData,
-}: DataTableProps<TData, TValue> & CustomDataTableProps) {
+}: DataTableProps<TData, TValue> & React.ComponentProps<"div">) {
   const table = useReactTable({
     data,
     columns,
