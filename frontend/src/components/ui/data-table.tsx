@@ -31,14 +31,15 @@ type PropsWithPaginationData = {
   paginationData: PaginatedResponse<any>;
 };
 
+type CustomDataTableProps = React.ComponentProps<"div"> &
+  PropsWithPaginationData;
+
 function DataTable<TData, TValue = unknown>({
   columns,
   className,
   data,
   paginationData,
-}: DataTableProps<TData, TValue> &
-  React.ComponentProps<"div"> &
-  PropsWithPaginationData) {
+}: DataTableProps<TData, TValue> & CustomDataTableProps) {
   const table = useReactTable({
     data,
     columns,
