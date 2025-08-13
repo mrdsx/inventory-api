@@ -64,13 +64,13 @@ function DataTableProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-function DataTable<TData, TValue>({
+function DataTable<TData, TValue = unknown>({
   columns,
   className,
   data,
   paginatedData,
 }: DataTableProps<TData, TValue> &
-  React.ComponentProps<"div"> & { paginatedData: PaginatedResponse<TData> }) {
+  React.ComponentProps<"div"> & { paginatedData: PaginatedResponse<any> }) {
   const table = useReactTable({
     data,
     columns,
