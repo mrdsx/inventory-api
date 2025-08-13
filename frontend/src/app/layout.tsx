@@ -1,4 +1,5 @@
 import { Body, NavBar } from "@/components";
+import { DataTableProvider } from "@/components/ui";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/features/sidebar";
 import { ReactQueryProvider } from "@/providers";
@@ -20,13 +21,15 @@ export default function RootLayout({
     <html lang="en">
       <Body>
         <ReactQueryProvider>
-          <SidebarProvider>
-            <AppSidebar />
-            <main className="w-full">
-              <NavBar />
-              <div className="grid gap-4 p-4">{children}</div>
-            </main>
-          </SidebarProvider>
+          <DataTableProvider>
+            <SidebarProvider>
+              <AppSidebar />
+              <main className="w-full">
+                <NavBar />
+                <div className="grid gap-4 p-4">{children}</div>
+              </main>
+            </SidebarProvider>
+          </DataTableProvider>
         </ReactQueryProvider>
       </Body>
     </html>
