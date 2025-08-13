@@ -4,7 +4,6 @@ import { Button, buttonVariants } from "@/components/ui";
 import { useThemeStore } from "@/features/theme";
 import { VariantProps } from "class-variance-authority";
 import { Moon, Sun } from "lucide-react";
-import { useEffect } from "react";
 
 type ToggleThemeBtnProps = React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
@@ -13,10 +12,6 @@ type ToggleThemeBtnProps = React.ComponentProps<"button"> &
 
 export function ToggleThemeBtn({ size, className }: ToggleThemeBtnProps) {
   const { isDarkMode, setIsDarkMode } = useThemeStore();
-
-  useEffect(() => {
-    if (isDarkMode) document.body.classList.add("dark");
-  }, []);
 
   function handleClick() {
     document.body.classList.toggle("dark");
