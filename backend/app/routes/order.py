@@ -60,22 +60,6 @@ async def get_orders(
     return get_orders_count(status, result)
 
 
-@router.get("/paginated-orders")
-async def get_paginated_orders(
-    page: int = 1, limit: int = 10, session: AsyncSession = Depends(get_session)
-):
-    set_params(Params(page=page, size=limit))
-
-    query = build_get_orders_query()
-    result = await session.execute(query)
-    db_orders = [
-        await build_order_public_schema(order, supplier, session)
-        for order, supplier in result
-    ]
-
-    return paginate(db_orders)
-
-
 @router.get("/orders/{order_id}", response_model=OrderPublicSchema)
 async def get_order_by_id(order_id: int, session: AsyncSession = Depends(get_session)):
     db_order = await find_order_by_id(order_id, session)
