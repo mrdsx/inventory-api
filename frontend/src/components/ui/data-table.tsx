@@ -11,7 +11,6 @@ import { PaginatedResponse } from "@/app/lib";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { createContext, useContext, useEffect, useState } from "react";
 import { Button } from "./button";
 import { ScrollArea } from "./scroll-area";
 import {
@@ -28,47 +27,6 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-type DataTableContextType<TData = any> = {
-  paginationData: PaginatedResponse<TData>;
-  setPaginationData: (data: PaginatedResponse<TData>) => void;
-};
-
-const DataTableContext = createContext<DataTableContextType | null>(null);
-
-function useDataTable() {
-  const context = useContext(DataTableContext);
-  if (context === null) {
-    throw new Error(
-      "DataTableContext must be used inside DataTableContextProvider",
-    );
-  }
-
-  return context;
-}
-
-function DataTableProvider({ children }: { children: React.ReactNode }) {
-  const [paginationData, setPaginationData] = useState<
-    PaginatedResponse<unknown>
-  >({
-    items: [],
-    total: 0,
-    page: 0,
-    size: 0,
-    pages: 0,
-  });
-
-  return (
-    <DataTableContext.Provider
-      value={{
-        paginationData,
-        setPaginationData,
-      }}
-    >
-      {children}
-    </DataTableContext.Provider>
-  );
-}
-
 function DataTable<TData, TValue = unknown>({
   columns,
   className,
@@ -82,11 +40,6 @@ function DataTable<TData, TValue = unknown>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
-
-  const { setPaginationData } = useDataTable();
-  useEffect(() => {
-    setPaginationData(paginationData);
-  }, []);
 
   return (
     <div>
@@ -144,13 +97,16 @@ function DataTable<TData, TValue = unknown>({
         </Table>
       </ScrollArea>
 
-      <DataTableActions />
+      <DataTableActions paginationData={paginationData} />
     </div>
   );
 }
 
-function DataTableActions() {
-  const { paginationData, setPaginationData } = useDataTable();
+function DataTableActions({
+  paginationData,
+}: {
+  paginationData: PaginatedResponse<any>;
+}) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -161,12 +117,11 @@ function DataTableActions() {
 
     params.set("page", String(newPage));
     replace(`${pathname}?${params.toString()}`);
-    setPaginationData({ ...paginationData, page: newPage });
   }
 
   return (
     <div className="mt-5 flex h-5 items-center justify-end gap-3">
-      <PaginationInfo />
+      <PaginationInfo paginationData={paginationData} />
       <div className="flex items-center rounded-md border">
         <PreviousPageBtn
           onClick={() => handleClick(currentPage - 1)}
@@ -181,8 +136,11 @@ function DataTableActions() {
   );
 }
 
-function PaginationInfo() {
-  const { paginationData } = useDataTable();
+function PaginationInfo({
+  paginationData,
+}: {
+  paginationData: PaginatedResponse<any>;
+}) {
   const {
     items,
     page: currentPage,
@@ -217,4 +175,4 @@ function NextPageBtn(props: React.ComponentProps<"button">) {
   );
 }
 
-export { DataTable, DataTableProvider };
+export { DataTable };
