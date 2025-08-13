@@ -1,18 +1,15 @@
 "use client";
 
-import { useThemeStore } from "@/features/theme";
+import { Body } from "@/components";
 import "@/styles/app.css";
 import "@/styles/globals.css";
 import Link from "next/link";
 import { ROUTES } from "./lib";
 
 export default function GlobalNotFoundPage() {
-  const { isDarkMode } = useThemeStore();
-  // let isDarkMode;
-
   return (
     <html lang="en">
-      <body className={`${isDarkMode && "dark"}`}>
+      <Body>
         <div className="grid min-h-screen place-content-center">
           <div className="card bg-background p-10 text-center">
             <h1 className="mb-2 text-6xl font-extrabold text-red-500">404</h1>
@@ -30,7 +27,7 @@ export default function GlobalNotFoundPage() {
             </Link>
           </div>
         </div>
-      </body>
+      </Body>
     </html>
   );
 }

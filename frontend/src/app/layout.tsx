@@ -1,4 +1,4 @@
-import { NavBar } from "@/components";
+import { Body, NavBar } from "@/components";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/features/sidebar";
 import { ReactQueryProvider } from "@/providers";
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <Body>
         <ReactQueryProvider>
           <SidebarProvider>
             <AppSidebar />
@@ -28,7 +28,7 @@ export default function RootLayout({
             </main>
           </SidebarProvider>
         </ReactQueryProvider>
-      </body>
+      </Body>
     </html>
   );
 }
