@@ -1,5 +1,4 @@
 "use client";
-
 import { DataTable } from "@/components/ui";
 import { getPaginatedOrders } from "@/features/order";
 import { PaginatedOrdersResponse } from "@/features/order/types";
