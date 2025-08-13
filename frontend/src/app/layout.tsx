@@ -1,6 +1,7 @@
 import { NavBar } from "@/components";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/features/sidebar";
+import { ReactQueryProvider } from "@/providers";
 import "@/styles/app.css";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
@@ -18,13 +19,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SidebarProvider>
-          <AppSidebar />
-          <main className="w-full">
-            <NavBar />
-            <div className="grid gap-4 p-4">{children}</div>
-          </main>
-        </SidebarProvider>
+        <ReactQueryProvider>
+          <SidebarProvider>
+            <AppSidebar />
+            <main className="w-full">
+              <NavBar />
+              <div className="grid gap-4 p-4">{children}</div>
+            </main>
+          </SidebarProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
