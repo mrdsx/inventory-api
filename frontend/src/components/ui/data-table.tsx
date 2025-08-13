@@ -46,8 +46,14 @@ function useDataTable() {
   return context;
 }
 
-function DataTableProvider({ children }: { children: React.ReactNode }) {
-  const [paginatedData, setPaginatedData] = useState<any>(null);
+function DataTableProvider<TData>({ children }: { children: React.ReactNode }) {
+  const [paginatedData, setPaginatedData] = useState<PaginatedResponse<TData>>({
+    items: [] as TData,
+    total: 0,
+    page: 0,
+    size: 0,
+    pages: 0,
+  });
 
   return (
     <DataTableContext.Provider value={{ paginatedData, setPaginatedData }}>
