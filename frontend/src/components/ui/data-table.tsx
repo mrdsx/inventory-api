@@ -27,13 +27,18 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
+type PropsWithPaginationData = {
+  paginationData: PaginatedResponse<any>;
+};
+
 function DataTable<TData, TValue = unknown>({
   columns,
   className,
   data,
   paginationData,
 }: DataTableProps<TData, TValue> &
-  React.ComponentProps<"div"> & { paginationData: PaginatedResponse<any> }) {
+  React.ComponentProps<"div"> &
+  PropsWithPaginationData) {
   const table = useReactTable({
     data,
     columns,
@@ -102,11 +107,7 @@ function DataTable<TData, TValue = unknown>({
   );
 }
 
-function DataTableActions({
-  paginationData,
-}: {
-  paginationData: PaginatedResponse<any>;
-}) {
+function DataTableActions({ paginationData }: PropsWithPaginationData) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -136,11 +137,7 @@ function DataTableActions({
   );
 }
 
-function PaginationInfo({
-  paginationData,
-}: {
-  paginationData: PaginatedResponse<any>;
-}) {
+function PaginationInfo({ paginationData }: PropsWithPaginationData) {
   const {
     items,
     page: currentPage,
