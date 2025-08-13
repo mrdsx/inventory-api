@@ -30,7 +30,9 @@ export function OrdersSection() {
       .then((paginatedOrders) => {
         setPaginatedOrders(paginatedOrders);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -40,7 +42,9 @@ export function OrdersSection() {
       .then((paginatedOrders) => {
         setPaginatedOrders(paginatedOrders);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [page, itemsPerPage]);
 
   if (isLoading) return <WorkspacePageContentLoader />;
