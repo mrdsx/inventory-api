@@ -1,5 +1,5 @@
 export { Button, buttonVariants } from "./button";
-export { DataTable } from "./data-table";
+export * from "./data-table";
 export { Input } from "./input";
 export { ScrollArea, ScrollBar } from "./scroll-area";
 export { Separator } from "./separator";
