@@ -1,4 +1,4 @@
-import { SidebarTrigger } from "../ui";
+import { SidebarTrigger } from "./ui";
 
 export function NavBar() {
   return (
