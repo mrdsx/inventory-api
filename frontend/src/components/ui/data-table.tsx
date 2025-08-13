@@ -22,10 +22,10 @@ import {
   TableRow,
 } from "./table";
 
-interface DataTableProps<TData, TValue> {
+type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-}
+};
 
 type PropsWithPaginationData = {
   paginationData: PaginatedResponse<any>;
