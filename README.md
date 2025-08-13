@@ -109,6 +109,8 @@ pytest tests
 
 ## Libraries
 
-- [Radix UI](https://www.radix-ui.com/)
 - [Lucide React](https://lucide.dev/)
+- [Radix UI](https://www.radix-ui.com/)
+- [Tanstack Table](https://tanstack.com/query/latest)
+- [Tanstack Query](https://tanstack.com/table)
 - [Zustand](https://zustand-demo.pmnd.rs/)
