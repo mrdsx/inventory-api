@@ -10,12 +10,12 @@ export async function getPaginatedOrders(
   itemsPerPage: number = 10,
 ) {
   return await apiClient<PaginatedOrdersResponse>(
-    `${ENDPOINTS.orders}?page=${page}&limit=${itemsPerPage}`,
+    `${ENDPOINTS.orders}?page=${page}&size=${itemsPerPage}`,
   );
 }
 
 export async function getRecentOrders() {
   return await apiClient<PaginatedOrdersResponse>(
-    `${ENDPOINTS.orders}?order_by_recent=true`,
+    `${ENDPOINTS.orders}?order_by_recent=true&limit=10`,
   );
 }
