@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-table";
 
 import { PaginatedResponse } from "@/app/lib";
+import { ContentLoader } from "@/components";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -24,9 +25,8 @@ import {
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[];
   isLoading?: boolean;
-} & PropsWithPaginationData;
+} & Partial<PropsWithPaginationData>;
 
 type PropsWithPaginationData = {
   paginationData: PaginatedResponse<any>;
@@ -35,12 +35,11 @@ type PropsWithPaginationData = {
 function DataTable<TData, TValue = unknown>({
   columns,
   className,
-  data,
   isLoading = false,
   paginationData,
 }: DataTableProps<TData, TValue> & React.ComponentProps<"div">) {
   const table = useReactTable({
-    data,
+    data: paginationData?.items || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -58,7 +57,11 @@ function DataTable<TData, TValue = unknown>({
               >
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead className="font-semibold" key={header.id}>
+                    <TableHead
+                      className="font-semibold"
+                      style={{ width: `${header.getSize()}px` }}
+                      key={header.id}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -72,7 +75,16 @@ function DataTable<TData, TValue = unknown>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {isLoading || paginationData === undefined ? (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  <ContentLoader />
+                </TableCell>
+              </TableRow>
+            ) : table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -102,7 +114,7 @@ function DataTable<TData, TValue = unknown>({
         </Table>
       </ScrollArea>
 
-      <DataTableActions paginationData={paginationData} />
+      {paginationData && <DataTableActions paginationData={paginationData} />}
     </div>
   );
 }
