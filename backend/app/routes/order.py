@@ -39,13 +39,14 @@ set_page(Page[OrderPublicSchema])
 @router.get("/orders")
 async def get_orders(
     count: bool = False,
-    limit: int = 10,
+    limit: int | None = None,
     order_by_recent: bool = False,
     page: int = 1,
+    size: int = 10,
     status: OrderStatus | None = None,
     session: AsyncSession = Depends(get_session),
 ):
-    set_params(Params(page=page, size=limit))
+    set_params(Params(page=page, size=size))
     query = build_get_orders_query(count, order_by_recent, limit)
     result = await session.execute(query)
 
