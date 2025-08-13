@@ -85,7 +85,7 @@ OR
 python app\main.py
 ```
 
-After running the frontend is accessible at http://localhost:3000 and backend API at http://127.0.0.1:3000.
+After running the project, the frontend can be accessed at http://localhost:3000/dashboard and backend API at http://127.0.0.1:3000.
 
 ## Running tests
 
