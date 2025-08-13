@@ -1,5 +1,12 @@
-import { TableBody } from "@/components/ui";
-import { getRecentOrders, OrdersTable, OrdersTableRow } from "@/features/order";
+import { ContentLoader } from "@/components";
+import { TableBody, TableCell, TableRow } from "@/components/ui";
+import {
+  getRecentOrders,
+  OrdersTable,
+  OrdersTableRow,
+  TABLE_COLUMNS,
+} from "@/features/order";
+import { Suspense } from "react";
 
 export async function RecentOrdersSection() {
   const { items: orders } = await getRecentOrders();
@@ -9,11 +16,23 @@ export async function RecentOrdersSection() {
       <span className="text-lg">Recent Orders ({orders.length})</span>
       <OrdersTable className="h-60">
         <TableBody>
-          {orders.map((order) => (
-            <OrdersTableRow order={order} key={order.id} />
-          ))}
+          <Suspense fallback={<TableBodyContentLoader />}>
+            {orders.map((order) => (
+              <OrdersTableRow order={order} key={order.id} />
+            ))}
+          </Suspense>
         </TableBody>
       </OrdersTable>
     </div>
+  );
+}
+
+function TableBodyContentLoader() {
+  return (
+    <TableRow>
+      <TableCell colSpan={TABLE_COLUMNS.length}>
+        <ContentLoader />
+      </TableCell>
+    </TableRow>
   );
 }
