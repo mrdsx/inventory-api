@@ -6,7 +6,7 @@ export function ContentLoader({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div className={cn("mt-5 flex justify-center", className)} {...props}>
+    <div className={cn("my-5 flex justify-center", className)} {...props}>
       <LoaderCircle className="animate-spin" />
     </div>
   );
