@@ -1,4 +1,3 @@
-from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi_pagination import paginate, set_page, set_params
 from fastapi_pagination.default import Page, Params
@@ -11,7 +10,6 @@ from schemas import (
     OrderItemSchema,
     OrderPublicSchema,
     OrderSchema,
-    OrdersCountSchema,
 )
 from services import (
     find_order_by_id,
@@ -35,24 +33,30 @@ from validation import validate_order_exists, validate_order_items
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 
+set_page(Page[OrderPublicSchema])
 
-@router.get("/orders", response_model=Union[list[OrderPublicSchema], OrdersCountSchema])
+
+@router.get("/orders")
 async def get_orders(
-    limit: int | None = None,
-    order_by_recent: bool = False,
     count: bool = False,
+    limit: int = 10,
+    order_by_recent: bool = False,
+    page: int = 1,
     status: OrderStatus | None = None,
     session: AsyncSession = Depends(get_session),
 ):
+    set_params(Params(page=page, size=limit))
     query = build_get_orders_query(count, order_by_recent, limit)
     result = await session.execute(query)
 
     if not count:
-        return [
+        db_orders = [
             await build_order_public_schema(order, supplier, session)
             for order, supplier in result
             if status is None or order.status == status
         ]
+
+        return paginate(db_orders)
     return get_orders_count(status, result)
 
 
@@ -60,7 +64,6 @@ async def get_orders(
 async def get_paginated_orders(
     page: int = 1, limit: int = 10, session: AsyncSession = Depends(get_session)
 ):
-    set_page(Page[OrderPublicSchema])
     set_params(Params(page=page, size=limit))
 
     query = build_get_orders_query()
