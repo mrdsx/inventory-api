@@ -17,7 +17,7 @@ export function OrdersSection() {
       className="h-80"
       columns={ordersTableColumns}
       data={paginatedOrders.items}
-      paginatedData={paginatedOrders}
+      paginationData={paginatedOrders}
     />
   );
 }

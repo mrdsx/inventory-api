@@ -29,8 +29,8 @@ interface DataTableProps<TData, TValue> {
 }
 
 type DataTableContextType<TData = any> = {
-  paginatedData: PaginatedResponse<TData>;
-  setPaginatedData: (data: PaginatedResponse<TData>) => void;
+  paginationData: PaginatedResponse<TData>;
+  setPaginationData: (data: PaginatedResponse<TData>) => void;
 };
 
 const DataTableContext = createContext<DataTableContextType | null>(null);
@@ -47,7 +47,7 @@ function useDataTable() {
 }
 
 function DataTableProvider({ children }: { children: React.ReactNode }) {
-  const [paginatedData, setPaginatedData] = useState<
+  const [paginationData, setPaginationData] = useState<
     PaginatedResponse<unknown>
   >({
     items: [],
@@ -58,7 +58,12 @@ function DataTableProvider({ children }: { children: React.ReactNode }) {
   });
 
   return (
-    <DataTableContext.Provider value={{ paginatedData, setPaginatedData }}>
+    <DataTableContext.Provider
+      value={{
+        paginationData,
+        setPaginationData,
+      }}
+    >
       {children}
     </DataTableContext.Provider>
   );
@@ -68,9 +73,9 @@ function DataTable<TData, TValue = unknown>({
   columns,
   className,
   data,
-  paginatedData,
+  paginationData,
 }: DataTableProps<TData, TValue> &
-  React.ComponentProps<"div"> & { paginatedData: PaginatedResponse<any> }) {
+  React.ComponentProps<"div"> & { paginationData: PaginatedResponse<any> }) {
   const table = useReactTable({
     data,
     columns,
@@ -78,9 +83,9 @@ function DataTable<TData, TValue = unknown>({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-  const { setPaginatedData } = useDataTable();
+  const { setPaginationData } = useDataTable();
   useEffect(() => {
-    setPaginatedData(paginatedData);
+    setPaginationData(paginationData);
   }, []);
 
   return (
@@ -145,18 +150,18 @@ function DataTable<TData, TValue = unknown>({
 }
 
 function DataTableActions() {
-  const { paginatedData, setPaginatedData } = useDataTable();
+  const { paginationData, setPaginationData } = useDataTable();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  const { page: currentPage, pages: totalPages } = paginatedData;
+  const { page: currentPage, pages: totalPages } = paginationData;
 
   function handleClick(newPage: number) {
     const params = new URLSearchParams(searchParams);
 
     params.set("page", String(newPage));
     replace(`${pathname}?${params.toString()}`);
-    setPaginatedData({ ...paginatedData, page: newPage });
+    setPaginationData({ ...paginationData, page: newPage });
   }
 
   return (
@@ -177,13 +182,13 @@ function DataTableActions() {
 }
 
 function PaginationInfo() {
-  const { paginatedData } = useDataTable();
+  const { paginationData } = useDataTable();
   const {
     items,
     page: currentPage,
     size: pageSize,
     total: totalItemsCount,
-  } = paginatedData;
+  } = paginationData;
 
   const rangeStart = pageSize * currentPage - pageSize + 1;
   const rangeEnd = pageSize * (currentPage - 1) + items.length;
@@ -212,4 +217,4 @@ function NextPageBtn(props: React.ComponentProps<"button">) {
   );
 }
 
-export { DataTable, DataTableProvider, useDataTable };
+export { DataTable, DataTableProvider };
