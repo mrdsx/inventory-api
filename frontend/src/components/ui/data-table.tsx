@@ -11,7 +11,7 @@ import { PaginatedResponse } from "@/app/lib";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Button } from "./button";
 import { ScrollArea } from "./scroll-area";
 import {
@@ -79,7 +79,9 @@ function DataTable<TData, TValue>({
   });
 
   const { setPaginatedData } = useDataTable();
-  setPaginatedData(paginatedData);
+  useEffect(() => {
+    setPaginatedData(paginatedData);
+  }, []);
 
   return (
     <div>
