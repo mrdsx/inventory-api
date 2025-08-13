@@ -4,12 +4,14 @@ import { DataTable } from "@/components/ui";
 import { getPaginatedOrders } from "@/features/order";
 import { PaginatedOrdersResponse } from "@/features/order/types";
 import { WorkspacePageContentLoader } from "@/features/workspace";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ordersTableColumns } from "./orders-table-columns";
 
 export function OrdersSection() {
   const params = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
   const page = Number(params.get("page") ?? "1");
   const itemsPerPage = Number(params.get("items-per-page") ?? "10");
 
@@ -25,6 +27,7 @@ export function OrdersSection() {
 
   useEffect(() => {
     setIsLoading(true);
+    if (page < 1) replace(`${pathname}?page=1`);
 
     getPaginatedOrders(page, itemsPerPage)
       .then((paginatedOrders) => {
@@ -37,6 +40,7 @@ export function OrdersSection() {
 
   useEffect(() => {
     setIsLoading(true);
+    if (page < 1) replace(`${pathname}?page=1`);
 
     getPaginatedOrders(page, itemsPerPage)
       .then((paginatedOrders) => {
