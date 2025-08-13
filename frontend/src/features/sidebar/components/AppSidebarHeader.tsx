@@ -1,4 +1,5 @@
 "use client";
+
 import { Path } from "@/app/lib";
 import { SidebarHeader, useSidebar } from "@/components/ui";
 import { Webhook } from "lucide-react";

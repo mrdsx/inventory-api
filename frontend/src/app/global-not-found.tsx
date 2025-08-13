@@ -1,4 +1,5 @@
 "use client";
+
 import { useThemeStore } from "@/features/theme";
 import "@/styles/app.css";
 import "@/styles/globals.css";
