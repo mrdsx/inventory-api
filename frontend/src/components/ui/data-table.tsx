@@ -163,22 +163,14 @@ function DataTableActions() {
     <div className="mt-5 flex h-5 items-center justify-end gap-3">
       <PaginationInfo />
       <div className="flex items-center rounded-md border">
-        <Button
-          variant="ghost"
-          size="sm"
+        <PreviousPageBtn
           onClick={() => handleClick(currentPage - 1)}
           disabled={currentPage <= 1}
-        >
-          <ChevronLeft />
-        </Button>
-        <Button
-          variant="ghost"
-          size="sm"
+        />
+        <NextPageBtn
           onClick={() => handleClick(currentPage + 1)}
           disabled={currentPage >= totalPages}
-        >
-          <ChevronRight />
-        </Button>
+        />
       </div>
     </div>
   );
@@ -201,6 +193,22 @@ function PaginationInfo() {
     <div className="grid h-8 place-content-center rounded-md border px-3 text-sm">
       {range} of {totalItemsCount}
     </div>
+  );
+}
+
+function PreviousPageBtn(props: React.ComponentProps<"button">) {
+  return (
+    <Button variant="ghost" size="sm" {...props}>
+      <ChevronLeft />
+    </Button>
+  );
+}
+
+function NextPageBtn(props: React.ComponentProps<"button">) {
+  return (
+    <Button variant="ghost" size="sm" {...props}>
+      <ChevronRight />
+    </Button>
   );
 }
 
