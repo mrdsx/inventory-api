@@ -25,6 +25,7 @@ import {
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  isLoading?: boolean;
 } & PropsWithPaginationData;
 
 type PropsWithPaginationData = {
@@ -35,6 +36,7 @@ function DataTable<TData, TValue = unknown>({
   columns,
   className,
   data,
+  isLoading = false,
   paginationData,
 }: DataTableProps<TData, TValue> & React.ComponentProps<"div">) {
   const table = useReactTable({
