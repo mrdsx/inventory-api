@@ -1,6 +1,6 @@
 import { TableHead, TableHeader, TableRow } from "@/components/ui";
 
-const TABLE_COLUMNS = [
+export const TABLE_COLUMNS = [
   "ID",
   "Supplier Name",
   "Created at",
