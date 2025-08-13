@@ -2,7 +2,7 @@ import { TableBody } from "@/components/ui";
 import { getRecentOrders, OrdersTable, OrdersTableRow } from "@/features/order";
 
 export async function RecentOrdersSection() {
-  const orders = await getRecentOrders();
+  const { items: orders } = await getRecentOrders();
 
   return (
     <div className="card grid gap-2">
