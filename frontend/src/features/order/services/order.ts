@@ -10,7 +10,7 @@ export async function getPaginatedOrders(
   itemsPerPage: number = 10,
 ) {
   return await apiClient<PaginatedOrdersResponse>(
-    `/paginated-orders?page=${page}&limit=${itemsPerPage}`,
+    `${ENDPOINTS.orders}?page=${page}&limit=${itemsPerPage}`,
   );
 }
 
