@@ -3,7 +3,7 @@ import { Routes } from "./types";
 const DEFAULT_PAGE = 1;
 const DEFAULT_PAGE_SIZE = 10;
 
-const PAGE_SIZES: Readonly<string[]> = ["10", "25", "50"];
+const PAGE_SIZES: Readonly<number[]> = [10, 25, 50];
 
 enum QUERY_KEYS {
   ORDERS = "orders",
