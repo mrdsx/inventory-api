@@ -1,0 +1,7 @@
+.stats-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: calc(var(--spacing) * 2);
+  height: calc(var(--spacing) * 25);
+}
