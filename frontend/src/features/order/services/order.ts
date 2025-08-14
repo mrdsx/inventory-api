@@ -1,8 +1,13 @@
-import { apiClient, DEFAULT_PAGE_SIZE, ENDPOINTS } from "@/app/lib";
+import {
+  apiClient,
+  DEFAULT_PAGE,
+  DEFAULT_PAGE_SIZE,
+  ENDPOINTS,
+} from "@/app/lib";
 import { PaginatedOrdersResponse } from "../types";
 
 export async function getOrders(
-  page: number = 1,
+  page: number = DEFAULT_PAGE,
   itemsPerPage: number = DEFAULT_PAGE_SIZE,
 ) {
   return await apiClient<PaginatedOrdersResponse>(
