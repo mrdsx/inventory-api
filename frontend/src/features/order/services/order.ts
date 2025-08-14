@@ -1,9 +1,5 @@
 import { apiClient, ENDPOINTS } from "@/app/lib";
-import { OrderResponse, PaginatedOrdersResponse } from "../types";
-
-export async function getOrders() {
-  return await apiClient<OrderResponse[]>("/orders");
-}
+import { PaginatedOrdersResponse } from "../types";
 
 export async function getPaginatedOrders(
   page: number = 1,
