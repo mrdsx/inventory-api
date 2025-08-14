@@ -16,6 +16,14 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "./button";
 import { ScrollArea } from "./scroll-area";
 import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./select";
+import {
   Table,
   TableBody,
   TableCell,
@@ -137,6 +145,7 @@ function DataTableActions({ paginationData }: PropsWithPaginationData) {
 
   return (
     <div className="mt-5 flex h-5 items-center justify-end gap-3">
+      <PageSizeSelect />
       <PaginationInfo paginationData={paginationData} />
       <div className="flex items-center rounded-md border">
         <PreviousPageBtn
@@ -149,6 +158,27 @@ function DataTableActions({ paginationData }: PropsWithPaginationData) {
         />
       </div>
     </div>
+  );
+}
+
+const PAGE_SIZES = ["10", "25", "50"];
+
+function PageSizeSelect() {
+  return (
+    <Select defaultValue={PAGE_SIZES[0]}>
+      <SelectTrigger className="w-40">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          {PAGE_SIZES.map((size, index) => (
+            <SelectItem value={size} key={size + index}>
+              {size} per page
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
   );
 }
 
