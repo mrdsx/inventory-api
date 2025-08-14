@@ -8,11 +8,14 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { PaginatedResponse, SEARCH_PARAMS_KEYS } from "@/app/lib";
+import {
+  PaginatedResponse,
+  SEARCH_PARAMS_KEYS,
+  useEditSearchParams,
+} from "@/app/lib";
 import { ContentLoader } from "@/components";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "./button";
 import { ScrollArea } from "./scroll-area";
 import {
@@ -131,15 +134,11 @@ function DataTable<TData, TValue = unknown>({
 }
 
 function DataTableActions({ paginationData }: PropsWithPaginationData) {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  const editSearchParams = useEditSearchParams();
   const { page: currentPage, pages: totalPages } = paginationData;
 
-  function handleClick(newPage: number) {
-    const params = new URLSearchParams(searchParams);
-    params.set(PAGE, String(newPage));
-    replace(`${pathname}?${params.toString()}`);
+  function handleClick(value: number) {
+    editSearchParams(PAGE, value);
   }
 
   return (
@@ -163,14 +162,10 @@ function DataTableActions({ paginationData }: PropsWithPaginationData) {
 const PAGE_SIZES = ["10", "25", "50"];
 
 function PageSizeSelect() {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  const editSearchParams = useEditSearchParams();
 
   function handleChange(value: string) {
-    const params = new URLSearchParams(searchParams);
-    params.set(ITEMS_PER_PAGE, value);
-    replace(`${pathname}?${params.toString()}`);
+    editSearchParams(ITEMS_PER_PAGE, value);
   }
 
   return (
