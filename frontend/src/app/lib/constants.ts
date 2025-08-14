@@ -1,11 +1,15 @@
 import { Routes } from "./types";
 
-export const DEFAULT_PAGE = 1;
-export const DEFAULT_PAGE_SIZE = 10;
+const DEFAULT_PAGE = 1;
+const DEFAULT_PAGE_SIZE = 10;
 
-export const PAGE_SIZES: Readonly<string[]> = ["10", "25", "50"];
+const PAGE_SIZES: Readonly<string[]> = ["10", "25", "50"];
 
-export const ROUTES = {
+enum QUERY_KEYS {
+  ORDERS = "orders",
+}
+
+const ROUTES = {
   workspace: {
     dashboard: "/dashboard",
     orders: "/orders",
@@ -15,11 +19,16 @@ export const ROUTES = {
   settings: "/settings",
 } satisfies Routes;
 
-export const SEARCH_PARAMS_KEYS = {
+const SEARCH_PARAMS_KEYS = {
   ITEMS_PER_PAGE: "items_per_page",
   PAGE: "page",
 } as const;
 
-export enum QUERY_KEYS {
-  ORDERS = "orders",
-}
+export {
+  DEFAULT_PAGE,
+  DEFAULT_PAGE_SIZE,
+  PAGE_SIZES,
+  QUERY_KEYS,
+  ROUTES,
+  SEARCH_PARAMS_KEYS,
+};
