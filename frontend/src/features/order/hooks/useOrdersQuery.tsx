@@ -8,7 +8,7 @@ import { PaginatedOrdersResponse } from "../types";
 
 const { ITEMS_PER_PAGE, PAGE } = SEARCH_PARAMS_KEYS;
 
-export function useGetPaginatedOrdersQuery() {
+export function useGetOrdersQuery() {
   const params = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
