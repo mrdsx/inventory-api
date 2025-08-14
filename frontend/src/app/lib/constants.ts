@@ -13,7 +13,7 @@ export const ROUTES = {
 } satisfies Routes;
 
 export const SEARCH_PARAMS_KEYS = {
-  ITEMS_PER_PAGE: "items-per-page",
+  ITEMS_PER_PAGE: "items_per_page",
   PAGE: "page",
 } as const;
 
