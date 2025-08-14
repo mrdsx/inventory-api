@@ -12,6 +12,6 @@ export async function getOrders(
 
 export async function getRecentOrders() {
   return await apiClient<PaginatedOrdersResponse>(
-    `${ENDPOINTS.orders}?order_by_recent=true&limit=${PAGE_SIZE}`,
+    `${ENDPOINTS.orders}?order_by_recent=true&limit=${PAGE_SIZE}&size=${PAGE_SIZE}`,
   );
 }
