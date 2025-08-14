@@ -10,6 +10,11 @@ export const ROUTES = {
   settings: "/settings",
 } satisfies Routes;
 
+export const SEARCH_PARAMS_KEYS = {
+  ITEMS_PER_PAGE: "items-per-page",
+  PAGE: "page",
+} as const;
+
 export enum QUERY_KEYS {
   ORDERS = "orders",
 }

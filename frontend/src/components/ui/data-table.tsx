@@ -8,7 +8,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { PaginatedResponse } from "@/app/lib";
+import { PaginatedResponse, SEARCH_PARAMS_KEYS } from "@/app/lib";
 import { ContentLoader } from "@/components";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -23,6 +23,8 @@ import {
   TableHeader,
   TableRow,
 } from "./table";
+
+const { PAGE } = SEARCH_PARAMS_KEYS;
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -129,7 +131,7 @@ function DataTableActions({ paginationData }: PropsWithPaginationData) {
   function handleClick(newPage: number) {
     const params = new URLSearchParams(searchParams);
 
-    params.set("page", String(newPage));
+    params.set(PAGE, String(newPage));
     replace(`${pathname}?${params.toString()}`);
   }
 
