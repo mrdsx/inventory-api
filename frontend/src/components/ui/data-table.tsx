@@ -55,11 +55,21 @@ function DataTable<TData, TValue = unknown>({
   isLoading = false,
   paginationData,
 }: DataTableProps<TData, TValue> & React.ComponentProps<"div">) {
+  const searchParams = useSearchParams();
+  const pageSize = Number(
+    searchParams.get(ITEMS_PER_PAGE) ?? DEFAULT_PAGE_SIZE,
+  );
+
   const table = useReactTable({
     data: paginationData?.items || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: {
+        pageSize,
+      },
+    },
   });
 
   return (
