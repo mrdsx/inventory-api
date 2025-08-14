@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-table";
 
 import {
+  DEFAULT_PAGE_SIZE,
   PAGE_SIZES,
   PaginatedResponse,
   SEARCH_PARAMS_KEYS,
@@ -17,6 +18,7 @@ import {
 import { ContentLoader } from "@/components";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import { Button } from "./button";
 import { ScrollArea } from "./scroll-area";
 import {
@@ -162,20 +164,23 @@ function DataTableActions({ paginationData }: PropsWithPaginationData) {
 
 function PageSizeSelect() {
   const editSearchParams = useEditSearchParams();
+  const searchParams = useSearchParams();
+  const pageSize =
+    searchParams.get(ITEMS_PER_PAGE) ?? DEFAULT_PAGE_SIZE.toString();
 
   function handleChange(value: string) {
     editSearchParams(ITEMS_PER_PAGE, value);
   }
 
   return (
-    <Select defaultValue={PAGE_SIZES[0]} onValueChange={handleChange}>
+    <Select defaultValue={pageSize} onValueChange={handleChange}>
       <SelectTrigger className="w-40">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           {PAGE_SIZES.map((size, index) => (
-            <SelectItem value={size} key={size + index}>
+            <SelectItem value={size.toString()} key={size + index}>
               {size} per page
             </SelectItem>
           ))}
