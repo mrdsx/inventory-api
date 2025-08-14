@@ -2,6 +2,7 @@ export * from "./button";
 export * from "./data-table";
 export { Input } from "./input";
 export * from "./scroll-area";
+export * from "./select";
 export { Separator } from "./separator";
 export * from "./sheet";
 export * from "./sidebar";
