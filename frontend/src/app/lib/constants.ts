@@ -1,5 +1,7 @@
 import { Routes } from "./types";
 
+export const PAGE_SIZE = 10;
+
 export const ROUTES = {
   workspace: {
     dashboard: "/dashboard",
