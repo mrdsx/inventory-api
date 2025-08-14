@@ -32,7 +32,7 @@ import {
   TableRow,
 } from "./table";
 
-const { PAGE } = SEARCH_PARAMS_KEYS;
+const { ITEMS_PER_PAGE, PAGE } = SEARCH_PARAMS_KEYS;
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -164,8 +164,19 @@ function DataTableActions({ paginationData }: PropsWithPaginationData) {
 const PAGE_SIZES = ["10", "25", "50"];
 
 function PageSizeSelect() {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  function handleChange(value: string) {
+    const params = new URLSearchParams(searchParams);
+
+    params.set(ITEMS_PER_PAGE, value);
+    replace(`${pathname}?${params.toString()}`);
+  }
+
   return (
-    <Select defaultValue={PAGE_SIZES[0]}>
+    <Select defaultValue={PAGE_SIZES[0]} onValueChange={handleChange}>
       <SelectTrigger className="w-40">
         <SelectValue />
       </SelectTrigger>
