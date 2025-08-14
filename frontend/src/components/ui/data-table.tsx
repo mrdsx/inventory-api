@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-table";
 
 import {
+  PAGE_SIZES,
   PaginatedResponse,
   SEARCH_PARAMS_KEYS,
   useEditSearchParams,
@@ -158,8 +159,6 @@ function DataTableActions({ paginationData }: PropsWithPaginationData) {
     </div>
   );
 }
-
-const PAGE_SIZES = ["10", "25", "50"];
 
 function PageSizeSelect() {
   const editSearchParams = useEditSearchParams();

@@ -3,6 +3,8 @@ import { Routes } from "./types";
 export const DEFAULT_PAGE = 1;
 export const DEFAULT_PAGE_SIZE = 10;
 
+export const PAGE_SIZES: Readonly<string[]> = ["10", "25", "50"];
+
 export const ROUTES = {
   workspace: {
     dashboard: "/dashboard",
