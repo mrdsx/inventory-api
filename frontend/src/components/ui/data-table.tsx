@@ -138,7 +138,6 @@ function DataTableActions({ paginationData }: PropsWithPaginationData) {
 
   function handleClick(newPage: number) {
     const params = new URLSearchParams(searchParams);
-
     params.set(PAGE, String(newPage));
     replace(`${pathname}?${params.toString()}`);
   }
@@ -170,7 +169,6 @@ function PageSizeSelect() {
 
   function handleChange(value: string) {
     const params = new URLSearchParams(searchParams);
-
     params.set(ITEMS_PER_PAGE, value);
     replace(`${pathname}?${params.toString()}`);
   }
