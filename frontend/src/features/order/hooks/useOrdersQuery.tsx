@@ -1,5 +1,6 @@
 "use client";
 
+import { QUERY_KEYS } from "@/app/lib";
 import { useQuery } from "@tanstack/react-query";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getPaginatedOrders } from "../services";
@@ -16,7 +17,7 @@ export function useGetPaginatedOrdersQuery() {
   if (page < 1) replace(`${pathname}?page=1`);
 
   const query = useQuery<unknown, unknown, PaginatedOrdersResponse>({
-    queryKey: ["orders", page],
+    queryKey: [QUERY_KEYS.ORDERS, page],
     queryFn: () => getPaginatedOrders(page, itemsPerPage),
   });
 

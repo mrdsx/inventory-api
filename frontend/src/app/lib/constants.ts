@@ -9,3 +9,7 @@ export const ROUTES = {
   },
   settings: "/settings",
 } satisfies Routes;
+
+export enum QUERY_KEYS {
+  ORDERS = "orders",
+}
