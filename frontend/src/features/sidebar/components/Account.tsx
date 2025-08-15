@@ -10,7 +10,7 @@ import { AppSidebarItem } from "./AppSidebarItem";
 
 const items: SidebarItem[] = [
   { link: ROUTES.settings, icon: <Settings />, title: "Settings" },
-  { link: "/", icon: <LogOut />, title: "Log Out" },
+  { link: "/logout", icon: <LogOut />, title: "Log Out" },
 ];
 
 export function Account() {
