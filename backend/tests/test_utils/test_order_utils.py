@@ -59,10 +59,10 @@ async def test_get_order_items_total_cost():
         )
     ]
 
-    total_cost = await get_order_items_total_cost(order_items)
+    total_cost = get_order_items_total_cost(order_items)
     assert total_cost == MOCK_ORDER_ITEM_COST * MOCK_ORDER_ITEM_QUANTITY
 
-    total_cost = await get_order_items_total_cost([])
+    total_cost = get_order_items_total_cost([])
     assert total_cost == 0
 
 
