@@ -1,3 +1,4 @@
+from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi_pagination import paginate, set_page, set_params
 from fastapi_pagination.default import Page, Params
@@ -7,9 +8,11 @@ from constants import API_ROUTER_PREFIX, OrderItemResponseMsg, OrderStatus
 from database import get_session
 from schemas import (
     CreateOrderSchema,
+    OrdersCountSchema,
     OrderItemSchema,
     OrderPublicSchema,
     OrderSchema,
+    PaginatedResponse,
 )
 from services import (
     find_order_by_id,
@@ -36,7 +39,12 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 set_page(Page[OrderPublicSchema])
 
 
-@router.get("/orders")
+@router.get(
+    "/orders",
+    response_model=Union[
+        PaginatedResponse[list[OrderPublicSchema]] | OrdersCountSchema
+    ],
+)
 async def get_orders(
     count: bool = False,
     limit: int | None = None,
