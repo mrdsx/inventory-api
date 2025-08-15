@@ -3,3 +3,4 @@ export { BASE_API_URL, ENDPOINTS } from "./api/constants";
 export * from "./constants";
 export { useParams } from "./hooks/useParams";
 export * from "./types";
+export { validateParams } from "./utils/validateParams";
