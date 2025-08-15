@@ -9,7 +9,7 @@ export function OrdersSection() {
 
   return (
     <DataTable
-      className="h-80"
+      className="h-[60vh]"
       columns={ordersTableColumns}
       isLoading={isPending}
       paginationData={paginatedOrders}
