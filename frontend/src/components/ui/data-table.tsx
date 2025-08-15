@@ -65,9 +65,10 @@ function DataTable<TData, TValue = unknown>({
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    initialState: {
+    state: {
       pagination: {
         pageSize,
+        pageIndex: 0,
       },
     },
   });
