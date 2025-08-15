@@ -19,7 +19,7 @@ import {
 import { ContentLoader } from "@/components";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Button } from "./button";
 import { ScrollArea } from "./scroll-area";
 import {
@@ -149,14 +149,12 @@ function DataTable<TData, TValue = unknown>({
 }
 
 function DataTableActions({ paginationData }: PropsWithPaginationData) {
-  const { params, setParams } = useParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  const { setParams, updatePathname } = useParams();
   const { page: currentPage, pages: totalPages } = paginationData;
 
   function handleClick(value: number) {
     setParams(PAGE, value);
-    replace(`${pathname}?${params.toString()}`);
+    updatePathname();
   }
 
   return (
@@ -178,15 +176,13 @@ function DataTableActions({ paginationData }: PropsWithPaginationData) {
 }
 
 function PageSizeSelect() {
-  const { params, setParams } = useParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  const { params, setParams, updatePathname } = useParams();
   const pageSize = params.get(ITEMS_PER_PAGE) ?? DEFAULT_PAGE_SIZE.toString();
 
   function handleChange(value: string) {
     setParams(PAGE, DEFAULT_PAGE);
     setParams(ITEMS_PER_PAGE, value);
-    replace(`${pathname}?${params.toString()}`);
+    updatePathname();
   }
 
   return (
