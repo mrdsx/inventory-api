@@ -1,4 +1,5 @@
 export * from "./button";
+export * from "./card";
 export * from "./data-table";
 export { Input } from "./input";
 export * from "./scroll-area";
