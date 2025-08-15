@@ -61,14 +61,14 @@ export default function CreateOrderPage() {
   return (
     <div>
       <Link href={ROUTES.workspace.orders.root}>
-        <Button className="ml-2 flex" variant="link">
+        <Button className="mb-2" variant="link">
           <ArrowLeft />
           Go back
         </Button>
       </Link>
-      <div className="flex h-120 transition-colors">
+      <div className="flex h-110 gap-4 transition-colors">
         {/* Left side: Catalog */}
-        <div className="flex w-[70%] flex-col p-6">
+        <div className="flex w-[70%] flex-col">
           <div className="mb-4 flex items-center gap-4">
             <Select
               value={groupBy}
@@ -123,7 +123,7 @@ export default function CreateOrderPage() {
           </div>
         </div>
         {/* Right side: Cart */}
-        <div className="flex w-[30%] flex-col p-6 transition-colors">
+        <div className="flex w-[30%] flex-col p-2 transition-colors">
           <Card className="flex-1 p-4">
             <h2 className="mb-4 text-lg font-bold">Cart</h2>
             {cart.length === 0 ? (
