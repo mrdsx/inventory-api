@@ -2,7 +2,13 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export function useParams() {
+type ParamsState = {
+  params: URLSearchParams;
+  setParams: (key: string, value: any) => void;
+  updatePathname: () => void;
+};
+
+export function useParams(): ParamsState {
   const pathname = usePathname();
   const { replace } = useRouter();
   const searchParams = useSearchParams();
