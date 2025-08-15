@@ -14,6 +14,7 @@ const ROUTES = {
     dashboard: "/dashboard",
     orders: {
       root: "/orders",
+      create: "/orders/new",
     },
     products: "/products",
     suppliers: "/suppliers",
