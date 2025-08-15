@@ -12,7 +12,9 @@ enum QUERY_KEYS {
 const ROUTES = {
   workspace: {
     dashboard: "/dashboard",
-    orders: "/orders",
+    orders: {
+      root: "/orders",
+    },
     products: "/products",
     suppliers: "/suppliers",
   },

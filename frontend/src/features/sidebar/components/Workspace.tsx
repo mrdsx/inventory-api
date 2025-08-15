@@ -23,7 +23,7 @@ const items: SidebarItem[] = [
     isWorkspaceRoute: true,
   },
   {
-    link: workspace.orders,
+    link: workspace.orders.root,
     icon: <ListChecks />,
     title: "Orders",
     isWorkspaceRoute: true,
