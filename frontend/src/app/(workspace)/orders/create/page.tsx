@@ -60,10 +60,12 @@ export default function CreateOrderPage() {
 
   return (
     <div>
-      <Button className="ml-2 flex" variant="link">
-        <ArrowLeft />
-        <Link href={ROUTES.workspace.orders.root}>Go back</Link>
-      </Button>
+      <Link href={ROUTES.workspace.orders.root}>
+        <Button className="ml-2 flex" variant="link">
+          <ArrowLeft />
+          Go back
+        </Button>
+      </Link>
       <div className="flex h-120 transition-colors">
         {/* Left side: Catalog */}
         <div className="flex w-[70%] flex-col p-6">
