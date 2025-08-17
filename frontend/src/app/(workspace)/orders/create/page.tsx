@@ -15,28 +15,60 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Minus, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
-// Flat list of products
+// Flat list of products (updated shape)
 const catalogData = [
-  { id: 1, name: "Coca Cola", supplier: "Supplier A", category: "Beverages" },
-  { id: 2, name: "Pepsi", supplier: "Supplier B", category: "Beverages" },
-  { id: 3, name: "Chips", supplier: "Supplier A", category: "Snacks" },
-  { id: 4, name: "Nuts", supplier: "Supplier B", category: "Snacks" },
+  {
+    id: 1,
+    name: "Coca Cola",
+    supplier: "Supplier A",
+    description: "Refreshing soft drink.",
+    category: "Beverages",
+    cost: 1.99,
+  },
+  {
+    id: 2,
+    name: "Pepsi",
+    supplier: "Supplier B",
+    description: "Popular cola beverage.",
+    category: "Beverages",
+    cost: 1.89,
+  },
+  {
+    id: 3,
+    name: "Chips",
+    supplier: "Supplier A",
+    description: "Crispy potato chips.",
+    category: "Snacks",
+    cost: 2.49,
+  },
+  {
+    id: 4,
+    name: "Nuts",
+    supplier: "Supplier B",
+    description: "Roasted mixed nuts.",
+    category: "Snacks",
+    cost: 3.79,
+  },
 ];
 
 type Product = {
   id: number;
   name: string;
   supplier: string;
+  description: string;
   category: string;
+  cost: number;
 };
+
+type CartItem = Product & { count: number };
 
 export default function CreateOrderPage() {
   const [groupBy, setGroupBy] = useState<"category" | "supplier">("category");
-  const [cart, setCart] = useState<Product[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
 
   // Group products by selected attribute using groupBy value
   const groupedData = Object.groupBy(
@@ -45,14 +77,33 @@ export default function CreateOrderPage() {
   ) as Record<string, Product[]>;
 
   const handleAddToCart = (item: Product) => {
-    if (!cart.find((i) => i.id === item.id)) {
-      setCart([...cart, item]);
-    }
+    setCart((prevCart) => {
+      const existing = prevCart.find((i) => i.id === item.id);
+      if (existing) {
+        return prevCart.map((i) =>
+          i.id === item.id ? { ...i, count: i.count + 1 } : i,
+        );
+      } else {
+        return [...prevCart, { ...item, count: 1 }];
+      }
+    });
   };
 
-  const handleRemoveFromCart = (item: Product) => {
-    setCart(cart.filter((i) => i.id !== item.id));
+  const handleRemoveOneFromCart = (item: Product) => {
+    setCart((prevCart) => {
+      const existing = prevCart.find((i) => i.id === item.id);
+      if (!existing) return prevCart;
+      return prevCart.filter((i) => i.id !== item.id);
+    });
   };
+
+  const getCartCount = (itemId: number) => {
+    const cartItem = cart.find((i) => i.id === itemId);
+    return cartItem ? cartItem.count : 0;
+  };
+
+  // Calculate total cost
+  const totalCost = cart.reduce((sum, item) => sum + item.cost * item.count, 0);
 
   return (
     <div>
@@ -91,40 +142,72 @@ export default function CreateOrderPage() {
                     </AccordionTrigger>
                     <AccordionContent>
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-                        {items.map((item) => (
-                          <Card
-                            key={item.id}
-                            className="flex flex-col justify-between p-4"
-                          >
-                            <div>
-                              <div className="text-lg font-bold">
-                                {item.name}
-                              </div>
-                              {groupBy === "category" ? (
-                                <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                                  <span className="font-medium">Supplier:</span>{" "}
-                                  {item.supplier}
+                        {items.map((item) => {
+                          const count = getCartCount(item.id);
+                          return (
+                            <Card
+                              key={item.id}
+                              className="flex flex-col justify-between p-4"
+                            >
+                              <div>
+                                <div className="text-lg font-bold">
+                                  {item.name}
                                 </div>
-                              ) : (
+                                {groupBy === "category" ? (
+                                  <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                    <span className="font-medium">
+                                      Supplier:
+                                    </span>{" "}
+                                    {item.supplier}
+                                  </div>
+                                ) : (
+                                  <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                    <span className="font-medium">
+                                      Category:
+                                    </span>{" "}
+                                    {item.category}
+                                  </div>
+                                )}
                                 <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                                  <span className="font-medium">Category:</span>{" "}
-                                  {item.category}
+                                  <span className="font-medium">Cost:</span>{" "}
+                                  {item.cost.toFixed(2)}
+                                </div>
+                              </div>
+                              {count === 0 ? (
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={() => handleAddToCart(item)}
+                                  className="mt-4"
+                                >
+                                  Add to Cart
+                                </Button>
+                              ) : (
+                                <div className="mt-4 flex items-center gap-2">
+                                  <Button
+                                    size="icon"
+                                    variant="outline"
+                                    onClick={() =>
+                                      handleRemoveOneFromCart(item)
+                                    }
+                                  >
+                                    <Minus size={16} />
+                                  </Button>
+                                  <span className="min-w-[24px] text-center">
+                                    {count}
+                                  </span>
+                                  <Button
+                                    size="icon"
+                                    variant="outline"
+                                    onClick={() => handleAddToCart(item)}
+                                  >
+                                    <Plus size={16} />
+                                  </Button>
                                 </div>
                               )}
-                            </div>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => handleAddToCart(item)}
-                              disabled={!!cart.find((i) => i.id === item.id)}
-                              className="mt-4"
-                            >
-                              {cart.find((i) => i.id === item.id)
-                                ? "Added"
-                                : "Add to Cart"}
-                            </Button>
-                          </Card>
-                        ))}
+                            </Card>
+                          );
+                        })}
                       </div>
                     </AccordionContent>
                   </AccordionItem>
@@ -142,24 +225,41 @@ export default function CreateOrderPage() {
                 No items in cart.
               </p>
             ) : (
-              <ul>
-                {cart.map((item) => (
-                  <li
-                    key={item.id}
-                    className="flex items-center justify-between py-2"
-                  >
-                    <span>{item.name}</span>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => handleRemoveFromCart(item)}
-                      className="dark:text-red-400"
+              <>
+                <ul>
+                  {cart.map((item) => (
+                    <li
+                      key={item.id}
+                      className="flex flex-col justify-between border-b py-2 last:border-b-0"
                     >
-                      Remove
-                    </Button>
-                  </li>
-                ))}
-              </ul>
+                      <div className="mb-2 flex items-center justify-between">
+                        <span>
+                          {item.name}{" "}
+                          <span className="text-xs text-gray-500 dark:text-gray-400">
+                            ×{item.count}
+                          </span>
+                        </span>
+                        <span className="ml-2 text-xs font-semibold text-gray-600 dark:text-gray-300">
+                          ${(item.cost * item.count).toFixed(2)}
+                        </span>
+                      </div>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => handleRemoveOneFromCart(item)}
+                        className="self-end dark:text-red-400"
+                      >
+                        <Trash2 />
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4 flex justify-end">
+                  <span className="text-lg font-semibold">
+                    Total: ${totalCost.toFixed(2)}
+                  </span>
+                </div>
+              </>
             )}
           </Card>
         </div>
