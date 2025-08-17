@@ -22,9 +22,9 @@ export default function RootLayout({
         <ReactQueryProvider>
           <SidebarProvider>
             <AppSidebar />
-            <main className="w-full">
+            <main className="mr-4 ml-2 w-full">
               <NavBar />
-              <div className="grid gap-4 p-4">{children}</div>
+              <div className="mt-4 grid gap-4">{children}</div>
             </main>
           </SidebarProvider>
         </ReactQueryProvider>
