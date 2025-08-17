@@ -234,65 +234,67 @@ export default function CreateOrderPage() {
         </div>
         {/* Right side: Cart */}
         <div className="flex w-[30%] flex-col p-2 transition-colors">
-          <Card className="flex-1 rounded-md p-4 shadow-sm">
-            <h2 className="text-lg font-bold">Cart</h2>
+          <Card className="flex-1 rounded-md shadow-sm">
+            <h2 className="px-4 text-lg font-bold">Cart</h2>
             {cart.length === 0 ? (
               <p className="text-md text-center text-gray-400 dark:text-gray-500">
                 No items in cart.
               </p>
             ) : (
               <>
-                <ul>
-                  {cart.map((item) => (
-                    <li
-                      key={item.id}
-                      className="mb-2 flex flex-col justify-between border-b py-2 last:mb-0 last:border-b-0"
-                    >
-                      <div className="mb-3 flex items-center justify-between">
-                        <span>
-                          {item.name}{" "}
-                          <span className="text-xs text-gray-500 dark:text-gray-400">
-                            ×{item.count}
+                <ScrollArea className="h-70 px-4">
+                  <ul>
+                    {cart.map((item) => (
+                      <li
+                        key={item.id}
+                        className="mb-2 flex flex-col justify-between border-b py-2 last:mb-0 last:border-b-0"
+                      >
+                        <div className="mb-3 flex items-center justify-between">
+                          <span>
+                            {item.name}{" "}
+                            <span className="text-xs text-gray-500 dark:text-gray-400">
+                              ×{item.count}
+                            </span>
                           </span>
-                        </span>
-                        <span className="ml-2 text-[12px] font-semibold text-gray-600 dark:text-gray-300">
-                          ${(item.cost * item.count).toFixed(2)}
-                        </span>
-                      </div>
-                      <div className="mb-3 flex items-center gap-1">
-                        <Button
-                          size="icon"
-                          variant="outline"
-                          onClick={() => handleRemoveOneFromCart(item)}
-                          disabled={item.count === 0}
-                          className="h-7 w-7"
-                        >
-                          <Minus size={14} />
-                        </Button>
-                        <span className="min-w-[24px] text-center font-semibold">
-                          {item.count}
-                        </span>
-                        <Button
-                          size="icon"
-                          variant="outline"
-                          onClick={() => handleAddToCart(item)}
-                          className="h-7 w-7"
-                        >
-                          <Plus size={14} />
-                        </Button>
-                        <Button
-                          size="icon"
-                          variant="ghost"
-                          onClick={() => handleRemoveFromCart(item)}
-                          className="ml-auto h-7 w-7 dark:text-red-400"
-                        >
-                          <Trash2 size={14} />
-                        </Button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-6 flex justify-end">
+                          <span className="ml-2 text-[12px] font-semibold text-gray-600 dark:text-gray-300">
+                            ${(item.cost * item.count).toFixed(2)}
+                          </span>
+                        </div>
+                        <div className="mb-3 flex items-center gap-1">
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            onClick={() => handleRemoveOneFromCart(item)}
+                            disabled={item.count === 0}
+                            className="h-7 w-7"
+                          >
+                            <Minus size={14} />
+                          </Button>
+                          <span className="min-w-[24px] text-center font-semibold">
+                            {item.count}
+                          </span>
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            onClick={() => handleAddToCart(item)}
+                            className="h-7 w-7"
+                          >
+                            <Plus size={14} />
+                          </Button>
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            onClick={() => handleRemoveFromCart(item)}
+                            className="ml-auto h-7 w-7 dark:text-red-400"
+                          >
+                            <Trash2 size={14} />
+                          </Button>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </ScrollArea>
+                <div className="mt-6 flex justify-end px-4">
                   <span className="text-base font-semibold">
                     Total: ${totalCost.toFixed(2)}
                   </span>
