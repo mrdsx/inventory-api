@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
   Button,
   Card,
+  ScrollArea,
   Select,
   SelectContent,
   SelectItem,
@@ -80,52 +81,56 @@ export default function CreateOrderPage() {
               </SelectContent>
             </Select>
           </div>
-          <div className="flex-1 overflow-y-auto">
-            <Accordion type="multiple" className="w-full">
-              {Object.entries(groupedData).map(([groupName, items]) => (
-                <AccordionItem value={groupName} key={groupName}>
-                  <AccordionTrigger className="font-semibold">
-                    {groupName}
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-                      {items.map((item) => (
-                        <Card
-                          key={item.id}
-                          className="flex flex-col justify-between p-4"
-                        >
-                          <div>
-                            <div className="text-lg font-bold">{item.name}</div>
-                            {groupBy === "category" ? (
-                              <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                                <span className="font-medium">Supplier:</span>{" "}
-                                {item.supplier}
-                              </div>
-                            ) : (
-                              <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                                <span className="font-medium">Category:</span>{" "}
-                                {item.category}
-                              </div>
-                            )}
-                          </div>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleAddToCart(item)}
-                            disabled={!!cart.find((i) => i.id === item.id)}
-                            className="mt-4"
+          <div className="flex-1">
+            <ScrollArea className="h-100">
+              <Accordion type="multiple" className="w-full">
+                {Object.entries(groupedData).map(([groupName, items]) => (
+                  <AccordionItem value={groupName} key={groupName}>
+                    <AccordionTrigger className="mx-4 font-semibold">
+                      {groupName}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+                        {items.map((item) => (
+                          <Card
+                            key={item.id}
+                            className="flex flex-col justify-between p-4"
                           >
-                            {cart.find((i) => i.id === item.id)
-                              ? "Added"
-                              : "Add to Cart"}
-                          </Button>
-                        </Card>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+                            <div>
+                              <div className="text-lg font-bold">
+                                {item.name}
+                              </div>
+                              {groupBy === "category" ? (
+                                <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                  <span className="font-medium">Supplier:</span>{" "}
+                                  {item.supplier}
+                                </div>
+                              ) : (
+                                <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                  <span className="font-medium">Category:</span>{" "}
+                                  {item.category}
+                                </div>
+                              )}
+                            </div>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleAddToCart(item)}
+                              disabled={!!cart.find((i) => i.id === item.id)}
+                              className="mt-4"
+                            >
+                              {cart.find((i) => i.id === item.id)
+                                ? "Added"
+                                : "Add to Cart"}
+                            </Button>
+                          </Card>
+                        ))}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </ScrollArea>
           </div>
         </div>
         {/* Right side: Cart */}
