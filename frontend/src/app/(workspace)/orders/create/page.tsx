@@ -93,13 +93,27 @@ export default function CreateOrderPage() {
     setCart((prevCart) => {
       const existing = prevCart.find((i) => i.id === item.id);
       if (!existing) return prevCart;
+      if (existing.count === 1) {
+        return prevCart.filter((i) => i.id !== item.id);
+      } else {
+        return prevCart.map((i) =>
+          i.id === item.id ? { ...i, count: i.count - 1 } : i,
+        );
+      }
+    });
+  };
+
+  const handleRemoveFromCart = (item: Product) => {
+    setCart((prevCart) => {
+      const existing = prevCart.find((i) => i.id === item.id);
+      if (!existing) return prevCart;
       return prevCart.filter((i) => i.id !== item.id);
     });
   };
 
   const getCartCount = (itemId: number) => {
     const cartItem = cart.find((i) => i.id === itemId);
-    return cartItem ? cartItem.count : 0;
+    return cartItem?.count ?? 0;
   };
 
   // Calculate total cost
@@ -243,14 +257,34 @@ export default function CreateOrderPage() {
                           ${(item.cost * item.count).toFixed(2)}
                         </span>
                       </div>
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        onClick={() => handleRemoveOneFromCart(item)}
-                        className="self-end dark:text-red-400"
-                      >
-                        <Trash2 />
-                      </Button>
+                      <div className="mb-2 flex items-center gap-2">
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          onClick={() => handleRemoveOneFromCart(item)}
+                          disabled={item.count === 0}
+                        >
+                          <Minus size={16} />
+                        </Button>
+                        <span className="min-w-[24px] text-center">
+                          {item.count}
+                        </span>
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          onClick={() => handleAddToCart(item)}
+                        >
+                          <Plus size={16} />
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => handleRemoveFromCart(item)}
+                          className="ml-auto dark:text-red-400"
+                        >
+                          <Trash2 />
+                        </Button>
+                      </div>
                     </li>
                   ))}
                 </ul>
