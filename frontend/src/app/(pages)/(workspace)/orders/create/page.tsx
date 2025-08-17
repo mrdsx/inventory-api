@@ -16,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui";
-import { CartItem, Product } from "@/features/order";
+import { Product, useOrderCartStore } from "@/features/order";
 import { ArrowLeft, Minus, Plus, Search, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -26,7 +26,15 @@ export default function CreateOrderPage() {
   const [groupBy, setGroupBy] = useState<"category" | "supplier">("category");
   const [productView, setProductView] = useState<"grid" | "rows">("grid");
   const [search, setSearch] = useState("");
-  const [cart, setCart] = useState<CartItem[]>([]);
+
+  const {
+    cart,
+    addToCart,
+    getCartItemCount,
+    getCartTotalCost,
+    removeItemFromCart,
+    removeOneFromCart,
+  } = useOrderCartStore();
 
   // Filter products by search query in name OR category
   const filteredProducts = search.trim()
@@ -59,48 +67,7 @@ export default function CreateOrderPage() {
         product.category.toLowerCase().includes(search.toLowerCase()),
     ).length;
 
-  const handleAddToCart = (item: Product) => {
-    setCart((prevCart) => {
-      const existing = prevCart.find((i) => i.id === item.id);
-      if (existing) {
-        return prevCart.map((i) =>
-          i.id === item.id ? { ...i, count: i.count + 1 } : i,
-        );
-      } else {
-        return [...prevCart, { ...item, count: 1 }];
-      }
-    });
-  };
-
-  const handleRemoveOneFromCart = (item: Product) => {
-    setCart((prevCart) => {
-      const existing = prevCart.find((i) => i.id === item.id);
-      if (!existing) return prevCart;
-      if (existing.count === 1) {
-        return prevCart.filter((i) => i.id !== item.id);
-      } else {
-        return prevCart.map((i) =>
-          i.id === item.id ? { ...i, count: i.count - 1 } : i,
-        );
-      }
-    });
-  };
-
-  const handleRemoveFromCart = (item: Product) => {
-    setCart((prevCart) => {
-      const existing = prevCart.find((i) => i.id === item.id);
-      if (!existing) return prevCart;
-      return prevCart.filter((i) => i.id !== item.id);
-    });
-  };
-
-  const getCartCount = (itemId: number) => {
-    const cartItem = cart.find((i) => i.id === itemId);
-    return cartItem?.count ?? 0;
-  };
-
-  // Calculate total cost
-  const totalCost = cart.reduce((sum, item) => sum + item.cost * item.count, 0);
+  const totalCost = getCartTotalCost();
 
   return (
     <div>
@@ -173,7 +140,7 @@ export default function CreateOrderPage() {
                         {productView === "grid" ? (
                           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
                             {items.map((item) => {
-                              const count = getCartCount(item.id);
+                              const count = getCartItemCount(item.id);
                               return (
                                 <Card
                                   key={item.id}
@@ -207,7 +174,7 @@ export default function CreateOrderPage() {
                                     <Button
                                       size="sm"
                                       variant="outline"
-                                      onClick={() => handleAddToCart(item)}
+                                      onClick={() => addToCart(item)}
                                       className="mt-2 h-7.5 px-2 text-xs"
                                     >
                                       Add to Cart
@@ -218,7 +185,7 @@ export default function CreateOrderPage() {
                                         size="icon"
                                         variant="outline"
                                         onClick={() =>
-                                          handleRemoveOneFromCart(item)
+                                          removeOneFromCart(item.id)
                                         }
                                         className="h-7.5 w-7.5"
                                       >
@@ -230,7 +197,7 @@ export default function CreateOrderPage() {
                                       <Button
                                         size="icon"
                                         variant="outline"
-                                        onClick={() => handleAddToCart(item)}
+                                        onClick={() => addToCart(item)}
                                         className="h-7.5 w-7.5"
                                       >
                                         <Plus size={14} />
@@ -244,7 +211,7 @@ export default function CreateOrderPage() {
                         ) : (
                           <div className="flex flex-col gap-2">
                             {items.map((item) => {
-                              const count = getCartCount(item.id);
+                              const count = getCartItemCount(item.id);
                               return (
                                 <Card
                                   key={item.id}
@@ -279,7 +246,7 @@ export default function CreateOrderPage() {
                                       <Button
                                         size="sm"
                                         variant="outline"
-                                        onClick={() => handleAddToCart(item)}
+                                        onClick={() => addToCart(item)}
                                         className="h-7.5 px-2 text-xs"
                                       >
                                         Add to Cart
@@ -290,7 +257,7 @@ export default function CreateOrderPage() {
                                           size="icon"
                                           variant="outline"
                                           onClick={() =>
-                                            handleRemoveOneFromCart(item)
+                                            removeOneFromCart(item.id)
                                           }
                                           className="h-7.5 w-7.5"
                                         >
@@ -302,7 +269,7 @@ export default function CreateOrderPage() {
                                         <Button
                                           size="icon"
                                           variant="outline"
-                                          onClick={() => handleAddToCart(item)}
+                                          onClick={() => addToCart(item)}
                                           className="h-7.5 w-7.5"
                                         >
                                           <Plus size={14} />
@@ -357,7 +324,7 @@ export default function CreateOrderPage() {
                           <Button
                             size="icon"
                             variant="outline"
-                            onClick={() => handleRemoveOneFromCart(item)}
+                            onClick={() => removeOneFromCart(item.id)}
                             disabled={item.count === 0}
                             className="h-7 w-7"
                           >
@@ -369,7 +336,7 @@ export default function CreateOrderPage() {
                           <Button
                             size="icon"
                             variant="outline"
-                            onClick={() => handleAddToCart(item)}
+                            onClick={() => addToCart(item)}
                             className="h-7 w-7"
                           >
                             <Plus size={14} />
@@ -377,7 +344,7 @@ export default function CreateOrderPage() {
                           <Button
                             size="icon"
                             variant="ghost"
-                            onClick={() => handleRemoveFromCart(item)}
+                            onClick={() => removeItemFromCart(item.id)}
                             className="ml-auto h-7 w-7 dark:text-red-400"
                           >
                             <Trash2 size={14} />
