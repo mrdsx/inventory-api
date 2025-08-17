@@ -89,11 +89,11 @@ export default function CreateOrderPage() {
                   </AccordionTrigger>
                   <AccordionContent>
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-                        {items.map((item) => (
+                      {items.map((item) => (
                         <Card
-                            key={item.id}
+                          key={item.id}
                           className="flex flex-col justify-between p-4"
-                          >
+                        >
                           <div>
                             <div className="text-lg font-bold">{item.name}</div>
                             {groupBy === "category" ? (
@@ -108,19 +108,19 @@ export default function CreateOrderPage() {
                               </div>
                             )}
                           </div>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => handleAddToCart(item)}
-                              disabled={!!cart.find((i) => i.id === item.id)}
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => handleAddToCart(item)}
+                            disabled={!!cart.find((i) => i.id === item.id)}
                             className="mt-4"
-                            >
-                              {cart.find((i) => i.id === item.id)
-                                ? "Added"
+                          >
+                            {cart.find((i) => i.id === item.id)
+                              ? "Added"
                               : "Add to Cart"}
-                            </Button>
+                          </Button>
                         </Card>
-                        ))}
+                      ))}
                     </div>
                   </AccordionContent>
                 </AccordionItem>
