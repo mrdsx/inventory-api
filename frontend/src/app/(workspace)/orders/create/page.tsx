@@ -38,15 +38,10 @@ export default function CreateOrderPage() {
   const [cart, setCart] = useState<Product[]>([]);
 
   // Group products by selected attribute using groupBy value
-  const groupedData: Record<string, Product[]> = catalogData.reduce(
-    (acc, product) => {
-      const key = product[groupBy];
-      if (!acc[key]) acc[key] = [];
-      acc[key].push(product);
-      return acc;
-    },
-    {} as Record<string, Product[]>,
-  );
+  const groupedData = Object.groupBy(
+    catalogData,
+    (product) => product[groupBy],
+  ) as Record<string, Product[]>;
 
   const handleAddToCart = (item: Product) => {
     if (!cart.find((i) => i.id === item.id)) {
