@@ -151,38 +151,38 @@ export default function CreateOrderPage() {
               <Accordion type="multiple" className="w-full">
                 {Object.entries(groupedData).map(([groupName, items]) => (
                   <AccordionItem value={groupName} key={groupName}>
-                    <AccordionTrigger className="mx-4 font-semibold">
+                    <AccordionTrigger className="mx-3 py-2 text-sm font-semibold">
                       {groupName}
                     </AccordionTrigger>
                     <AccordionContent>
-                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+                      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
                         {items.map((item) => {
                           const count = getCartCount(item.id);
                           return (
                             <Card
                               key={item.id}
-                              className="flex flex-col justify-between p-4"
+                              className="flex flex-col justify-between p-2 text-xs"
                             >
                               <div>
-                                <div className="text-lg font-bold">
+                                <div className="text-base font-bold">
                                   {item.name}
                                 </div>
                                 {groupBy === "category" ? (
-                                  <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                  <div className="mt-1 text-gray-600 dark:text-gray-300">
                                     <span className="font-medium">
                                       Supplier:
                                     </span>{" "}
                                     {item.supplier}
                                   </div>
                                 ) : (
-                                  <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                  <div className="mt-1 text-gray-600 dark:text-gray-300">
                                     <span className="font-medium">
                                       Category:
                                     </span>{" "}
                                     {item.category}
                                   </div>
                                 )}
-                                <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                <div className="mt-1 text-gray-600 dark:text-gray-300">
                                   <span className="font-medium">Cost:</span>{" "}
                                   {item.cost.toFixed(2)}
                                 </div>
@@ -192,30 +192,32 @@ export default function CreateOrderPage() {
                                   size="sm"
                                   variant="outline"
                                   onClick={() => handleAddToCart(item)}
-                                  className="mt-4"
+                                  className="mt-2 px-2 py-1 text-xs"
                                 >
                                   Add to Cart
                                 </Button>
                               ) : (
-                                <div className="mt-4 flex items-center gap-2">
+                                <div className="mt-2 flex items-center gap-1">
                                   <Button
                                     size="icon"
                                     variant="outline"
                                     onClick={() =>
                                       handleRemoveOneFromCart(item)
                                     }
+                                    className="h-6 w-6"
                                   >
-                                    <Minus size={16} />
+                                    <Minus size={14} />
                                   </Button>
-                                  <span className="min-w-[24px] text-center">
+                                  <span className="min-w-[20px] text-center">
                                     {count}
                                   </span>
                                   <Button
                                     size="icon"
                                     variant="outline"
                                     onClick={() => handleAddToCart(item)}
+                                    className="h-6 w-6"
                                   >
-                                    <Plus size={16} />
+                                    <Plus size={14} />
                                   </Button>
                                 </div>
                               )}
