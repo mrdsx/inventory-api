@@ -233,16 +233,18 @@ export default function CreateOrderPage() {
           </div>
         </div>
         {/* Right side: Cart */}
-        <div className="flex w-[30%] flex-col p-2 transition-colors">
-          <Card className="flex-1 rounded-md shadow-sm">
-            <h2 className="px-4 text-lg font-bold">Cart</h2>
+        <div className="flex h-120 w-[30%] flex-col p-2 transition-colors">
+          <Card className="flex h-full flex-1 flex-col rounded-md shadow-sm">
+            <h2 className="px-4 pt-4 text-lg font-bold">Cart</h2>
             {cart.length === 0 ? (
-              <p className="text-md text-center text-gray-400 dark:text-gray-500">
-                No items in cart.
-              </p>
+              <div className="flex flex-1 items-center justify-center">
+                <p className="text-md text-center text-gray-400 dark:text-gray-500">
+                  No items in cart.
+                </p>
+              </div>
             ) : (
               <>
-                <ScrollArea className="h-70 px-4">
+                <ScrollArea className="h-60 flex-1 px-4">
                   <ul>
                     {cart.map((item) => (
                       <li
