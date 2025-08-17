@@ -31,6 +31,14 @@ export default function CreateOrderPage() {
     (product) => product[groupBy],
   ) as Record<string, Product[]>;
 
+  // Sort each group alphabetically by product name
+  const sortedGroupedData = Object.fromEntries(
+    Object.entries(groupedData).map(([groupName, items]) => [
+      groupName,
+      items.slice().sort((a, b) => a.name.localeCompare(b.name)),
+    ]),
+  );
+
   const handleAddToCart = (item: Product) => {
     setCart((prevCart) => {
       const existing = prevCart.find((i) => i.id === item.id);
@@ -102,9 +110,9 @@ export default function CreateOrderPage() {
             </Select>
           </div>
           <div className="flex-1">
-            <ScrollArea className="h-100">
+            <ScrollArea className="h-105">
               <Accordion type="multiple" className="w-full">
-                {Object.entries(groupedData).map(([groupName, items]) => (
+                {Object.entries(sortedGroupedData).map(([groupName, items]) => (
                   <AccordionItem value={groupName} key={groupName}>
                     <AccordionTrigger className="mx-3 py-2 text-sm font-semibold">
                       {groupName}
