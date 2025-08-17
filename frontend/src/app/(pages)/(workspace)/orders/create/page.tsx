@@ -18,53 +18,8 @@ import {
 import { ArrowLeft, Minus, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-
-// Flat list of products (updated shape)
-const catalogData = [
-  {
-    id: 1,
-    name: "Coca Cola",
-    supplier: "Supplier A",
-    description: "Refreshing soft drink.",
-    category: "Beverages",
-    cost: 1.99,
-  },
-  {
-    id: 2,
-    name: "Pepsi",
-    supplier: "Supplier B",
-    description: "Popular cola beverage.",
-    category: "Beverages",
-    cost: 1.89,
-  },
-  {
-    id: 3,
-    name: "Chips",
-    supplier: "Supplier A",
-    description: "Crispy potato chips.",
-    category: "Snacks",
-    cost: 2.49,
-  },
-  {
-    id: 4,
-    name: "Nuts",
-    supplier: "Supplier B",
-    description: "Roasted mixed nuts.",
-    category: "Snacks",
-    cost: 3.79,
-  },
-];
-
-type Product = {
-  id: number;
-  name: string;
-  supplier: string;
-  description: string;
-  category: string;
-  cost: number;
-};
-
-type CartItem = Product & { count: number };
+import { products } from "./mock-data";
+import { CartItem, Product } from "./types";
 
 export default function CreateOrderPage() {
   const [groupBy, setGroupBy] = useState<"category" | "supplier">("category");
@@ -72,7 +27,7 @@ export default function CreateOrderPage() {
 
   // Group products by selected attribute using groupBy value
   const groupedData = Object.groupBy(
-    catalogData,
+    products,
     (product) => product[groupBy],
   ) as Record<string, Product[]>;
 
