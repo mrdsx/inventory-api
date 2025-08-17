@@ -1,27 +1,27 @@
 "use client";
 
-import { OrderResponse } from "@/features/order";
+import { OrderResponse, TABLE_COLUMNS } from "@/features/order";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const ordersTableColumns: ColumnDef<OrderResponse>[] = [
   {
     accessorKey: "id",
-    header: "ID",
+    header: TABLE_COLUMNS[0],
   },
   {
     accessorKey: "supplier_name",
-    header: "Supplier Name",
+    header: TABLE_COLUMNS[1],
   },
   {
     accessorKey: "date",
-    header: "Created At",
+    header: TABLE_COLUMNS[2],
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: TABLE_COLUMNS[3],
   },
   {
     accessorKey: "total_cost",
-    header: "Total Cost",
+    header: TABLE_COLUMNS[4],
   },
 ];
