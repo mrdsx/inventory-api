@@ -2,7 +2,7 @@ import { TableHead, TableHeader, TableRow } from "@/components/ui";
 
 export const TABLE_COLUMNS = [
   "ID",
-  "Supplier Name",
+  "Supplier",
   "Created at",
   "Status",
   "Total Cost",
