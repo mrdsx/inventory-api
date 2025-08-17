@@ -187,12 +187,12 @@ export default function CreateOrderPage() {
                                   {item.cost.toFixed(2)}
                                 </div>
                               </div>
-                              {count === 0 ? (
+                              {count <= 0 ? (
                                 <Button
                                   size="sm"
                                   variant="outline"
                                   onClick={() => handleAddToCart(item)}
-                                  className="mt-2 px-2 py-1 text-xs"
+                                  className="mt-2 h-7.5 px-2 text-xs"
                                 >
                                   Add to Cart
                                 </Button>
@@ -204,7 +204,7 @@ export default function CreateOrderPage() {
                                     onClick={() =>
                                       handleRemoveOneFromCart(item)
                                     }
-                                    className="h-7 w-7"
+                                    className="h-7.5 w-7.5"
                                   >
                                     <Minus size={14} />
                                   </Button>
@@ -215,7 +215,7 @@ export default function CreateOrderPage() {
                                     size="icon"
                                     variant="outline"
                                     onClick={() => handleAddToCart(item)}
-                                    className="h-7 w-7"
+                                    className="h-7.5 w-7.5"
                                   >
                                     <Plus size={14} />
                                   </Button>
