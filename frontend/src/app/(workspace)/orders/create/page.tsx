@@ -161,7 +161,7 @@ export default function CreateOrderPage() {
                           return (
                             <Card
                               key={item.id}
-                              className="flex flex-col justify-between p-2 text-xs"
+                              className="flex flex-col justify-between p-3 text-[13px]"
                             >
                               <div>
                                 <div className="text-base font-bold">
@@ -204,7 +204,7 @@ export default function CreateOrderPage() {
                                     onClick={() =>
                                       handleRemoveOneFromCart(item)
                                     }
-                                    className="h-6 w-6"
+                                    className="h-7 w-7"
                                   >
                                     <Minus size={14} />
                                   </Button>
@@ -215,7 +215,7 @@ export default function CreateOrderPage() {
                                     size="icon"
                                     variant="outline"
                                     onClick={() => handleAddToCart(item)}
-                                    className="h-6 w-6"
+                                    className="h-7 w-7"
                                   >
                                     <Plus size={14} />
                                   </Button>
