@@ -28,10 +28,12 @@ export default function CreateOrderPage() {
   const [search, setSearch] = useState("");
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  // Filter products by search query in name
+  // Filter products by search query in name OR category
   const filteredProducts = search.trim()
-    ? products.filter((product) =>
-        product.name.toLowerCase().includes(search.toLowerCase()),
+    ? products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(search.toLowerCase()) ||
+          product.category.toLowerCase().includes(search.toLowerCase()),
       )
     : products;
 
@@ -49,10 +51,12 @@ export default function CreateOrderPage() {
     ]),
   );
 
-  // For each group, count results matching search (always all if search is applied, but for clarity)
+  // For each group, count results matching search (by name or category)
   const getGroupSearchCount = (items: Product[]) =>
-    items.filter((product) =>
-      product.name.toLowerCase().includes(search.toLowerCase()),
+    items.filter(
+      (product) =>
+        product.name.toLowerCase().includes(search.toLowerCase()) ||
+        product.category.toLowerCase().includes(search.toLowerCase()),
     ).length;
 
   const handleAddToCart = (item: Product) => {
