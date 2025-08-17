@@ -235,7 +235,7 @@ export default function CreateOrderPage() {
         {/* Right side: Cart */}
         <div className="flex h-120 w-[30%] flex-col p-2 transition-colors">
           <Card className="flex h-full flex-1 flex-col rounded-md shadow-sm">
-            <h2 className="px-4 pt-4 text-lg font-bold">Cart</h2>
+            <h2 className="px-4 text-lg font-bold">Cart</h2>
             {cart.length === 0 ? (
               <div className="flex flex-1 items-center justify-center">
                 <p className="text-md text-center text-gray-400 dark:text-gray-500">
