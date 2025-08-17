@@ -88,29 +88,40 @@ export default function CreateOrderPage() {
                     {groupName}
                   </AccordionTrigger>
                   <AccordionContent>
-                    <Card className="p-4">
-                      <ul>
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
                         {items.map((item) => (
-                          <li
+                        <Card
                             key={item.id}
-                            className="flex items-center justify-between py-1"
+                          className="flex flex-col justify-between p-4"
                           >
-                            <span className="text-foreground">{item.name}</span>
+                          <div>
+                            <div className="text-lg font-bold">{item.name}</div>
+                            {groupBy === "category" ? (
+                              <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                <span className="font-medium">Supplier:</span>{" "}
+                                {item.supplier}
+                              </div>
+                            ) : (
+                              <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                <span className="font-medium">Category:</span>{" "}
+                                {item.category}
+                              </div>
+                            )}
+                          </div>
                             <Button
                               size="sm"
                               variant="outline"
                               onClick={() => handleAddToCart(item)}
                               disabled={!!cart.find((i) => i.id === item.id)}
-                              className="dark:border-gray-700"
+                            className="mt-4"
                             >
                               {cart.find((i) => i.id === item.id)
                                 ? "Added"
-                                : "Add"}
+                              : "Add to Cart"}
                             </Button>
-                          </li>
+                        </Card>
                         ))}
-                      </ul>
-                    </Card>
+                    </div>
                   </AccordionContent>
                 </AccordionItem>
               ))}
