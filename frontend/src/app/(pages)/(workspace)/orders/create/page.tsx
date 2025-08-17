@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
   Button,
   Card,
+  Input,
   ScrollArea,
   Select,
   SelectContent,
@@ -15,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui";
-import { ArrowLeft, Minus, Plus, Trash2 } from "lucide-react";
+import { ArrowLeft, Minus, Plus, Search, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { products } from "./mock-data";
@@ -24,11 +25,19 @@ import { CartItem, Product } from "./types";
 export default function CreateOrderPage() {
   const [groupBy, setGroupBy] = useState<"category" | "supplier">("category");
   const [productView, setProductView] = useState<"grid" | "rows">("grid");
+  const [search, setSearch] = useState("");
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  // Group products by selected attribute using groupBy value
+  // Filter products by search query in name
+  const filteredProducts = search.trim()
+    ? products.filter((product) =>
+        product.name.toLowerCase().includes(search.toLowerCase()),
+      )
+    : products;
+
+  // Group filtered products by selected attribute
   const groupedData = Object.groupBy(
-    products,
+    filteredProducts,
     (product) => product[groupBy],
   ) as Record<string, Product[]>;
 
@@ -39,6 +48,12 @@ export default function CreateOrderPage() {
       items.slice().sort((a, b) => a.name.localeCompare(b.name)),
     ]),
   );
+
+  // For each group, count results matching search (always all if search is applied, but for clarity)
+  const getGroupSearchCount = (items: Product[]) =>
+    items.filter((product) =>
+      product.name.toLowerCase().includes(search.toLowerCase()),
+    ).length;
 
   const handleAddToCart = (item: Product) => {
     setCart((prevCart) => {
@@ -94,160 +109,107 @@ export default function CreateOrderPage() {
       <div className="flex h-110 gap-4 transition-colors">
         {/* Left side: Catalog */}
         <div className="flex w-[70%] flex-col">
-          <div className="mb-4 flex items-center gap-4">
-            <Select
-              value={groupBy}
-              onValueChange={(val) =>
-                setGroupBy(val as "category" | "supplier")
-              }
-            >
-              <SelectTrigger className="w-[220px]">
-                <SelectValue placeholder="Group by..." />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="category">Group by Categories</SelectItem>
-                <SelectItem value="supplier">Group by Suppliers</SelectItem>
-              </SelectContent>
-            </Select>
-            {/* New select for view mode */}
-            <Select
-              value={productView}
-              onValueChange={(val) => setProductView(val as "grid" | "rows")}
-            >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="View..." />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="grid">Grid view</SelectItem>
-                <SelectItem value="rows">Rows view</SelectItem>
-              </SelectContent>
-            </Select>
+          <div className="mb-4 flex flex-col gap-2">
+            {/* Search bar */}
+            <div className="relative w-full">
+              <Input
+                type="text"
+                placeholder="Search products..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="pl-9"
+              />
+              <Search className="absolute top-2.5 left-2 h-4 w-4 text-gray-400" />
+            </div>
+            {/* Select menus */}
+            <div className="flex items-center gap-2">
+              <Select
+                value={groupBy}
+                onValueChange={(val) =>
+                  setGroupBy(val as "category" | "supplier")
+                }
+              >
+                <SelectTrigger className="w-[220px]">
+                  <SelectValue placeholder="Group by..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="category">Group by Categories</SelectItem>
+                  <SelectItem value="supplier">Group by Suppliers</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select
+                value={productView}
+                onValueChange={(val) => setProductView(val as "grid" | "rows")}
+              >
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="View..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="grid">Grid view</SelectItem>
+                  <SelectItem value="rows">Rows view</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
           <div className="flex-1">
             <ScrollArea className="h-105">
               <Accordion type="multiple" className="w-full">
-                {Object.entries(sortedGroupedData).map(([groupName, items]) => (
-                  <AccordionItem value={groupName} key={groupName}>
-                    <AccordionTrigger className="mx-3 py-2 text-sm font-semibold">
-                      {groupName}
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      {productView === "grid" ? (
-                        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
-                          {items.map((item) => {
-                            const count = getCartCount(item.id);
-                            return (
-                              <Card
-                                key={item.id}
-                                className="flex flex-col justify-between p-3 text-[13px]"
-                              >
-                                <div>
-                                  <div className="text-base font-bold">
-                                    {item.name}
-                                  </div>
-                                  {groupBy === "category" ? (
-                                    <div className="mt-1 text-gray-600 dark:text-gray-300">
-                                      <span className="font-medium">
-                                        Supplier:
-                                      </span>{" "}
-                                      {item.supplier}
+                {Object.entries(sortedGroupedData).map(([groupName, items]) => {
+                  const foundCount = getGroupSearchCount(items);
+                  return (
+                    <AccordionItem value={groupName} key={groupName}>
+                      <AccordionTrigger className="mx-3 flex items-center gap-2 py-2 text-sm font-semibold">
+                        <span>{groupName}</span>
+                        <span className="ml-auto text-xs font-normal text-gray-500">
+                          {search.trim() &&
+                            `${foundCount} result${foundCount === 1 ? "" : "s"} found`}
+                        </span>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        {productView === "grid" ? (
+                          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+                            {items.map((item) => {
+                              const count = getCartCount(item.id);
+                              return (
+                                <Card
+                                  key={item.id}
+                                  className="flex flex-col justify-between p-3 text-[13px]"
+                                >
+                                  <div>
+                                    <div className="text-base font-bold">
+                                      {item.name}
                                     </div>
-                                  ) : (
+                                    {groupBy === "category" ? (
+                                      <div className="mt-1 text-gray-600 dark:text-gray-300">
+                                        <span className="font-medium">
+                                          Supplier:
+                                        </span>{" "}
+                                        {item.supplier}
+                                      </div>
+                                    ) : (
+                                      <div className="mt-1 text-gray-600 dark:text-gray-300">
+                                        <span className="font-medium">
+                                          Category:
+                                        </span>{" "}
+                                        {item.category}
+                                      </div>
+                                    )}
                                     <div className="mt-1 text-gray-600 dark:text-gray-300">
-                                      <span className="font-medium">
-                                        Category:
-                                      </span>{" "}
-                                      {item.category}
+                                      <span className="font-medium">Cost:</span>{" "}
+                                      {item.cost.toFixed(2)}
                                     </div>
-                                  )}
-                                  <div className="mt-1 text-gray-600 dark:text-gray-300">
-                                    <span className="font-medium">Cost:</span>{" "}
-                                    {item.cost.toFixed(2)}
                                   </div>
-                                </div>
-                                {count <= 0 ? (
-                                  <Button
-                                    size="sm"
-                                    variant="outline"
-                                    onClick={() => handleAddToCart(item)}
-                                    className="mt-2 h-7.5 px-2 text-xs"
-                                  >
-                                    Add to Cart
-                                  </Button>
-                                ) : (
-                                  <div className="mt-2 flex items-center gap-1">
-                                    <Button
-                                      size="icon"
-                                      variant="outline"
-                                      onClick={() =>
-                                        handleRemoveOneFromCart(item)
-                                      }
-                                      className="h-7.5 w-7.5"
-                                    >
-                                      <Minus size={14} />
-                                    </Button>
-                                    <span className="min-w-[20px] text-center">
-                                      {count}
-                                    </span>
-                                    <Button
-                                      size="icon"
-                                      variant="outline"
-                                      onClick={() => handleAddToCart(item)}
-                                      className="h-7.5 w-7.5"
-                                    >
-                                      <Plus size={14} />
-                                    </Button>
-                                  </div>
-                                )}
-                              </Card>
-                            );
-                          })}
-                        </div>
-                      ) : (
-                        <div className="flex flex-col gap-2">
-                          {items.map((item) => {
-                            const count = getCartCount(item.id);
-                            return (
-                              <Card
-                                key={item.id}
-                                className="flex flex-row items-center justify-between p-3 text-[13px]"
-                              >
-                                <div>
-                                  <div className="text-base font-bold">
-                                    {item.name}
-                                  </div>
-                                  {groupBy === "category" ? (
-                                    <div className="mt-1 text-gray-600 dark:text-gray-300">
-                                      <span className="font-medium">
-                                        Supplier:
-                                      </span>{" "}
-                                      {item.supplier}
-                                    </div>
-                                  ) : (
-                                    <div className="mt-1 text-gray-600 dark:text-gray-300">
-                                      <span className="font-medium">
-                                        Category:
-                                      </span>{" "}
-                                      {item.category}
-                                    </div>
-                                  )}
-                                  <div className="mt-1 text-gray-600 dark:text-gray-300">
-                                    <span className="font-medium">Cost:</span>{" "}
-                                    {item.cost.toFixed(2)}
-                                  </div>
-                                </div>
-                                <div>
                                   {count <= 0 ? (
                                     <Button
                                       size="sm"
                                       variant="outline"
                                       onClick={() => handleAddToCart(item)}
-                                      className="h-7.5 px-2 text-xs"
+                                      className="mt-2 h-7.5 px-2 text-xs"
                                     >
                                       Add to Cart
                                     </Button>
                                   ) : (
-                                    <div className="flex items-center gap-1">
+                                    <div className="mt-2 flex items-center gap-1">
                                       <Button
                                         size="icon"
                                         variant="outline"
@@ -271,15 +233,88 @@ export default function CreateOrderPage() {
                                       </Button>
                                     </div>
                                   )}
-                                </div>
-                              </Card>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
+                                </Card>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <div className="flex flex-col gap-2">
+                            {items.map((item) => {
+                              const count = getCartCount(item.id);
+                              return (
+                                <Card
+                                  key={item.id}
+                                  className="flex flex-row items-center justify-between p-3 text-[13px]"
+                                >
+                                  <div>
+                                    <div className="text-base font-bold">
+                                      {item.name}
+                                    </div>
+                                    {groupBy === "category" ? (
+                                      <div className="mt-1 text-gray-600 dark:text-gray-300">
+                                        <span className="font-medium">
+                                          Supplier:
+                                        </span>{" "}
+                                        {item.supplier}
+                                      </div>
+                                    ) : (
+                                      <div className="mt-1 text-gray-600 dark:text-gray-300">
+                                        <span className="font-medium">
+                                          Category:
+                                        </span>{" "}
+                                        {item.category}
+                                      </div>
+                                    )}
+                                    <div className="mt-1 text-gray-600 dark:text-gray-300">
+                                      <span className="font-medium">Cost:</span>{" "}
+                                      {item.cost.toFixed(2)}
+                                    </div>
+                                  </div>
+                                  <div>
+                                    {count <= 0 ? (
+                                      <Button
+                                        size="sm"
+                                        variant="outline"
+                                        onClick={() => handleAddToCart(item)}
+                                        className="h-7.5 px-2 text-xs"
+                                      >
+                                        Add to Cart
+                                      </Button>
+                                    ) : (
+                                      <div className="flex items-center gap-1">
+                                        <Button
+                                          size="icon"
+                                          variant="outline"
+                                          onClick={() =>
+                                            handleRemoveOneFromCart(item)
+                                          }
+                                          className="h-7.5 w-7.5"
+                                        >
+                                          <Minus size={14} />
+                                        </Button>
+                                        <span className="min-w-[20px] text-center">
+                                          {count}
+                                        </span>
+                                        <Button
+                                          size="icon"
+                                          variant="outline"
+                                          onClick={() => handleAddToCart(item)}
+                                          className="h-7.5 w-7.5"
+                                        >
+                                          <Plus size={14} />
+                                        </Button>
+                                      </div>
+                                    )}
+                                  </div>
+                                </Card>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </AccordionContent>
+                    </AccordionItem>
+                  );
+                })}
               </Accordion>
             </ScrollArea>
           </div>
