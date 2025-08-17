@@ -23,6 +23,7 @@ import { CartItem, Product } from "./types";
 
 export default function CreateOrderPage() {
   const [groupBy, setGroupBy] = useState<"category" | "supplier">("category");
+  const [productView, setProductView] = useState<"grid" | "rows">("grid");
   const [cart, setCart] = useState<CartItem[]>([]);
 
   // Group products by selected attribute using groupBy value
@@ -108,6 +109,19 @@ export default function CreateOrderPage() {
                 <SelectItem value="supplier">Group by Suppliers</SelectItem>
               </SelectContent>
             </Select>
+            {/* New select for view mode */}
+            <Select
+              value={productView}
+              onValueChange={(val) => setProductView(val as "grid" | "rows")}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="View..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="grid">Grid view</SelectItem>
+                <SelectItem value="rows">Rows view</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <div className="flex-1">
             <ScrollArea className="h-105">
@@ -118,76 +132,151 @@ export default function CreateOrderPage() {
                       {groupName}
                     </AccordionTrigger>
                     <AccordionContent>
-                      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
-                        {items.map((item) => {
-                          const count = getCartCount(item.id);
-                          return (
-                            <Card
-                              key={item.id}
-                              className="flex flex-col justify-between p-3 text-[13px]"
-                            >
-                              <div>
-                                <div className="text-base font-bold">
-                                  {item.name}
-                                </div>
-                                {groupBy === "category" ? (
-                                  <div className="mt-1 text-gray-600 dark:text-gray-300">
-                                    <span className="font-medium">
-                                      Supplier:
-                                    </span>{" "}
-                                    {item.supplier}
+                      {productView === "grid" ? (
+                        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+                          {items.map((item) => {
+                            const count = getCartCount(item.id);
+                            return (
+                              <Card
+                                key={item.id}
+                                className="flex flex-col justify-between p-3 text-[13px]"
+                              >
+                                <div>
+                                  <div className="text-base font-bold">
+                                    {item.name}
                                   </div>
-                                ) : (
+                                  {groupBy === "category" ? (
+                                    <div className="mt-1 text-gray-600 dark:text-gray-300">
+                                      <span className="font-medium">
+                                        Supplier:
+                                      </span>{" "}
+                                      {item.supplier}
+                                    </div>
+                                  ) : (
+                                    <div className="mt-1 text-gray-600 dark:text-gray-300">
+                                      <span className="font-medium">
+                                        Category:
+                                      </span>{" "}
+                                      {item.category}
+                                    </div>
+                                  )}
                                   <div className="mt-1 text-gray-600 dark:text-gray-300">
-                                    <span className="font-medium">
-                                      Category:
-                                    </span>{" "}
-                                    {item.category}
+                                    <span className="font-medium">Cost:</span>{" "}
+                                    {item.cost.toFixed(2)}
                                   </div>
-                                )}
-                                <div className="mt-1 text-gray-600 dark:text-gray-300">
-                                  <span className="font-medium">Cost:</span>{" "}
-                                  {item.cost.toFixed(2)}
                                 </div>
-                              </div>
-                              {count <= 0 ? (
-                                <Button
-                                  size="sm"
-                                  variant="outline"
-                                  onClick={() => handleAddToCart(item)}
-                                  className="mt-2 h-7.5 px-2 text-xs"
-                                >
-                                  Add to Cart
-                                </Button>
-                              ) : (
-                                <div className="mt-2 flex items-center gap-1">
+                                {count <= 0 ? (
                                   <Button
-                                    size="icon"
-                                    variant="outline"
-                                    onClick={() =>
-                                      handleRemoveOneFromCart(item)
-                                    }
-                                    className="h-7.5 w-7.5"
-                                  >
-                                    <Minus size={14} />
-                                  </Button>
-                                  <span className="min-w-[20px] text-center">
-                                    {count}
-                                  </span>
-                                  <Button
-                                    size="icon"
+                                    size="sm"
                                     variant="outline"
                                     onClick={() => handleAddToCart(item)}
-                                    className="h-7.5 w-7.5"
+                                    className="mt-2 h-7.5 px-2 text-xs"
                                   >
-                                    <Plus size={14} />
+                                    Add to Cart
                                   </Button>
+                                ) : (
+                                  <div className="mt-2 flex items-center gap-1">
+                                    <Button
+                                      size="icon"
+                                      variant="outline"
+                                      onClick={() =>
+                                        handleRemoveOneFromCart(item)
+                                      }
+                                      className="h-7.5 w-7.5"
+                                    >
+                                      <Minus size={14} />
+                                    </Button>
+                                    <span className="min-w-[20px] text-center">
+                                      {count}
+                                    </span>
+                                    <Button
+                                      size="icon"
+                                      variant="outline"
+                                      onClick={() => handleAddToCart(item)}
+                                      className="h-7.5 w-7.5"
+                                    >
+                                      <Plus size={14} />
+                                    </Button>
+                                  </div>
+                                )}
+                              </Card>
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <div className="flex flex-col gap-2">
+                          {items.map((item) => {
+                            const count = getCartCount(item.id);
+                            return (
+                              <Card
+                                key={item.id}
+                                className="flex flex-row items-center justify-between p-3 text-[13px]"
+                              >
+                                <div>
+                                  <div className="text-base font-bold">
+                                    {item.name}
+                                  </div>
+                                  {groupBy === "category" ? (
+                                    <div className="mt-1 text-gray-600 dark:text-gray-300">
+                                      <span className="font-medium">
+                                        Supplier:
+                                      </span>{" "}
+                                      {item.supplier}
+                                    </div>
+                                  ) : (
+                                    <div className="mt-1 text-gray-600 dark:text-gray-300">
+                                      <span className="font-medium">
+                                        Category:
+                                      </span>{" "}
+                                      {item.category}
+                                    </div>
+                                  )}
+                                  <div className="mt-1 text-gray-600 dark:text-gray-300">
+                                    <span className="font-medium">Cost:</span>{" "}
+                                    {item.cost.toFixed(2)}
+                                  </div>
                                 </div>
-                              )}
-                            </Card>
-                          );
-                        })}
-                      </div>
+                                <div>
+                                  {count <= 0 ? (
+                                    <Button
+                                      size="sm"
+                                      variant="outline"
+                                      onClick={() => handleAddToCart(item)}
+                                      className="h-7.5 px-2 text-xs"
+                                    >
+                                      Add to Cart
+                                    </Button>
+                                  ) : (
+                                    <div className="flex items-center gap-1">
+                                      <Button
+                                        size="icon"
+                                        variant="outline"
+                                        onClick={() =>
+                                          handleRemoveOneFromCart(item)
+                                        }
+                                        className="h-7.5 w-7.5"
+                                      >
+                                        <Minus size={14} />
+                                      </Button>
+                                      <span className="min-w-[20px] text-center">
+                                        {count}
+                                      </span>
+                                      <Button
+                                        size="icon"
+                                        variant="outline"
+                                        onClick={() => handleAddToCart(item)}
+                                        className="h-7.5 w-7.5"
+                                      >
+                                        <Plus size={14} />
+                                      </Button>
+                                    </div>
+                                  )}
+                                </div>
+                              </Card>
+                            );
+                          })}
+                        </div>
+                      )}
                     </AccordionContent>
                   </AccordionItem>
                 ))}
