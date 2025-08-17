@@ -234,10 +234,10 @@ export default function CreateOrderPage() {
         </div>
         {/* Right side: Cart */}
         <div className="flex w-[30%] flex-col p-2 transition-colors">
-          <Card className="flex-1 p-4">
-            <h2 className="mb-4 text-lg font-bold">Cart</h2>
+          <Card className="flex-1 rounded-md p-4 shadow-sm">
+            <h2 className="text-lg font-bold">Cart</h2>
             {cart.length === 0 ? (
-              <p className="text-gray-400 dark:text-gray-500">
+              <p className="text-md text-center text-gray-400 dark:text-gray-500">
                 No items in cart.
               </p>
             ) : (
@@ -246,52 +246,54 @@ export default function CreateOrderPage() {
                   {cart.map((item) => (
                     <li
                       key={item.id}
-                      className="flex flex-col justify-between border-b py-2 last:border-b-0"
+                      className="mb-2 flex flex-col justify-between border-b py-2 last:mb-0 last:border-b-0"
                     >
-                      <div className="mb-2 flex items-center justify-between">
+                      <div className="mb-3 flex items-center justify-between">
                         <span>
                           {item.name}{" "}
                           <span className="text-xs text-gray-500 dark:text-gray-400">
                             ×{item.count}
                           </span>
                         </span>
-                        <span className="ml-2 text-xs font-semibold text-gray-600 dark:text-gray-300">
+                        <span className="ml-2 text-[12px] font-semibold text-gray-600 dark:text-gray-300">
                           ${(item.cost * item.count).toFixed(2)}
                         </span>
                       </div>
-                      <div className="mb-2 flex items-center gap-2">
+                      <div className="mb-3 flex items-center gap-1">
                         <Button
                           size="icon"
                           variant="outline"
                           onClick={() => handleRemoveOneFromCart(item)}
                           disabled={item.count === 0}
+                          className="h-7 w-7"
                         >
-                          <Minus size={16} />
+                          <Minus size={14} />
                         </Button>
-                        <span className="min-w-[24px] text-center">
+                        <span className="min-w-[24px] text-center font-semibold">
                           {item.count}
                         </span>
                         <Button
                           size="icon"
                           variant="outline"
                           onClick={() => handleAddToCart(item)}
+                          className="h-7 w-7"
                         >
-                          <Plus size={16} />
+                          <Plus size={14} />
                         </Button>
                         <Button
-                          size="sm"
+                          size="icon"
                           variant="ghost"
                           onClick={() => handleRemoveFromCart(item)}
-                          className="ml-auto dark:text-red-400"
+                          className="ml-auto h-7 w-7 dark:text-red-400"
                         >
-                          <Trash2 />
+                          <Trash2 size={14} />
                         </Button>
                       </div>
                     </li>
                   ))}
                 </ul>
-                <div className="mt-4 flex justify-end">
-                  <span className="text-lg font-semibold">
+                <div className="mt-6 flex justify-end">
+                  <span className="text-base font-semibold">
                     Total: ${totalCost.toFixed(2)}
                   </span>
                 </div>
