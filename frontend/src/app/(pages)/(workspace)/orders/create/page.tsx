@@ -16,11 +16,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui";
+import { CartItem, Product } from "@/features/order";
 import { ArrowLeft, Minus, Plus, Search, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { products } from "./mock-data";
-import { CartItem, Product } from "./types";
 
 export default function CreateOrderPage() {
   const [groupBy, setGroupBy] = useState<"category" | "supplier">("category");

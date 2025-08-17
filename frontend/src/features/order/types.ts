@@ -1,7 +1,9 @@
 import { PaginatedResponse } from "@/app/lib";
 import { ORDER_STATUS } from "./constants";
 
-export interface OrderResponse {
+type CartItem = Product & { count: number };
+
+interface OrderResponse {
   id: number;
   supplier_name: string;
   date: string;
@@ -9,8 +11,25 @@ export interface OrderResponse {
   total_cost: number;
 }
 
-export interface OrdersCountResponse {
+interface OrdersCountResponse {
   orders_count: number;
 }
 
-export type PaginatedOrdersResponse = PaginatedResponse<OrderResponse[]>;
+type PaginatedOrdersResponse = PaginatedResponse<OrderResponse[]>;
+
+type Product = {
+  id: number;
+  name: string;
+  supplier: string;
+  description: string;
+  category: string;
+  cost: number;
+};
+
+export type {
+  CartItem,
+  OrderResponse,
+  OrdersCountResponse,
+  PaginatedOrdersResponse,
+  Product,
+};
