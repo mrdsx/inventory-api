@@ -3,8 +3,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui";
-import { useOrderCartStore } from "@/features/order";
 import {
+  getIsProductInSearchQuery,
   Product,
   useProductGroupByStore,
   useProductSearchStore,
@@ -15,18 +15,13 @@ import { ProductGridView } from "./ProductGridView";
 import { ProductRowsView } from "./ProductRowsView";
 
 export function CatalogContent() {
-  const { addToCart, getCartItemCount, removeOneFromCart } =
-    useOrderCartStore();
   const groupBy = useProductGroupByStore((state) => state.groupBy);
   const searchQuery = useProductSearchStore((state) => state.searchQuery);
   const productView = useProductViewStore((state) => state.productView);
 
   const filteredProducts = searchQuery.trim()
-    ? products.filter(
-        (product) =>
-          product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          product.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          product.supplier.toLowerCase().includes(searchQuery.toLowerCase()),
+    ? products.filter((product) =>
+        getIsProductInSearchQuery(product, searchQuery),
       )
     : products;
 
@@ -46,12 +41,8 @@ export function CatalogContent() {
 
   // For each group, count results matching search (by name or category)
   const getGroupSearchCount = (items: Product[]) =>
-    items.filter(
-      (product) =>
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.supplier.toLowerCase().includes(searchQuery.toLowerCase()),
-    ).length;
+    items.filter((product) => getIsProductInSearchQuery(product, searchQuery))
+      .length;
 
   return (
     <>
