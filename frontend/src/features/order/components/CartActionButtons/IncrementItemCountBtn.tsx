@@ -1,19 +1,19 @@
 import { Button } from "@/components/ui";
 import { Product } from "@/features/product";
-import { useOrderCartStore } from "../stores/orderCartStore";
+import { Plus } from "lucide-react";
+import { useOrderCartStore } from "../../stores/orderCartStore";
 
-// TODO: replace hardcoded values
-export function AddToCartBtn({ item }: { item: Product }) {
+export function IncrementItemCountBtn({ item }: { item: Product }) {
   const addToCart = useOrderCartStore((state) => state.addToCart);
 
   return (
     <Button
-      size="sm"
+      size="icon"
       variant="outline"
       onClick={() => addToCart(item)}
-      className="mt-2 h-7.5 px-2 text-xs"
+      className="h-7.5 w-7.5"
     >
-      Add to Cart
+      <Plus size={14} />
     </Button>
   );
 }

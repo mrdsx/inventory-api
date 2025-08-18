@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui";
 import { Product } from "@/features/product";
 import { Minus } from "lucide-react";
-import { useOrderCartStore } from "../stores/orderCartStore";
+import { useOrderCartStore } from "../../stores/orderCartStore";
 
 export function DecrementItemCountBtn({ item }: { item: Product }) {
   const decrementItemCount = useOrderCartStore(
