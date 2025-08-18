@@ -3,7 +3,7 @@ from datetime import datetime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routes import router_orders, router_products, router_suppliers
+from routes import router_orders, router_inventory_items, router_suppliers
 
 
 app = FastAPI(
@@ -32,7 +32,7 @@ def root():
 
 
 app.include_router(router_orders)
-app.include_router(router_products)
+app.include_router(router_inventory_items)
 app.include_router(router_suppliers)
 
 
