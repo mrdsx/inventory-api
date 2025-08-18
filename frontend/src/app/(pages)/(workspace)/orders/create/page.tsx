@@ -1,6 +1,7 @@
 "use client";
 
 import { ROUTES } from "@/app/lib";
+import { NavigationBtn } from "@/components";
 import {
   Accordion,
   AccordionContent,
@@ -24,8 +25,7 @@ import {
   useProductSearchStore,
   useProductViewStore,
 } from "@/features/product";
-import { ArrowLeft, Minus, Plus, Search, Trash2 } from "lucide-react";
-import Link from "next/link";
+import { Minus, Plus, Search, Trash2 } from "lucide-react";
 import { products } from "./mock-data";
 
 export default function CreateOrderPage() {
@@ -76,12 +76,9 @@ export default function CreateOrderPage() {
 
   return (
     <div>
-      <Link href={ROUTES.workspace.orders.root}>
-        <Button className="mb-2" variant="link">
-          <ArrowLeft />
-          Go back
-        </Button>
-      </Link>
+      <NavigationBtn className="mb-2" href={ROUTES.workspace.orders.root}>
+        Go back
+      </NavigationBtn>
       <div className="flex h-100 gap-4 transition-colors">
         {/* Left side: Catalog */}
         <div className="flex w-[70%] flex-col">
