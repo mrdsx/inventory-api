@@ -1,4 +1,4 @@
-import { CatalogItem } from "@/features/order";
+import { CatalogItem } from "@/features/catalog";
 
 const competitorProducts: CatalogItem[] = [
   // ===================== RAZER =====================

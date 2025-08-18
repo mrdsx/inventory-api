@@ -1,5 +1,6 @@
+import { CatalogItem } from "@/features/catalog";
 import { create } from "zustand";
-import { CartItem, CatalogItem } from "../types";
+import { CartItem } from "../types";
 
 interface OrderCartState {
   cart: CartItem[];
