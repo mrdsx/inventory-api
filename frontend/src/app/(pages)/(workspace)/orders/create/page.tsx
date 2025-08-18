@@ -9,7 +9,11 @@ import { CatalogContent } from "./components/CatalogContent/CatalogContent";
 export default function CreateOrderPage() {
   return (
     <div>
-      <NavigationBtn className="mb-2" href={ROUTES.workspace.orders.root}>
+      <NavigationBtn
+        className="mb-2"
+        href={ROUTES.workspace.orders.root}
+        variant="link"
+      >
         <ArrowLeft />
         Go back
       </NavigationBtn>
