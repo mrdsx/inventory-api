@@ -1,15 +1,15 @@
-import { Button, Card } from "@/components/ui";
+import { Card } from "@/components/ui";
 import {
   AddToCartBtn,
   DecrementItemCountBtn,
+  IncrementItemCountBtn,
   useOrderCartStore,
 } from "@/features/order";
 import { Product, useProductGroupByStore } from "@/features/product";
-import { Plus } from "lucide-react";
 
 export function ProductGridView({ items }: { items: Product[] }) {
   const groupBy = useProductGroupByStore((state) => state.groupBy);
-  const { addToCart, getItemCount } = useOrderCartStore();
+  const { getItemCount } = useOrderCartStore();
 
   return (
     <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
@@ -43,14 +43,7 @@ export function ProductGridView({ items }: { items: Product[] }) {
               <div className="mt-2 flex items-center gap-1">
                 <DecrementItemCountBtn item={item} />
                 <span className="min-w-[20px] text-center">{count}</span>
-                <Button
-                  size="icon"
-                  variant="outline"
-                  onClick={() => addToCart(item)}
-                  className="h-7.5 w-7.5"
-                >
-                  <Plus size={14} />
-                </Button>
+                <IncrementItemCountBtn item={item} />
               </div>
             )}
           </Card>
