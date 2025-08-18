@@ -1,8 +1,9 @@
 import { Button, Card } from "@/components/ui";
-import { useOrderCartStore } from "@/features/order";
+import { AddToCartBtn, useOrderCartStore } from "@/features/order";
 import { Product, useProductGroupByStore } from "@/features/product";
 import { Minus, Plus } from "lucide-react";
 
+// TODO: refactor
 export function ProductRowsView({ items }: { items: Product[] }) {
   const groupBy = useProductGroupByStore((state) => state.groupBy);
   const { addToCart, getCartItemCount, removeOneFromCart } =
@@ -35,14 +36,7 @@ export function ProductRowsView({ items }: { items: Product[] }) {
             </div>
             <div>
               {count <= 0 ? (
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => addToCart(item)}
-                  className="h-7.5 px-2 text-xs"
-                >
-                  Add to Cart
-                </Button>
+                <AddToCartBtn item={item} />
               ) : (
                 <div className="flex items-center gap-1">
                   <Button

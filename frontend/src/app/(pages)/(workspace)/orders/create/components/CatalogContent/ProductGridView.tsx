@@ -1,5 +1,5 @@
 import { Button, Card } from "@/components/ui";
-import { useOrderCartStore } from "@/features/order";
+import { AddToCartBtn, useOrderCartStore } from "@/features/order";
 import { Product, useProductGroupByStore } from "@/features/product";
 import { Minus, Plus } from "lucide-react";
 
@@ -35,14 +35,7 @@ export function ProductGridView({ items }: { items: Product[] }) {
               </div>
             </div>
             {count <= 0 ? (
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => addToCart(item)}
-                className="mt-2 h-7.5 px-2 text-xs"
-              >
-                Add to Cart
-              </Button>
+              <AddToCartBtn item={item} />
             ) : (
               <div className="mt-2 flex items-center gap-1">
                 <Button
