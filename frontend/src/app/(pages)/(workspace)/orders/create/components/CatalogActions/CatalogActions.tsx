@@ -7,7 +7,7 @@ export function CatalogActions() {
   const { searchQuery, setSearchQuery } = useProductSearchStore();
 
   return (
-    <div className="mb-4 flex flex-col gap-2">
+    <div className="flex flex-col gap-2">
       <SearchBar
         placeholder="Search products..."
         onChange={(e) => setSearchQuery(e.target.value)}
