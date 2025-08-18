@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui";
 import { useOrderCartStore } from "@/features/order";
-import { Product } from "@/features/product";
+import { Product, useProductViewStore } from "@/features/product";
 import { ArrowLeft, Minus, Plus, Search, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -25,7 +25,6 @@ import { products } from "./mock-data";
 
 export default function CreateOrderPage() {
   const [groupBy, setGroupBy] = useState<"category" | "supplier">("category");
-  const [productView, setProductView] = useState<"grid" | "rows">("grid");
   const [search, setSearch] = useState("");
 
   const {
@@ -36,6 +35,7 @@ export default function CreateOrderPage() {
     removeItemFromCart,
     removeOneFromCart,
   } = useOrderCartStore();
+  const { productView, setProductView } = useProductViewStore();
 
   // Filter products by search query in name OR category
   const filteredProducts = search.trim()
