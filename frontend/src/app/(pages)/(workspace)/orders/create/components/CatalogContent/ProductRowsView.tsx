@@ -6,13 +6,12 @@ import { Minus, Plus } from "lucide-react";
 // TODO: refactor
 export function ProductRowsView({ items }: { items: Product[] }) {
   const groupBy = useProductGroupByStore((state) => state.groupBy);
-  const { addToCart, getCartItemCount, decrementItemCount } =
-    useOrderCartStore();
+  const { addToCart, getItemCount, decrementItemCount } = useOrderCartStore();
 
   return (
     <div className="flex flex-col gap-2">
       {items.map((item) => {
-        const count = getCartItemCount(item.id);
+        const count = getItemCount(item.id);
         return (
           <Card
             key={item.id}

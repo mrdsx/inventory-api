@@ -5,13 +5,12 @@ import { Minus, Plus } from "lucide-react";
 
 export function ProductGridView({ items }: { items: Product[] }) {
   const groupBy = useProductGroupByStore((state) => state.groupBy);
-  const { addToCart, getCartItemCount, decrementItemCount } =
-    useOrderCartStore();
+  const { addToCart, getItemCount, decrementItemCount } = useOrderCartStore();
 
   return (
     <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
       {items.map((item) => {
-        const count = getCartItemCount(item.id);
+        const count = getItemCount(item.id);
 
         return (
           <Card

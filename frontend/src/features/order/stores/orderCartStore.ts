@@ -6,8 +6,8 @@ type OrderCartState = {
   cart: CartItem[];
   addToCart: (item: Product) => void;
   decrementItemCount: (itemId: number) => void;
-  getCartItemCount: (itemId: number) => number;
-  removeItemFromCart: (itemId: number) => void;
+  getItemCount: (itemId: number) => number;
+  removeItem: (itemId: number) => void;
 };
 
 export const useOrderCartStore = create<OrderCartState>((set, get) => ({
@@ -42,11 +42,11 @@ export const useOrderCartStore = create<OrderCartState>((set, get) => ({
     }
     set({ cart: nextCart });
   },
-  getCartItemCount: (itemId: number) => {
+  getItemCount: (itemId: number) => {
     const cartItem = get().cart.find((i) => i.id === itemId);
     return cartItem?.count ?? 0;
   },
-  removeItemFromCart: (itemId: number) => {
+  removeItem: (itemId: number) => {
     const { cart } = get();
 
     const existing = cart.find((i) => i.id === itemId);
