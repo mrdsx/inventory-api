@@ -21,16 +21,14 @@ import {
   Product,
   ProductView,
   useProductGroupByStore,
+  useProductSearchStore,
   useProductViewStore,
 } from "@/features/product";
 import { ArrowLeft, Minus, Plus, Search, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
 import { products } from "./mock-data";
 
 export default function CreateOrderPage() {
-  const [search, setSearch] = useState("");
-
   const {
     cart,
     addToCart,
@@ -40,14 +38,15 @@ export default function CreateOrderPage() {
     removeOneFromCart,
   } = useOrderCartStore();
   const { groupBy, setGroupBy } = useProductGroupByStore();
+  const { searchQuery, setSearchQuery } = useProductSearchStore();
   const { productView, setProductView } = useProductViewStore();
 
   // Filter products by search query in name OR category
-  const filteredProducts = search.trim()
+  const filteredProducts = searchQuery.trim()
     ? products.filter(
         (product) =>
-          product.name.toLowerCase().includes(search.toLowerCase()) ||
-          product.category.toLowerCase().includes(search.toLowerCase()),
+          product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          product.category.toLowerCase().includes(searchQuery.toLowerCase()),
       )
     : products;
 
@@ -69,8 +68,8 @@ export default function CreateOrderPage() {
   const getGroupSearchCount = (items: Product[]) =>
     items.filter(
       (product) =>
-        product.name.toLowerCase().includes(search.toLowerCase()) ||
-        product.category.toLowerCase().includes(search.toLowerCase()),
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.category.toLowerCase().includes(searchQuery.toLowerCase()),
     ).length;
 
   const totalCost = getCartTotalCost();
@@ -92,8 +91,8 @@ export default function CreateOrderPage() {
               <Input
                 type="text"
                 placeholder="Search products..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-9"
               />
               <Search className="absolute top-2.5 left-2 h-4 w-4 text-gray-400" />
@@ -138,7 +137,7 @@ export default function CreateOrderPage() {
                       <AccordionTrigger className="mx-3 flex items-center gap-2 py-2 text-sm font-semibold">
                         <span>{groupName}</span>
                         <span className="ml-auto text-xs font-normal text-gray-500">
-                          {search.trim() &&
+                          {searchQuery.trim() &&
                             `${foundCount} result${foundCount === 1 ? "" : "s"} found`}
                         </span>
                       </AccordionTrigger>
