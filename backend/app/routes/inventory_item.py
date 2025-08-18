@@ -12,7 +12,7 @@ from schemas import (
 )
 from services import find_inventory_item_by_id
 from utils import build_db_inventory_item
-from validation import validate_product_not_exists_by_sku
+from validation import validate_inventory_item_not_exists_by_sku
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 
@@ -38,7 +38,7 @@ async def create_inventory_item(
     inventory_item: CreateInventoryItemSchema,
     session: AsyncSession = Depends(get_session),
 ):
-    await validate_product_not_exists_by_sku(inventory_item.sku, session)
+    await validate_inventory_item_not_exists_by_sku(inventory_item.sku, session)
 
     new_inventory_item = build_db_inventory_item(inventory_item)
     session.add(new_inventory_item)

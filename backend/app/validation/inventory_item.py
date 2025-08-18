@@ -6,12 +6,14 @@ from constants import InventoryItemResponseMsg
 from models import InventoryItem
 
 
-async def validate_product_not_exists_by_sku(sku: str, session: AsyncSession) -> None:
+async def validate_inventory_item_not_exists_by_sku(
+    sku: str, session: AsyncSession
+) -> None:
     result = await session.execute(
         select(InventoryItem).where(InventoryItem.sku == sku)
     )
-    db_product = result.scalar()
-    if db_product is not None:
+    db_inventory_item = result.scalar()
+    if db_inventory_item is not None:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail=InventoryItemResponseMsg.inventory_item_already_exists,
