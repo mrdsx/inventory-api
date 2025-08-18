@@ -1,7 +1,7 @@
 import { PaginatedResponse } from "@/app/lib";
 import { ORDER_STATUS } from "./constants";
 
-type CartItem = Product & { count: number };
+type CartItem = CatalogItem & { count: number };
 
 type OrderResponse = {
   id: number;
@@ -17,7 +17,7 @@ type OrdersCountResponse = {
 
 type PaginatedOrdersResponse = PaginatedResponse<OrderResponse[]>;
 
-type Product = {
+type CatalogItem = {
   id: number;
   name: string;
   supplier: string;
@@ -31,5 +31,5 @@ export type {
   OrderResponse,
   OrdersCountResponse,
   PaginatedOrdersResponse,
-  Product,
+  CatalogItem,
 };

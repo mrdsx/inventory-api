@@ -1,9 +1,9 @@
 import { create } from "zustand";
-import { CartItem, Product } from "../types";
+import { CartItem, CatalogItem } from "../types";
 
 interface OrderCartState {
   cart: CartItem[];
-  addToCart: (item: Product) => void;
+  addToCart: (item: CatalogItem) => void;
   getCartItemCount: (itemId: number) => number;
   getCartTotalCost: () => number;
   removeItemFromCart: (itemId: number) => void;
