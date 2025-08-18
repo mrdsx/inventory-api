@@ -1,4 +1,4 @@
-export type CatalogItem = {
+export type Product = {
   id: number;
   name: string;
   supplier: string;

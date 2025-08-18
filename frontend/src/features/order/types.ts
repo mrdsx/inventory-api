@@ -1,8 +1,8 @@
 import { PaginatedResponse } from "@/app/lib";
-import { CatalogItem } from "../catalog";
+import { Product } from "../catalog";
 import { ORDER_STATUS } from "./constants";
 
-type CartItem = CatalogItem & { count: number };
+type CartItem = Product & { count: number };
 
 type OrderResponse = {
   id: number;

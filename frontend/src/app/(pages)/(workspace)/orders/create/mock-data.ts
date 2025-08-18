@@ -1,6 +1,6 @@
-import { CatalogItem } from "@/features/catalog";
+import { Product } from "@/features/catalog";
 
-const competitorProducts: CatalogItem[] = [
+const competitorProducts: Product[] = [
   // ===================== RAZER =====================
   // Gaming Mouse
   {
@@ -336,7 +336,7 @@ const competitorProducts: CatalogItem[] = [
   },
 ];
 
-export const products: CatalogItem[] = [
+export const products: Product[] = [
   // 🎮 Gaming Mice
   {
     id: 1,

@@ -1,10 +1,10 @@
-import { CatalogItem } from "@/features/catalog";
+import { Product } from "@/features/catalog";
 import { create } from "zustand";
 import { CartItem } from "../types";
 
 interface OrderCartState {
   cart: CartItem[];
-  addToCart: (item: CatalogItem) => void;
+  addToCart: (item: Product) => void;
   getCartItemCount: (itemId: number) => number;
   getCartTotalCost: () => number;
   removeItemFromCart: (itemId: number) => void;

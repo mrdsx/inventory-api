@@ -16,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui";
-import { CatalogItem } from "@/features/catalog";
+import { Product } from "@/features/catalog";
 import { useOrderCartStore } from "@/features/order";
 import { ArrowLeft, Minus, Plus, Search, Trash2 } from "lucide-react";
 import Link from "next/link";
@@ -50,7 +50,7 @@ export default function CreateOrderPage() {
   const groupedData = Object.groupBy(
     filteredProducts,
     (product) => product[groupBy],
-  ) as Record<string, CatalogItem[]>;
+  ) as Record<string, Product[]>;
 
   // Sort each group alphabetically by product name
   const sortedGroupedData = Object.fromEntries(
@@ -61,7 +61,7 @@ export default function CreateOrderPage() {
   );
 
   // For each group, count results matching search (by name or category)
-  const getGroupSearchCount = (items: CatalogItem[]) =>
+  const getGroupSearchCount = (items: Product[]) =>
     items.filter(
       (product) =>
         product.name.toLowerCase().includes(search.toLowerCase()) ||
