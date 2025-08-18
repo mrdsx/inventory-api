@@ -1,4 +1,8 @@
-from .inventory_item import CreateProductSchema, ProductSchema, UpdateProductSchema
+from .inventory_item import (
+    CreateInventoryItemSchema,
+    InventoryItemSchema,
+    UpdateInventoryItemSchema,
+)
 from .order import CreateOrderSchema, OrderPublicSchema, OrderSchema, OrdersCountSchema
 from .order_item import CreateOrderItemSchema, OrderItemSchema
 from .response import PaginatedResponse
@@ -7,9 +11,9 @@ from .supplier import CreateSupplierSchema, SupplierSchema
 
 __all__ = [
     # * inventory_item
-    "CreateProductSchema",
-    "ProductSchema",
-    "UpdateProductSchema",
+    "CreateInventoryItemSchema",
+    "InventoryItemSchema",
+    "UpdateInventoryItemSchema",
     # * order
     "CreateOrderSchema",
     "OrderPublicSchema",

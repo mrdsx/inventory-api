@@ -5,7 +5,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from database import get_session
 from constants import API_ROUTER_PREFIX, InventoryItemResponseMsg
 from models import InventoryItem
-from schemas import CreateProductSchema, ProductSchema, UpdateProductSchema
+from schemas import (
+    CreateInventoryItemSchema,
+    InventoryItemSchema,
+    UpdateInventoryItemSchema,
+)
 from services import find_product_by_id
 from utils import build_db_product
 from validation import validate_product_not_exists_by_sku
@@ -13,14 +17,14 @@ from validation import validate_product_not_exists_by_sku
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 
-@router.get("/inventory_items", response_model=list[ProductSchema])
+@router.get("/inventory_items", response_model=list[InventoryItemSchema])
 async def get_inventory_items(session: AsyncSession = Depends(get_session)):
     result = await session.execute(select(InventoryItem).order_by(InventoryItem.id))
 
     return result.scalars().all()
 
 
-@router.get("/inventory_items/{inventory_item_id}", response_model=ProductSchema)
+@router.get("/inventory_items/{inventory_item_id}", response_model=InventoryItemSchema)
 async def get_inventory_item_by_id(
     inventory_item_id: int, session: AsyncSession = Depends(get_session)
 ):
@@ -29,9 +33,10 @@ async def get_inventory_item_by_id(
     return db_inventory_item
 
 
-@router.post("/inventory_items", response_model=ProductSchema)
+@router.post("/inventory_items", response_model=InventoryItemSchema)
 async def create_inventory_item(
-    inventory_item: CreateProductSchema, session: AsyncSession = Depends(get_session)
+    inventory_item: CreateInventoryItemSchema,
+    session: AsyncSession = Depends(get_session),
 ):
     await validate_product_not_exists_by_sku(inventory_item.sku, session)
 
@@ -43,10 +48,10 @@ async def create_inventory_item(
     return new_inventory_item
 
 
-@router.put("/inventory_items/{inventory_item_id}", response_model=ProductSchema)
+@router.put("/inventory_items/{inventory_item_id}", response_model=InventoryItemSchema)
 async def update_inventory_item_by_id(
     inventory_item_id: int,
-    inventory_item: UpdateProductSchema,
+    inventory_item: UpdateInventoryItemSchema,
     session: AsyncSession = Depends(get_session),
 ):
     db_inventory_item = await find_product_by_id(inventory_item_id, session)
