@@ -16,7 +16,6 @@ import {
 import { useOrderCartStore } from "@/features/order";
 import {
   Product,
-  ProductGroupBy,
   ProductView,
   useProductGroupByStore,
   useProductSearchStore,
@@ -24,11 +23,12 @@ import {
 } from "@/features/product";
 import { Minus, Plus } from "lucide-react";
 import { products } from "../mock-data";
+import { ProductGroupBySelect } from "./ProductGroupBySelect";
 
 export function Catalog() {
   const { addToCart, getCartItemCount, removeOneFromCart } =
     useOrderCartStore();
-  const { groupBy, setGroupBy } = useProductGroupByStore();
+  const groupBy = useProductGroupByStore((state) => state.groupBy);
   const { searchQuery, setSearchQuery } = useProductSearchStore();
   const { productView, setProductView } = useProductViewStore();
 
@@ -75,18 +75,7 @@ export function Catalog() {
         />
         {/* Select menus */}
         <div className="flex items-center gap-2">
-          <Select
-            value={groupBy}
-            onValueChange={(val) => setGroupBy(val as ProductGroupBy)}
-          >
-            <SelectTrigger className="w-[220px]">
-              <SelectValue placeholder="Group by..." />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="category">Group by Categories</SelectItem>
-              <SelectItem value="supplier">Group by Suppliers</SelectItem>
-            </SelectContent>
-          </Select>
+          <ProductGroupBySelect />
           <Select
             value={productView}
             onValueChange={(val) => setProductView(val as ProductView)}
