@@ -36,7 +36,8 @@ export function Catalog() {
     ? products.filter(
         (product) =>
           product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          product.category.toLowerCase().includes(searchQuery.toLowerCase()),
+          product.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          product.supplier.toLowerCase().includes(searchQuery.toLowerCase()),
       )
     : products;
 
@@ -59,7 +60,8 @@ export function Catalog() {
     items.filter(
       (product) =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchQuery.toLowerCase()),
+        product.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.supplier.toLowerCase().includes(searchQuery.toLowerCase()),
     ).length;
 
   return (
