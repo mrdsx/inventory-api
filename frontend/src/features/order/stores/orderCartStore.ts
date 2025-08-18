@@ -6,7 +6,6 @@ type OrderCartState = {
   cart: CartItem[];
   addToCart: (item: Product) => void;
   getCartItemCount: (itemId: number) => number;
-  getCartTotalCost: () => number;
   removeItemFromCart: (itemId: number) => void;
   removeOneFromCart: (itemId: number) => void;
 };
@@ -30,9 +29,6 @@ export const useOrderCartStore = create<OrderCartState>((set, get) => ({
   getCartItemCount: (itemId: number) => {
     const cartItem = get().cart.find((i) => i.id === itemId);
     return cartItem?.count ?? 0;
-  },
-  getCartTotalCost: () => {
-    return get().cart.reduce((sum, item) => sum + item.cost * item.count, 0);
   },
   removeItemFromCart: (itemId: number) => {
     const { cart } = get();

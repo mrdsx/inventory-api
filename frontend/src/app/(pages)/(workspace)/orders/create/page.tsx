@@ -8,15 +8,10 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { Catalog } from "./components/Catalog";
 
 export default function CreateOrderPage() {
-  const {
-    cart,
-    addToCart,
-    getCartTotalCost,
-    removeItemFromCart,
-    removeOneFromCart,
-  } = useOrderCartStore();
+  const { cart, addToCart, removeItemFromCart, removeOneFromCart } =
+    useOrderCartStore();
 
-  const totalCost = getCartTotalCost();
+  const totalCost = cart.reduce((sum, item) => sum + item.cost * item.count, 0);
 
   return (
     <div>
