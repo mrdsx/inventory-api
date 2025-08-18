@@ -7,7 +7,7 @@ from .order import (
     handle_update_order_status,
 )
 from .order_item import get_order_items_total_cost
-from .product import build_product_db_object
+from .product import build_db_product
 
 __all__ = [
     # * datetime
@@ -21,5 +21,5 @@ __all__ = [
     # * order_item
     "get_order_items_total_cost",
     # * product
-    "build_product_db_object",
+    "build_db_product",
 ]

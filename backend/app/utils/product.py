@@ -2,7 +2,7 @@ from models import Product
 from schemas import CreateProductSchema
 
 
-def build_product_db_object(product: CreateProductSchema) -> Product:
+def build_db_product(product: CreateProductSchema) -> Product:
     return Product(
         sku=product.sku,
         order_id=product.order_id,
