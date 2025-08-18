@@ -16,6 +16,7 @@ import {
 import { useOrderCartStore } from "@/features/order";
 import {
   Product,
+  ProductGroupBy,
   ProductView,
   useProductGroupByStore,
   useProductSearchStore,
@@ -76,7 +77,7 @@ export function Catalog() {
         <div className="flex items-center gap-2">
           <Select
             value={groupBy}
-            onValueChange={(val) => setGroupBy(val as "category" | "supplier")}
+            onValueChange={(val) => setGroupBy(val as ProductGroupBy)}
           >
             <SelectTrigger className="w-[220px]">
               <SelectValue placeholder="Group by..." />

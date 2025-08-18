@@ -1,11 +1,12 @@
 import { create } from "zustand";
+import { ProductGroupBy } from "../types";
 
 type ProductGroupByState = {
-  groupBy: "category" | "supplier";
-  setGroupBy: (value: "category" | "supplier") => void;
+  groupBy: ProductGroupBy;
+  setGroupBy: (value: ProductGroupBy) => void;
 };
 
 export const useProductGroupByStore = create<ProductGroupByState>((set) => ({
   groupBy: "category",
-  setGroupBy: (value: "category" | "supplier") => set({ groupBy: value }),
+  setGroupBy: (value: ProductGroupBy) => set({ groupBy: value }),
 }));

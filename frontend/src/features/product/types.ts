@@ -7,4 +7,5 @@ export type Product = {
   cost: number;
 };
 
+export type ProductGroupBy = "category" | "supplier";
 export type ProductView = "grid" | "rows";
