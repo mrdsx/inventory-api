@@ -13,14 +13,14 @@ interface OrderCartState {
 
 export const useOrderCartStore = create<OrderCartState>((set, get) => ({
   cart: [],
-  getCartItemCount: (itemId) => {
+  getCartItemCount: (itemId: number) => {
     const cartItem = get().cart.find((i) => i.id === itemId);
     return cartItem?.count ?? 0;
   },
   getCartTotalCost: () => {
     return get().cart.reduce((sum, item) => sum + item.cost * item.count, 0);
   },
-  addToCart: (item) => {
+  addToCart: (item: Product) => {
     const { cart } = get();
     let nextCart;
 
