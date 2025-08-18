@@ -2,7 +2,7 @@ from models import InventoryItem
 from schemas import CreateInventoryItemSchema
 
 
-def build_db_product(product: CreateInventoryItemSchema) -> InventoryItem:
+def build_db_inventory_item(product: CreateInventoryItemSchema) -> InventoryItem:
     return InventoryItem(
         sku=product.sku,
         order_id=product.order_id,
