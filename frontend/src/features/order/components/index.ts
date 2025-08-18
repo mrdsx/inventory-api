@@ -1,4 +1,4 @@
-export * from "./CartItemActionButtons";
+export * from "./CartItemActions";
 export { CreateOrderBtn } from "./CreateOrderBtn";
 export { OrdersTable } from "./OrdersTable";
 export { OrdersTableHeader, TABLE_COLUMNS } from "./OrdersTableHeader";
