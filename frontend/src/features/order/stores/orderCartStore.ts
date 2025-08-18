@@ -5,9 +5,9 @@ import { CartItem } from "../types";
 type OrderCartState = {
   cart: CartItem[];
   addToCart: (item: Product) => void;
+  decrementItemCount: (itemId: number) => void;
   getCartItemCount: (itemId: number) => number;
   removeItemFromCart: (itemId: number) => void;
-  removeOneFromCart: (itemId: number) => void;
 };
 
 export const useOrderCartStore = create<OrderCartState>((set, get) => ({
@@ -26,20 +26,7 @@ export const useOrderCartStore = create<OrderCartState>((set, get) => ({
     }
     set({ cart: nextCart });
   },
-  getCartItemCount: (itemId: number) => {
-    const cartItem = get().cart.find((i) => i.id === itemId);
-    return cartItem?.count ?? 0;
-  },
-  removeItemFromCart: (itemId: number) => {
-    const { cart } = get();
-
-    const existing = cart.find((i) => i.id === itemId);
-    if (existing === undefined) return;
-
-    const nextCart = cart.filter((i) => i.id !== itemId);
-    set({ cart: nextCart });
-  },
-  removeOneFromCart: (itemId: number) => {
+  decrementItemCount: (itemId: number) => {
     const { cart } = get();
     let nextCart;
 
@@ -53,6 +40,19 @@ export const useOrderCartStore = create<OrderCartState>((set, get) => ({
         i.id === itemId ? { ...i, count: i.count - 1 } : i,
       );
     }
+    set({ cart: nextCart });
+  },
+  getCartItemCount: (itemId: number) => {
+    const cartItem = get().cart.find((i) => i.id === itemId);
+    return cartItem?.count ?? 0;
+  },
+  removeItemFromCart: (itemId: number) => {
+    const { cart } = get();
+
+    const existing = cart.find((i) => i.id === itemId);
+    if (existing === undefined) return;
+
+    const nextCart = cart.filter((i) => i.id !== itemId);
     set({ cart: nextCart });
   },
 }));

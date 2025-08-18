@@ -6,7 +6,7 @@ import { Minus, Plus } from "lucide-react";
 // TODO: refactor
 export function ProductRowsView({ items }: { items: Product[] }) {
   const groupBy = useProductGroupByStore((state) => state.groupBy);
-  const { addToCart, getCartItemCount, removeOneFromCart } =
+  const { addToCart, getCartItemCount, decrementItemCount } =
     useOrderCartStore();
 
   return (
@@ -42,7 +42,7 @@ export function ProductRowsView({ items }: { items: Product[] }) {
                   <Button
                     size="icon"
                     variant="outline"
-                    onClick={() => removeOneFromCart(item.id)}
+                    onClick={() => decrementItemCount(item.id)}
                     className="h-7.5 w-7.5"
                   >
                     <Minus size={14} />
