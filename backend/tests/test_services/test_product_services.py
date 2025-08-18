@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from unittest.mock import AsyncMock, MagicMock
 
 from app.constants import InventoryItemResponseMsg
-from app.models import Order, OrderItem, Product
+from app.models import Order, OrderItem, InventoryItem
 from app.services import find_product_by_id, save_products
 from tests.constants import (
     EXISTING_PRODUCT_ID,
@@ -32,10 +32,10 @@ async def test_find_product_by_id():
     assert InventoryItemResponseMsg.product_not_found in exc_info.value.detail
 
     # * Test for success
-    mock_result.scalar.return_value = Product(id=EXISTING_PRODUCT_ID)
+    mock_result.scalar.return_value = InventoryItem(id=EXISTING_PRODUCT_ID)
     db_product = await find_product_by_id(EXISTING_PRODUCT_ID, mock_session)
 
-    assert isinstance(db_product, Product)
+    assert isinstance(db_product, InventoryItem)
     assert db_product.id == EXISTING_PRODUCT_ID
 
 

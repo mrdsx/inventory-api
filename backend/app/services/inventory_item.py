@@ -5,11 +5,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Sequence
 
 from constants import InventoryItemResponseMsg
-from models import Order, OrderItem, Product
+from models import Order, OrderItem, InventoryItem
 
 
-async def find_product_by_id(id: int, session: AsyncSession) -> Product:
-    result = await session.execute(select(Product).where(Product.id == id))
+async def find_product_by_id(id: int, session: AsyncSession) -> InventoryItem:
+    result = await session.execute(select(InventoryItem).where(InventoryItem.id == id))
     db_product = result.scalar()
     if db_product is None:
         raise HTTPException(
@@ -28,7 +28,7 @@ async def save_products(
         for j in range(order_item.quantity):
             price = order_item.cost + floor(order_item.cost / 2)
             products.append(
-                Product(
+                InventoryItem(
                     sku=f"SKU-{order.id}-{i}-{j}",
                     order_id=order.id,
                     supplier_id=order.supplier_id,

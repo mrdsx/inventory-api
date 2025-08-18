@@ -10,7 +10,7 @@ from constants import (
 from database import Base
 
 
-class Product(Base):
+class InventoryItem(Base):
     __table_args__ = {"extend_existing": True}
     __tablename__ = TableName.INVENTORY_ITEMS.value
 

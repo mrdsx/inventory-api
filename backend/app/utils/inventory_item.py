@@ -1,9 +1,9 @@
-from models import Product
+from models import InventoryItem
 from schemas import CreateProductSchema
 
 
-def build_db_product(product: CreateProductSchema) -> Product:
-    return Product(
+def build_db_product(product: CreateProductSchema) -> InventoryItem:
+    return InventoryItem(
         sku=product.sku,
         order_id=product.order_id,
         supplier_id=product.supplier_id,

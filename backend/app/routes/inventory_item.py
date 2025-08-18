@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_session
 from constants import API_ROUTER_PREFIX, InventoryItemResponseMsg
-from models import Product
+from models import InventoryItem
 from schemas import CreateProductSchema, ProductSchema, UpdateProductSchema
 from services import find_product_by_id
 from utils import build_db_product
@@ -15,7 +15,7 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 @router.get("/products", response_model=list[ProductSchema])
 async def get_products(session: AsyncSession = Depends(get_session)):
-    result = await session.execute(select(Product).order_by(Product.id))
+    result = await session.execute(select(InventoryItem).order_by(InventoryItem.id))
 
     return result.scalars().all()
 
@@ -74,7 +74,9 @@ async def delete_product_by_id(
 async def delete_products_by_order_id(
     order_id: int, session: AsyncSession = Depends(get_session)
 ):
-    result = await session.execute(select(Product).where(Product.order_id == order_id))
+    result = await session.execute(
+        select(InventoryItem).where(InventoryItem.order_id == order_id)
+    )
     db_products = result.scalars().all()
     await session.delete(db_products)
     await session.commit()
