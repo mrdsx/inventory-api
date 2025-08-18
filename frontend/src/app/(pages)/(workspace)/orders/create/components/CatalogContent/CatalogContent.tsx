@@ -6,17 +6,14 @@ import {
   Product,
   useProductGroupByStore,
   useProductSearchStore,
-  useProductViewStore,
 } from "@/features/product";
 import { products } from "../../mock-data";
 import { CategoryAccordionTrigger } from "./CategoryAccordionTrigger";
-import { ProductGridView } from "./ProductGridView";
-import { ProductRowsView } from "./ProductRowsView";
+import { ProductsView } from "./ProductsView";
 
 export function CatalogContent() {
   const groupBy = useProductGroupByStore((state) => state.groupBy);
   const searchQuery = useProductSearchStore((state) => state.searchQuery);
-  const productView = useProductViewStore((state) => state.productView);
 
   const filteredProducts = searchQuery.trim()
     ? products.filter((product) =>
@@ -43,11 +40,7 @@ export function CatalogContent() {
           <AccordionItem value={groupName} key={groupName}>
             <CategoryAccordionTrigger title={groupName} items={items} />
             <AccordionContent>
-              {productView === "grid" ? (
-                <ProductGridView items={items} />
-              ) : (
-                <ProductRowsView items={items} />
-              )}
+              <ProductsView products={items} />
             </AccordionContent>
           </AccordionItem>
         );
