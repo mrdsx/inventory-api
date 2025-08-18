@@ -21,7 +21,7 @@ export default function CreateOrderPage() {
       <div className="flex h-100 gap-4 transition-colors">
         <Catalog />
         {/* Right side: Cart */}
-        <div className="flex h-120 w-[30%] flex-col p-2 transition-colors">
+        {/* <div className="flex h-120 w-[30%] flex-col p-2 transition-colors">
           <Card className="flex h-full flex-1 flex-col rounded-md shadow-sm">
             <h2 className="px-4 text-lg font-bold">Cart</h2>
             {cart.length === 0 ? (
@@ -92,7 +92,7 @@ export default function CreateOrderPage() {
               </>
             )}
           </Card>
-        </div>
+        </div> */}
       </div>
     </div>
   );
