@@ -13,72 +13,72 @@ from validation import validate_product_not_exists_by_sku
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 
-@router.get("/products", response_model=list[ProductSchema])
-async def get_products(session: AsyncSession = Depends(get_session)):
+@router.get("/inventory_items", response_model=list[ProductSchema])
+async def get_inventory_items(session: AsyncSession = Depends(get_session)):
     result = await session.execute(select(InventoryItem).order_by(InventoryItem.id))
 
     return result.scalars().all()
 
 
-@router.get("/products/{product_id}", response_model=ProductSchema)
-async def get_product_by_id(
-    product_id: int, session: AsyncSession = Depends(get_session)
+@router.get("/inventory_items/{inventory_item_id}", response_model=ProductSchema)
+async def get_inventory_item_by_id(
+    inventory_item_id: int, session: AsyncSession = Depends(get_session)
 ):
-    db_product = await find_product_by_id(product_id, session)
+    db_inventory_item = await find_product_by_id(inventory_item_id, session)
 
-    return db_product
+    return db_inventory_item
 
 
-@router.post("/products", response_model=ProductSchema)
-async def create_product(
-    product: CreateProductSchema, session: AsyncSession = Depends(get_session)
+@router.post("/inventory_items", response_model=ProductSchema)
+async def create_inventory_item(
+    inventory_item: CreateProductSchema, session: AsyncSession = Depends(get_session)
 ):
-    await validate_product_not_exists_by_sku(product.sku, session)
+    await validate_product_not_exists_by_sku(inventory_item.sku, session)
 
-    new_product = build_db_product(product)
-    session.add(new_product)
+    new_inventory_item = build_db_product(inventory_item)
+    session.add(new_inventory_item)
     await session.commit()
-    await session.refresh(new_product)
+    await session.refresh(new_inventory_item)
 
-    return new_product
+    return new_inventory_item
 
 
-@router.put("/products/{product_id}", response_model=ProductSchema)
-async def update_product_by_id(
-    product_id: int,
-    product: UpdateProductSchema,
+@router.put("/inventory_items/{inventory_item_id}", response_model=ProductSchema)
+async def update_inventory_item_by_id(
+    inventory_item_id: int,
+    inventory_item: UpdateProductSchema,
     session: AsyncSession = Depends(get_session),
 ):
-    db_product = await find_product_by_id(product_id, session)
+    db_inventory_item = await find_product_by_id(inventory_item_id, session)
 
-    for key, value in product.model_dump().items():
-        setattr(db_product, key, value)
+    for key, value in inventory_item.model_dump().items():
+        setattr(db_inventory_item, key, value)
     await session.commit()
-    await session.refresh(db_product)
+    await session.refresh(db_inventory_item)
 
-    return db_product
+    return db_inventory_item
 
 
-@router.delete("/products/{product_id}")
-async def delete_product_by_id(
-    product_id: int, session: AsyncSession = Depends(get_session)
+@router.delete("/inventory_items/{inventory_item_id}")
+async def delete_inventory_item_by_id(
+    inventory_item_id: int, session: AsyncSession = Depends(get_session)
 ):
-    db_product = await find_product_by_id(product_id, session)
-    await session.delete(db_product)
+    db_inventory_item = await find_product_by_id(inventory_item_id, session)
+    await session.delete(db_inventory_item)
     await session.commit()
 
     return {"message": InventoryItemResponseMsg.product_deleted}
 
 
-@router.delete("/products/{order_id}")
-async def delete_products_by_order_id(
+@router.delete("/inventory_items/{order_id}")
+async def delete_inventory_items_by_order_id(
     order_id: int, session: AsyncSession = Depends(get_session)
 ):
     result = await session.execute(
         select(InventoryItem).where(InventoryItem.order_id == order_id)
     )
-    db_products = result.scalars().all()
-    await session.delete(db_products)
+    db_inventory_items = result.scalars().all()
+    await session.delete(db_inventory_items)
     await session.commit()
 
     return {"message": InventoryItemResponseMsg.products_deleted}
