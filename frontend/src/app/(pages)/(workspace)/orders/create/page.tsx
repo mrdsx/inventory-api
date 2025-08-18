@@ -78,7 +78,7 @@ export default function CreateOrderPage() {
           Go back
         </Button>
       </Link>
-      <div className="flex h-110 gap-4 transition-colors">
+      <div className="flex h-100 gap-4 transition-colors">
         {/* Left side: Catalog */}
         <div className="flex w-[70%] flex-col">
           <div className="mb-4 flex flex-col gap-2">
@@ -124,7 +124,7 @@ export default function CreateOrderPage() {
             </div>
           </div>
           <div className="flex-1">
-            <ScrollArea className="h-105">
+            <ScrollArea className="h-95">
               <Accordion type="multiple" className="w-full">
                 {Object.entries(sortedGroupedData).map(([groupName, items]) => {
                   const foundCount = getGroupSearchCount(items);
