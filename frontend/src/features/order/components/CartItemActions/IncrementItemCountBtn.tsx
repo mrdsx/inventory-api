@@ -2,6 +2,7 @@ import { Button } from "@/components/ui";
 import { Product } from "@/features/product";
 import { Plus } from "lucide-react";
 import { useOrderCartStore } from "../../stores/orderCartStore";
+import "./cart-action-btn.css";
 
 export function IncrementItemCountBtn({ item }: { item: Product }) {
   const addToCart = useOrderCartStore((state) => state.addToCart);
@@ -11,7 +12,7 @@ export function IncrementItemCountBtn({ item }: { item: Product }) {
       size="icon"
       variant="outline"
       onClick={() => addToCart(item)}
-      className="h-7.5 w-7.5"
+      className="size-(--cart-action-btn-size)"
     >
       <Plus size={14} />
     </Button>
