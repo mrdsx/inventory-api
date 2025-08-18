@@ -4,9 +4,11 @@ export function getIsProductInSearchQuery(
   product: Product,
   searchQuery: string,
 ): boolean {
+  const formattedSearchQuery = searchQuery.toLowerCase().trim();
+
   return (
-    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.supplier.toLowerCase().includes(searchQuery.toLowerCase())
+    product.name.toLowerCase().includes(formattedSearchQuery) ||
+    product.category.toLowerCase().includes(formattedSearchQuery) ||
+    product.supplier.toLowerCase().includes(formattedSearchQuery)
   );
 }
