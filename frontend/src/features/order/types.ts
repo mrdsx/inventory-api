@@ -3,17 +3,17 @@ import { ORDER_STATUS } from "./constants";
 
 type CartItem = Product & { count: number };
 
-interface OrderResponse {
+type OrderResponse = {
   id: number;
   supplier_name: string;
   date: string;
   status: ORDER_STATUS;
   total_cost: number;
-}
+};
 
-interface OrdersCountResponse {
+type OrdersCountResponse = {
   orders_count: number;
-}
+};
 
 type PaginatedOrdersResponse = PaginatedResponse<OrderResponse[]>;
 

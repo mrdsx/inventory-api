@@ -1,11 +1,11 @@
-export interface BaseAPIErrorResponse {
+export type BaseAPIErrorResponse = {
   detail: string;
-}
+};
 
-export interface PaginatedResponse<TResponse> {
+export type PaginatedResponse<TResponse> = {
   items: TResponse;
   total: number;
   page: number;
   size: number;
   pages: number;
-}
+};
