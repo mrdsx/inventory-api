@@ -1,4 +1,3 @@
-import { SearchBar } from "@/components";
 import {
   Accordion,
   AccordionContent,
@@ -17,14 +16,13 @@ import {
 } from "@/features/product";
 import { Minus, Plus } from "lucide-react";
 import { products } from "../mock-data";
-import { ProductGroupBySelect } from "./ProductGroupBySelect";
-import { ProductViewSelect } from "./ProductViewSelect";
+import { CatalogActions } from "./CatalogActions";
 
 export function Catalog() {
   const { addToCart, getCartItemCount, removeOneFromCart } =
     useOrderCartStore();
   const groupBy = useProductGroupByStore((state) => state.groupBy);
-  const { searchQuery, setSearchQuery } = useProductSearchStore();
+  const searchQuery = useProductSearchStore((state) => state.searchQuery);
   const productView = useProductViewStore((state) => state.productView);
 
   // Filter products by search query in name OR category
@@ -62,17 +60,7 @@ export function Catalog() {
 
   return (
     <div className="flex w-[70%] flex-col">
-      <div className="mb-4 flex flex-col gap-2">
-        <SearchBar
-          placeholder="Search products..."
-          onChange={(e) => setSearchQuery(e.target.value)}
-          value={searchQuery}
-        />
-        <div className="flex items-center gap-2">
-          <ProductGroupBySelect />
-          <ProductViewSelect />
-        </div>
-      </div>
+      <CatalogActions />
       <div className="flex-1">
         <ScrollArea className="h-95">
           <Accordion type="multiple" className="w-full">
