@@ -1,3 +1,5 @@
+"use client";
+
 import { SearchBar } from "@/components";
 import { useProductSearchStore } from "@/features/product";
 import { ProductGroupBySelect } from "./ProductGroupBySelect";

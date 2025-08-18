@@ -1,3 +1,5 @@
+"use client";
+
 import { AccordionContent, AccordionItem } from "@/components/ui";
 import {
   getIsProductInSearchQuery,
