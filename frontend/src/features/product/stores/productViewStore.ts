@@ -1,11 +1,12 @@
 import { create } from "zustand";
+import { ProductView } from "../types";
 
 type ProductViewState = {
-  productView: "grid" | "rows";
-  setProductView: (value: "grid" | "rows") => void;
+  productView: ProductView;
+  setProductView: (value: ProductView) => void;
 };
 
 export const useProductViewStore = create<ProductViewState>((set) => ({
   productView: "grid",
-  setProductView: (value: "grid" | "rows") => set({ productView: value }),
+  setProductView: (value: ProductView) => set({ productView: value }),
 }));

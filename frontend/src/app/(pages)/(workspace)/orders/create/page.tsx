@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui";
 import { useOrderCartStore } from "@/features/order";
-import { Product, useProductViewStore } from "@/features/product";
+import { Product, ProductView, useProductViewStore } from "@/features/product";
 import { ArrowLeft, Minus, Plus, Search, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -111,7 +111,7 @@ export default function CreateOrderPage() {
               </Select>
               <Select
                 value={productView}
-                onValueChange={(val) => setProductView(val as "grid" | "rows")}
+                onValueChange={(val) => setProductView(val as ProductView)}
               >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="View..." />

@@ -6,3 +6,5 @@ export type Product = {
   category: string;
   cost: number;
 };
+
+export type ProductView = "grid" | "rows";
