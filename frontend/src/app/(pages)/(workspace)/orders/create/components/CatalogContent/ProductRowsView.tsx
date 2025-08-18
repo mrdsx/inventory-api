@@ -1,12 +1,16 @@
 import { Button, Card } from "@/components/ui";
-import { AddToCartBtn, useOrderCartStore } from "@/features/order";
+import {
+  AddToCartBtn,
+  DecrementItemCountBtn,
+  useOrderCartStore,
+} from "@/features/order";
 import { Product, useProductGroupByStore } from "@/features/product";
-import { Minus, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 
 // TODO: refactor
 export function ProductRowsView({ items }: { items: Product[] }) {
   const groupBy = useProductGroupByStore((state) => state.groupBy);
-  const { addToCart, getItemCount, decrementItemCount } = useOrderCartStore();
+  const { addToCart, getItemCount } = useOrderCartStore();
 
   return (
     <div className="flex flex-col gap-2">
@@ -38,14 +42,7 @@ export function ProductRowsView({ items }: { items: Product[] }) {
                 <AddToCartBtn item={item} />
               ) : (
                 <div className="flex items-center gap-1">
-                  <Button
-                    size="icon"
-                    variant="outline"
-                    onClick={() => decrementItemCount(item.id)}
-                    className="h-7.5 w-7.5"
-                  >
-                    <Minus size={14} />
-                  </Button>
+                  <DecrementItemCountBtn item={item} />
                   <span className="min-w-[20px] text-center">{count}</span>
                   <Button
                     size="icon"
