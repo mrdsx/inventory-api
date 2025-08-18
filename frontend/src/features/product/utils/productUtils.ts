@@ -12,3 +12,12 @@ export function getIsProductInSearchQuery(
     product.supplier.toLowerCase().includes(formattedSearchQuery)
   );
 }
+
+export function getProductGroupSearchCount(
+  items: Product[],
+  searchQuery: string,
+): number {
+  return items.filter((product) =>
+    getIsProductInSearchQuery(product, searchQuery),
+  ).length;
+}
