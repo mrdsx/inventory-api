@@ -1,3 +1,4 @@
+import { SearchBar } from "@/components";
 import {
   Accordion,
   AccordionContent,
@@ -5,7 +6,6 @@ import {
   AccordionTrigger,
   Button,
   Card,
-  Input,
   ScrollArea,
   Select,
   SelectContent,
@@ -21,7 +21,7 @@ import {
   useProductSearchStore,
   useProductViewStore,
 } from "@/features/product";
-import { Minus, Plus, Search } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { products } from "../mock-data";
 
 export function Catalog() {
@@ -67,17 +67,11 @@ export function Catalog() {
   return (
     <div className="flex w-[70%] flex-col">
       <div className="mb-4 flex flex-col gap-2">
-        {/* Search bar */}
-        <div className="relative w-full">
-          <Input
-            type="text"
-            placeholder="Search products..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9"
-          />
-          <Search className="absolute top-2.5 left-2 h-4 w-4 text-gray-400" />
-        </div>
+        <SearchBar
+          placeholder="Search products..."
+          onChange={(e) => setSearchQuery(e.target.value)}
+          value={searchQuery}
+        />
         {/* Select menus */}
         <div className="flex items-center gap-2">
           <Select
