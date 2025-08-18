@@ -12,7 +12,7 @@ from database import Base
 
 class Product(Base):
     __table_args__ = {"extend_existing": True}
-    __tablename__ = TableName.PRODUCTS.value
+    __tablename__ = TableName.INVENTORY_ITEMS.value
 
     id: Mapped[int] = mapped_column(
         Integer, primary_key=True, unique=True, autoincrement=True
