@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock, MagicMock
 
 from app.constants import InventoryItemResponseMsg
 from app.models import Order, OrderItem, InventoryItem
-from app.services import find_product_by_id, save_products
+from app.services import find_inventory_item_by_id, save_inventory_items
 from tests.constants import (
     EXISTING_PRODUCT_ID,
     MOCK_ORDER_ID,
@@ -26,14 +26,14 @@ async def test_find_product_by_id():
     mock_session.execute.return_value = mock_result
 
     with pytest.raises(HTTPException) as exc_info:
-        await find_product_by_id(NOT_EXISTING_PRODUCT_ID, mock_session)
+        await find_inventory_item_by_id(NOT_EXISTING_PRODUCT_ID, mock_session)
 
     assert exc_info.value.status_code == status.HTTP_404_NOT_FOUND
     assert InventoryItemResponseMsg.inventory_item_not_found in exc_info.value.detail
 
     # * Test for success
     mock_result.scalar.return_value = InventoryItem(id=EXISTING_PRODUCT_ID)
-    db_product = await find_product_by_id(EXISTING_PRODUCT_ID, mock_session)
+    db_product = await find_inventory_item_by_id(EXISTING_PRODUCT_ID, mock_session)
 
     assert isinstance(db_product, InventoryItem)
     assert db_product.id == EXISTING_PRODUCT_ID
@@ -54,7 +54,7 @@ async def test_save_products():
         )
     ]
 
-    await save_products(mock_order, mock_order_items, mock_session)
+    await save_inventory_items(mock_order, mock_order_items, mock_session)
 
     mock_session.commit.assert_awaited_once()
     mock_session.refresh.assert_awaited_once_with(mock_order)

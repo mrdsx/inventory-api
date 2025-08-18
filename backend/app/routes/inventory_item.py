@@ -10,7 +10,7 @@ from schemas import (
     InventoryItemSchema,
     UpdateInventoryItemSchema,
 )
-from services import find_product_by_id
+from services import find_inventory_item_by_id
 from utils import build_db_product
 from validation import validate_product_not_exists_by_sku
 
@@ -28,7 +28,7 @@ async def get_inventory_items(session: AsyncSession = Depends(get_session)):
 async def get_inventory_item_by_id(
     inventory_item_id: int, session: AsyncSession = Depends(get_session)
 ):
-    db_inventory_item = await find_product_by_id(inventory_item_id, session)
+    db_inventory_item = await find_inventory_item_by_id(inventory_item_id, session)
 
     return db_inventory_item
 
@@ -54,7 +54,7 @@ async def update_inventory_item_by_id(
     inventory_item: UpdateInventoryItemSchema,
     session: AsyncSession = Depends(get_session),
 ):
-    db_inventory_item = await find_product_by_id(inventory_item_id, session)
+    db_inventory_item = await find_inventory_item_by_id(inventory_item_id, session)
 
     for key, value in inventory_item.model_dump().items():
         setattr(db_inventory_item, key, value)
@@ -68,7 +68,7 @@ async def update_inventory_item_by_id(
 async def delete_inventory_item_by_id(
     inventory_item_id: int, session: AsyncSession = Depends(get_session)
 ):
-    db_inventory_item = await find_product_by_id(inventory_item_id, session)
+    db_inventory_item = await find_inventory_item_by_id(inventory_item_id, session)
     await session.delete(db_inventory_item)
     await session.commit()
 

@@ -1,4 +1,4 @@
-from .inventory_item import find_product_by_id, save_products
+from .inventory_item import find_inventory_item_by_id, save_inventory_items
 from .order import find_order_by_id, save_order
 from .order_item import (
     find_order_item_by_id,
@@ -9,8 +9,8 @@ from .supplier import find_supplier_by_id, find_supplier_by_name
 
 __all__ = [
     # * inventory_item
-    "find_product_by_id",
-    "save_products",
+    "find_inventory_item_by_id",
+    "save_inventory_items",
     # * order
     "find_order_by_id",
     "save_order",

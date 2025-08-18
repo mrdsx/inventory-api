@@ -22,7 +22,7 @@ from services import (
     find_supplier_by_name,
     save_order,
     save_order_items,
-    save_products,
+    save_inventory_items,
 )
 from utils import (
     build_order_public_schema,
@@ -109,7 +109,7 @@ async def update_order_status(
 
     if status == OrderStatus.DELIVERED:
         db_order_items = await find_order_items_by_order_id(db_order.id, session)
-        await save_products(db_order, db_order_items, session)
+        await save_inventory_items(db_order, db_order_items, session)
 
     db_order.status = status
     await session.commit()
