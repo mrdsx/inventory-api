@@ -16,8 +16,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui";
-import { Product } from "@/features/catalog";
 import { useOrderCartStore } from "@/features/order";
+import { Product } from "@/features/product";
 import { ArrowLeft, Minus, Plus, Search, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";

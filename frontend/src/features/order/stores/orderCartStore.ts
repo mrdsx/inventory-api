@@ -1,4 +1,4 @@
-import { Product } from "@/features/catalog";
+import { Product } from "@/features/product";
 import { create } from "zustand";
 import { CartItem } from "../types";
 
