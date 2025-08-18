@@ -16,7 +16,7 @@ import {
 } from "@/features/product";
 import { Minus, Plus } from "lucide-react";
 import { products } from "../mock-data";
-import { CatalogActions } from "./CatalogActions";
+import { CatalogActions } from "./CatalogActions/CatalogActions";
 
 export function Catalog() {
   const { addToCart, getCartItemCount, removeOneFromCart } =
@@ -59,7 +59,7 @@ export function Catalog() {
     ).length;
 
   return (
-    <div className="flex w-[70%] flex-col">
+    <div className="flex w-[70%] flex-col gap-4">
       <CatalogActions />
       <div className="flex-1">
         <ScrollArea className="h-95">
