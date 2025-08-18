@@ -25,13 +25,11 @@ export function CatalogContent() {
       )
     : products;
 
-  // Group filtered products by selected attribute
   const groupedData = Object.groupBy(
     filteredProducts,
     (product) => product[groupBy],
   ) as Record<string, Product[]>;
 
-  // Sort each group alphabetically by product name
   const sortedGroupedData = Object.fromEntries(
     Object.entries(groupedData).map(([groupName, items]) => [
       groupName,
@@ -39,7 +37,6 @@ export function CatalogContent() {
     ]),
   );
 
-  // For each group, count results matching search (by name or category)
   const getGroupSearchCount = (items: Product[]) =>
     items.filter((product) => getIsProductInSearchQuery(product, searchQuery))
       .length;
