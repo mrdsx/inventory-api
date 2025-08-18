@@ -3,7 +3,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from unittest.mock import AsyncMock, MagicMock
 
-from app.constants import ProductResponseMsg
+from app.constants import InventoryItemResponseMsg
 from app.models import Order, OrderItem, Product
 from app.services import find_product_by_id, save_products
 from tests.constants import (
@@ -29,7 +29,7 @@ async def test_find_product_by_id():
         await find_product_by_id(NOT_EXISTING_PRODUCT_ID, mock_session)
 
     assert exc_info.value.status_code == status.HTTP_404_NOT_FOUND
-    assert ProductResponseMsg.product_not_found in exc_info.value.detail
+    assert InventoryItemResponseMsg.product_not_found in exc_info.value.detail
 
     # * Test for success
     mock_result.scalar.return_value = Product(id=EXISTING_PRODUCT_ID)

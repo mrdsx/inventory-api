@@ -1,8 +1,8 @@
 from .database import TableName
 from .inventory_item import (
-    PRODUCT_DESCRIPTION_LENGTH,
-    PRODUCT_SKU_LENGTH,
-    ProductResponseMsg,
+    INVENTORY_ITEM_DESCRIPTION_LENGTH,
+    INVENTORY_ITEM_SKU_LENGTH,
+    InventoryItemResponseMsg,
 )
 from .order import OrderStatus, OrderResponseMsg
 from .order_item import ORDER_ITEM_DESCRIPTION_LENGTH, OrderItemResponseMsg
@@ -14,9 +14,9 @@ __all__ = [
     # * database
     "TableName",
     # * inventory_item
-    "PRODUCT_DESCRIPTION_LENGTH",
-    "PRODUCT_SKU_LENGTH",
-    "ProductResponseMsg",
+    "INVENTORY_ITEM_DESCRIPTION_LENGTH",
+    "INVENTORY_ITEM_SKU_LENGTH",
+    "InventoryItemResponseMsg",
     # * order
     "OrderResponseMsg",
     "OrderStatus",

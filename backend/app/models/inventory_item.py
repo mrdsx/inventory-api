@@ -2,7 +2,11 @@ from pydantic import NonNegativeFloat
 from sqlalchemy import Float, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from constants import PRODUCT_DESCRIPTION_LENGTH, PRODUCT_SKU_LENGTH, TableName
+from constants import (
+    INVENTORY_ITEM_DESCRIPTION_LENGTH,
+    INVENTORY_ITEM_SKU_LENGTH,
+    TableName,
+)
 from database import Base
 
 
@@ -14,7 +18,7 @@ class Product(Base):
         Integer, primary_key=True, unique=True, autoincrement=True
     )
     sku: Mapped[str] = mapped_column(
-        String(PRODUCT_SKU_LENGTH), primary_key=True, unique=True
+        String(INVENTORY_ITEM_SKU_LENGTH), primary_key=True, unique=True
     )
     order_id: Mapped[int] = mapped_column(
         Integer, ForeignKey(f"{TableName.ORDERS.value}.id"), nullable=False
@@ -24,7 +28,7 @@ class Product(Base):
     )
     name: Mapped[str] = mapped_column(String, nullable=False)
     description: Mapped[str] = mapped_column(
-        String(PRODUCT_DESCRIPTION_LENGTH), nullable=False
+        String(INVENTORY_ITEM_DESCRIPTION_LENGTH), nullable=False
     )
     category: Mapped[str] = mapped_column(String, nullable=False)
     cost: Mapped[NonNegativeFloat] = mapped_column(Float, nullable=False)
