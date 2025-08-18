@@ -1,4 +1,4 @@
-export type Product = {
+type Product = {
   id: number;
   name: string;
   supplier: string;
@@ -7,5 +7,7 @@ export type Product = {
   cost: number;
 };
 
-export type ProductGroupBy = "category" | "supplier";
-export type ProductView = "grid" | "rows";
+type ProductGroupBy = "category" | "supplier";
+type ProductView = "grid" | "rows";
+
+export type { Product, ProductGroupBy, ProductView };
