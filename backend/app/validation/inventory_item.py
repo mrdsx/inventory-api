@@ -14,5 +14,5 @@ async def validate_product_not_exists_by_sku(sku: str, session: AsyncSession) ->
     if db_product is not None:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=InventoryItemResponseMsg.product_already_exists,
+            detail=InventoryItemResponseMsg.inventory_item_already_exists,
         )

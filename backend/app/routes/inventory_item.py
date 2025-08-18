@@ -67,7 +67,7 @@ async def delete_inventory_item_by_id(
     await session.delete(db_inventory_item)
     await session.commit()
 
-    return {"message": InventoryItemResponseMsg.product_deleted}
+    return {"message": InventoryItemResponseMsg.inventory_item_deleted}
 
 
 @router.delete("/inventory_items/{order_id}")
@@ -81,4 +81,4 @@ async def delete_inventory_items_by_order_id(
     await session.delete(db_inventory_items)
     await session.commit()
 
-    return {"message": InventoryItemResponseMsg.products_deleted}
+    return {"message": InventoryItemResponseMsg.inventory_item_deleted}

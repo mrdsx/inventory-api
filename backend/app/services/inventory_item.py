@@ -14,7 +14,7 @@ async def find_product_by_id(id: int, session: AsyncSession) -> InventoryItem:
     if db_product is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=InventoryItemResponseMsg.product_not_found,
+            detail=InventoryItemResponseMsg.inventory_item_not_found,
         )
 
     return db_product

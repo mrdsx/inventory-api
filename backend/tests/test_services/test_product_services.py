@@ -29,7 +29,7 @@ async def test_find_product_by_id():
         await find_product_by_id(NOT_EXISTING_PRODUCT_ID, mock_session)
 
     assert exc_info.value.status_code == status.HTTP_404_NOT_FOUND
-    assert InventoryItemResponseMsg.product_not_found in exc_info.value.detail
+    assert InventoryItemResponseMsg.inventory_item_not_found in exc_info.value.detail
 
     # * Test for success
     mock_result.scalar.return_value = InventoryItem(id=EXISTING_PRODUCT_ID)
