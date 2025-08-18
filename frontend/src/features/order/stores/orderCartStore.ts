@@ -2,14 +2,14 @@ import { Product } from "@/features/product";
 import { create } from "zustand";
 import { CartItem } from "../types";
 
-interface OrderCartState {
+type OrderCartState = {
   cart: CartItem[];
   addToCart: (item: Product) => void;
   getCartItemCount: (itemId: number) => number;
   getCartTotalCost: () => number;
   removeItemFromCart: (itemId: number) => void;
   removeOneFromCart: (itemId: number) => void;
-}
+};
 
 export const useOrderCartStore = create<OrderCartState>((set, get) => ({
   cart: [],
