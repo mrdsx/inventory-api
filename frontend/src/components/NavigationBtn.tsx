@@ -1,4 +1,3 @@
-import { ArrowLeft } from "lucide-react";
 import Link, { LinkProps } from "next/link";
 import { Button } from "./ui";
 
@@ -12,7 +11,6 @@ export function NavigationBtn({
   return (
     <Link href={href}>
       <Button className={className} variant="link">
-        <ArrowLeft />
         {children}
       </Button>
     </Link>
