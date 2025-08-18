@@ -13,16 +13,14 @@ export default function CreateOrderPage() {
         <ArrowLeft />
         Go back
       </NavigationBtn>
-      <div className="flex h-100 gap-4 transition-colors">
-        <Catalog>
-          <CatalogActions />
-          <ScrollArea className="h-95">
-            <Accordion type="multiple">
-              <CatalogContent />
-            </Accordion>
-          </ScrollArea>
-        </Catalog>
-      </div>
+      <Catalog>
+        <CatalogActions />
+        <ScrollArea className="h-95">
+          <Accordion type="multiple">
+            <CatalogContent />
+          </Accordion>
+        </ScrollArea>
+      </Catalog>
     </div>
   );
 }

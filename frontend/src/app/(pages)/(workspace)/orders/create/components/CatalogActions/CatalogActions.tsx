@@ -1,20 +1,11 @@
-"use client";
-
-import { SearchBar } from "@/components";
-import { useProductSearchStore } from "@/features/product";
 import { ProductGroupBySelect } from "./ProductGroupBySelect";
 import { ProductViewSelect } from "./ProductViewSelect";
+import { SearchProductsBar } from "./SearchProductsBar";
 
 export function CatalogActions() {
-  const { searchQuery, setSearchQuery } = useProductSearchStore();
-
   return (
     <div className="flex flex-col gap-2">
-      <SearchBar
-        placeholder="Search products..."
-        onChange={(e) => setSearchQuery(e.target.value)}
-        value={searchQuery}
-      />
+      <SearchProductsBar />
       <div className="flex items-center gap-2">
         <ProductGroupBySelect />
         <ProductViewSelect />
