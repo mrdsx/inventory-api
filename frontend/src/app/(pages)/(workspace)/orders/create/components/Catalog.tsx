@@ -7,16 +7,10 @@ import {
   Button,
   Card,
   ScrollArea,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
 } from "@/components/ui";
 import { useOrderCartStore } from "@/features/order";
 import {
   Product,
-  ProductView,
   useProductGroupByStore,
   useProductSearchStore,
   useProductViewStore,
@@ -24,13 +18,14 @@ import {
 import { Minus, Plus } from "lucide-react";
 import { products } from "../mock-data";
 import { ProductGroupBySelect } from "./ProductGroupBySelect";
+import { ProductViewSelect } from "./ProductViewSelect";
 
 export function Catalog() {
   const { addToCart, getCartItemCount, removeOneFromCart } =
     useOrderCartStore();
   const groupBy = useProductGroupByStore((state) => state.groupBy);
   const { searchQuery, setSearchQuery } = useProductSearchStore();
-  const { productView, setProductView } = useProductViewStore();
+  const productView = useProductViewStore((state) => state.productView);
 
   // Filter products by search query in name OR category
   const filteredProducts = searchQuery.trim()
@@ -73,21 +68,9 @@ export function Catalog() {
           onChange={(e) => setSearchQuery(e.target.value)}
           value={searchQuery}
         />
-        {/* Select menus */}
         <div className="flex items-center gap-2">
           <ProductGroupBySelect />
-          <Select
-            value={productView}
-            onValueChange={(val) => setProductView(val as ProductView)}
-          >
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="View..." />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="grid">Grid view</SelectItem>
-              <SelectItem value="rows">Rows view</SelectItem>
-            </SelectContent>
-          </Select>
+          <ProductViewSelect />
         </div>
       </div>
       <div className="flex-1">
