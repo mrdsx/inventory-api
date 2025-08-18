@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui";
 import {
-  AddToCartBtn,
+  AddItemToCartBtn,
   DecrementItemCountBtn,
   IncrementItemCountBtn,
   useOrderCartStore,
@@ -39,7 +39,7 @@ export function ProductRowsView({ items }: { items: Product[] }) {
             </div>
             <div>
               {count <= 0 ? (
-                <AddToCartBtn item={item} />
+                <AddItemToCartBtn item={item} />
               ) : (
                 <div className="flex items-center gap-1">
                   <DecrementItemCountBtn item={item} />

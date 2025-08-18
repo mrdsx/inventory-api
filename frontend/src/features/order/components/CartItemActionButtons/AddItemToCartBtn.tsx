@@ -3,7 +3,7 @@ import { Product } from "@/features/product";
 import { useOrderCartStore } from "../../stores/orderCartStore";
 
 // TODO: replace hardcoded values
-export function AddToCartBtn({ item }: { item: Product }) {
+export function AddItemToCartBtn({ item }: { item: Product }) {
   const addToCart = useOrderCartStore((state) => state.addToCart);
 
   return (

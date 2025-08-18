@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui";
 import {
-  AddToCartBtn,
+  AddItemToCartBtn,
   DecrementItemCountBtn,
   IncrementItemCountBtn,
   useOrderCartStore,
@@ -38,7 +38,7 @@ export function ProductGridView({ items }: { items: Product[] }) {
               </div>
             </div>
             {count <= 0 ? (
-              <AddToCartBtn item={item} />
+              <AddItemToCartBtn item={item} />
             ) : (
               <div className="mt-2 flex items-center gap-1">
                 <DecrementItemCountBtn item={item} />
