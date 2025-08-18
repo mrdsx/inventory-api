@@ -1,6 +1,6 @@
 from enum import Enum
 
-from .product import PRODUCT_DESCRIPTION_LENGTH
+from .inventory_item import PRODUCT_DESCRIPTION_LENGTH
 
 ORDER_ITEM_DESCRIPTION_LENGTH = PRODUCT_DESCRIPTION_LENGTH
 

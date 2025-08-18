@@ -1,13 +1,13 @@
+from .inventory_item import validate_product_not_exists_by_sku
 from .order import validate_order_exists, validate_order_items
-from .product import validate_product_not_exists_by_sku
 from .supplier import validate_supplier_not_exists
 
 __all__ = [
+    # * inventory_item
+    "validate_product_not_exists_by_sku",
     # * order
     "validate_order_exists",
     "validate_order_items",
-    # * product
-    "validate_product_not_exists_by_sku",
     # * supplier
     "validate_supplier_not_exists",
 ]

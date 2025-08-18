@@ -1,12 +1,12 @@
+from .inventory_item import router as router_products
 from .order import router as router_orders
-from .product import router as router_products
 from .supplier import router as router_suppliers
 
 __all__ = [
+    # * inventory_item
+    "router_products",
     # * order
     "router_orders",
-    # * product
-    "router_products",
     # * supplier
     "router_suppliers",
 ]
