@@ -1,5 +1,6 @@
 import { Product } from "@/features/product";
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { CartItem } from "../types";
 
 type OrderCartState = {
@@ -10,49 +11,57 @@ type OrderCartState = {
   removeItem: (itemId: number) => void;
 };
 
-export const useOrderCartStore = create<OrderCartState>((set, get) => ({
-  cart: [],
-  addToCart: (item: Product) => {
-    const { cart } = get();
-    let nextCart;
+export const useOrderCartStore = create<OrderCartState>()(
+  persist(
+    (set, get) => ({
+      cart: [],
+      addToCart: (item: Product) => {
+        const { cart } = get();
+        let nextCart;
 
-    const existing = cart.find((i) => i.id === item.id);
-    if (existing === undefined) {
-      nextCart = [...cart, { ...item, count: 1 }];
-    } else {
-      nextCart = cart.map((i) =>
-        i.id === item.id ? { ...i, count: i.count + 1 } : i,
-      );
-    }
-    set({ cart: nextCart });
-  },
-  decrementItemCount: (itemId: number) => {
-    const { cart } = get();
-    let nextCart;
+        const existing = cart.find((i) => i.id === item.id);
+        if (existing === undefined) {
+          nextCart = [...cart, { ...item, count: 1 }];
+        } else {
+          nextCart = cart.map((i) =>
+            i.id === item.id ? { ...i, count: i.count + 1 } : i,
+          );
+        }
+        set({ cart: nextCart });
+      },
+      decrementItemCount: (itemId: number) => {
+        const { cart } = get();
+        let nextCart;
 
-    const existing = cart.find((i) => i.id === itemId);
-    if (existing === undefined) return;
+        const existing = cart.find((i) => i.id === itemId);
+        if (existing === undefined) return;
 
-    if (existing.count <= 1) {
-      nextCart = cart.filter((i) => i.id !== itemId);
-    } else {
-      nextCart = cart.map((i) =>
-        i.id === itemId ? { ...i, count: i.count - 1 } : i,
-      );
-    }
-    set({ cart: nextCart });
-  },
-  getItemCount: (itemId: number) => {
-    const cartItem = get().cart.find((i) => i.id === itemId);
-    return cartItem?.count ?? 0;
-  },
-  removeItem: (itemId: number) => {
-    const { cart } = get();
+        if (existing.count <= 1) {
+          nextCart = cart.filter((i) => i.id !== itemId);
+        } else {
+          nextCart = cart.map((i) =>
+            i.id === itemId ? { ...i, count: i.count - 1 } : i,
+          );
+        }
+        set({ cart: nextCart });
+      },
+      getItemCount: (itemId: number) => {
+        const cartItem = get().cart.find((i) => i.id === itemId);
+        return cartItem?.count ?? 0;
+      },
+      removeItem: (itemId: number) => {
+        const { cart } = get();
 
-    const existing = cart.find((i) => i.id === itemId);
-    if (existing === undefined) return;
+        const existing = cart.find((i) => i.id === itemId);
+        if (existing === undefined) return;
 
-    const nextCart = cart.filter((i) => i.id !== itemId);
-    set({ cart: nextCart });
-  },
-}));
+        const nextCart = cart.filter((i) => i.id !== itemId);
+        set({ cart: nextCart });
+      },
+    }),
+    {
+      name: "order-cart-storage",
+      storage: createJSONStorage(() => localStorage),
+    },
+  ),
+);
