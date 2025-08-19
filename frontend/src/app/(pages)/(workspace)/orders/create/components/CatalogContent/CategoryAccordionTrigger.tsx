@@ -20,9 +20,9 @@ export function CategoryAccordionTrigger({
   const resultsCountMessage = `${foundCount} result${foundCount > 1 ? "s" : ""} found`;
 
   return (
-    <AccordionTrigger className="mx-3 flex items-center gap-2 py-2 text-sm font-semibold">
+    <AccordionTrigger className="mx-3.5 flex items-center gap-2 py-2.25 font-semibold">
       <span>{title}</span>
-      <span className="ml-auto text-xs font-normal text-gray-500">
+      <span className="ml-auto font-normal text-gray-500">
         {searchQuery.trim().length > 0 && resultsCountMessage}
       </span>
     </AccordionTrigger>
