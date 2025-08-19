@@ -1,5 +1,15 @@
 import { Product } from "../types";
 
+export function getFilteredProducts(
+  products: Product[],
+  searchQuery: string,
+): Product[] {
+  if (searchQuery.trim().length === 0) return products;
+  return products.filter((product) =>
+    getIsProductInSearchQuery(product, searchQuery),
+  );
+}
+
 export function getIsProductInSearchQuery(
   product: Product,
   searchQuery: string,
@@ -17,7 +27,5 @@ export function getFilteredProductsCount(
   products: Product[],
   searchQuery: string,
 ): number {
-  return products.filter((product) =>
-    getIsProductInSearchQuery(product, searchQuery),
-  ).length;
+  return getFilteredProducts(products, searchQuery).length;
 }

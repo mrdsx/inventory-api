@@ -2,7 +2,7 @@
 
 import { AccordionContent, AccordionItem } from "@/components/ui";
 import {
-  getIsProductInSearchQuery,
+  getFilteredProducts,
   Product,
   useProductGroupByStore,
   useProductSearchStore,
@@ -15,11 +15,7 @@ export function CatalogContent() {
   const groupBy = useProductGroupByStore((state) => state.groupBy);
   const searchQuery = useProductSearchStore((state) => state.searchQuery);
 
-  const filteredProducts = searchQuery.trim()
-    ? products.filter((product) =>
-        getIsProductInSearchQuery(product, searchQuery),
-      )
-    : products;
+  const filteredProducts = getFilteredProducts(products, searchQuery);
 
   const groupedData = Object.groupBy(
     filteredProducts,
