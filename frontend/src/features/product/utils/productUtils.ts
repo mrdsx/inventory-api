@@ -10,6 +10,13 @@ export function getFilteredProducts(
   );
 }
 
+export function getFilteredProductsCount(
+  products: Product[],
+  searchQuery: string,
+): number {
+  return getFilteredProducts(products, searchQuery).length;
+}
+
 export function getIsProductInSearchQuery(
   product: Product,
   searchQuery: string,
@@ -21,11 +28,4 @@ export function getIsProductInSearchQuery(
     product.category.toLowerCase().includes(formattedSearchQuery) ||
     product.supplier.toLowerCase().includes(formattedSearchQuery)
   );
-}
-
-export function getFilteredProductsCount(
-  products: Product[],
-  searchQuery: string,
-): number {
-  return getFilteredProducts(products, searchQuery).length;
 }
