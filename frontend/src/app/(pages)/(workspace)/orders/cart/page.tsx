@@ -2,12 +2,22 @@
 
 import { ROUTES } from "@/app/lib";
 import { NavigationBtn } from "@/components";
-import { Button, ScrollArea } from "@/components/ui";
+import {
+  Button,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  ScrollArea,
+} from "@/components/ui";
 import { CartItemActions, useOrderCartStore } from "@/features/order";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Ellipsis } from "lucide-react";
 
 export default function CartPage() {
   const cart = useOrderCartStore((state) => state.cart);
+  const removeItem = useOrderCartStore((state) => state.removeItem);
 
   const totalCost = cart.reduce(
     (total, item) => total + item.cost * item.count,
@@ -44,6 +54,21 @@ export default function CartPage() {
                       <span className="ml-auto font-semibold text-gray-600 dark:text-gray-300">
                         ${(item.cost * item.count).toFixed(2)}
                       </span>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="hover:bg-accent mx-3 rounded-sm p-1.5">
+                          <Ellipsis size={14} />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          <DropdownMenuLabel>Cart item</DropdownMenuLabel>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem
+                            variant="destructive"
+                            onClick={() => removeItem(item.id)}
+                          >
+                            Remove
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
                   </li>
                 ))}
