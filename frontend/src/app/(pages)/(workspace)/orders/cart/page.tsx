@@ -2,23 +2,13 @@
 
 import { ROUTES } from "@/app/lib";
 import { GoBackBtn } from "@/components";
-import {
-  Button,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  ScrollArea,
-} from "@/components/ui";
-import { CartItemActions, useOrderCartStore } from "@/features/order";
-import { Ellipsis } from "lucide-react";
+import { Button } from "@/components/ui";
+import { useOrderCartStore } from "@/features/order";
+import { Cart } from "./components/Cart";
 import { EmptyCartTitle } from "./components/EmptyCartTitle";
 
 export default function CartPage() {
   const cart = useOrderCartStore((state) => state.cart);
-  const removeItem = useOrderCartStore((state) => state.removeItem);
 
   const totalCost = cart.reduce(
     (total, item) => total + item.cost * item.count,
@@ -34,36 +24,7 @@ export default function CartPage() {
           <EmptyCartTitle />
         ) : (
           <>
-            <ScrollArea className="mb-4 h-80 flex-1 px-4">
-              <ul className="divide-y-1">
-                {cart.map((item) => (
-                  <li key={item.id}>
-                    <div className="flex items-center px-2 py-4">
-                      <span className="mr-4 w-[30%]">{item.name}</span>
-                      <CartItemActions item={item} />
-                      <span className="ml-auto font-semibold text-gray-600 dark:text-gray-300">
-                        ${(item.cost * item.count).toFixed(2)}
-                      </span>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger className="hover:bg-accent mx-3 rounded-sm p-1.5">
-                          <Ellipsis size={14} />
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                          <DropdownMenuLabel>Cart item</DropdownMenuLabel>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem
-                            variant="destructive"
-                            onClick={() => removeItem(item.id)}
-                          >
-                            Remove
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </ScrollArea>
+            <Cart />
             <div className="flex items-center justify-between px-4">
               <Button className="text-md font-semibold">Checkout</Button>
               <span className="text-base font-semibold">
