@@ -10,6 +10,16 @@ export function getFilteredProducts(
   );
 }
 
+export function getGroupedProducts<T extends keyof Product>(
+  products: Product[],
+  groupBy: T,
+) {
+  return Object.groupBy(products, (product) => product[groupBy]) as Record<
+    string,
+    Product[]
+  >;
+}
+
 export function getFilteredProductsCount(
   products: Product[],
   searchQuery: string,

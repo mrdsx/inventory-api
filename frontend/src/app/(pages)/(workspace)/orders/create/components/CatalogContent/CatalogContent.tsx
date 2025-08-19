@@ -3,7 +3,7 @@
 import { AccordionContent, AccordionItem } from "@/components/ui";
 import {
   getFilteredProducts,
-  Product,
+  getGroupedProducts,
   useProductGroupByStore,
   useProductSearchStore,
 } from "@/features/product";
@@ -16,14 +16,10 @@ export function CatalogContent() {
   const searchQuery = useProductSearchStore((state) => state.searchQuery);
 
   const filteredProducts = getFilteredProducts(products, searchQuery);
-
-  const groupedData = Object.groupBy(
-    filteredProducts,
-    (product) => product[groupBy],
-  ) as Record<string, Product[]>;
+  const groupedProducts = getGroupedProducts(filteredProducts, groupBy);
 
   const sortedGroupedData = Object.fromEntries(
-    Object.entries(groupedData).map(([groupName, items]) => [
+    Object.entries(groupedProducts).map(([groupName, items]) => [
       groupName,
       items.slice().sort((a, b) => a.name.localeCompare(b.name)),
     ]),
