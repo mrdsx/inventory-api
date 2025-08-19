@@ -34,7 +34,7 @@ export default function CartPage() {
           <EmptyCartTitle />
         ) : (
           <>
-            <ScrollArea className="my-4 h-80 flex-1 px-4">
+            <ScrollArea className="mb-4 h-80 flex-1 px-4">
               <ul className="divide-y-1">
                 {cart.map((item) => (
                   <li key={item.id}>
