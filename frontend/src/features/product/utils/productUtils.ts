@@ -13,11 +13,11 @@ export function getIsProductInSearchQuery(
   );
 }
 
-export function getProductGroupSearchCount(
-  items: Product[],
+export function getFilteredProductsCount(
+  products: Product[],
   searchQuery: string,
 ): number {
-  return items.filter((product) =>
+  return products.filter((product) =>
     getIsProductInSearchQuery(product, searchQuery),
   ).length;
 }

@@ -1,6 +1,6 @@
 import { AccordionTrigger } from "@/components/ui";
 import {
-  getProductGroupSearchCount,
+  getFilteredProductsCount,
   Product,
   useProductSearchStore,
 } from "@/features/product";
@@ -16,7 +16,7 @@ export function CategoryAccordionTrigger({
 }: CategoryAccordionTriggerProps) {
   const searchQuery = useProductSearchStore((state) => state.searchQuery);
 
-  const foundCount = getProductGroupSearchCount(items, searchQuery);
+  const foundCount = getFilteredProductsCount(items, searchQuery);
   const resultsCountMessage = `${foundCount} result${foundCount > 1 ? "s" : ""} found`;
 
   return (
