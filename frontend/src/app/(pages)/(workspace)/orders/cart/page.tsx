@@ -14,6 +14,7 @@ import {
 } from "@/components/ui";
 import { CartItemActions, useOrderCartStore } from "@/features/order";
 import { Ellipsis } from "lucide-react";
+import { EmptyCartTitle } from "./components/EmptyCartTitle";
 
 export default function CartPage() {
   const cart = useOrderCartStore((state) => state.cart);
@@ -30,11 +31,7 @@ export default function CartPage() {
         <GoBackBtn href={ROUTES.workspace.orders.create} />
         <h2 className="px-4 text-lg font-bold">Cart</h2>
         {cart.length === 0 ? (
-          <div className="flex justify-center">
-            <p className="mt-30 text-gray-400 dark:text-gray-500">
-              No items in cart.
-            </p>
-          </div>
+          <EmptyCartTitle />
         ) : (
           <>
             <ScrollArea className="my-4 h-80 flex-1 px-4">
