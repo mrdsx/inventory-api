@@ -2,6 +2,7 @@ export * from "./accordion";
 export * from "./button";
 export * from "./card";
 export * from "./data-table";
+export * from "./dropdown-menu";
 export { Input } from "./input";
 export * from "./scroll-area";
 export * from "./select";
