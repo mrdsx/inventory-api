@@ -16,13 +16,12 @@ export function CatalogContent() {
   const searchQuery = useProductSearchStore((state) => state.searchQuery);
 
   const filteredProducts = getFilteredProducts(products, searchQuery);
-  const groupedProducts = getGroupedProducts(filteredProducts, groupBy);
-
+  const sortedProducts = filteredProducts.sort((a, b) =>
+    a.name.localeCompare(b.name),
+  );
+  const groupedData = getGroupedProducts(sortedProducts, groupBy);
   const sortedGroupedData = Object.fromEntries(
-    Object.entries(groupedProducts).map(([groupName, items]) => [
-      groupName,
-      items.slice().sort((a, b) => a.name.localeCompare(b.name)),
-    ]),
+    Object.entries(groupedData).sort((a, b) => a[0].localeCompare(b[0])),
   );
 
   return (
