@@ -39,3 +39,7 @@ export function getIsProductInSearchQuery(
     product.supplier.toLowerCase().includes(formattedSearchQuery)
   );
 }
+
+export function getSortedProducts(products: Product[]): Product[] {
+  return products.sort((a, b) => a.name.localeCompare(b.name));
+}
