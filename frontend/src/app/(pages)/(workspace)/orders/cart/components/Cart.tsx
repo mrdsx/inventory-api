@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui";
+import { Button, ScrollArea } from "@/components/ui";
 import { useOrderCartStore } from "@/features/order";
 import { CartItemsList } from "./CartItemsList";
 import { EmptyCartTitle } from "./EmptyCartTitle";
@@ -17,7 +17,9 @@ export function Cart() {
 
   return (
     <>
-      <CartItemsList />
+      <ScrollArea className="mb-4 h-80 flex-1 px-4">
+        <CartItemsList />
+      </ScrollArea>
       <div className="flex items-center justify-between px-4">
         <Button className="text-md font-semibold">Checkout</Button>
         <span className="text-base font-semibold">
