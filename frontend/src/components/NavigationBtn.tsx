@@ -13,7 +13,7 @@ export function NavigationBtn({
   variant,
 }: NavigationBtnProps) {
   return (
-    <Link href={href}>
+    <Link href={href} className="max-w-fit">
       <Button className={className} variant={variant}>
         {children}
       </Button>
