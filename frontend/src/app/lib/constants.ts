@@ -15,6 +15,7 @@ const ROUTES = {
     orders: {
       root: "/orders",
       create: "/orders/create",
+      cart: "/orders/cart",
     },
     products: "/products",
     suppliers: "/suppliers",
