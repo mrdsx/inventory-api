@@ -17,7 +17,7 @@ export function ProductsView({ products }: { products: Product[] }) {
       {products.map((product) => (
         <Card
           key={product.id}
-          className={cn("flex justify-between p-3 text-[13px]", cardClassName)}
+          className={cn("flex justify-between p-3", cardClassName)}
         >
           <ProductInfo product={product} />
           <CartItemActions item={product} />

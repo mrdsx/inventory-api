@@ -11,7 +11,7 @@ export function AddItemToCartBtn({ item }: { item: Product }) {
       size="sm"
       variant="outline"
       onClick={() => addToCart(item)}
-      className="mt-2 h-(--cart-action-btn-size) px-2 text-xs"
+      className="mt-2 h-(--cart-action-btn-size) px-2 text-sm"
     >
       Add to Cart
     </Button>
