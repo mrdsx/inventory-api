@@ -8,10 +8,12 @@ import {
 
 const { ITEMS_PER_PAGE, PAGE } = SEARCH_PARAMS_KEYS;
 
-export function useValidateParams() {
+type ValidateParamsActions = (page: number, itemsPerPage: number) => void;
+
+export function useValidateParams(): ValidateParamsActions {
   const { setParams, updatePathname } = useParams();
 
-  function validateParams(page: number, itemsPerPage: number) {
+  function validateParams(page: number, itemsPerPage: number): void {
     const isPageNumberPositive = page > 0;
     if (!isPageNumberPositive || !PAGE_SIZES.includes(itemsPerPage)) {
       setParams(PAGE, DEFAULT_PAGE);
