@@ -1,7 +1,7 @@
 "use client";
 
 import { ROUTES } from "@/app/lib";
-import { NavigationBtn } from "@/components";
+import { GoBackBtn } from "@/components";
 import {
   Button,
   DropdownMenu,
@@ -13,7 +13,7 @@ import {
   ScrollArea,
 } from "@/components/ui";
 import { CartItemActions, useOrderCartStore } from "@/features/order";
-import { ArrowLeft, Ellipsis } from "lucide-react";
+import { Ellipsis } from "lucide-react";
 
 export default function CartPage() {
   const cart = useOrderCartStore((state) => state.cart);
@@ -27,14 +27,7 @@ export default function CartPage() {
   return (
     <div className="flex h-120 flex-col transition-colors">
       <div className="flex h-full flex-1 flex-col rounded-md">
-        <NavigationBtn
-          className="mb-2"
-          href={ROUTES.workspace.orders.create}
-          variant="link"
-        >
-          <ArrowLeft />
-          Go back
-        </NavigationBtn>
+        <GoBackBtn href={ROUTES.workspace.orders.create} />
         <h2 className="px-4 text-lg font-bold">Cart</h2>
         {cart.length === 0 ? (
           <div className="flex justify-center">
