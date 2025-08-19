@@ -65,7 +65,7 @@ export default function CartPage() {
               </ul>
             </ScrollArea>
             <div className="flex items-center justify-between px-4">
-              <Button>Checkout</Button>
+              <Button className="text-md font-semibold">Checkout</Button>
               <span className="text-base font-semibold">
                 Total: ${totalCost.toFixed(2)}
               </span>
