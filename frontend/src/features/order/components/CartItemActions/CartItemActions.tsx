@@ -16,7 +16,7 @@ export function CartItemActions({ item }: { item: Product }) {
   return (
     <div className="flex items-center gap-1">
       <DecrementItemCountBtn item={item} />
-      <span className="min-w-[20px] text-center">{count}</span>
+      <span className="min-w-6 text-center">{count}</span>
       <IncrementItemCountBtn item={item} />
     </div>
   );
