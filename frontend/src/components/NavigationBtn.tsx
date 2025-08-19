@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { VariantProps } from "class-variance-authority";
 import Link, { LinkProps } from "next/link";
 import { Button, buttonVariants } from "./ui";
@@ -15,7 +14,7 @@ export function NavigationBtn({
 }: NavigationBtnProps) {
   return (
     <Link href={href}>
-      <Button className={cn("text-foreground", className)} variant={variant}>
+      <Button className={className} variant={variant}>
         {children}
       </Button>
     </Link>
