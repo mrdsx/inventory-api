@@ -1,6 +1,11 @@
 import { useProductGroupByStore } from "../stores";
 import { Product } from "../types";
 
+type ProductFieldProps = {
+  title: string;
+  value: string | number;
+};
+
 export function ProductInfo({ product }: { product: Product }) {
   const groupBy = useProductGroupByStore((state) => state.groupBy);
 
@@ -21,7 +26,7 @@ function ProductName({ children }: { children: React.ReactNode }) {
   return <div className="text-base font-bold">{children}</div>;
 }
 
-function ProductField({ title, value }: { title: string; value: any }) {
+function ProductField({ title, value }: ProductFieldProps) {
   return (
     <div className="mt-1 text-gray-600 dark:text-gray-300">
       {title}: {value}
