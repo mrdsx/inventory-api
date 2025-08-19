@@ -4,6 +4,7 @@ import { AccordionContent, AccordionItem } from "@/components/ui";
 import {
   getFilteredProducts,
   getGroupedProducts,
+  getSortedGroupedProducts,
   getSortedProducts,
   useProductGroupByStore,
   useProductSearchStore,
@@ -19,9 +20,7 @@ export function CatalogContent() {
   const filteredProducts = getFilteredProducts(products, searchQuery);
   const sortedProducts = getSortedProducts(filteredProducts);
   const groupedData = getGroupedProducts(sortedProducts, groupBy);
-  const sortedGroupedData = Object.fromEntries(
-    Object.entries(groupedData).sort((a, b) => a[0].localeCompare(b[0])),
-  );
+  const sortedGroupedData = getSortedGroupedProducts(groupedData);
 
   return (
     <>
