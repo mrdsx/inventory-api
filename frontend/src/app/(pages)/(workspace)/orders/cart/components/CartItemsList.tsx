@@ -10,7 +10,7 @@ import { CartItemActions, useOrderCartStore } from "@/features/order";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Ellipsis } from "lucide-react";
 
-export function Cart() {
+export function CartItemsList() {
   const cart = useOrderCartStore((state) => state.cart);
   const removeItem = useOrderCartStore((state) => state.removeItem);
 

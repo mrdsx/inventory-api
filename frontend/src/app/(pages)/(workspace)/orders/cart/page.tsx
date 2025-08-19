@@ -4,7 +4,7 @@ import { ROUTES } from "@/app/lib";
 import { GoBackBtn } from "@/components";
 import { Button } from "@/components/ui";
 import { useOrderCartStore } from "@/features/order";
-import { Cart } from "./components/Cart";
+import { CartItemsList } from "./components/CartItemsList";
 import { EmptyCartTitle } from "./components/EmptyCartTitle";
 
 export default function CartPage() {
@@ -24,7 +24,7 @@ export default function CartPage() {
           <EmptyCartTitle />
         ) : (
           <>
-            <Cart />
+            <CartItemsList />
             <div className="flex items-center justify-between px-4">
               <Button className="text-md font-semibold">Checkout</Button>
               <span className="text-base font-semibold">
