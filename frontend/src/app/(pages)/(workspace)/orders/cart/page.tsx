@@ -37,8 +37,8 @@ export default function CartPage() {
         </NavigationBtn>
         <h2 className="px-4 text-lg font-bold">Cart</h2>
         {cart.length === 0 ? (
-          <div className="flex items-center justify-center">
-            <p className="text-gray-400 dark:text-gray-500">
+          <div className="flex justify-center">
+            <p className="mt-30 text-gray-400 dark:text-gray-500">
               No items in cart.
             </p>
           </div>
