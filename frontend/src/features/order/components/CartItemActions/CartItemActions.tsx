@@ -1,5 +1,5 @@
+import { useOrderCartStore } from "@/features/order";
 import { Product } from "@/features/product";
-import { useOrderCartStore } from "../../stores/orderCartStore";
 import { AddItemToCartBtn } from "./AddItemToCartBtn";
 import { DecrementItemCountBtn } from "./DecrementItemCountBtn";
 import { IncrementItemCountBtn } from "./IncrementItemCountBtn";
@@ -7,8 +7,7 @@ import { IncrementItemCountBtn } from "./IncrementItemCountBtn";
 const MIN_COUNT_OF_CART_ITEM = 1;
 
 export function CartItemActions({ item }: { item: Product }) {
-  const getItemCount = useOrderCartStore((state) => state.getItemCount);
-  const count = getItemCount(item.id);
+  const count = useOrderCartStore((state) => state.getItemCount(item.id));
 
   if (count < MIN_COUNT_OF_CART_ITEM) {
     return <AddItemToCartBtn item={item} />;
