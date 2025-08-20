@@ -14,7 +14,7 @@ export function OrdersTableHeader() {
       <TableRow className="table-header">
         {TABLE_COLUMNS.map((item, index) => (
           <TableHead
-            className="sticky top-0 p-2 text-start font-semibold"
+            className="p-2 text-start font-semibold"
             key={item + index}
           >
             {item}
