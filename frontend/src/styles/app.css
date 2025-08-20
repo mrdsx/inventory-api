@@ -3,3 +3,7 @@
 .card {
   @apply rounded-xl border-1 border-(--border) p-4 shadow-md;
 }
+
+.table-header {
+  @apply bg-gray-100 hover:bg-gray-200 dark:bg-neutral-900 dark:hover:bg-neutral-800;
+}

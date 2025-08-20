@@ -11,7 +11,7 @@ export const TABLE_COLUMNS = [
 export function OrdersTableHeader() {
   return (
     <TableHeader className="sticky top-0">
-      <TableRow className="bg-gray-100 hover:bg-gray-200 dark:bg-neutral-900 dark:hover:bg-neutral-800">
+      <TableRow className="table-header">
         {TABLE_COLUMNS.map((item, index) => (
           <TableHead
             className="sticky top-0 p-2 text-start font-semibold"

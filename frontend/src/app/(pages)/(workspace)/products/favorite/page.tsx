@@ -17,7 +17,7 @@ export default function FavoriteProductsPage() {
       <h2 className="mb-4 text-2xl">Favorite products</h2>
       <ScrollArea className="h-120 rounded-sm border">
         <Table className="h-full rounded-sm outline-1 outline-(--border)">
-          <TableHeader className="sticky top-0 bg-gray-100 hover:bg-gray-200 dark:bg-neutral-900 dark:hover:bg-neutral-800">
+          <TableHeader className="table-header sticky top-0">
             <TableRow>
               <TableHead className="w-1/4">Name</TableHead>
               <TableHead className="">Description</TableHead>
