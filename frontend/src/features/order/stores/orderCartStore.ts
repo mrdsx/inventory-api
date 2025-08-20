@@ -15,12 +15,13 @@ export const useOrderCartStore = create<OrderCartState>()(
   persist(
     (set, get) => ({
       cart: [],
+
       addToCart: (item: Product) => {
         const { cart } = get();
         let nextCart;
 
-        const existing = cart.find((i) => i.id === item.id);
-        if (existing === undefined) {
+        const cartItem = cart.find((i) => i.id === item.id);
+        if (cartItem === undefined) {
           nextCart = [...cart, { ...item, count: 1 }];
         } else {
           nextCart = cart.map((i) =>
@@ -29,14 +30,15 @@ export const useOrderCartStore = create<OrderCartState>()(
         }
         set({ cart: nextCart });
       },
+
       decrementItemCount: (itemId: number) => {
         const { cart } = get();
         let nextCart;
 
-        const existing = cart.find((i) => i.id === itemId);
-        if (existing === undefined) return;
+        const cartItem = cart.find((i) => i.id === itemId);
+        if (cartItem === undefined) return;
 
-        if (existing.count <= 1) {
+        if (cartItem.count <= 1) {
           nextCart = cart.filter((i) => i.id !== itemId);
         } else {
           nextCart = cart.map((i) =>
@@ -45,15 +47,17 @@ export const useOrderCartStore = create<OrderCartState>()(
         }
         set({ cart: nextCart });
       },
+
       getItemCount: (itemId: number) => {
         const cartItem = get().cart.find((i) => i.id === itemId);
         return cartItem?.count ?? 0;
       },
+
       removeItem: (itemId: number) => {
         const { cart } = get();
 
-        const existing = cart.find((i) => i.id === itemId);
-        if (existing === undefined) return;
+        const cartItem = cart.find((i) => i.id === itemId);
+        if (cartItem === undefined) return;
 
         const nextCart = cart.filter((i) => i.id !== itemId);
         set({ cart: nextCart });
