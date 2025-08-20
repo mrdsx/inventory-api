@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui";
 import { useOrderCartStore } from "@/features/order";
 import { Product, useFavoriteProductsStore } from "@/features/product";
+import { useThemeStore } from "@/features/theme";
 import { Heart } from "lucide-react";
 import { AddItemToCartBtn } from "./AddItemToCartBtn";
 import { DecrementItemCountBtn } from "./DecrementItemCountBtn";
@@ -11,6 +12,7 @@ const MIN_COUNT_OF_CART_ITEM = 1;
 
 export function CartItemActions({ item }: { item: Product }) {
   const count = useOrderCartStore((state) => state.getItemCount(item.id));
+  const isDarkMode = useThemeStore((state) => state.isDarkMode);
   const { favoriteProducts, addFavoriteProductId, removeFavoriteProductId } =
     useFavoriteProductsStore();
 
@@ -40,7 +42,11 @@ export function CartItemActions({ item }: { item: Product }) {
         variant="outline"
         onClick={handleClick}
       >
-        <Heart className={isProductFavorite ? "fill-red-500" : ""} />
+        <Heart
+          className={
+            isProductFavorite ? (isDarkMode ? "fill-white" : "fill-black") : ""
+          }
+        />
       </Button>
     </div>
   );
