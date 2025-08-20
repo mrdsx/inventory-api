@@ -12,14 +12,16 @@ export function CreateOrderPageActions() {
     <div className="flex justify-between">
       <GoBackBtn href={ROUTES.workspace.orders.root} />
       <NavigationBtn
-        className="size relative mr-4"
+        className="relative mr-4"
         href={ROUTES.workspace.orders.cart}
-        variant="ghost"
+        variant="outline"
       >
-        <ShoppingCart className="size-6" />
-        <div className="bg-primary absolute top-0.5 right-0.5 flex size-4 items-center justify-center rounded-full text-xs">
-          {cart.length}
-        </div>
+        <ShoppingCart />
+        {cart.length > 0 && (
+          <div className="bg-primary absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full text-xs">
+            {cart.length}
+          </div>
+        )}
       </NavigationBtn>
     </div>
   );
