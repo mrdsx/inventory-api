@@ -19,6 +19,7 @@ import { useOrderCartStore } from "@/features/order";
 import { useFavoriteProductsStore } from "@/features/product";
 import { Ellipsis } from "lucide-react";
 import { products } from "../../orders/create/mock-data";
+import { FAVORITE_PRODUCTS_TABLE_COLUMNS as tableColumns } from "./components/favorite-products-table-columns";
 
 export default function FavoriteProductsPage() {
   const _cart = useOrderCartStore((state) => state.cart);
@@ -40,18 +41,20 @@ export default function FavoriteProductsPage() {
         <Table className="h-full rounded-sm">
           <TableHeader className="table-header sticky top-0">
             <TableRow>
-              <TableHead className="w-1/4">Name</TableHead>
-              <TableHead>Description</TableHead>
-              <TableHead className="w-1/7">Supplier</TableHead>
-              <TableHead className="w-1/7">Category</TableHead>
-              <TableHead className="w-1/8 pr-10 text-end">Cost</TableHead>
-              <TableHead className="w-10" />
+              {tableColumns.map((item, index) => (
+                <TableHead className={item.headingClassName} key={index}>
+                  {item.title}
+                </TableHead>
+              ))}
             </TableRow>
           </TableHeader>
           <TableBody>
             {favoriteProducts.length === 0 ? (
               <TableRow>
-                <TableCell className="py-10 text-center" colSpan={6}>
+                <TableCell
+                  className="py-10 text-center"
+                  colSpan={tableColumns.length}
+                >
                   No favorite products found
                 </TableCell>
               </TableRow>
@@ -59,8 +62,6 @@ export default function FavoriteProductsPage() {
               favoriteProducts.map((product) => {
                 const count = getItemCount(product.id);
                 const isProductInCart = count > 0;
-
-                console.log(count);
 
                 return (
                   <TableRow key={product.id}>
