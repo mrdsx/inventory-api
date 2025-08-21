@@ -1,12 +1,16 @@
-import { Path } from "@/app/lib";
-import { ArrowLeft } from "lucide-react";
-import { NavigationBtn } from "./NavigationBtn";
+"use client";
 
-export function GoBackBtn({ href }: { href: Path }) {
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Button } from "./ui";
+
+export function GoBackBtn() {
+  const router = useRouter();
+
   return (
-    <NavigationBtn className="mb-2" href={href} variant="link">
+    <Button className="mb-2" variant="link" onClick={() => router.back()}>
       <ArrowLeft />
       Go back
-    </NavigationBtn>
+    </Button>
   );
 }
