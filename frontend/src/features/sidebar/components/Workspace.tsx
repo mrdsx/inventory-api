@@ -5,7 +5,7 @@ import {
   SidebarMenu,
 } from "@/components/ui";
 import { SidebarItem } from "@/features/sidebar";
-import { ChartLine, ListChecks, Package2, Users } from "lucide-react";
+import { ChartLine, ListChecks, Package, Package2, Users } from "lucide-react";
 import { AppSidebarItem } from "./AppSidebarItem";
 
 const { workspace } = ROUTES;
@@ -20,6 +20,12 @@ const items: SidebarItem[] = [
     link: workspace.inventory,
     icon: <Package2 />,
     title: "Inventory",
+    isWorkspaceRoute: true,
+  },
+  {
+    link: workspace.products.root,
+    icon: <Package />,
+    title: "Products",
     isWorkspaceRoute: true,
   },
   {
