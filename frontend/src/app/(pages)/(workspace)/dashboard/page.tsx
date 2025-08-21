@@ -1,9 +1,10 @@
+import { PageHeading } from "@/components";
 import { RecentOrdersSection, StatsSection } from "./components";
 
 export default function DashboardPage() {
   return (
     <>
-      <div className="text-2xl">Dashboard</div>
+      <PageHeading>Dashboard</PageHeading>
       <StatsSection />
       <RecentOrdersSection />
     </>

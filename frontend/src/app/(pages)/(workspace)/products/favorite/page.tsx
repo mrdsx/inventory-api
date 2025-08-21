@@ -1,3 +1,4 @@
+import { PageHeading } from "@/components";
 import {
   ScrollArea,
   Table,
@@ -12,7 +13,7 @@ import { FavoriteProductsTableBodyContent } from "./components/FavoriteProductsT
 export default function FavoriteProductsPage() {
   return (
     <div>
-      <h2 className="mb-4 text-2xl">Favorite products</h2>
+      <PageHeading className="mb-4">Favorite products</PageHeading>
       <ScrollArea className="h-120 rounded-sm border">
         <Table className="h-full rounded-sm">
           <TableHeader className="table-header sticky top-0">

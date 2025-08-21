@@ -1,3 +1,5 @@
+import { PageHeading } from "@/components";
+
 export default function InventoryPage() {
-  return <>Inventory</>;
+  return <PageHeading>Inventory</PageHeading>;
 }

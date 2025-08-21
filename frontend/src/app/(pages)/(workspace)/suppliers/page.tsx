@@ -1,3 +1,5 @@
+import { PageHeading } from "@/components";
+
 export default function SuppliersPage() {
-  return <>Suppliers</>;
+  return <PageHeading>Suppliers</PageHeading>;
 }
