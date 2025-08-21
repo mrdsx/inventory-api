@@ -2,7 +2,7 @@
 
 import { TableCell, TableRow } from "@/components/ui";
 import { useFavoriteProductsStore } from "@/features/product";
-import { products } from "../../../orders/create/mock-data";
+import { products } from "../../mock-data";
 import { FAVORITE_PRODUCTS_TABLE_COLUMNS as tableColumns } from "./favorite-products-table-columns";
 import { TableRowDropdownMenu } from "./TableRowDropdownMenu/TableRowDropdownMenu";
 
