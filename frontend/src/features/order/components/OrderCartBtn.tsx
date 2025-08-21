@@ -16,7 +16,7 @@ export function OrderCartBtn() {
     >
       <ShoppingCart />
       {cart.length > 0 && (
-        <div className="bg-primary absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full text-xs">
+        <div className="bg-primary absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full text-xs text-white">
           {cart.length}
         </div>
       )}
