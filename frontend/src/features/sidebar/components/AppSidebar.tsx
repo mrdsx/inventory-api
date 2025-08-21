@@ -5,9 +5,9 @@ import {
   SidebarSeparator,
 } from "@/components/ui";
 import { ToggleThemeBtn } from "@/features/theme";
-import { Account } from "./Account";
+import { AccountSidebarGroup } from "./AccountSidebarGroup";
 import { AppSidebarHeader } from "./AppSidebarHeader";
-import { Workspace } from "./Workspace";
+import { WorkspaceSidebarGroup } from "./WorkspaceSidebarGroup";
 
 export function AppSidebar() {
   return (
@@ -15,9 +15,9 @@ export function AppSidebar() {
       <AppSidebarHeader />
       <SidebarSeparator />
       <SidebarContent>
-        <Workspace />
+        <WorkspaceSidebarGroup />
         <SidebarSeparator />
-        <Account />
+        <AccountSidebarGroup />
       </SidebarContent>
       <SidebarFooter>
         <ToggleThemeBtn size="icon" />

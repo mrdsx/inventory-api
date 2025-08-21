@@ -13,7 +13,7 @@ const items: SidebarItem[] = [
   { link: "/logout", icon: <LogOut />, title: "Log Out" },
 ];
 
-export function Account() {
+export function AccountSidebarGroup() {
   return (
     <SidebarGroup>
       <SidebarGroupContent>

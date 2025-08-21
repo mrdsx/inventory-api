@@ -43,7 +43,7 @@ const items: SidebarItem[] = [
   },
 ];
 
-export function Workspace() {
+export function WorkspaceSidebarGroup() {
   return (
     <SidebarGroup>
       <SidebarGroupContent>
