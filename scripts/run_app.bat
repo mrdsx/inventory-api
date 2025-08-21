@@ -1,0 +1,1 @@
+wt -w 0 nt -d . cmd /k run_client.bat ; nt -d . cmd /k run_server.bat
