@@ -15,11 +15,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui";
-import { Product, useFavoriteProductsStore } from "@/features/product";
+import { useOrderCartStore } from "@/features/order";
+import { useFavoriteProductsStore } from "@/features/product";
 import { Ellipsis } from "lucide-react";
 import { products } from "../../orders/create/mock-data";
 
 export default function FavoriteProductsPage() {
+  const _cart = useOrderCartStore((state) => state.cart);
+  const addToCart = useOrderCartStore((state) => state.addToCart);
+  const getItemCount = useOrderCartStore((state) => state.getItemCount);
+  const removeItem = useOrderCartStore((state) => state.removeItem);
   const favoriteProductIds = useFavoriteProductsStore(
     (state) => state.favoriteProducts,
   );
@@ -27,10 +32,6 @@ export default function FavoriteProductsPage() {
     (state) => state.removeFavoriteProductId,
   );
   const favoriteProducts = products.filter((i) => favoriteProductIds.has(i.id));
-
-  function handleDeleteFromFavorites(product: Product) {
-    removeFavoriteProductId(product.id);
-  }
 
   return (
     <div>
@@ -55,41 +56,62 @@ export default function FavoriteProductsPage() {
                 </TableCell>
               </TableRow>
             ) : (
-              favoriteProducts.map((product) => (
-                <TableRow key={product.id}>
-                  <TableCell>{product.name}</TableCell>
-                  <TableCell>
-                    <p className="w-[40ch] overflow-hidden overflow-ellipsis">
-                      {product.description}
-                    </p>
-                  </TableCell>
-                  <TableCell>{product.supplier}</TableCell>
-                  <TableCell>{product.category}</TableCell>
-                  <TableCell className="pr-10 text-end">
-                    {product.cost}
-                  </TableCell>
-                  <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild className="size-7">
-                        <Button variant="ghost">
-                          <Ellipsis className="size-3.5" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                        <DropdownMenuGroup>
-                          {/* <DropdownMenuItem>Add to order</DropdownMenuItem> */}
-                          <DropdownMenuItem
-                            onClick={() => handleDeleteFromFavorites(product)}
-                            variant="destructive"
-                          >
-                            Remove from favorites
-                          </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))
+              favoriteProducts.map((product) => {
+                const count = getItemCount(product.id);
+                const isProductInCart = count > 0;
+
+                console.log(count);
+
+                return (
+                  <TableRow key={product.id}>
+                    <TableCell>{product.name}</TableCell>
+                    <TableCell>
+                      <p className="w-[40ch] overflow-hidden overflow-ellipsis">
+                        {product.description}
+                      </p>
+                    </TableCell>
+                    <TableCell>{product.supplier}</TableCell>
+                    <TableCell>{product.category}</TableCell>
+                    <TableCell className="pr-10 text-end">
+                      {product.cost}
+                    </TableCell>
+                    <TableCell>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild className="size-7">
+                          <Button variant="ghost">
+                            <Ellipsis className="size-3.5" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          <DropdownMenuGroup>
+                            <DropdownMenuItem
+                              onClick={() => {
+                                if (isProductInCart) {
+                                  removeItem(product.id);
+                                } else {
+                                  addToCart(product);
+                                }
+                              }}
+                            >
+                              {isProductInCart
+                                ? "Remove from cart"
+                                : "Add to cart"}
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() =>
+                                removeFavoriteProductId(product.id)
+                              }
+                              variant="destructive"
+                            >
+                              Unfavorite
+                            </DropdownMenuItem>
+                          </DropdownMenuGroup>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                );
+              })
             )}
           </TableBody>
         </Table>
