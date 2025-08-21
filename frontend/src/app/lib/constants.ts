@@ -17,6 +17,7 @@ const ROUTES = {
       create: "/orders/create",
       cart: "/orders/cart",
     },
+    inventory: "/inventory",
     products: {
       root: "/products",
       favorite: "/products/favorite",

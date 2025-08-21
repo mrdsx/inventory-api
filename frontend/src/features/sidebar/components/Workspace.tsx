@@ -17,9 +17,9 @@ const items: SidebarItem[] = [
     isWorkspaceRoute: true,
   },
   {
-    link: workspace.products.root,
+    link: workspace.inventory,
     icon: <Package2 />,
-    title: "Products",
+    title: "Inventory",
     isWorkspaceRoute: true,
   },
   {
