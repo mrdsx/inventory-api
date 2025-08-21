@@ -16,7 +16,7 @@ export const useFavoriteProductsStore = create<FavoriteProductsState>()(
           favoriteProducts: new Set(state.favoriteProducts).add(id),
         })),
       removeFavoriteProductId: (id: number) => {
-        const nextFavoriteProductIds = get().favoriteProducts;
+        const nextFavoriteProductIds = new Set(get().favoriteProducts);
         nextFavoriteProductIds.delete(id);
         set({ favoriteProducts: nextFavoriteProductIds });
       },
