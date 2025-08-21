@@ -20,31 +20,26 @@ const items: SidebarItem[] = [
     link: workspace.dashboard,
     icon: <ChartLine />,
     title: "Dashboard",
-    isWorkspaceRoute: true,
   },
   {
     link: workspace.inventory,
     icon: <ClipboardList />,
     title: "Inventory",
-    isWorkspaceRoute: true,
   },
   {
     link: workspace.products.root,
     icon: <Package />,
     title: "Products",
-    isWorkspaceRoute: true,
   },
   {
     link: workspace.orders.root,
     icon: <ListChecks />,
     title: "Orders",
-    isWorkspaceRoute: true,
   },
   {
     link: workspace.suppliers,
     icon: <Users />,
     title: "Suppliers",
-    isWorkspaceRoute: true,
   },
 ];
 
