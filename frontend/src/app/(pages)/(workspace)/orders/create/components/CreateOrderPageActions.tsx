@@ -3,7 +3,8 @@
 import { ROUTES } from "@/app/lib";
 import { GoBackBtn, NavigationBtn } from "@/components";
 import { useOrderCartStore } from "@/features/order";
-import { Heart, ShoppingCart } from "lucide-react";
+import { FavoriteProductsBtn } from "@/features/product";
+import { ShoppingCart } from "lucide-react";
 
 export function CreateOrderPageActions() {
   const cart = useOrderCartStore((state) => state.cart);
@@ -11,15 +12,10 @@ export function CreateOrderPageActions() {
   return (
     <div className="mb-1 flex justify-between">
       <GoBackBtn href={ROUTES.workspace.orders.root} />
-      <div className="flex gap-2">
+      <div className="mr-4 flex gap-2">
+        <FavoriteProductsBtn />
         <NavigationBtn
-          href={ROUTES.workspace.products.favorite}
-          variant="outline"
-        >
-          <Heart />
-        </NavigationBtn>
-        <NavigationBtn
-          className="relative mr-4"
+          className="relative"
           href={ROUTES.workspace.orders.cart}
           variant="outline"
         >
