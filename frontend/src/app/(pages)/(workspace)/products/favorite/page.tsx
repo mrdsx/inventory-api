@@ -39,10 +39,10 @@ export default function FavoriteProductsPage() {
         <Table className="h-full rounded-sm">
           <TableHeader className="table-header sticky top-0">
             <TableRow>
-              <TableHead className="w-1/4">Name </TableHead>
-              <TableHead>Description </TableHead>
-              <TableHead className="w-1/7">Supplier </TableHead>
-              <TableHead className="w-1/7">Category </TableHead>
+              <TableHead className="w-1/4">Name</TableHead>
+              <TableHead>Description</TableHead>
+              <TableHead className="w-1/7">Supplier</TableHead>
+              <TableHead className="w-1/7">Category</TableHead>
               <TableHead className="w-1/8 pr-10 text-end">Cost</TableHead>
               <TableHead className="w-10" />
             </TableRow>
