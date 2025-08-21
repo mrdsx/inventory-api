@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui";
 import { Product, useFavoriteProductsStore } from "@/features/product";
-import { useThemeStore } from "@/features/theme";
 import { Heart } from "lucide-react";
 
 export function ToggleFavoriteProductBtn({ item }: { item: Product }) {
-  const isDarkMode = useThemeStore((state) => state.isDarkMode);
   const { favoriteProducts, addFavoriteProductId, removeFavoriteProductId } =
     useFavoriteProductsStore();
 
@@ -20,15 +18,11 @@ export function ToggleFavoriteProductBtn({ item }: { item: Product }) {
 
   return (
     <Button
-      className="ml-auto size-(--cart-action-btn-size)"
+      className="ml-auto size-(--cart-action-btn-size) hover:text-red-500"
       variant="outline"
       onClick={handleClick}
     >
-      <Heart
-        className={
-          isProductFavorite ? (isDarkMode ? "fill-white" : "fill-black") : ""
-        }
-      />
+      <Heart className={isProductFavorite ? "fill-red-500 text-red-500" : ""} />
     </Button>
   );
 }
