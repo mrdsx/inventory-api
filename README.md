@@ -1,6 +1,6 @@
 # Inventory API
 
-A backend service for managing products, suppliers, stock levels, and restocking operations.
+A fullstack application with dashboard for managing products, suppliers, stock levels, and restocking operations.
 
 ## Features
 
@@ -85,7 +85,7 @@ OR
 python app\main.py
 ```
 
-After running the project, the frontend can be accessed at http://localhost:3000/dashboard and backend API at http://127.0.0.1:3000.
+After running the project, the frontend can be accessed at http://localhost:3000/dashboard and backend API at http://127.0.0.1:3000. To run both frontend and backend you can also use scripts. Just go to `scripts` folder and run `run_app.bat` script.
 
 ## Running tests
 
