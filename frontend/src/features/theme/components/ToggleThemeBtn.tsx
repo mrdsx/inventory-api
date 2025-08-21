@@ -10,7 +10,7 @@ type ToggleThemeBtnProps = React.ComponentProps<"button"> &
     asChild?: boolean;
   };
 
-export function ToggleThemeBtn({ size, className }: ToggleThemeBtnProps) {
+export function ToggleThemeBtn({ size }: ToggleThemeBtnProps) {
   const { isDarkMode, setIsDarkMode } = useThemeStore();
 
   function handleClick() {
@@ -19,12 +19,7 @@ export function ToggleThemeBtn({ size, className }: ToggleThemeBtnProps) {
   }
 
   return (
-    <Button
-      className={className}
-      variant="outline"
-      onClick={handleClick}
-      size={size}
-    >
+    <Button variant="outline" onClick={handleClick} size={size}>
       {isDarkMode ? <Sun /> : <Moon />}
     </Button>
   );
