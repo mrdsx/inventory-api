@@ -17,7 +17,10 @@ const ROUTES = {
       create: "/orders/create",
       cart: "/orders/cart",
     },
-    products: "/products",
+    products: {
+      root: "/products",
+      favorite: "/products/favorite",
+    },
     suppliers: "/suppliers",
   },
   settings: "/settings",

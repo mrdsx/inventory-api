@@ -12,7 +12,10 @@ export function CreateOrderPageActions() {
     <div className="mb-1 flex justify-between">
       <GoBackBtn href={ROUTES.workspace.orders.root} />
       <div className="flex gap-2">
-        <NavigationBtn href={"/products/favorite"} variant="outline">
+        <NavigationBtn
+          href={ROUTES.workspace.products.favorite}
+          variant="outline"
+        >
           <Heart />
         </NavigationBtn>
         <NavigationBtn
