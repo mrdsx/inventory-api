@@ -7,7 +7,7 @@ export function RemoveProductFromCart({ product }: { product: Product }) {
 
   return (
     <DropdownMenuItem onClick={() => removeItem(product.id)}>
-      Add to cart
+      Remove from to cart
     </DropdownMenuItem>
   );
 }
