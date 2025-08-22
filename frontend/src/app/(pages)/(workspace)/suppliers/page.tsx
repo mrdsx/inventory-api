@@ -1,13 +1,10 @@
-import { apiClient, ENDPOINTS } from "@/app/lib";
 import { PageHeading } from "@/components";
 import { DataTable } from "@/components/ui";
-import { PaginatedSuppliersResponse } from "@/features/supplier";
+import { getSuppliers } from "@/features/supplier";
 import { SUPPLIERS_TABLE_COLUMNS } from "./suppliers-table-columns";
 
 export default async function SuppliersPage() {
-  const paginatedSuppliers = await apiClient<PaginatedSuppliersResponse>(
-    ENDPOINTS.suppliers,
-  );
+  const paginatedSuppliers = await getSuppliers();
 
   return (
     <>
