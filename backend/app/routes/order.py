@@ -56,17 +56,17 @@ async def get_orders(
 ):
     set_params(Params(page=page, size=size))
     query = build_get_orders_query(count, order_by_recent, limit)
-    result = await session.execute(query)
+    results = await session.execute(query)
 
     if not count:
         db_orders = [
             await build_order_public_schema(order, supplier, session)
-            for order, supplier in result
+            for order, supplier in results
             if status is None or order.status == status
         ]
 
         return paginate(db_orders)
-    return get_orders_count(status, result)
+    return get_orders_count(status, results)
 
 
 @router.get("/orders/{order_id}", response_model=OrderPublicSchema)
