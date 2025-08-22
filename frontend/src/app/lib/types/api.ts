@@ -4,8 +4,8 @@ export type BaseAPIErrorResponse = {
 
 export type PaginatedResponse<TResponse> = {
   items: TResponse;
-  total: number;
   page: number;
-  size: number;
   pages: number;
+  size: number;
+  total: number;
 };
