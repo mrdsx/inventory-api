@@ -1,3 +1,5 @@
+import { PageHeading } from "@/components";
+
 export default function SettingsPage() {
-  return <div>Settings</div>;
+  return <PageHeading>Settings</PageHeading>;
 }
