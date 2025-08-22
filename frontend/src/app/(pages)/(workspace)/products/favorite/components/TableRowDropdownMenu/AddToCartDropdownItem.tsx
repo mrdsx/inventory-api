@@ -2,12 +2,15 @@ import { DropdownMenuItem } from "@/components/ui";
 import { useOrderCartStore } from "@/features/order";
 import { Product } from "@/features/product";
 
-type AddProductToCartProps = {
+type AddToCartDropdownItemProps = {
   product: Product;
   disabled: boolean;
 };
 
-export function AddProductToCart({ product, disabled }: AddProductToCartProps) {
+export function AddToCartDropdownItem({
+  product,
+  disabled,
+}: AddToCartDropdownItemProps) {
   const addToCart = useOrderCartStore((state) => state.addToCart);
 
   return (

@@ -8,8 +8,8 @@ import {
 import { useOrderCartStore } from "@/features/order";
 import { Product } from "@/features/product";
 import { Ellipsis } from "lucide-react";
-import { AddProductToCart } from "./AddProductToCart";
-import { UnfavoriteProduct } from "./UnfavoriteProduct";
+import { AddToCartDropdownItem } from "./AddToCartDropdownItem";
+import { UnfavoriteDropdownItem } from "./UnfavoriteDropdownItem";
 
 export function TableRowDropdownMenu({ product }: { product: Product }) {
   const count = useOrderCartStore((state) => state.getItemCount(product.id));
@@ -24,8 +24,8 @@ export function TableRowDropdownMenu({ product }: { product: Product }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          <AddProductToCart product={product} disabled={isProductInCart} />
-          <UnfavoriteProduct product={product} />
+          <AddToCartDropdownItem product={product} disabled={isProductInCart} />
+          <UnfavoriteDropdownItem product={product} />
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

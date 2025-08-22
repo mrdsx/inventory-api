@@ -1,7 +1,7 @@
 import { DropdownMenuItem } from "@/components/ui";
 import { Product, useFavoriteProductsStore } from "@/features/product";
 
-export function UnfavoriteProduct({ product }: { product: Product }) {
+export function UnfavoriteDropdownItem({ product }: { product: Product }) {
   const removeFavoriteProductId = useFavoriteProductsStore(
     (state) => state.removeFavoriteProductId,
   );
