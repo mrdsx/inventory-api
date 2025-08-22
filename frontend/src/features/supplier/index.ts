@@ -1,1 +1,1 @@
-export type { SupplierResponse } from "./types";
+export * from "./types";
