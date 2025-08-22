@@ -1,23 +1,38 @@
 import { TableHead, TableHeader, TableRow } from "@/components/ui";
 
-export const TABLE_COLUMNS = [
-  "ID",
-  "Supplier",
-  "Created at",
-  "Status",
-  "Total Cost",
+export const ORDERS_TABLE_COLUMNS = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
+  {
+    accessorKey: "supplier_name",
+    header: "Supplier",
+  },
+  {
+    accessorKey: "date",
+    header: "Created at",
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+  },
+  {
+    accessorKey: "total_cost",
+    header: "Total Cost",
+  },
 ] as const;
 
 export function OrdersTableHeader() {
   return (
     <TableHeader className="sticky top-0">
       <TableRow className="table-header">
-        {TABLE_COLUMNS.map((item, index) => (
+        {ORDERS_TABLE_COLUMNS.map(({ header }, index) => (
           <TableHead
             className="p-2 text-start font-semibold"
-            key={item + index}
+            key={header + index}
           >
-            {item}
+            {header}
           </TableHead>
         ))}
       </TableRow>

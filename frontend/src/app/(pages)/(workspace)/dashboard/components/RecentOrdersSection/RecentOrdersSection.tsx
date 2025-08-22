@@ -2,9 +2,9 @@ import { ContentLoader } from "@/components";
 import { TableBody, TableCell, TableRow } from "@/components/ui";
 import {
   getRecentOrders,
+  ORDERS_TABLE_COLUMNS,
   OrdersTable,
   OrdersTableRow,
-  TABLE_COLUMNS,
 } from "@/features/order";
 import { Suspense } from "react";
 
@@ -30,7 +30,7 @@ export async function RecentOrdersSection() {
 function TableBodyContentLoader() {
   return (
     <TableRow>
-      <TableCell colSpan={TABLE_COLUMNS.length}>
+      <TableCell colSpan={ORDERS_TABLE_COLUMNS.length}>
         <ContentLoader />
       </TableCell>
     </TableRow>
