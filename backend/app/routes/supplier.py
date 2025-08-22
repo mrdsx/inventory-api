@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+from fastapi_pagination import Page, Params, paginate, set_page, set_params
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -12,11 +13,19 @@ from validation import validate_supplier_not_exists
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 
-@router.get("/suppliers", response_model=list[SupplierSchema])
-async def get_suppliers(session: AsyncSession = Depends(get_session)):
-    results = await session.execute(select(Supplier).order_by(Supplier.id))
+@router.get("/suppliers")
+async def get_suppliers(
+    limit: int | None = None,
+    page: int = 1,
+    size: int = 10,
+    session: AsyncSession = Depends(get_session),
+):
+    set_page(Page[SupplierSchema])
+    set_params(Params(page=page, size=size))
+    results = await session.execute(select(Supplier).order_by(Supplier.id).limit(limit))
+    db_suppliers = results.scalars().all()
 
-    return results.scalars().all()
+    return paginate(db_suppliers)
 
 
 @router.post("/suppliers", response_model=SupplierSchema)
