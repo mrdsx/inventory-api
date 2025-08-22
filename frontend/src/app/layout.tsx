@@ -2,9 +2,9 @@ import { Body, NavBar } from "@/components";
 import { SidebarProvider } from "@/components/ui";
 import { AppSidebar } from "@/features/sidebar";
 import { ReactQueryProvider } from "@/providers";
-import "@/styles/app.css";
-import "@/styles/globals.css";
 import type { Metadata } from "next";
+import "./styles/app.css";
+import "./styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Inventory API Dashboard",

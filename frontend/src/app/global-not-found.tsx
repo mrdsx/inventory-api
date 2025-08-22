@@ -1,8 +1,8 @@
 "use client";
 
 import { Body } from "@/components";
-import "@/styles/app.css";
-import "@/styles/globals.css";
+import "./styles/app.css";
+import "./styles/globals.css";
 import Link from "next/link";
 import { ROUTES } from "./lib";
 
