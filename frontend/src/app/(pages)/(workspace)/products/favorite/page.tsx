@@ -1,4 +1,4 @@
-import { PageHeading } from "@/components";
+import { GoBackBtn, PageHeading } from "@/components";
 import {
   ScrollArea,
   Table,
@@ -13,6 +13,7 @@ import { FavoriteProductsTableBodyContent } from "./components/FavoriteProductsT
 export default function FavoriteProductsPage() {
   return (
     <div>
+      <GoBackBtn className="mb-2" />
       <PageHeading className="mb-4">Favorite products</PageHeading>
       <ScrollArea className="h-120 rounded-sm border">
         <Table className="h-full rounded-sm">
