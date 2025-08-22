@@ -24,7 +24,7 @@ export function TableRowDropdownMenu({ product }: { product: Product }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          <AddProductToCart product={product} />
+          <AddProductToCart product={product} disabled={isProductInCart} />
           <UnfavoriteProduct product={product} />
         </DropdownMenuGroup>
       </DropdownMenuContent>
