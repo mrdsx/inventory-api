@@ -7,6 +7,7 @@ const PAGE_SIZES: Readonly<number[]> = [10, 25, 50];
 
 enum QUERY_KEYS {
   ORDERS = "orders",
+  SUPPLIERS = "suppliers",
 }
 
 const ROUTES = {
