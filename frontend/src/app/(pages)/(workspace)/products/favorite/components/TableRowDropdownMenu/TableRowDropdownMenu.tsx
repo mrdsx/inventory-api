@@ -9,7 +9,6 @@ import { useOrderCartStore } from "@/features/order";
 import { Product } from "@/features/product";
 import { Ellipsis } from "lucide-react";
 import { AddProductToCart } from "./AddProductToCart";
-import { RemoveProductFromCart } from "./RemoveProductFromCart";
 import { UnfavoriteProduct } from "./UnfavoriteProduct";
 
 export function TableRowDropdownMenu({ product }: { product: Product }) {
@@ -25,11 +24,7 @@ export function TableRowDropdownMenu({ product }: { product: Product }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          {isProductInCart ? (
-            <RemoveProductFromCart product={product} />
-          ) : (
-            <AddProductToCart product={product} />
-          )}
+          <AddProductToCart product={product} />
           <UnfavoriteProduct product={product} />
         </DropdownMenuGroup>
       </DropdownMenuContent>
