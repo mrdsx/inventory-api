@@ -1,5 +1,5 @@
 import { Body, NavBar } from "@/components";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui";
 import { AppSidebar } from "@/features/sidebar";
 import { ReactQueryProvider } from "@/providers";
 import "@/styles/app.css";
