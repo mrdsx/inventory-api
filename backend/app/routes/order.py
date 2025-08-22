@@ -36,8 +36,6 @@ from validation import validate_order_exists, validate_order_items
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 
-set_page(Page[OrderPublicSchema])
-
 
 @router.get(
     "/orders",
@@ -54,6 +52,7 @@ async def get_orders(
     status: OrderStatus | None = None,
     session: AsyncSession = Depends(get_session),
 ):
+    set_page(Page[OrderPublicSchema])
     set_params(Params(page=page, size=size))
     query = build_get_orders_query(count, order_by_recent, limit)
     results = await session.execute(query)
