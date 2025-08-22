@@ -19,9 +19,9 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 @router.get("/inventory_items", response_model=list[InventoryItemSchema])
 async def get_inventory_items(session: AsyncSession = Depends(get_session)):
-    result = await session.execute(select(InventoryItem).order_by(InventoryItem.id))
+    results = await session.execute(select(InventoryItem).order_by(InventoryItem.id))
 
-    return result.scalars().all()
+    return results.scalars().all()
 
 
 @router.get("/inventory_items/{inventory_item_id}", response_model=InventoryItemSchema)
@@ -79,10 +79,10 @@ async def delete_inventory_item_by_id(
 async def delete_inventory_items_by_order_id(
     order_id: int, session: AsyncSession = Depends(get_session)
 ):
-    result = await session.execute(
+    results = await session.execute(
         select(InventoryItem).where(InventoryItem.order_id == order_id)
     )
-    db_inventory_items = result.scalars().all()
+    db_inventory_items = results.scalars().all()
     await session.delete(db_inventory_items)
     await session.commit()
 
