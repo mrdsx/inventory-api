@@ -11,15 +11,14 @@ export async function getSuppliers(
 }
 
 export async function createSupplier(supplier: Supplier) {
-  return await apiClient<BaseAPIResponse>(
-    ENDPOINTS.suppliers,
-    {
+  return await apiClient<BaseAPIResponse>(ENDPOINTS.suppliers, {
+    requestInit: {
       body: JSON.stringify(supplier),
       headers: {
         "Content-Type": "application/json",
       },
       method: "POST",
     },
-    "Failed to create supplier",
-  );
+    errorMessage: "Failed to create supplier",
+  });
 }
