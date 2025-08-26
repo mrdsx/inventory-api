@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui";
 import "./stats-card.css";
 
-export function StatsSectionSkeleton({
+export function StatisticsSectionSkeleton({
   childrenCount,
 }: {
   childrenCount: number;

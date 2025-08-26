@@ -1,11 +1,11 @@
 import { PageHeading } from "@/components";
-import { RecentOrdersSection, StatsSection } from "./components";
+import { RecentOrdersSection, StatisticsSection } from "./components";
 
 export default function DashboardPage() {
   return (
     <>
       <PageHeading>Dashboard</PageHeading>
-      <StatsSection />
+      <StatisticsSection />
       <RecentOrdersSection />
     </>
   );
