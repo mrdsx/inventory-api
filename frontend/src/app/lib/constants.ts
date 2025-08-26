@@ -24,6 +24,7 @@ const ROUTES = {
     },
     suppliers: {
       root: "/suppliers",
+      create: "/suppliers/create",
     },
   },
   settings: "/settings",
