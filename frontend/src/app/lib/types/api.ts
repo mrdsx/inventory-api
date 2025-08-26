@@ -1,3 +1,7 @@
+export type BaseAPIResponse = {
+  message: string;
+};
+
 export type BaseAPIErrorResponse = {
   detail: string;
 };
