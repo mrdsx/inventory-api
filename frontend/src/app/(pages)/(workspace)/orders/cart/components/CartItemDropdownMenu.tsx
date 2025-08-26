@@ -2,12 +2,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui";
 import { CartItem, useOrderCartStore } from "@/features/order";
-import { Ellipsis } from "lucide-react";
+import { Ellipsis, Trash2 } from "lucide-react";
 
 export function CartItemDropdownMenu({ item }: { item: CartItem }) {
   const removeItem = useOrderCartStore((state) => state.removeItem);
@@ -18,12 +16,11 @@ export function CartItemDropdownMenu({ item }: { item: CartItem }) {
         <Ellipsis size={14} />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Cart item</DropdownMenuLabel>
-        <DropdownMenuSeparator />
         <DropdownMenuItem
           variant="destructive"
           onClick={() => removeItem(item.id)}
         >
+          <Trash2 />
           Remove
         </DropdownMenuItem>
       </DropdownMenuContent>
