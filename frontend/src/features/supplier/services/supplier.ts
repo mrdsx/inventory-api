@@ -7,6 +7,7 @@ export async function getSuppliers(
 ): Promise<PaginatedSuppliersResponse> {
   return await apiClient<PaginatedSuppliersResponse>(
     `${ENDPOINTS.suppliers}?page=${page}&size=${itemsPerPage}`,
+    { errorMessage: "Failed to fetch suppliers" },
   );
 }
 

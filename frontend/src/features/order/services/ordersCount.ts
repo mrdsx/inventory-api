@@ -8,7 +8,11 @@ export async function getOrdersCount(
   if (status !== undefined) {
     return await apiClient<OrdersCountResponse>(
       `${ENDPOINTS.orders}?count=true&status=${status}`,
+      { errorMessage: "Failed to fetch orders count" },
     );
   }
-  return await apiClient<OrdersCountResponse>(`${ENDPOINTS.orders}?count=true`);
+  return await apiClient<OrdersCountResponse>(
+    `${ENDPOINTS.orders}?count=true`,
+    { errorMessage: "Failed to fetch orders count" },
+  );
 }
