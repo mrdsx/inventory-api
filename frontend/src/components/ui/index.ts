@@ -11,5 +11,6 @@ export { Separator } from "./separator";
 export * from "./sheet";
 export * from "./sidebar";
 export { Skeleton } from "./skeleton";
+export { Toaster } from "./sonner";
 export * from "./table";
 export * from "./tooltip";
