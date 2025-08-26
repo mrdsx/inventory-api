@@ -15,7 +15,7 @@ export default function FavoriteProductsPage() {
     <div>
       <GoBackBtn className="mb-2" />
       <PageHeading className="mb-4">Favorite products</PageHeading>
-      <ScrollArea className="h-120 rounded-sm border">
+      <ScrollArea className="h-100 rounded-sm border">
         <Table className="h-full rounded-sm">
           <TableHeader className="table-header sticky top-0">
             <TableRow>
