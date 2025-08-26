@@ -2,11 +2,11 @@
 
 import { toast } from "sonner";
 
-export async function handleAPIFetch(
-  callbackFn: () => void | Promise<void>,
-): Promise<void> {
+export async function handleAPIFetch<T>(
+  callbackFn: () => Promise<T>,
+): Promise<T | undefined> {
   try {
-    await callbackFn();
+    return await callbackFn();
   } catch (error) {
     if (error instanceof Error) {
       toast.error(error.message);
