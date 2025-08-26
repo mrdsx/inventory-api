@@ -37,7 +37,7 @@ const items: SidebarItem[] = [
     title: "Orders",
   },
   {
-    link: workspace.suppliers,
+    link: workspace.suppliers.root,
     icon: <Users />,
     title: "Suppliers",
   },

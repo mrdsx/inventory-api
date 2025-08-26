@@ -22,7 +22,9 @@ const ROUTES = {
       root: "/products",
       favorite: "/products/favorite",
     },
-    suppliers: "/suppliers",
+    suppliers: {
+      root: "/suppliers",
+    },
   },
   settings: "/settings",
 } satisfies Routes;
