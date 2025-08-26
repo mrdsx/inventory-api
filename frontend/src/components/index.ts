@@ -1,3 +1,4 @@
+export { AppToaster } from "./AppToaster";
 export { Body } from "./Body";
 export { ContentLoader } from "./ContentLoader";
 export { GoBackBtn } from "./GoBackBtn";

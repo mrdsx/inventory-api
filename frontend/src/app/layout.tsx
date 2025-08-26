@@ -1,4 +1,5 @@
 import { Body, NavBar } from "@/components";
+import { AppToaster } from "@/components/AppToaster";
 import { SidebarProvider } from "@/components/ui";
 import { AppSidebar } from "@/features/sidebar";
 import { ReactQueryProvider } from "@/providers";
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Body>
+        <AppToaster />
         <ReactQueryProvider>
           <SidebarProvider>
             <AppSidebar />
