@@ -28,7 +28,7 @@ async def get_suppliers(
     return paginate(db_suppliers)
 
 
-@router.post("/suppliers", response_model=SupplierSchema)
+@router.post("/suppliers")
 async def create_supplier(
     supplier: CreateSupplierSchema, session: AsyncSession = Depends(get_session)
 ):
@@ -39,7 +39,7 @@ async def create_supplier(
     await session.commit()
     await session.refresh(new_supplier)
 
-    return new_supplier
+    return {"message": "Successfully created new supplier"}
 
 
 @router.put("/suppliers/{id}", response_model=SupplierSchema)
