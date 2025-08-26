@@ -29,10 +29,10 @@ const ROUTES = {
   settings: "/settings",
 } satisfies Routes;
 
-const SEARCH_PARAMS_KEYS = {
-  ITEMS_PER_PAGE: "items_per_page",
-  PAGE: "page",
-} as const;
+enum SEARCH_PARAMS_KEYS {
+  ITEMS_PER_PAGE = "items_per_page",
+  PAGE = "page",
+}
 
 export {
   DEFAULT_PAGE,
