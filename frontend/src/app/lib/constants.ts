@@ -6,6 +6,7 @@ export const DEFAULT_PAGE_SIZE = 10;
 export const PAGE_SIZES: Readonly<number[]> = [10, 25, 50];
 
 export enum QUERY_KEYS {
+  INVENTORY_ITEMS = "inventory_items",
   ORDERS = "orders",
   SUPPLIERS = "suppliers",
 }
