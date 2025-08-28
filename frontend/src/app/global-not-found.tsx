@@ -1,10 +1,10 @@
 "use client";
 
 import { Body } from "@/components";
-import "./styles/app.css";
-import "./styles/globals.css";
 import Link from "next/link";
 import { ROUTES } from "./lib";
+import "./styles/app.css";
+import "./styles/globals.css";
 
 export default function GlobalNotFoundPage() {
   return (
@@ -12,7 +12,7 @@ export default function GlobalNotFoundPage() {
       <Body>
         <div className="grid min-h-screen place-content-center">
           <div className="card bg-background p-10 text-center">
-            <h1 className="mb-2 text-6xl font-extrabold text-red-500">404</h1>
+            <h1 className="mb-2 text-2xl font-extrabold text-red-500">404</h1>
             <h2 className="text-foreground mb-4 text-2xl font-semibold">
               Page Not Found
             </h2>
