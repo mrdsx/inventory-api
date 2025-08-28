@@ -164,3 +164,7 @@
     @apply w-fit cursor-pointer;
   }
 }
+
+nextjs-portal {
+  display: none;
+}
