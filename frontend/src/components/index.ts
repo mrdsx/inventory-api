@@ -1,6 +1,7 @@
 export { AppToaster } from "./AppToaster";
 export { Body } from "./Body";
 export { ContentLoader } from "./ContentLoader";
+export { ErrorCard } from "./ErrorCard";
 export { GoBackBtn } from "./GoBackBtn";
 export { NavBar } from "./NavBar";
 export { NavigationBtn } from "./NavigationBtn";
