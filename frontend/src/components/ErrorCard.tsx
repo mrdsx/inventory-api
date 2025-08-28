@@ -9,18 +9,20 @@ import { Button, Card, CardContent, CardHeader, CardTitle } from "./ui";
 export function ErrorCard({
   title = "Uncaught Error",
   message = "Oops! Something went wrong!",
+  toastMessage = "Failed to load data",
   centerContent = false,
   error,
   reset,
 }: Partial<{
   title: string;
   message: string;
+  toastMessage?: string;
   centerContent: boolean;
 }> &
   ErrorBoundaryProps) {
   useEffect(() => {
-    toast.error("Dashboard failed to load.");
-    console.error("Dashboard error:", error);
+    toast.error(toastMessage);
+    console.error("Error:", error);
   }, [error]);
 
   return (
@@ -38,7 +40,7 @@ export function ErrorCard({
       <CardContent>
         <p className="text-muted-foreground mb-3 text-sm">{message}</p>
         <pre className="bg-muted text-destructive rounded-md p-3 font-mono text-xs whitespace-pre-wrap">
-          {error.message}
+          {error.name}: {error.message}
         </pre>
         <Button onClick={() => reset()} variant="destructive" className="mt-4">
           Try Again

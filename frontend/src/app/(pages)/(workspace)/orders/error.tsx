@@ -8,6 +8,7 @@ export default function OrdersError(props: ErrorBoundaryProps) {
     <ErrorCard
       title="Orders Error"
       message="Oops! Something went wrong while loading orders"
+      toastMessage="Failed to load orders"
       {...props}
     />
   );
