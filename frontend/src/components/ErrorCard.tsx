@@ -7,16 +7,17 @@ import { toast } from "sonner";
 import { Button, Card, CardContent, CardHeader, CardTitle } from "./ui";
 
 export function ErrorCard({
-  title,
-  message,
-  centerContent,
+  title = "Uncaught Error",
+  message = "Oops! Something went wrong!",
+  centerContent = false,
   error,
   reset,
-}: {
+}: Partial<{
   title: string;
   message: string;
-  centerContent?: boolean;
-} & ErrorBoundaryProps) {
+  centerContent: boolean;
+}> &
+  ErrorBoundaryProps) {
   useEffect(() => {
     toast.error("Dashboard failed to load.");
     console.error("Dashboard error:", error);

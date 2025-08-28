@@ -9,12 +9,7 @@ export default function GlobalError(props: ErrorBoundaryProps) {
       <Body>
         <div className="grid min-h-screen place-content-center">
           <div className="w-[400px]">
-            <ErrorCard
-              title="Uncaught error"
-              message="Oops! Something went wrong!"
-              centerContent
-              {...props}
-            />
+            <ErrorCard centerContent {...props} />
           </div>
         </div>
       </Body>
