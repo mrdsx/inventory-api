@@ -6,6 +6,13 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 import { Button, Card, CardContent, CardHeader, CardTitle } from "./ui";
 
+type ErrorCardProps = Partial<{
+  title: string;
+  description: string;
+  toastMessage?: string;
+  centerContent: boolean;
+}>;
+
 export function ErrorCard({
   title = "Uncaught Error",
   description = "Oops! Something went wrong!",
@@ -13,13 +20,7 @@ export function ErrorCard({
   centerContent = false,
   error,
   reset,
-}: Partial<{
-  title: string;
-  message: string;
-  toastMessage?: string;
-  centerContent: boolean;
-}> &
-  ErrorBoundaryProps) {
+}: ErrorCardProps & ErrorBoundaryProps) {
   useEffect(() => {
     toast.error(toastMessage);
     console.error("Error:", error);
