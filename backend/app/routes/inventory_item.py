@@ -1,13 +1,21 @@
 from fastapi import APIRouter, Depends
+from fastapi_pagination import Page, Params, paginate, set_page, set_params
+from pydantic import PositiveInt
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_session
-from constants import API_ROUTER_PREFIX, InventoryItemResponseMsg
+from constants import (
+    API_ROUTER_PREFIX,
+    DEFAULT_PAGE_NUMBER,
+    DEFAULT_PAGE_SIZE,
+    InventoryItemResponseMsg,
+)
 from models import InventoryItem
 from schemas import (
     CreateInventoryItemSchema,
     InventoryItemSchema,
+    PaginatedResponse,
     UpdateInventoryItemSchema,
 )
 from services import find_inventory_item_by_id
@@ -17,11 +25,20 @@ from validation import validate_inventory_item_not_exists_by_sku
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 
-@router.get("/inventory_items", response_model=list[InventoryItemSchema])
-async def get_inventory_items(session: AsyncSession = Depends(get_session)):
+@router.get(
+    "/inventory_items", response_model=PaginatedResponse[list[InventoryItemSchema]]
+)
+async def get_inventory_items(
+    page: PositiveInt = DEFAULT_PAGE_NUMBER,
+    size: PositiveInt = DEFAULT_PAGE_SIZE,
+    session: AsyncSession = Depends(get_session),
+):
+    set_page(Page[InventoryItemSchema])
+    set_params(Params(page=page, size=size))
     results = await session.execute(select(InventoryItem).order_by(InventoryItem.id))
+    db_inventory_items = results.scalars().all()
 
-    return results.scalars().all()
+    return paginate(db_inventory_items)
 
 
 @router.get("/inventory_items/{inventory_item_id}", response_model=InventoryItemSchema)
