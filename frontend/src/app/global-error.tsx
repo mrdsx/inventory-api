@@ -1,11 +1,9 @@
 "use client";
 
 import { Body, ErrorCard } from "@/components";
+import { ErrorBoundaryProps } from "./lib";
 
-export default function GlobalError(props: {
-  error: Error;
-  reset: () => void;
-}) {
+export default function GlobalError(props: ErrorBoundaryProps) {
   return (
     <html>
       <Body>

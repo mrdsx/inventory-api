@@ -1,11 +1,9 @@
 "use client";
 
+import { ErrorBoundaryProps } from "@/app/lib";
 import { ErrorCard } from "@/components";
 
-export default function DashboardError(props: {
-  error: Error;
-  reset: () => void;
-}) {
+export default function DashboardError(props: ErrorBoundaryProps) {
   return (
     <ErrorCard
       title="Dashboard Error"

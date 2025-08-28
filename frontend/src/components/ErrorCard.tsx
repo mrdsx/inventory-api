@@ -1,5 +1,6 @@
 "use client";
 
+import { ErrorBoundaryProps } from "@/app/lib";
 import { AlertTriangle } from "lucide-react";
 import { useEffect } from "react";
 import { toast } from "sonner";
@@ -15,9 +16,7 @@ export function ErrorCard({
   title: string;
   message: string;
   centerContent?: boolean;
-  error: Error;
-  reset: () => void;
-}) {
+} & ErrorBoundaryProps) {
   useEffect(() => {
     toast.error("Dashboard failed to load.");
     console.error("Dashboard error:", error);
