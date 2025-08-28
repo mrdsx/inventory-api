@@ -26,7 +26,7 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 
 @router.get(
-    "/inventory_items", response_model=PaginatedResponse[list[InventoryItemSchema]]
+    "/inventory-items", response_model=PaginatedResponse[list[InventoryItemSchema]]
 )
 async def get_inventory_items(
     page: PositiveInt = DEFAULT_PAGE_NUMBER,
@@ -41,7 +41,7 @@ async def get_inventory_items(
     return paginate(db_inventory_items)
 
 
-@router.get("/inventory_items/{inventory_item_id}", response_model=InventoryItemSchema)
+@router.get("/inventory-items/{inventory_item_id}", response_model=InventoryItemSchema)
 async def get_inventory_item_by_id(
     inventory_item_id: int, session: AsyncSession = Depends(get_session)
 ):
@@ -50,7 +50,7 @@ async def get_inventory_item_by_id(
     return db_inventory_item
 
 
-@router.post("/inventory_items")
+@router.post("/inventory-items")
 async def create_inventory_item(
     inventory_item: CreateInventoryItemSchema,
     session: AsyncSession = Depends(get_session),
@@ -64,7 +64,7 @@ async def create_inventory_item(
     return {"message": "Successfully added new inventory item"}
 
 
-@router.put("/inventory_items/{inventory_item_id}", response_model=InventoryItemSchema)
+@router.put("/inventory-items/{inventory_item_id}", response_model=InventoryItemSchema)
 async def update_inventory_item_by_id(
     inventory_item_id: int,
     inventory_item: UpdateInventoryItemSchema,
@@ -80,7 +80,7 @@ async def update_inventory_item_by_id(
     return db_inventory_item
 
 
-@router.delete("/inventory_items/{inventory_item_id}")
+@router.delete("/inventory-items/{inventory_item_id}")
 async def delete_inventory_item_by_id(
     inventory_item_id: int, session: AsyncSession = Depends(get_session)
 ):
@@ -91,7 +91,7 @@ async def delete_inventory_item_by_id(
     return {"message": InventoryItemResponseMsg.inventory_item_deleted}
 
 
-@router.delete("/inventory_items/{order_id}")
+@router.delete("/inventory-items/{order_id}")
 async def delete_inventory_items_by_order_id(
     order_id: int, session: AsyncSession = Depends(get_session)
 ):
