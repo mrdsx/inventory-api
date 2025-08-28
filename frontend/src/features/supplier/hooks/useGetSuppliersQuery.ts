@@ -22,6 +22,8 @@ export function useGetSuppliersQuery() {
   const query = useQuery({
     queryKey: [QUERY_KEYS.SUPPLIERS, page, itemsPerPage],
     queryFn: () => getSuppliers(page, itemsPerPage),
+    throwOnError: true,
+    retry: false,
   });
 
   return { ...query };
