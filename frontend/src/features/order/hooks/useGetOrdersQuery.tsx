@@ -24,6 +24,8 @@ export function useGetOrdersQuery() {
   const query = useQuery({
     queryKey: [QUERY_KEYS.ORDERS, page, itemsPerPage],
     queryFn: () => getOrders(page, itemsPerPage),
+    throwOnError: true,
+    retry: false,
   });
 
   return { ...query };
