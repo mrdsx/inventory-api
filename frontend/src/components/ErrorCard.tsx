@@ -8,11 +8,13 @@ import { Button, Card, CardContent, CardHeader, CardTitle } from "./ui";
 export function ErrorCard({
   title,
   message,
+  centerContent,
   error,
   reset,
 }: {
   title: string;
   message: string;
+  centerContent?: boolean;
   error: Error;
   reset: () => void;
 }) {
@@ -22,9 +24,13 @@ export function ErrorCard({
   }, [error]);
 
   return (
-    <Card className="border-destructive">
+    <Card
+      className={`border-destructive ${centerContent ? "text-center" : ""}`}
+    >
       <CardHeader>
-        <CardTitle className="text-destructive flex items-center gap-2">
+        <CardTitle
+          className={`text-destructive flex items-center gap-2 ${centerContent ? "mx-auto" : ""}`}
+        >
           <AlertTriangle className="size-5" />
           {title}
         </CardTitle>
