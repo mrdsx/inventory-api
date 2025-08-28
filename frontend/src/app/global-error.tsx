@@ -1,20 +1,8 @@
 "use client";
 
-import { Body } from "@/components";
-import {
-  Button,
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui";
-import { AlertCircle } from "lucide-react";
+import { Body, ErrorCard } from "@/components";
 
-export default function GlobalError({
-  error,
-  reset,
-}: {
+export default function GlobalError(props: {
   error: Error;
   reset: () => void;
 }) {
@@ -22,30 +10,14 @@ export default function GlobalError({
     <html>
       <Body>
         <div className="grid min-h-screen place-content-center">
-          <Card className="border-destructive/50 w-[400px] text-center shadow-lg">
-            <CardHeader className="flex items-center justify-center space-x-2">
-              <AlertCircle className="text-destructive size-8" />
-              <CardTitle className="text-destructive text-xl font-bold">
-                Something went wrong
-              </CardTitle>
-            </CardHeader>
-
-            <CardContent>
-              <p className="text-muted-foreground grid gap-2 text-sm">
-                Error message:
-                <pre className="bg-muted text-destructive rounded-md p-3 font-mono whitespace-pre-wrap">
-                  {error.message}
-                  <br />
-                </pre>
-              </p>
-            </CardContent>
-
-            <CardFooter className="mx-auto">
-              <Button variant="destructive" onClick={() => reset()}>
-                Try again
-              </Button>
-            </CardFooter>
-          </Card>
+          <div className="w-[400px]">
+            <ErrorCard
+              title="Uncaught error"
+              message="Oops! Something went wrong!"
+              centerContent
+              {...props}
+            />
+          </div>
         </div>
       </Body>
     </html>
