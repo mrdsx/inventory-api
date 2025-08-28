@@ -14,12 +14,8 @@ class InventoryItem(Base):
     __table_args__ = {"extend_existing": True}
     __tablename__ = TableName.INVENTORY_ITEMS.value
 
-    id: Mapped[int] = mapped_column(
-        Integer, primary_key=True, unique=True, autoincrement=True
-    )
-    sku: Mapped[str] = mapped_column(
-        String(INVENTORY_ITEM_SKU_LENGTH), primary_key=True, unique=True
-    )
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    sku: Mapped[str] = mapped_column(String(INVENTORY_ITEM_SKU_LENGTH), unique=True)
     order_id: Mapped[int] = mapped_column(
         Integer, ForeignKey(f"{TableName.ORDERS.value}.id"), nullable=False
     )
