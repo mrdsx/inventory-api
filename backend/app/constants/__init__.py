@@ -6,6 +6,7 @@ from .inventory_item import (
 )
 from .order import OrderStatus, OrderResponseMsg
 from .order_item import ORDER_ITEM_DESCRIPTION_LENGTH, OrderItemResponseMsg
+from .pagination import DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE
 from .supplier import SupplierResponseMsg
 
 API_ROUTER_PREFIX = "/api/v1"
@@ -25,6 +26,9 @@ __all__ = [
     "OrderItemResponseMsg",
     # * prefixes
     "API_ROUTER_PREFIX",
+    # * pagination
+    "DEFAULT_PAGE_NUMBER",
+    "DEFAULT_PAGE_SIZE",
     # * supplier
     "SupplierResponseMsg",
 ]

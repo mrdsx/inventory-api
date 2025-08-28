@@ -5,7 +5,13 @@ from pydantic import PositiveInt
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Union
 
-from constants import API_ROUTER_PREFIX, OrderItemResponseMsg, OrderStatus
+from constants import (
+    API_ROUTER_PREFIX,
+    DEFAULT_PAGE_NUMBER,
+    DEFAULT_PAGE_SIZE,
+    OrderItemResponseMsg,
+    OrderStatus,
+)
 from database import get_session
 from schemas import (
     CreateOrderSchema,
@@ -48,8 +54,8 @@ async def get_orders(
     count: bool = False,
     limit: PositiveInt | None = None,
     order_by_recent: bool = False,
-    page: PositiveInt = 1,
-    size: PositiveInt = 10,
+    page: PositiveInt = DEFAULT_PAGE_NUMBER,
+    size: PositiveInt = DEFAULT_PAGE_SIZE,
     status: OrderStatus | None = None,
     session: AsyncSession = Depends(get_session),
 ):

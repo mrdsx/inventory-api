@@ -5,7 +5,12 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_session
-from constants import API_ROUTER_PREFIX, SupplierResponseMsg
+from constants import (
+    API_ROUTER_PREFIX,
+    DEFAULT_PAGE_NUMBER,
+    DEFAULT_PAGE_SIZE,
+    SupplierResponseMsg,
+)
 from models import Supplier
 from schemas import CreateSupplierSchema, SupplierSchema
 from services import find_supplier_by_id
@@ -17,8 +22,8 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 @router.get("/suppliers")
 async def get_suppliers(
     limit: PositiveInt | None = None,
-    page: PositiveInt = 1,
-    size: PositiveInt = 10,
+    page: PositiveInt = DEFAULT_PAGE_NUMBER,
+    size: PositiveInt = DEFAULT_PAGE_SIZE,
     session: AsyncSession = Depends(get_session),
 ):
     set_page(Page[SupplierSchema])
