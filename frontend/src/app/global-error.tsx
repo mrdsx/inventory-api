@@ -23,9 +23,9 @@ export default function GlobalError({
       <Body>
         <div className="grid min-h-screen place-content-center">
           <Card className="border-destructive/50 w-[400px] text-center shadow-lg">
-            <CardHeader className="flex flex-col items-center space-y-2">
-              <AlertCircle className="text-destructive size-12" />
-              <CardTitle className="text-destructive text-2xl font-bold">
+            <CardHeader className="flex items-center justify-center space-x-2">
+              <AlertCircle className="text-destructive size-8" />
+              <CardTitle className="text-destructive text-xl font-bold">
                 Something went wrong
               </CardTitle>
             </CardHeader>
