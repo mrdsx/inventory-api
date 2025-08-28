@@ -33,7 +33,7 @@ async def get_inventory_item_by_id(
     return db_inventory_item
 
 
-@router.post("/inventory_items", response_model=InventoryItemSchema)
+@router.post("/inventory_items")
 async def create_inventory_item(
     inventory_item: CreateInventoryItemSchema,
     session: AsyncSession = Depends(get_session),
@@ -43,9 +43,8 @@ async def create_inventory_item(
     new_inventory_item = build_db_inventory_item(inventory_item)
     session.add(new_inventory_item)
     await session.commit()
-    await session.refresh(new_inventory_item)
 
-    return new_inventory_item
+    return {"message": "Successfully added new inventory item"}
 
 
 @router.put("/inventory_items/{inventory_item_id}", response_model=InventoryItemSchema)
