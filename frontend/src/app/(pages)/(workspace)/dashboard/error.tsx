@@ -7,7 +7,7 @@ export default function DashboardError(props: ErrorBoundaryProps) {
   return (
     <ErrorCard
       title="Dashboard Error"
-      message="Oops! Something went wrong while loading the dashboard."
+      description="Oops! Something went wrong while loading the dashboard."
       toastMessage="Dashboard failed to load"
       {...props}
     />

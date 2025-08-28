@@ -8,7 +8,7 @@ import { Button, Card, CardContent, CardHeader, CardTitle } from "./ui";
 
 export function ErrorCard({
   title = "Uncaught Error",
-  message = "Oops! Something went wrong!",
+  description = "Oops! Something went wrong!",
   toastMessage = "Failed to load data",
   centerContent = false,
   error,
@@ -38,7 +38,7 @@ export function ErrorCard({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-muted-foreground mb-3 text-sm">{message}</p>
+        <p className="text-muted-foreground mb-3 text-sm">{description}</p>
         <pre className="bg-muted text-destructive rounded-md p-3 font-mono text-xs whitespace-pre-wrap">
           {error.name}: {error.message}
         </pre>
