@@ -1,8 +1,9 @@
-from typing import Union
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi_pagination import paginate, set_page, set_params
 from fastapi_pagination.default import Page, Params
+from pydantic import PositiveInt
 from sqlalchemy.ext.asyncio import AsyncSession
+from typing import Union
 
 from constants import API_ROUTER_PREFIX, OrderItemResponseMsg, OrderStatus
 from database import get_session
@@ -45,10 +46,10 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 )
 async def get_orders(
     count: bool = False,
-    limit: int | None = None,
+    limit: PositiveInt | None = None,
     order_by_recent: bool = False,
-    page: int = 1,
-    size: int = 10,
+    page: PositiveInt = 1,
+    size: PositiveInt = 10,
     status: OrderStatus | None = None,
     session: AsyncSession = Depends(get_session),
 ):

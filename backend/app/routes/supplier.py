@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from fastapi_pagination import Page, Params, paginate, set_page, set_params
+from pydantic import PositiveInt
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -15,9 +16,9 @@ router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 @router.get("/suppliers")
 async def get_suppliers(
-    limit: int | None = None,
-    page: int = 1,
-    size: int = 10,
+    limit: PositiveInt | None = None,
+    page: PositiveInt = 1,
+    size: PositiveInt = 10,
     session: AsyncSession = Depends(get_session),
 ):
     set_page(Page[SupplierSchema])
