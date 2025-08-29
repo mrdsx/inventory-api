@@ -20,15 +20,17 @@ export default function SuppliersPage() {
   return (
     <>
       <PageHeading>Suppliers</PageHeading>
-      <NavigationBtn href={ROUTES.workspace.suppliers.create}>
-        Create Supplier
-      </NavigationBtn>
-      <DataTable
-        className="h-90"
-        columns={SUPPLIERS_TABLE_COLUMNS}
-        isLoading={isPending}
-        paginationData={paginatedSuppliers}
-      />
+      <div className="grid gap-2">
+        <NavigationBtn href={ROUTES.workspace.suppliers.create}>
+          Create Supplier
+        </NavigationBtn>
+        <DataTable
+          className="h-90"
+          columns={SUPPLIERS_TABLE_COLUMNS}
+          isLoading={isPending}
+          paginationData={paginatedSuppliers}
+        />
+      </div>
     </>
   );
 }

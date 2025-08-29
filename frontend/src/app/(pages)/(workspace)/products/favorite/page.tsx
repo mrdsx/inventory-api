@@ -13,25 +13,27 @@ import { FavoriteProductsTableBodyContent } from "./components/FavoriteProductsT
 
 export default function FavoriteProductsPage() {
   return (
-    <div>
-      <GoBackBtn className="mb-2" href={ROUTES.workspace.products.root} />
-      <PageHeading className="mb-4">Favorite products</PageHeading>
-      <ScrollArea className="h-100 rounded-sm border">
-        <Table className="h-full rounded-sm">
-          <TableHeader className="table-header sticky top-0">
-            <TableRow>
-              {tableColumns.map((item, index) => (
-                <TableHead className={item.headingClassName} key={index}>
-                  {item.title}
-                </TableHead>
-              ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <FavoriteProductsTableBodyContent />
-          </TableBody>
-        </Table>
-      </ScrollArea>
-    </div>
+    <>
+      <GoBackBtn href={ROUTES.workspace.products.root} />
+      <div className="space-y-2">
+        <PageHeading>Favorite products</PageHeading>
+        <ScrollArea className="h-100 rounded-sm border">
+          <Table className="h-full rounded-sm">
+            <TableHeader className="table-header sticky top-0">
+              <TableRow>
+                {tableColumns.map((item, index) => (
+                  <TableHead className={item.headingClassName} key={index}>
+                    {item.title}
+                  </TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <FavoriteProductsTableBodyContent />
+            </TableBody>
+          </Table>
+        </ScrollArea>
+      </div>
+    </>
   );
 }

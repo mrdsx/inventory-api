@@ -26,7 +26,7 @@ export default function RootLayout({
             <AppSidebar />
             <main className="mr-4 ml-2 w-full">
               <NavBar />
-              <div className="mt-4 grid gap-4">{children}</div>
+              <div className="mt-4 grid gap-2">{children}</div>
             </main>
           </SidebarProvider>
         </ReactQueryProvider>
