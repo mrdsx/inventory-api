@@ -24,5 +24,12 @@ export function GoBackBtn({
       Go back
     </Button>
   );
-  return href ? <Link href={href}>{button}</Link> : button;
+
+  return href ? (
+    <Link className="w-fit" href={href}>
+      {button}
+    </Link>
+  ) : (
+    button
+  );
 }

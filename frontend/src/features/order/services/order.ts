@@ -1,7 +1,13 @@
 import { apiClient, DEFAULT_PAGE_SIZE, ENDPOINTS } from "@/app/lib";
-import { PaginatedOrdersResponse } from "../types";
+import { OrderResponse, PaginatedOrdersResponse } from "../types";
 
 const { orders } = ENDPOINTS;
+
+export async function fetchOrderById(id: number): Promise<OrderResponse> {
+  return await apiClient<OrderResponse>(`${orders}/${id}`, {
+    errorMessage: `Failed to fetch order #${id}`,
+  });
+}
 
 export async function fetchOrders(
   page: number,

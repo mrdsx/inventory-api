@@ -1,2 +1,2 @@
-export { fetchOrders, fetchRecentOrders } from "./order";
+export * from "./order";
 export { fetchOrdersStatistics } from "./statistics";
