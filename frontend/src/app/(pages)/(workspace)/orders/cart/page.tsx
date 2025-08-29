@@ -6,7 +6,7 @@ export default function CartPage() {
     <div className="flex h-120 flex-col transition-colors">
       <div className="flex h-full flex-col rounded-md">
         <GoBackBtn className="mb-2" />
-        <PageHeading className="px-2">Cart</PageHeading>
+        <PageHeading>Cart</PageHeading>
         <Cart />
       </div>
     </div>
