@@ -1,2 +1,2 @@
-export { getOrders, getRecentOrders } from "./order";
-export { getOrdersStatistics } from "./statistics";
+export * from "./order";
+export { fetchOrdersStatistics } from "./statistics";

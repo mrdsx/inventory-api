@@ -1,13 +1,13 @@
 import { StatisticsItem } from "@/app/lib";
 import { ORDER_STATUS } from "../constants";
-import { getOrdersCount } from "./ordersCount";
+import { fetchOrdersCount } from "./ordersCount";
 
-export async function getOrdersStatistics(): Promise<StatisticsItem[]> {
+export async function fetchOrdersStatistics(): Promise<StatisticsItem[]> {
   const [ordersCount, canceledOrdersCount, pendingOrdersCount] =
     await Promise.all([
-      getOrdersCount(),
-      getOrdersCount(ORDER_STATUS.CANCELED),
-      getOrdersCount(ORDER_STATUS.IN_TRANSIT),
+      fetchOrdersCount(),
+      fetchOrdersCount(ORDER_STATUS.CANCELED),
+      fetchOrdersCount(ORDER_STATUS.IN_TRANSIT),
     ]);
 
   return [

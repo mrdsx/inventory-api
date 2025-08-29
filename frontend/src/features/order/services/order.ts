@@ -1,19 +1,27 @@
 import { apiClient, DEFAULT_PAGE_SIZE, ENDPOINTS } from "@/app/lib";
-import { PaginatedOrdersResponse } from "../types";
+import { OrderResponse, PaginatedOrdersResponse } from "../types";
 
-export async function getOrders(
+const { orders } = ENDPOINTS;
+
+export async function fetchOrderById(id: number): Promise<OrderResponse> {
+  return await apiClient<OrderResponse>(`${orders}/${id}`, {
+    errorMessage: `Failed to fetch order #${id}`,
+  });
+}
+
+export async function fetchOrders(
   page: number,
   itemsPerPage: number,
 ): Promise<PaginatedOrdersResponse> {
   return await apiClient<PaginatedOrdersResponse>(
-    `${ENDPOINTS.orders}?page=${page}&size=${itemsPerPage}`,
+    `${orders}?page=${page}&size=${itemsPerPage}`,
     { errorMessage: "Failed to fetch orders" },
   );
 }
 
-export async function getRecentOrders(): Promise<PaginatedOrdersResponse> {
+export async function fetchRecentOrders(): Promise<PaginatedOrdersResponse> {
   return await apiClient<PaginatedOrdersResponse>(
-    `${ENDPOINTS.orders}?order_by_recent=true&limit=${DEFAULT_PAGE_SIZE}&size=${DEFAULT_PAGE_SIZE}`,
+    `${orders}?order_by_recent=true&limit=${DEFAULT_PAGE_SIZE}&size=${DEFAULT_PAGE_SIZE}`,
     { errorMessage: "Failed to fetch recent orders" },
   );
 }

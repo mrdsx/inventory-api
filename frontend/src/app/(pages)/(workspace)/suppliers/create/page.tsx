@@ -2,10 +2,11 @@
 
 import { handleAPIFetch, ROUTES } from "@/app/lib";
 import { GoBackBtn } from "@/components";
-import { Button, Input, Label } from "@/components/ui";
-import { createSupplier, Supplier } from "@/features/supplier";
+import { Button } from "@/components/ui";
+import { postSupplier, Supplier } from "@/features/supplier";
 import { useRef } from "react";
 import { toast } from "sonner";
+import { CreateSupplierFormInputs } from "./CreateSupplierFormInputs";
 
 export default function CreateSupplierPage() {
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -21,7 +22,7 @@ export default function CreateSupplierPage() {
         name: nameInputRef.current.value,
         contact_email: emailInputRef.current.value,
       };
-      const response = await createSupplier(newSupplier);
+      const response = await postSupplier(newSupplier);
       toast.success(response.message);
 
       nameInputRef.current.value = "";
@@ -35,26 +36,10 @@ export default function CreateSupplierPage() {
       <div className="card p-6">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-end">
-            <div className="space-y-2">
-              <Label htmlFor="name">Supplier Name</Label>
-              <Input
-                id="name"
-                type="text"
-                placeholder="Enter supplier name"
-                required
-                ref={nameInputRef}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">E-mail</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter e-mail address"
-                required
-                ref={emailInputRef}
-              />
-            </div>
+            <CreateSupplierFormInputs
+              emailInputRef={emailInputRef}
+              nameInputRef={nameInputRef}
+            />
             <Button type="submit">Create Supplier</Button>
           </div>
         </form>

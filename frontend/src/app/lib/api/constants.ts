@@ -7,3 +7,7 @@ export const ENDPOINTS = {
   orders: "/orders",
   suppliers: "/suppliers",
 } satisfies Routes;
+
+export enum HTTP_CODES {
+  NOT_FOUND = 404,
+}

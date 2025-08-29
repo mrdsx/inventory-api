@@ -1,5 +1,6 @@
+import { notFound } from "next/navigation";
 import { Path } from "../types";
-import { BASE_API_URL } from "./constants";
+import { BASE_API_URL, HTTP_CODES } from "./constants";
 import { isBaseErrorResponse } from "./utils";
 
 type ApiClientOptions = {
@@ -15,6 +16,7 @@ export async function apiClient<TResponse extends Record<string, any>>(
   const data = await res.json();
 
   if (res.ok) return data;
+  if (res.status === HTTP_CODES.NOT_FOUND) notFound();
   if (isBaseErrorResponse(data)) throw new Error(data.detail);
 
   throw new Error(

@@ -1,7 +1,7 @@
 import { apiClient, BaseAPIResponse, ENDPOINTS } from "@/app/lib";
-import { PaginatedSuppliersResponse, Supplier } from "../types";
+import { PaginatedSuppliersResponse, Supplier } from "./types";
 
-export async function getSuppliers(
+export async function fetchSuppliers(
   page: number = 1,
   itemsPerPage: number = 10,
 ): Promise<PaginatedSuppliersResponse> {
@@ -11,7 +11,7 @@ export async function getSuppliers(
   );
 }
 
-export async function createSupplier(supplier: Supplier) {
+export async function postSupplier(supplier: Supplier) {
   return await apiClient<BaseAPIResponse>(ENDPOINTS.suppliers, {
     requestInit: {
       body: JSON.stringify(supplier),
