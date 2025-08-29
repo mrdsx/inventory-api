@@ -1,6 +1,6 @@
 import { getOrdersStatistics } from "@/features/order";
 import { Suspense } from "react";
-import { StatsCard } from "./StatsCard";
+import { StatisticsCard } from "./StatisticsCard";
 import { StatisticsSectionSkeleton } from "./StatisticsSectionSkeleton";
 
 export async function StatisticsSection() {
@@ -14,7 +14,7 @@ export async function StatisticsSection() {
         }
       >
         {statisticsData.map((stats, index) => (
-          <StatsCard stats={stats} key={stats.title + index} />
+          <StatisticsCard stats={stats} key={stats.title + index} />
         ))}
       </Suspense>
     </div>
