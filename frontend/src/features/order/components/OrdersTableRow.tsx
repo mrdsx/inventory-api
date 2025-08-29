@@ -1,9 +1,10 @@
 import { TableCell, TableRow } from "@/components/ui";
 import { OrderResponse } from "@/features/order";
-import { getOrderStatusTableCellStyles } from "../utils/orderStatusUtils";
+import { cn } from "@/lib/utils";
+import { getOrderStatusClassName } from "../utils/orderStatusUtils";
 
 export function OrdersTableRow({ order }: { order: OrderResponse }) {
-  const orderStatusStyles = getOrderStatusTableCellStyles(order.status);
+  const orderStatusClassName = getOrderStatusClassName(order.status);
 
   return (
     <TableRow>
@@ -15,7 +16,7 @@ export function OrdersTableRow({ order }: { order: OrderResponse }) {
       </TableCell>
       <TableCell className="text-start font-normal">{order.date}</TableCell>
       <TableCell className="text-start font-normal">
-        <span className={`rounded-md px-3 py-1 ${orderStatusStyles}`}>
+        <span className={cn("rounded-md px-3 py-1", orderStatusClassName)}>
           {order.status}
         </span>
       </TableCell>
