@@ -1,6 +1,6 @@
 "use client";
 
-import { handleAPIFetch } from "@/app/lib";
+import { handleAPIFetch, ROUTES } from "@/app/lib";
 import { GoBackBtn } from "@/components";
 import { Button, Input, Label } from "@/components/ui";
 import { createSupplier, Supplier } from "@/features/supplier";
@@ -31,7 +31,7 @@ export default function CreateSupplierPage() {
 
   return (
     <>
-      <GoBackBtn />
+      <GoBackBtn href={ROUTES.workspace.suppliers.root} />
       <div className="card p-6">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-end">

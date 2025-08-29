@@ -1,3 +1,4 @@
+import { ROUTES } from "@/app/lib";
 import { GoBackBtn, PageHeading } from "@/components";
 import {
   ScrollArea,
@@ -13,7 +14,7 @@ import { FavoriteProductsTableBodyContent } from "./components/FavoriteProductsT
 export default function FavoriteProductsPage() {
   return (
     <div>
-      <GoBackBtn className="mb-2" />
+      <GoBackBtn className="mb-2" href={ROUTES.workspace.products.root} />
       <PageHeading className="mb-4">Favorite products</PageHeading>
       <ScrollArea className="h-100 rounded-sm border">
         <Table className="h-full rounded-sm">
