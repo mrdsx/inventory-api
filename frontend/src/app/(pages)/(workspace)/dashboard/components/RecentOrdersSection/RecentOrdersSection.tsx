@@ -1,7 +1,7 @@
 import { ContentLoader } from "@/components";
 import { TableBody, TableCell, TableRow } from "@/components/ui";
 import {
-  getRecentOrders,
+  fetchRecentOrders,
   ORDERS_TABLE_COLUMNS,
   OrdersTable,
   OrdersTableRow,
@@ -9,7 +9,7 @@ import {
 import { Suspense } from "react";
 
 export async function RecentOrdersSection() {
-  const { items: orders } = await getRecentOrders();
+  const { items: orders } = await fetchRecentOrders();
 
   return (
     <div className="card grid gap-2">

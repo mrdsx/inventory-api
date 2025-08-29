@@ -1,2 +1,2 @@
-export { getInventoryItems } from "./services/inventory";
+export { fetchInventoryItems } from "./services/inventory";
 export * from "./types";
