@@ -8,9 +8,6 @@ export function OrdersTableRow({ order }: { order: OrderResponse }) {
 
   return (
     <TableRow>
-      <TableCell className="px-2 py-3 text-start font-normal">
-        {order.id}
-      </TableCell>
       <TableCell className="w-[20%] text-start font-normal">
         {order.supplier_name}
       </TableCell>
