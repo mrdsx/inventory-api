@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui";
-import "./stats-card.css";
+import "./statistic-card.css";
 
 export function StatisticsSectionSkeleton({
   childrenCount,
