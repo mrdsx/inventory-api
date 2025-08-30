@@ -17,7 +17,7 @@ export function Cart() {
 
   return (
     <>
-      <ScrollArea className="card mt-2 mb-4 h-80">
+      <ScrollArea className="mt-2 mb-4 h-80">
         <CartItemsList />
       </ScrollArea>
       <div className="flex items-center justify-between px-4">

@@ -6,7 +6,7 @@ export function CartItemsList() {
   const cart = useOrderCartStore((state) => state.cart);
 
   return (
-    <ul className="divide-y-1">
+    <ul className="grid gap-2">
       {cart.map((item) => (
         <CartItemRow key={item.id}>
           <span className="mr-4 w-[30%]">{item.name}</span>

@@ -12,6 +12,16 @@ export type OrderResponse = {
   total_cost: number;
 };
 
+export type OrderItemResponse = {
+  id: number;
+  order_id: number;
+  name: string;
+  description: string;
+  category: string;
+  cost: number;
+  quantity: number;
+};
+
 export type OrdersCountResponse = {
   orders_count: number;
 };

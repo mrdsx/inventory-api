@@ -6,7 +6,7 @@ import { Button } from "@/components/ui";
 import { postSupplier, Supplier } from "@/features/supplier";
 import { useRef } from "react";
 import { toast } from "sonner";
-import { CreateSupplierFormInputs } from "./CreateSupplierFormInputs";
+import { CreateSupplierFormInputs } from "./components/CreateSupplierFormInputs";
 
 export default function CreateSupplierPage() {
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -33,7 +33,7 @@ export default function CreateSupplierPage() {
   return (
     <>
       <GoBackBtn href={ROUTES.workspace.suppliers.root} />
-      <div className="card p-6">
+      <div className="card bg-card p-6">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-end">
             <CreateSupplierFormInputs

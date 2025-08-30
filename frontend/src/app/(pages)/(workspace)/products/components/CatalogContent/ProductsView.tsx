@@ -10,7 +10,8 @@ import { cn } from "@/lib/utils";
 
 export function ProductsView({ products }: { products: Product[] }) {
   const productView = useProductViewStore((state) => state.productView);
-  const { cardClassName, layoutClassName } = getProductViewStyles(productView);
+  const { cardClassName, layoutClassName } =
+    getProductViewClassNames(productView);
 
   return (
     <div className={cn("grid gap-2", layoutClassName)}>
@@ -27,7 +28,7 @@ export function ProductsView({ products }: { products: Product[] }) {
   );
 }
 
-function getProductViewStyles(productView: ProductView) {
+function getProductViewClassNames(productView: ProductView) {
   const layoutClassName =
     productView === "grid"
       ? "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"

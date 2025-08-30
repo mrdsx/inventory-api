@@ -1,9 +1,9 @@
+import { Path } from "@/app/lib";
 import { VariantProps } from "class-variance-authority";
-import Link, { LinkProps } from "next/link";
+import Link from "next/link";
 import { Button, buttonVariants } from "./ui";
 
-type NavigationBtnProps = LinkProps &
-  React.ComponentProps<"button"> &
+type NavigationBtnProps = { href: Path } & React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants>;
 
 export function NavigationBtn({

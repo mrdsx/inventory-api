@@ -1,6 +1,5 @@
 import { ROUTES } from "@/app/lib";
-import { GoBackBtn, PageHeading } from "@/components";
-import { Button } from "@/components/ui";
+import { GoBackBtn, NavigationBtn, PageHeading } from "@/components";
 import { fetchOrderById } from "@/features/order";
 import { Suspense } from "react";
 import { OrderInfo } from "./components/OrderInfo";
@@ -21,7 +20,9 @@ export default async function OrderPage({
         <Suspense fallback={<OrderInfoSkeleton />}>
           <PageHeading>Order #{id}</PageHeading>
           <OrderInfo order={order} />
-          <Button>View items</Button>
+          <NavigationBtn href={`${ROUTES.workspace.orders.root}/${id}/items`}>
+            View items
+          </NavigationBtn>
         </Suspense>
       </div>
     </>
