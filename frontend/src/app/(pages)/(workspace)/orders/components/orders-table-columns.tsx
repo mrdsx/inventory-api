@@ -1,0 +1,69 @@
+"use client";
+
+import { ROUTES } from "@/app/lib";
+import {
+  Button,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui";
+import { OrderResponse, ORDERS_TABLE_COLUMNS } from "@/features/order";
+import { ColumnDef } from "@tanstack/react-table";
+import { Copy, FileText, ListOrdered, MoreHorizontal } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+export const ordersTableColumns: ColumnDef<OrderResponse>[] = [
+  ...ORDERS_TABLE_COLUMNS.map(({ header, accessorKey }) => ({
+    header,
+    accessorKey,
+  })),
+  {
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const order = row.original;
+      const router = useRouter();
+
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="size-8 p-0">
+              <MoreHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() =>
+                navigator.clipboard.writeText(JSON.stringify(order.id))
+              }
+            >
+              <Copy />
+              Copy order ID
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={() =>
+                router.push(`${ROUTES.workspace.orders.root}/${order.id}`)
+              }
+            >
+              <FileText />
+              View order
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() =>
+                router.push(`${ROUTES.workspace.orders.root}/${order.id}/items`)
+              }
+            >
+              <ListOrdered />
+              View order items
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
+  },
+];
