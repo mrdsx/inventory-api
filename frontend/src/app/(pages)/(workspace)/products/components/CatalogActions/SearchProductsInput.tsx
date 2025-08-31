@@ -4,13 +4,13 @@ import { SearchInput } from "@/components";
 import { useProductSearchStore } from "@/features/product";
 
 export function SearchProductsInput() {
-  const { searchQuery, setSearchQuery } = useProductSearchStore();
+  const setSearchQuery = useProductSearchStore((state) => state.setSearchQuery);
+
+  function handleSearch(query: string) {
+    setSearchQuery(query);
+  }
 
   return (
-    <SearchInput
-      placeholder="Search products..."
-      onChange={(e) => setSearchQuery(e.target.value)}
-      value={searchQuery}
-    />
+    <SearchInput placeholder="Search products..." onSearch={handleSearch} />
   );
 }
