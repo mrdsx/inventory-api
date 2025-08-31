@@ -2,7 +2,8 @@ import { apiClient, ENDPOINTS, ROUTES } from "@/app/lib";
 import { GoBackBtn, PageHeading } from "@/components";
 import { ScrollArea } from "@/components/ui";
 import { OrderItemResponse } from "@/features/order";
-import { OrderItem } from "./components/OrderItem";
+import { OrderItemSearchInput } from "./components/OrderItemSearchInput";
+import { OrderItemsList } from "./components/OrderItemsList";
 
 const { orders } = ENDPOINTS;
 
@@ -26,14 +27,9 @@ export default async function OrderItemsPage({
       <PageHeading>
         Order #{id} - {orderItems.length} items
       </PageHeading>
-      <ScrollArea className="h-100">
-        <ul className="grid gap-2">
-          {orderItems.map((item) => (
-            <li key={item.id}>
-              <OrderItem item={item} />
-            </li>
-          ))}
-        </ul>
+      <OrderItemSearchInput />
+      <ScrollArea className="h-90">
+        <OrderItemsList orderItems={orderItems} />
       </ScrollArea>
       <span className="text-xl">Total cost: ${totalOrderItemsCost}</span>
     </>
