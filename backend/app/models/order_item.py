@@ -16,6 +16,9 @@ class OrderItem(Base):
         ForeignKey(f"{TableName.ORDERS.value}.id", ondelete="CASCADE"),
         nullable=False,
     )
+    supplier_id: Mapped[int] = mapped_column(
+        String, ForeignKey(f"{TableName.SUPPLIERS.value}.id"), nullable=False
+    )
     name: Mapped[str] = mapped_column(String, nullable=False)
     description: Mapped[str] = mapped_column(
         String(ORDER_ITEM_DESCRIPTION_LENGTH), nullable=False

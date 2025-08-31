@@ -16,7 +16,7 @@ from database import get_session
 from schemas import (
     CreateOrderSchema,
     OrdersCountSchema,
-    OrderItemSchema,
+    OrderItemPublicSchema,
     OrderPublicSchema,
     OrderSchema,
     PaginatedResponse,
@@ -32,6 +32,7 @@ from services import (
     save_inventory_items,
 )
 from utils import (
+    build_order_item_public_schema,
     build_order_public_schema,
     build_order_schema,
     build_get_orders_query,
@@ -83,14 +84,16 @@ async def get_order_by_id(order_id: int, session: AsyncSession = Depends(get_ses
     return await build_order_public_schema(db_order, db_supplier, session)
 
 
-@router.get("/orders/{order_id}/items", response_model=list[OrderItemSchema])
+@router.get("/orders/{order_id}/items", response_model=list[OrderItemPublicSchema])
 async def get_order_items_by_order_id(
     order_id: int, session: AsyncSession = Depends(get_session)
 ):
     await validate_order_exists(order_id, session)
     db_order_items = await find_order_items_by_order_id(order_id, session)
 
-    return db_order_items
+    return [
+        await build_order_item_public_schema(item, session) for item in db_order_items
+    ]
 
 
 @router.post("/orders", response_model=OrderSchema)

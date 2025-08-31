@@ -7,7 +7,7 @@ from .order import (
     get_orders_count,
     handle_update_order_status,
 )
-from .order_item import get_order_items_total_cost
+from .order_item import build_order_item_public_schema, get_order_items_total_cost
 
 __all__ = [
     # * datetime
@@ -21,5 +21,6 @@ __all__ = [
     "get_orders_count",
     "handle_update_order_status",
     # * order_item
+    "build_order_item_public_schema",
     "get_order_items_total_cost",
 ]
