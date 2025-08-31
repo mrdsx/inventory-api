@@ -28,7 +28,7 @@ export const ordersTableColumns: ColumnDef<OrderResponse>[] = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="size-8 p-0">
+            <Button className="p-0" size="xs" variant="ghost">
               <MoreHorizontal />
             </Button>
           </DropdownMenuTrigger>
