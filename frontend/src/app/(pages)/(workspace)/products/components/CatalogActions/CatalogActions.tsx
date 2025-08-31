@@ -2,7 +2,7 @@ import { OrderCartBtn } from "@/features/order";
 import { FavoriteProductsBtn } from "@/features/product";
 import { ProductGroupBySelect } from "./ProductGroupBySelect";
 import { ProductViewSelect } from "./ProductViewSelect";
-import { SearchProductsBar } from "./SearchProductsBar";
+import { SearchProductsInput } from "./SearchProductsInput";
 
 export function CatalogActions() {
   return (
@@ -17,7 +17,7 @@ export function CatalogActions() {
           <OrderCartBtn />
         </div>
       </div>
-      <SearchProductsBar />
+      <SearchProductsInput />
     </div>
   );
 }

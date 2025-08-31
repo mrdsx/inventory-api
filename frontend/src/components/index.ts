@@ -6,4 +6,4 @@ export { GoBackBtn } from "./GoBackBtn";
 export { NavBar } from "./NavBar";
 export { NavigationBtn } from "./NavigationBtn";
 export { PageHeading } from "./PageHeading";
-export { SearchBar } from "./SearchBar";
+export { SearchInput } from "./SearchInput";

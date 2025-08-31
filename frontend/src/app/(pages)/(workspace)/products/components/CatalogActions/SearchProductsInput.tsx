@@ -1,13 +1,13 @@
 "use client";
 
-import { SearchBar } from "@/components";
+import { SearchInput } from "@/components";
 import { useProductSearchStore } from "@/features/product";
 
-export function SearchProductsBar() {
+export function SearchProductsInput() {
   const { searchQuery, setSearchQuery } = useProductSearchStore();
 
   return (
-    <SearchBar
+    <SearchInput
       placeholder="Search products..."
       onChange={(e) => setSearchQuery(e.target.value)}
       value={searchQuery}

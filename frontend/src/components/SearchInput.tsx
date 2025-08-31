@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
 import { Input } from "./ui";
 
-export function SearchBar({
+export function SearchInput({
   className,
   ...props
 }: React.ComponentProps<"input">) {
