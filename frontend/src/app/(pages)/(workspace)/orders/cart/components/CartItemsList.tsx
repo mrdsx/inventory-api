@@ -1,9 +1,14 @@
+"use client";
+
 import { CartItemActions, useOrderCartStore } from "@/features/order";
 import { CartItemDropdownMenu } from "./CartItemDropdownMenu";
 import { CartItemRow } from "./CartItemRow";
+import { EmptyCartTitle } from "./EmptyCartTitle";
 
 export function CartItemsList() {
   const cart = useOrderCartStore((state) => state.cart);
+
+  if (cart.length === 0) return <EmptyCartTitle />;
 
   return (
     <ul className="grid gap-2">
