@@ -6,8 +6,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui";
 import { OrderResponse, ORDERS_TABLE_COLUMNS } from "@/features/order";
@@ -35,7 +33,6 @@ export const ordersTableColumns: ColumnDef<OrderResponse>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() =>
                 navigator.clipboard.writeText(JSON.stringify(order.id))
@@ -44,7 +41,6 @@ export const ordersTableColumns: ColumnDef<OrderResponse>[] = [
               <Copy />
               Copy order ID
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() =>
                 router.push(`${ROUTES.workspace.orders.root}/${order.id}`)
