@@ -2,7 +2,7 @@ import { OrderItemResponse } from "@/features/order";
 
 export function OrderItem({ item }: { item: OrderItemResponse }) {
   return (
-    <div className="card grid">
+    <div className="card bg-card grid">
       <div className="flex justify-between">
         <h3 className="text-lg">
           {item.name}{" "}

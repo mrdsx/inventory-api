@@ -6,7 +6,7 @@ export function OrderInfo({ order }: { order: OrderResponse }) {
   const orderFields = getOrderFields(order.status);
 
   return (
-    <div className="card grid gap-1">
+    <div className="card bg-card grid gap-1">
       {orderFields.map((field) => (
         <div
           className={cn("flex items-center gap-2", field.fieldClassName)}
