@@ -17,7 +17,7 @@ export default function InventoryPage() {
   return (
     <>
       <PageHeading>Inventory</PageHeading>
-      <div className="w-250">
+      <div>
         <DataTable
           className="h-[60vh]"
           columns={INVENTORY_ITEMS_TABLE_COLUMNS}
