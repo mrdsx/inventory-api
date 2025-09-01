@@ -60,12 +60,12 @@ def handle_update_order_status(order_status: OrderStatus) -> None:
         case OrderStatus.CANCELED:
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail=OrderResponseMsg.canceled_order_status_not_updated,
+                detail=OrderResponseMsg.canceled_order_status_cannot_be_updated,
             )
         case OrderStatus.DELIVERED:
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail=OrderResponseMsg.delivered_order_status_not_updated,
+                detail=OrderResponseMsg.delivered_order_status_cannot_be_updated,
             )
         case _:
             pass

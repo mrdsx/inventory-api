@@ -8,10 +8,10 @@ class OrderStatus(str, Enum):
 
 
 class OrderResponseMsg(str, Enum):
-    canceled_order_status_not_updated = (
+    canceled_order_status_cannot_be_updated = (
         f"Can't update status of {OrderStatus.CANCELED.lower()} order"
     )
-    delivered_order_status_not_updated = (
+    delivered_order_status_cannot_be_updated = (
         f"Can't update status of {OrderStatus.DELIVERED.lower()} order"
     )
     order_deleted = "Order successfully deleted"
