@@ -17,8 +17,10 @@ class CreateInventoryItemSchema(InventoryItemSchema):
     id: int = Field(0, validate_default=True, exclude=True)
 
 
+class InventoryItemPublicSchema(InventoryItemSchema):
+    supplier_id: int = Field(0, exclude=True)
+    supplier_name: str
+
+
 class UpdateInventoryItemSchema(BaseModel):
     name: str
-    description: str = Field(max_length=1000)
-    category: str
-    price: NonNegativeFloat

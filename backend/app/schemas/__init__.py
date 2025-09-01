@@ -1,5 +1,6 @@
 from .inventory_item import (
     CreateInventoryItemSchema,
+    InventoryItemPublicSchema,
     InventoryItemSchema,
     UpdateInventoryItemSchema,
 )
@@ -12,6 +13,7 @@ from .supplier import CreateSupplierSchema, SupplierSchema
 __all__ = [
     # * inventory_item
     "CreateInventoryItemSchema",
+    "InventoryItemPublicSchema",
     "InventoryItemSchema",
     "UpdateInventoryItemSchema",
     # * order

@@ -11,34 +11,42 @@ from constants import (
     DEFAULT_PAGE_SIZE,
     InventoryItemResponseMsg,
 )
-from models import InventoryItem
+from models import InventoryItem, Supplier
 from schemas import (
     CreateInventoryItemSchema,
+    InventoryItemPublicSchema,
     InventoryItemSchema,
     PaginatedResponse,
     UpdateInventoryItemSchema,
 )
 from services import find_inventory_item_by_id
-from utils import build_db_inventory_item
+from utils import build_inventory_item_public_schema, build_db_inventory_item
 from validation import validate_inventory_item_not_exists_by_sku
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 
 @router.get(
-    "/inventory-items", response_model=PaginatedResponse[list[InventoryItemSchema]]
+    "/inventory-items",
+    response_model=PaginatedResponse[list[InventoryItemPublicSchema]],
 )
 async def get_inventory_items(
     page: PositiveInt = DEFAULT_PAGE_NUMBER,
     size: PositiveInt = DEFAULT_PAGE_SIZE,
     session: AsyncSession = Depends(get_session),
 ):
-    set_page(Page[InventoryItemSchema])
+    set_page(Page[InventoryItemPublicSchema])
     set_params(Params(page=page, size=size))
-    results = await session.execute(select(InventoryItem).order_by(InventoryItem.id))
-    db_inventory_items = results.scalars().all()
+    results = await session.execute(
+        select(InventoryItem, Supplier).join(Supplier).order_by(InventoryItem.id)
+    )
 
-    return paginate(db_inventory_items)
+    public_inventory_items = [
+        build_inventory_item_public_schema(inventory_item, supplier)
+        for inventory_item, supplier in results
+    ]
+
+    return paginate(public_inventory_items)
 
 
 @router.get("/inventory-items/{inventory_item_id}", response_model=InventoryItemSchema)
