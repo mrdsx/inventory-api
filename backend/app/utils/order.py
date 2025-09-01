@@ -1,20 +1,18 @@
+from typing import Sequence
 from fastapi import HTTPException, status
 from sqlalchemy import Result, Select, select
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from constants import OrderResponseMsg, OrderStatus
-from models import Order, Supplier
+from models import Order, OrderItem, Supplier
 from schemas import OrderPublicSchema, OrderSchema, OrdersCountSchema
-from services import find_order_items_by_order_id
 from utils import format_date_from_iso_format
 from .order_item import get_order_items_total_cost
 
 
-async def build_order_public_schema(
-    order: Order, supplier: Supplier, session: AsyncSession
+def build_order_public_schema(
+    order: Order, order_items: Sequence[OrderItem], supplier: Supplier
 ) -> OrderPublicSchema:
-    db_order_items = await find_order_items_by_order_id(order.id, session)
-    total_cost = get_order_items_total_cost(db_order_items)
+    total_cost = get_order_items_total_cost(order_items)
     formatted_date = format_date_from_iso_format(order.date)
 
     return OrderPublicSchema(

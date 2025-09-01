@@ -68,11 +68,13 @@ async def get_orders(
     results = await session.execute(query)
 
     if not count:
-        db_orders = [
-            await build_order_public_schema(order, supplier, session)
-            for order, supplier in results
-            if status is None or order.status == status
-        ]
+        db_orders: list[OrderPublicSchema] = []
+        for order, supplier in results:
+            if status is None or order.status == status:
+                db_order_items = await find_order_items_by_order_id(order.id, session)
+                db_orders.append(
+                    build_order_public_schema(order, db_order_items, supplier)
+                )
 
         return paginate(db_orders)
     return get_orders_count(status, results)
@@ -81,9 +83,10 @@ async def get_orders(
 @router.get("/orders/{order_id}", response_model=OrderPublicSchema)
 async def get_order_by_id(order_id: int, session: AsyncSession = Depends(get_session)):
     db_order = await find_order_by_id(order_id, session)
+    db_order_items = await find_order_items_by_order_id(db_order.id, session)
     db_supplier = await find_supplier_by_id(db_order.supplier_id, session)
 
-    return await build_order_public_schema(db_order, db_supplier, session)
+    return build_order_public_schema(db_order, db_order_items, db_supplier)
 
 
 @router.get("/orders/{order_id}/items", response_model=list[OrderItemPublicSchema])
