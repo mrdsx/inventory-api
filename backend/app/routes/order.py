@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi_pagination import paginate, set_page, set_params
 from fastapi_pagination.default import Page, Params
 from pydantic import PositiveInt
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Union
 
@@ -13,6 +14,7 @@ from constants import (
     OrderStatus,
 )
 from database import get_session
+from models import OrderItem, Supplier
 from schemas import (
     CreateOrderSchema,
     OrdersCountSchema,
@@ -89,10 +91,16 @@ async def get_order_items_by_order_id(
     order_id: int, session: AsyncSession = Depends(get_session)
 ):
     await validate_order_exists(order_id, session)
-    db_order_items = await find_order_items_by_order_id(order_id, session)
+    db_order_items = await session.execute(
+        select(OrderItem, Supplier)
+        .join(Supplier)
+        .where(OrderItem.order_id == order_id)
+        .order_by(OrderItem.id)
+    )
 
     return [
-        await build_order_item_public_schema(item, session) for item in db_order_items
+        await build_order_item_public_schema(order_item, supplier, session)
+        for order_item, supplier in db_order_items
     ]
 
 
