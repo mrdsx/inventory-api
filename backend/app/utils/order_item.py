@@ -1,5 +1,5 @@
-from typing import Sequence
 from sqlalchemy.ext.asyncio import AsyncSession
+from typing import Sequence
 
 from schemas import OrderItemSchema, OrderItemPublicSchema, SupplierSchema
 
