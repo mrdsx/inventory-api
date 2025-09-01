@@ -6,7 +6,7 @@ export const INVENTORY_ITEMS_TABLE_COLUMNS: ColumnDef<InventoryItemResponse>[] =
     { accessorKey: "id", header: "ID" },
     { accessorKey: "sku", header: "SKU" },
     { accessorKey: "order_id", header: "Order ID" },
-    { accessorKey: "supplier_id", header: "Supplier ID" },
+    { accessorKey: "supplier_name", header: "Supplier Name" },
     { accessorKey: "name", header: "Name" },
     { accessorKey: "description", header: "Description" },
     { accessorKey: "category", header: "Category" },

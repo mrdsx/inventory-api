@@ -4,7 +4,7 @@ export type InventoryItemResponse = {
   id: number;
   sku: string;
   order_id: string;
-  supplier_id: number;
+  supplier_name: number;
   name: string;
   description: string;
   category: string;
