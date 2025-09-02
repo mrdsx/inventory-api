@@ -17,7 +17,7 @@ export function CartItemsList() {
           <span className="mr-4 w-[30%]">{item.name}</span>
           <CartItemActions item={item} />
           <span className="ml-auto font-semibold text-gray-600 dark:text-gray-300">
-            ${(item.cost * item.count).toFixed(2)}
+            ${(item.cost * item.quantity).toFixed(2)}
           </span>
           <CartItemDropdownMenu item={item} />
         </CartItemRow>

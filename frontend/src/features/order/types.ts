@@ -2,7 +2,7 @@ import { PaginatedResponse } from "@/app/lib";
 import { Product } from "../product";
 import { ORDER_STATUS } from "./constants";
 
-export type CartItem = Product & { count: number };
+export type CartItem = Product & { quantity: number };
 
 export type OrderResponse = {
   id: number;

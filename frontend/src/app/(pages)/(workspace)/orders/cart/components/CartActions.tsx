@@ -8,7 +8,7 @@ export function CartActions() {
   if (cart.length === 0) return;
 
   const totalCost = cart.reduce(
-    (total, item) => total + item.cost * item.count,
+    (total, item) => total + item.cost * item.quantity,
     0,
   );
 

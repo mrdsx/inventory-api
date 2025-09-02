@@ -22,10 +22,10 @@ export const useOrderCartStore = create<OrderCartState>()(
 
         const cartItem = cart.find((i) => i.id === item.id);
         if (cartItem === undefined) {
-          nextCart = [...cart, { ...item, count: 1 }];
+          nextCart = [...cart, { ...item, quantity: 1 }];
         } else {
           nextCart = cart.map((i) =>
-            i.id === item.id ? { ...i, count: i.count + 1 } : i,
+            i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i,
           );
         }
         set({ cart: nextCart });
@@ -38,11 +38,11 @@ export const useOrderCartStore = create<OrderCartState>()(
         const cartItem = cart.find((i) => i.id === itemId);
         if (cartItem === undefined) return;
 
-        if (cartItem.count <= 1) {
+        if (cartItem.quantity <= 1) {
           nextCart = cart.filter((i) => i.id !== itemId);
         } else {
           nextCart = cart.map((i) =>
-            i.id === itemId ? { ...i, count: i.count - 1 } : i,
+            i.id === itemId ? { ...i, count: i.quantity - 1 } : i,
           );
         }
         set({ cart: nextCart });
@@ -50,7 +50,7 @@ export const useOrderCartStore = create<OrderCartState>()(
 
       getItemCount: (itemId: number) => {
         const cartItem = get().cart.find((i) => i.id === itemId);
-        return cartItem?.count ?? 0;
+        return cartItem?.quantity ?? 0;
       },
 
       removeItem: (itemId: number) => {

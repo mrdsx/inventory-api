@@ -1,7 +1,11 @@
 import { apiClient, DEFAULT_PAGE_SIZE, ENDPOINTS } from "@/app/lib";
-import { OrderResponse, PaginatedOrdersResponse } from "../types";
+import { CartItem, OrderResponse, PaginatedOrdersResponse } from "../types";
 
 const { orders } = ENDPOINTS;
+
+export async function createOrder(order_items: CartItem[]): Promise<void> {
+  console.log("Hi mom");
+}
 
 export async function fetchOrderById(id: number): Promise<OrderResponse> {
   return await apiClient<OrderResponse>(`${orders}/${id}`, {
