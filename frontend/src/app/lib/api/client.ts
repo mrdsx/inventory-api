@@ -17,7 +17,7 @@ export async function apiClient<TResponse extends Record<string, any>>(
 
   if (res.ok) return data;
   if (res.status === HTTP_CODES.NOT_FOUND) notFound();
-  if (isBaseErrorResponse(data)) throw new Error(data.detail);
+  if (isBaseErrorResponse(data)) console.warn(data.detail);
 
   throw new Error(
     options?.errorMessage || "An error occurred while fetching data",
