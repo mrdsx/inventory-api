@@ -21,6 +21,7 @@ export const ordersTableColumns: ColumnDef<OrderResponse>[] = [
   {
     id: "actions",
     enableHiding: false,
+    size: 30,
     cell: ({ row }) => {
       const order = row.original;
       const router = useRouter();
@@ -34,9 +35,7 @@ export const ordersTableColumns: ColumnDef<OrderResponse>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem
-              onClick={() =>
-                navigator.clipboard.writeText(JSON.stringify(order.id))
-              }
+              onClick={() => navigator.clipboard.writeText(String(order.id))}
             >
               <Copy />
               Copy order ID
