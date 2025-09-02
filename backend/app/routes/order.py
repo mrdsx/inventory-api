@@ -10,6 +10,7 @@ from constants import (
     API_ROUTER_PREFIX,
     DEFAULT_PAGE_NUMBER,
     DEFAULT_PAGE_SIZE,
+    OrderResponseMsg,
     OrderItemResponseMsg,
     OrderStatus,
 )
@@ -110,7 +111,7 @@ async def create_order(
     new_order = await save_order(session)
     await save_order_items(new_order.id, order.items, session)
 
-    return {"message": "Successfully created new order"}
+    return {"message": OrderResponseMsg.order_created}
 
 
 @router.patch("/orders/{order_id}")

@@ -14,5 +14,6 @@ class OrderResponseMsg(str, Enum):
     delivered_order_status_cannot_be_updated = (
         f"Can't update status of {OrderStatus.DELIVERED.lower()} order"
     )
+    order_created = "Successfully created new order"
     order_deleted = "Order successfully deleted"
     order_not_found = "Order not found"

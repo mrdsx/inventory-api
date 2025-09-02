@@ -45,7 +45,7 @@ async def create_supplier(
     await session.commit()
     await session.refresh(new_supplier)
 
-    return {"message": "Successfully created new supplier"}
+    return {"message": SupplierResponseMsg.supplier_created}
 
 
 @router.put("/suppliers/{id}", response_model=SupplierSchema)

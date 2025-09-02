@@ -69,7 +69,7 @@ async def create_inventory_item(
     session.add(new_inventory_item)
     await session.commit()
 
-    return {"message": "Successfully added new inventory item"}
+    return {"message": InventoryItemResponseMsg.inventory_item_added}
 
 
 @router.put("/inventory-items/{inventory_item_id}", response_model=InventoryItemSchema)
