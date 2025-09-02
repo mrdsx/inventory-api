@@ -17,7 +17,7 @@ class OrderItem(Base):
         nullable=False,
     )
     supplier_id: Mapped[int] = mapped_column(
-        String, ForeignKey(f"{TableName.SUPPLIERS.value}.id"), nullable=False
+        Integer, ForeignKey(f"{TableName.SUPPLIERS.value}.id"), nullable=False
     )
     name: Mapped[str] = mapped_column(String, nullable=False)
     description: Mapped[str] = mapped_column(

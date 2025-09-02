@@ -2,7 +2,6 @@ from .datetime import format_date_from_iso_format
 from .inventory_item import build_inventory_item_public_schema, build_db_inventory_item
 from .order import (
     build_order_public_schema,
-    build_order_schema,
     build_get_orders_query,
     get_orders_count,
     handle_update_order_status,
@@ -17,7 +16,6 @@ __all__ = [
     "build_db_inventory_item",
     # * order
     "build_order_public_schema",
-    "build_order_schema",
     "build_get_orders_query",
     "get_orders_count",
     "handle_update_order_status",

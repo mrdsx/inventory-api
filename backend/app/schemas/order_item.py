@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field, NonNegativeFloat
 
 class CreateOrderItemSchema(BaseModel):
     name: str
-    supplier_name: str
+    supplier_id: int
     description: str
     category: str
     cost: NonNegativeFloat

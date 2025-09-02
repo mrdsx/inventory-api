@@ -20,15 +20,12 @@ from schemas import (
     OrdersCountSchema,
     OrderItemPublicSchema,
     OrderPublicSchema,
-    OrderSchema,
     PaginatedResponse,
 )
 from services import (
     find_order_by_id,
     find_order_item_by_id,
     find_order_items_by_order_id,
-    find_supplier_by_id,
-    find_supplier_by_name,
     save_order,
     save_order_items,
     save_inventory_items,
@@ -36,7 +33,6 @@ from services import (
 from utils import (
     build_order_item_public_schema,
     build_order_public_schema,
-    build_order_schema,
     build_get_orders_query,
     get_orders_count,
     handle_update_order_status,
@@ -66,27 +62,25 @@ async def get_orders(
     set_params(Params(page=page, size=size))
     query = build_get_orders_query(count, order_by_recent, limit)
     results = await session.execute(query)
+    db_orders = results.scalars().all()
 
     if not count:
-        db_orders: list[OrderPublicSchema] = []
-        for order, supplier in results:
+        orders_response: list[OrderPublicSchema] = []
+        for order in db_orders:
             if status is None or order.status == status:
                 db_order_items = await find_order_items_by_order_id(order.id, session)
-                db_orders.append(
-                    build_order_public_schema(order, db_order_items, supplier)
-                )
+                orders_response.append(build_order_public_schema(order, db_order_items))
 
-        return paginate(db_orders)
-    return get_orders_count(status, results)
+        return paginate(orders_response)
+    return get_orders_count(status, db_orders)
 
 
 @router.get("/orders/{order_id}", response_model=OrderPublicSchema)
 async def get_order_by_id(order_id: int, session: AsyncSession = Depends(get_session)):
     db_order = await find_order_by_id(order_id, session)
     db_order_items = await find_order_items_by_order_id(db_order.id, session)
-    db_supplier = await find_supplier_by_id(db_order.supplier_id, session)
 
-    return build_order_public_schema(db_order, db_order_items, db_supplier)
+    return build_order_public_schema(db_order, db_order_items)
 
 
 @router.get("/orders/{order_id}/items", response_model=list[OrderItemPublicSchema])
@@ -107,17 +101,16 @@ async def get_order_items_by_order_id(
     ]
 
 
-@router.post("/orders", response_model=OrderSchema)
+@router.post("/orders")
 async def create_order(
     order: CreateOrderSchema, session: AsyncSession = Depends(get_session)
 ):
     validate_order_items(order.items)
 
-    db_supplier = await find_supplier_by_name(order.supplier_name, session)
-    new_order = await save_order(db_supplier.id, session)
-    await save_order_items(new_order, order.items, session)
+    new_order = await save_order(session)
+    await save_order_items(new_order.id, order.items, session)
 
-    return build_order_schema(new_order)
+    return {"message": "Successfully created new order"}
 
 
 @router.patch("/orders/{order_id}")

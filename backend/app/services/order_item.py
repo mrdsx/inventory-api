@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Sequence
 
 from constants import OrderItemResponseMsg
-from models import Order, OrderItem
+from models import OrderItem
 from schemas import CreateOrderItemSchema
 
 
@@ -37,11 +37,13 @@ async def find_order_items_by_order_id(
 
 
 async def save_order_items(
-    order: Order, items: list[CreateOrderItemSchema], session: AsyncSession
+    order_id: int, items: list[CreateOrderItemSchema], session: AsyncSession
 ) -> None:
+
     order_items = [
         OrderItem(
-            order_id=order.id,
+            order_id=order_id,
+            supplier_id=item.supplier_id,
             name=item.name,
             description=item.description,
             category=item.category,
@@ -52,4 +54,3 @@ async def save_order_items(
     ]
     session.add_all(order_items)
     await session.commit()
-    await session.refresh(order)

@@ -19,8 +19,8 @@ async def find_order_by_id(id: int, session: AsyncSession) -> Order:
     return db_order
 
 
-async def save_order(supplier_id: int, session: AsyncSession) -> Order:
-    new_order = Order(supplier_id=supplier_id, date=datetime.now())
+async def save_order(session: AsyncSession) -> Order:
+    new_order = Order(date=datetime.now())
     session.add(new_order)
     await session.commit()
     await session.refresh(new_order)
