@@ -5,6 +5,7 @@ const competitorProducts: Product[] = [
   // Gaming Mouse
   {
     id: 101,
+    supplier_id: 10,
     name: "Razer DeathAdder V2",
     supplier: "Razer",
     description: "Ergonomic wired gaming mouse with optical sensor.",
@@ -13,6 +14,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 102,
+    supplier_id: 10,
     name: "Razer Basilisk V3",
     supplier: "Razer",
     description: "Wired gaming mouse with customizable scroll wheel.",
@@ -22,6 +24,7 @@ const competitorProducts: Product[] = [
   // Gaming Keyboard
   {
     id: 103,
+    supplier_id: 10,
     name: "Razer BlackWidow V3",
     supplier: "Razer",
     description: "Mechanical gaming keyboard with RGB lighting.",
@@ -30,6 +33,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 104,
+    supplier_id: 10,
     name: "Razer Huntsman Mini",
     supplier: "Razer",
     description: "60% compact gaming keyboard with optical switches.",
@@ -39,6 +43,7 @@ const competitorProducts: Product[] = [
   // Gaming Headset Wired
   {
     id: 105,
+    supplier_id: 10,
     name: "Razer Kraken X",
     supplier: "Razer",
     description: "Lightweight wired headset with 7.1 surround.",
@@ -47,6 +52,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 106,
+    supplier_id: 10,
     name: "Razer Nari Essential",
     supplier: "Razer",
     description: "Wired gaming headset with THX spatial audio.",
@@ -56,6 +62,7 @@ const competitorProducts: Product[] = [
   // Regular Mouse
   {
     id: 107,
+    supplier_id: 10,
     name: "Razer Atheris",
     supplier: "Razer",
     description: "Compact wireless mouse for work and travel.",
@@ -64,6 +71,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 108,
+    supplier_id: 10,
     name: "Razer Pro Click Mini",
     supplier: "Razer",
     description: "Wireless productivity mouse with ergonomic design.",
@@ -73,6 +81,7 @@ const competitorProducts: Product[] = [
   // Webcam
   {
     id: 109,
+    supplier_id: 10,
     name: "Razer Kiyo",
     supplier: "Razer",
     description: "1080p streaming webcam with adjustable ring light.",
@@ -82,6 +91,7 @@ const competitorProducts: Product[] = [
   // Microphone
   {
     id: 110,
+    supplier_id: 10,
     name: "Razer Seiren X",
     supplier: "Razer",
     description: "Compact USB microphone for streaming.",
@@ -92,6 +102,7 @@ const competitorProducts: Product[] = [
   // ===================== CORSAIR =====================
   {
     id: 111,
+    supplier_id: 11,
     name: "Corsair M65 RGB Elite",
     supplier: "Corsair",
     description: "FPS gaming mouse with customizable weights.",
@@ -100,6 +111,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 112,
+    supplier_id: 11,
     name: "Corsair Scimitar RGB",
     supplier: "Corsair",
     description: "MMO gaming mouse with 12 side buttons.",
@@ -108,6 +120,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 113,
+    supplier_id: 11,
     name: "Corsair K70 RGB MK.2",
     supplier: "Corsair",
     description: "Mechanical gaming keyboard with Cherry MX switches.",
@@ -116,6 +129,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 114,
+    supplier_id: 11,
     name: "Corsair K55 RGB",
     supplier: "Corsair",
     description: "Membrane keyboard with programmable macros.",
@@ -124,6 +138,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 115,
+    supplier_id: 11,
     name: "Corsair HS50 Pro",
     supplier: "Corsair",
     description: "Wired stereo gaming headset.",
@@ -132,6 +147,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 116,
+    supplier_id: 11,
     name: "Corsair VOID RGB Elite",
     supplier: "Corsair",
     description: "Wired 7.1 surround gaming headset.",
@@ -140,6 +156,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 117,
+    supplier_id: 11,
     name: "Corsair Harpoon RGB",
     supplier: "Corsair",
     description: "Affordable wireless mouse for productivity.",
@@ -148,6 +165,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 118,
+    supplier_id: 11,
     name: "Corsair K83 Wireless",
     supplier: "Corsair",
     description: "Compact wireless keyboard with touchpad.",
@@ -156,6 +174,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 119,
+    supplier_id: 11,
     name: "Corsair FaceCam",
     supplier: "Corsair",
     description: "1080p streaming webcam with high-quality optics.",
@@ -164,6 +183,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 120,
+    supplier_id: 11,
     name: "Corsair ST100 RGB Microphone",
     supplier: "Corsair",
     description: "USB microphone with RGB stand.",
@@ -174,6 +194,7 @@ const competitorProducts: Product[] = [
   // ===================== STEELSERIES =====================
   {
     id: 121,
+    supplier_id: 48,
     name: "SteelSeries Rival 3",
     supplier: "SteelSeries",
     description: "Wired optical gaming mouse with true 1-to-1 tracking.",
@@ -182,6 +203,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 122,
+    supplier_id: 48,
     name: "SteelSeries Sensei Ten",
     supplier: "SteelSeries",
     description: "Ambidextrous wired gaming mouse.",
@@ -190,6 +212,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 123,
+    supplier_id: 48,
     name: "SteelSeries Apex 7",
     supplier: "SteelSeries",
     description: "Mechanical gaming keyboard with OLED display.",
@@ -198,6 +221,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 124,
+    supplier_id: 48,
     name: "SteelSeries Apex 3",
     supplier: "SteelSeries",
     description: "RGB membrane gaming keyboard.",
@@ -206,6 +230,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 125,
+    supplier_id: 48,
     name: "SteelSeries Arctis 5",
     supplier: "SteelSeries",
     description: "Wired 7.1 surround headset with RGB lighting.",
@@ -214,6 +239,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 126,
+    supplier_id: 48,
     name: "SteelSeries Arctis 1 Wired",
     supplier: "SteelSeries",
     description: "Affordable wired gaming headset.",
@@ -222,6 +248,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 127,
+    supplier_id: 48,
     name: "SteelSeries Rival 600",
     supplier: "SteelSeries",
     description: "Dual-sensor wired mouse.",
@@ -230,6 +257,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 128,
+    supplier_id: 48,
     name: "SteelSeries Apex Pro TKL",
     supplier: "SteelSeries",
     description: "Tenkeyless mechanical keyboard with OmniPoint switches.",
@@ -238,6 +266,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 129,
+    supplier_id: 48,
     name: "SteelSeries StreamCam",
     supplier: "SteelSeries",
     description: "1080p webcam optimized for content creators.",
@@ -246,6 +275,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 130,
+    supplier_id: 48,
     name: "SteelSeries Sonar USB Microphone",
     supplier: "SteelSeries",
     description: "USB microphone with studio-quality sound.",
@@ -256,6 +286,7 @@ const competitorProducts: Product[] = [
   // ===================== HYPERX =====================
   {
     id: 131,
+    supplier_id: 27,
     name: "HyperX Pulsefire FPS Pro",
     supplier: "HyperX",
     description: "Wired gaming mouse with Pixart sensor.",
@@ -264,6 +295,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 132,
+    supplier_id: 27,
     name: "HyperX Pulsefire Dart",
     supplier: "HyperX",
     description: "Wireless gaming mouse with long battery life.",
@@ -272,6 +304,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 133,
+    supplier_id: 27,
     name: "HyperX Alloy FPS Pro",
     supplier: "HyperX",
     description: "Tenkeyless mechanical gaming keyboard with red switches.",
@@ -280,6 +313,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 134,
+    supplier_id: 27,
     name: "HyperX Alloy Elite 2",
     supplier: "HyperX",
     description: "Full-size mechanical RGB gaming keyboard.",
@@ -288,6 +322,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 135,
+    supplier_id: 27,
     name: "HyperX Cloud Stinger",
     supplier: "HyperX",
     description: "Lightweight wired headset with 7.1 virtual surround.",
@@ -296,6 +331,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 136,
+    supplier_id: 27,
     name: "HyperX Cloud Alpha",
     supplier: "HyperX",
     description: "Wired stereo gaming headset with dual chamber drivers.",
@@ -304,6 +340,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 137,
+    supplier_id: 27,
     name: "HyperX Pulsefire Raid",
     supplier: "HyperX",
     description: "Wired mouse optimized for MMO gaming.",
@@ -312,6 +349,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 138,
+    supplier_id: 27,
     name: "HyperX Alloy Core RGB",
     supplier: "HyperX",
     description: "Membrane keyboard with RGB lighting.",
@@ -320,6 +358,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 139,
+    supplier_id: 27,
     name: "HyperX SoloCast",
     supplier: "HyperX",
     description: "USB condenser microphone for streaming.",
@@ -328,6 +367,7 @@ const competitorProducts: Product[] = [
   },
   {
     id: 140,
+    supplier_id: 27,
     name: "HyperX QuadCast S",
     supplier: "HyperX",
     description: "Premium USB microphone with RGB lighting.",
@@ -340,6 +380,7 @@ export const products: Product[] = [
   // 🎮 Gaming Mice
   {
     id: 1,
+    supplier_id: 1,
     name: "Logitech G502 HERO",
     supplier: "Logitech",
     description: "High-performance wired gaming mouse with 25K sensor.",
@@ -348,6 +389,7 @@ export const products: Product[] = [
   },
   {
     id: 2,
+    supplier_id: 1,
     name: "Logitech G Pro X Superlight",
     supplier: "Logitech",
     description: "Lightweight wireless gaming mouse designed for esports.",
@@ -356,6 +398,7 @@ export const products: Product[] = [
   },
   {
     id: 3,
+    supplier_id: 1,
     name: "Logitech G203 Lightsync",
     supplier: "Logitech",
     description: "Budget-friendly RGB gaming mouse with 8K DPI.",
@@ -364,6 +407,7 @@ export const products: Product[] = [
   },
   {
     id: 4,
+    supplier_id: 1,
     name: "Logitech G305 Lightspeed",
     supplier: "Logitech",
     description:
@@ -373,6 +417,7 @@ export const products: Product[] = [
   },
   {
     id: 5,
+    supplier_id: 1,
     name: "Logitech G402 Hyperion Fury",
     supplier: "Logitech",
     description: "FPS-optimized wired gaming mouse with hybrid sensor.",
@@ -383,6 +428,7 @@ export const products: Product[] = [
   // 🎮 Gaming Keyboards
   {
     id: 6,
+    supplier_id: 1,
     name: "Logitech G915 TKL",
     supplier: "Logitech",
     description:
@@ -392,6 +438,7 @@ export const products: Product[] = [
   },
   {
     id: 7,
+    supplier_id: 1,
     name: "Logitech G Pro X",
     supplier: "Logitech",
     description:
@@ -401,6 +448,7 @@ export const products: Product[] = [
   },
   {
     id: 8,
+    supplier_id: 1,
     name: "Logitech G413",
     supplier: "Logitech",
     description: "Backlit mechanical gaming keyboard with Romer-G switches.",
@@ -409,6 +457,7 @@ export const products: Product[] = [
   },
   {
     id: 9,
+    supplier_id: 1,
     name: "Logitech G213 Prodigy",
     supplier: "Logitech",
     description: "Spill-resistant gaming keyboard with RGB lighting.",
@@ -417,6 +466,7 @@ export const products: Product[] = [
   },
   {
     id: 10,
+    supplier_id: 1,
     name: "Logitech G910 Orion Spectrum",
     supplier: "Logitech",
     description: "Full-size RGB mechanical keyboard with ARX control dock.",
@@ -427,6 +477,7 @@ export const products: Product[] = [
   // 🎧 Gaming Headset (Wired)
   {
     id: 11,
+    supplier_id: 1,
     name: "Logitech G432",
     supplier: "Logitech",
     description: "Wired gaming headset with 7.1 surround sound.",
@@ -435,6 +486,7 @@ export const products: Product[] = [
   },
   {
     id: 12,
+    supplier_id: 1,
     name: "Logitech G Pro X",
     supplier: "Logitech",
     description: "Wired esports headset with Blue VO!CE microphone tech.",
@@ -443,6 +495,7 @@ export const products: Product[] = [
   },
   {
     id: 13,
+    supplier_id: 1,
     name: "Logitech G633 Artemis Spectrum",
     supplier: "Logitech",
     description: "RGB wired gaming headset with DTS surround sound.",
@@ -451,6 +504,7 @@ export const products: Product[] = [
   },
   {
     id: 14,
+    supplier_id: 1,
     name: "Logitech G230",
     supplier: "Logitech",
     description: "Lightweight wired stereo gaming headset.",
@@ -459,6 +513,7 @@ export const products: Product[] = [
   },
   {
     id: 15,
+    supplier_id: 1,
     name: "Logitech G35",
     supplier: "Logitech",
     description: "Wired surround sound gaming headset with on-ear controls.",
@@ -469,6 +524,7 @@ export const products: Product[] = [
   // 🎧 Gaming Headset (Wireless)
   {
     id: 16,
+    supplier_id: 1,
     name: "Logitech G733 Lightspeed",
     supplier: "Logitech",
     description:
@@ -478,6 +534,7 @@ export const products: Product[] = [
   },
   {
     id: 17,
+    supplier_id: 1,
     name: "Logitech G935",
     supplier: "Logitech",
     description: "Wireless 7.1 surround gaming headset with 12-hour battery.",
@@ -486,6 +543,7 @@ export const products: Product[] = [
   },
   {
     id: 18,
+    supplier_id: 1,
     name: "Logitech G533",
     supplier: "Logitech",
     description: "DTS Headphone:X surround wireless gaming headset.",
@@ -494,6 +552,7 @@ export const products: Product[] = [
   },
   {
     id: 19,
+    supplier_id: 1,
     name: "Logitech G930",
     supplier: "Logitech",
     description: "Wireless gaming headset with Dolby 7.1 surround sound.",
@@ -502,6 +561,7 @@ export const products: Product[] = [
   },
   {
     id: 20,
+    supplier_id: 1,
     name: "Logitech Astro A50 (Logitech-owned brand)",
     supplier: "Logitech",
     description: "Premium wireless gaming headset with charging dock.",
@@ -512,6 +572,7 @@ export const products: Product[] = [
   // 🖱️ Regular Mice
   {
     id: 21,
+    supplier_id: 1,
     name: "Logitech MX Master 3S",
     supplier: "Logitech",
     description: "Advanced wireless mouse with MagSpeed scroll wheel.",
@@ -520,6 +581,7 @@ export const products: Product[] = [
   },
   {
     id: 22,
+    supplier_id: 1,
     name: "Logitech MX Anywhere 3",
     supplier: "Logitech",
     description: "Portable wireless mouse for mobile work.",
@@ -528,6 +590,7 @@ export const products: Product[] = [
   },
   {
     id: 23,
+    supplier_id: 1,
     name: "Logitech M510",
     supplier: "Logitech",
     description: "Wireless mouse with back/forward buttons.",
@@ -536,6 +599,7 @@ export const products: Product[] = [
   },
   {
     id: 24,
+    supplier_id: 1,
     name: "Logitech M185",
     supplier: "Logitech",
     description: "Simple, budget-friendly wireless mouse.",
@@ -544,6 +608,7 @@ export const products: Product[] = [
   },
   {
     id: 25,
+    supplier_id: 1,
     name: "Logitech Trackman Marble",
     supplier: "Logitech",
     description: "Ergonomic wired trackball mouse.",
@@ -554,6 +619,7 @@ export const products: Product[] = [
   // ⌨️ Regular Keyboards
   {
     id: 26,
+    supplier_id: 1,
     name: "Logitech MX Keys",
     supplier: "Logitech",
     description: "Wireless illuminated keyboard for productivity.",
@@ -562,6 +628,7 @@ export const products: Product[] = [
   },
   {
     id: 27,
+    supplier_id: 1,
     name: "Logitech K380",
     supplier: "Logitech",
     description: "Compact multi-device Bluetooth keyboard.",
@@ -570,6 +637,7 @@ export const products: Product[] = [
   },
   {
     id: 28,
+    supplier_id: 1,
     name: "Logitech Ergo K860",
     supplier: "Logitech",
     description: "Split ergonomic wireless keyboard.",
@@ -578,6 +646,7 @@ export const products: Product[] = [
   },
   {
     id: 29,
+    supplier_id: 1,
     name: "Logitech K120",
     supplier: "Logitech",
     description: "Affordable wired keyboard for everyday use.",
@@ -586,6 +655,7 @@ export const products: Product[] = [
   },
   {
     id: 30,
+    supplier_id: 1,
     name: "Logitech Craft",
     supplier: "Logitech",
     description: "Wireless keyboard with creative input dial.",
@@ -596,6 +666,7 @@ export const products: Product[] = [
   // 📹 Webcams
   {
     id: 31,
+    supplier_id: 1,
     name: "Logitech C920 HD Pro",
     supplier: "Logitech",
     description: "1080p HD webcam with stereo audio.",
@@ -604,6 +675,7 @@ export const products: Product[] = [
   },
   {
     id: 32,
+    supplier_id: 1,
     name: "Logitech C922 Pro Stream",
     supplier: "Logitech",
     description: "1080p streaming webcam with background replacement.",
@@ -612,6 +684,7 @@ export const products: Product[] = [
   },
   {
     id: 33,
+    supplier_id: 1,
     name: "Logitech Brio 4K",
     supplier: "Logitech",
     description: "Ultra HD 4K webcam with HDR.",
@@ -620,6 +693,7 @@ export const products: Product[] = [
   },
   {
     id: 34,
+    supplier_id: 1,
     name: "Logitech StreamCam",
     supplier: "Logitech",
     description: "1080p60 webcam optimized for creators.",
@@ -628,6 +702,7 @@ export const products: Product[] = [
   },
   {
     id: 35,
+    supplier_id: 1,
     name: "Logitech C270",
     supplier: "Logitech",
     description: "Affordable 720p webcam for everyday use.",
@@ -638,6 +713,7 @@ export const products: Product[] = [
   // 🎤 Microphones
   {
     id: 36,
+    supplier_id: 1,
     name: "Blue Yeti",
     supplier: "Logitech",
     description: "USB condenser microphone with multiple patterns.",
@@ -646,6 +722,7 @@ export const products: Product[] = [
   },
   {
     id: 37,
+    supplier_id: 1,
     name: "Blue Yeti Nano",
     supplier: "Logitech",
     description: "Compact USB microphone with cardioid and omni modes.",
@@ -654,6 +731,7 @@ export const products: Product[] = [
   },
   {
     id: 38,
+    supplier_id: 1,
     name: "Blue Snowball iCE",
     supplier: "Logitech",
     description: "Affordable plug-and-play USB microphone.",
@@ -662,6 +740,7 @@ export const products: Product[] = [
   },
   {
     id: 39,
+    supplier_id: 1,
     name: "Blue Yeti X",
     supplier: "Logitech",
     description: "Premium USB microphone with LED metering.",
@@ -670,6 +749,7 @@ export const products: Product[] = [
   },
   {
     id: 40,
+    supplier_id: 1,
     name: "Blue Snowball",
     supplier: "Logitech",
     description: "Classic USB condenser mic for creators.",
