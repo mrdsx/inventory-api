@@ -2,8 +2,8 @@ import { TableHead, TableHeader, TableRow } from "@/components/ui";
 
 export const ORDERS_TABLE_COLUMNS = [
   {
-    accessorKey: "supplier_name",
-    header: "Supplier",
+    accessorKey: "id",
+    header: "ID",
   },
   {
     accessorKey: "date",

@@ -13,7 +13,8 @@ export function CartActions() {
   );
 
   function handleClick() {
-    console.log(cart);
+    // TODO: add creating order
+    console.table(cart);
   }
 
   return (

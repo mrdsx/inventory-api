@@ -9,7 +9,7 @@ export function OrdersTableRow({ order }: { order: OrderResponse }) {
   return (
     <TableRow>
       <TableCell className="w-[20%] text-start font-normal">
-        {order.supplier_name}
+        {order.id}
       </TableCell>
       <TableCell className="text-start font-normal">{order.date}</TableCell>
       <TableCell className="text-start font-normal">
