@@ -9,11 +9,12 @@ type OrderCartState = {
   decrementItemCount: (itemId: number) => void;
   getItemCount: (itemId: number) => number;
   removeItem: (itemId: number) => void;
+  clearCart: () => void;
 };
 
 export const useOrderCartStore = create<OrderCartState>()(
   persist(
-    (set, get) => ({
+    (set, get, store) => ({
       cart: [],
 
       addToCart: (item: Product) => {
@@ -61,6 +62,10 @@ export const useOrderCartStore = create<OrderCartState>()(
 
         const nextCart = cart.filter((i) => i.id !== itemId);
         set({ cart: nextCart });
+      },
+
+      clearCart: () => {
+        set(store.getInitialState());
       },
     }),
     {

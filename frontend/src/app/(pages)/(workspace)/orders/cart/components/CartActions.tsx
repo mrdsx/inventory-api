@@ -1,10 +1,15 @@
 "use client";
 
+import { ENDPOINTS, handleAPIFetch } from "@/app/lib";
 import { Button } from "@/components/ui";
-import { useOrderCartStore } from "@/features/order";
+import { Order, postOrder, useOrderCartStore } from "@/features/order";
+import { toast } from "sonner";
+
+const { orders } = ENDPOINTS;
 
 export function CartActions() {
   const cart = useOrderCartStore((state) => state.cart);
+  const clearCart = useOrderCartStore((state) => state.clearCart);
   if (cart.length === 0) return;
 
   const totalCost = cart.reduce(
@@ -12,9 +17,13 @@ export function CartActions() {
     0,
   );
 
-  function handleClick() {
-    // TODO: add creating order
-    console.table(cart);
+  async function handleClick() {
+    await handleAPIFetch<void>(async () => {
+      const order: Order = { items: [...cart] };
+      const response = await postOrder(order);
+      clearCart();
+      toast.success(response.message);
+    });
   }
 
   return (

@@ -1,10 +1,24 @@
-import { apiClient, DEFAULT_PAGE_SIZE, ENDPOINTS } from "@/app/lib";
-import { CartItem, OrderResponse, PaginatedOrdersResponse } from "../types";
+import {
+  apiClient,
+  BaseAPIResponse,
+  DEFAULT_PAGE_SIZE,
+  ENDPOINTS,
+} from "@/app/lib";
+import { Order, OrderResponse, PaginatedOrdersResponse } from "../types";
 
 const { orders } = ENDPOINTS;
 
-export async function createOrder(order_items: CartItem[]): Promise<void> {
-  console.log("Hi mom");
+export async function postOrder(order: Order): Promise<BaseAPIResponse> {
+  return await apiClient<BaseAPIResponse>(orders, {
+    requestInit: {
+      body: JSON.stringify(order),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    },
+    errorMessage: "Failed to create order",
+  });
 }
 
 export async function fetchOrderById(id: number): Promise<OrderResponse> {

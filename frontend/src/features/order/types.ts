@@ -4,6 +4,10 @@ import { ORDER_STATUS } from "./constants";
 
 export type CartItem = Product & { quantity: number };
 
+export type Order = {
+  items: CartItem[];
+};
+
 export type OrderResponse = {
   id: number;
   date: string;
