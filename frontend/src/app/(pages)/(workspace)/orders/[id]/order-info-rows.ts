@@ -32,11 +32,6 @@ export function getOrderFields(status: ORDER_STATUS): OrderField[] {
       accessKey: "id",
     },
     {
-      icon: UserRound,
-      title: "Supplier",
-      accessKey: "supplier_name",
-    },
-    {
       icon: CalendarDays,
       title: "Created at",
       accessKey: "date",
