@@ -12,14 +12,14 @@ from constants import (
     SupplierResponseMsg,
 )
 from models import Supplier
-from schemas import CreateSupplierSchema, SupplierSchema
+from schemas import CreateSupplierSchema, PaginatedResponse, SupplierSchema
 from services import find_supplier_by_id
 from validation import validate_supplier_not_exists
 
 router = APIRouter(prefix=API_ROUTER_PREFIX)
 
 
-@router.get("/suppliers")
+@router.get("/suppliers", response_model=PaginatedResponse[list[SupplierSchema]])
 async def get_suppliers(
     limit: PositiveInt | None = None,
     page: PositiveInt = DEFAULT_PAGE_NUMBER,
@@ -32,6 +32,11 @@ async def get_suppliers(
     db_suppliers = results.scalars().all()
 
     return paginate(db_suppliers)
+
+
+@router.get("/suppliers/{id}", response_model=SupplierSchema)
+async def get_supplier_by_id(id: int, session: AsyncSession = Depends(get_session)):
+    return await find_supplier_by_id(id, session)
 
 
 @router.post("/suppliers")
