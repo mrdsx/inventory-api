@@ -7,11 +7,13 @@ import { fetchSuppliers } from "@/features/supplier";
 import { useQuery } from "@tanstack/react-query";
 import { SUPPLIERS_TABLE_COLUMNS } from "./suppliers-table-columns";
 
+const { SUPPLIERS } = QUERY_KEYS;
+
 export default function SuppliersPage() {
   const { itemsPerPage, page } = usePaginatedQueryParams();
 
   const { data: paginatedSuppliers, isPending } = useQuery({
-    queryKey: [QUERY_KEYS.SUPPLIERS, page, itemsPerPage],
+    queryKey: [SUPPLIERS, page, itemsPerPage],
     queryFn: () => fetchSuppliers(page, itemsPerPage),
     throwOnError: true,
     retry: false,

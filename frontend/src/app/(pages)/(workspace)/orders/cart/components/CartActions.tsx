@@ -1,11 +1,9 @@
 "use client";
 
-import { ENDPOINTS, handleAPIFetch } from "@/app/lib";
+import { handleAPIFetch } from "@/app/lib";
 import { Button } from "@/components/ui";
 import { Order, postOrder, useOrderCartStore } from "@/features/order";
 import { toast } from "sonner";
-
-const { orders } = ENDPOINTS;
 
 export function CartActions() {
   const cart = useOrderCartStore((state) => state.cart);

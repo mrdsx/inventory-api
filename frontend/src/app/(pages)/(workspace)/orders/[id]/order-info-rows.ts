@@ -10,7 +10,6 @@ import {
   CircleDollarSign,
   LucideIcon,
   SquareCheck,
-  UserRound,
 } from "lucide-react";
 
 type OrderField = {

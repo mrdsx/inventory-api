@@ -3,6 +3,8 @@ import { Path } from "../types";
 import { BASE_API_URL, HTTP_CODES } from "./constants";
 import { isBaseErrorResponse } from "./utils";
 
+const { NOT_FOUND } = HTTP_CODES;
+
 type ApiClientOptions = {
   requestInit?: RequestInit;
   errorMessage?: string;
@@ -16,7 +18,7 @@ export async function apiClient<TResponse extends Record<string, any>>(
   const data = await res.json();
 
   if (res.ok) return data;
-  if (res.status === HTTP_CODES.NOT_FOUND) notFound();
+  if (res.status === NOT_FOUND) notFound();
   if (isBaseErrorResponse(data)) console.warn(data.detail);
 
   throw new Error(
