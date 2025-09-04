@@ -23,7 +23,9 @@ export async function fetchSuppliers(
   );
 }
 
-export async function postSupplier(supplier: Supplier) {
+export async function postSupplier(
+  supplier: Supplier,
+): Promise<BaseAPIResponse> {
   return await apiClient<BaseAPIResponse>(suppliers, {
     requestInit: {
       body: JSON.stringify(supplier),
