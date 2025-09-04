@@ -8,7 +8,7 @@ import {
 } from "@/components/ui";
 import { SupplierResponse } from "@/features/supplier";
 import { ColumnDef } from "@tanstack/react-table";
-import { FileText, MoreHorizontal } from "lucide-react";
+import { FileText, MoreHorizontal, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export const SUPPLIERS_TABLE_COLUMNS: ColumnDef<SupplierResponse>[] = [
@@ -47,6 +47,14 @@ export const SUPPLIERS_TABLE_COLUMNS: ColumnDef<SupplierResponse>[] = [
             >
               <FileText />
               View supplier
+            </DropdownMenuItem>
+            {/* TODO: implement supplier deletion */}
+            <DropdownMenuItem
+              onClick={() => console.log("deleted")}
+              variant="destructive"
+            >
+              <Trash2 />
+              Delete Supplier
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
