@@ -1,7 +1,17 @@
 import { apiClient, BaseAPIResponse, ENDPOINTS } from "@/app/lib";
-import { PaginatedSuppliersResponse, Supplier } from "./types";
+import {
+  PaginatedSuppliersResponse,
+  Supplier,
+  SupplierResponse,
+} from "./types";
 
 const { suppliers } = ENDPOINTS;
+
+export async function fetchSupplierById(id: number): Promise<SupplierResponse> {
+  return await apiClient<SupplierResponse>(`${suppliers}/${id}`, {
+    errorMessage: "Failed to fetch supplier",
+  });
+}
 
 export async function fetchSuppliers(
   page: number = 1,
