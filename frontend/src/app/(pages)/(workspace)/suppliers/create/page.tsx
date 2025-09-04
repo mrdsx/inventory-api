@@ -34,14 +34,15 @@ export default function CreateSupplierPage() {
     <>
       <GoBackBtn href={ROUTES.workspace.suppliers.root} />
       <div className="card bg-card p-6">
-        <form onSubmit={handleSubmit}>
-          <div className="flex flex-col items-center gap-4 md:flex-row md:items-end">
-            <CreateSupplierFormInputs
-              emailInputRef={emailInputRef}
-              nameInputRef={nameInputRef}
-            />
-            <Button type="submit">Create Supplier</Button>
-          </div>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center gap-4 md:flex-row md:items-end"
+        >
+          <CreateSupplierFormInputs
+            nameInputRef={nameInputRef}
+            emailInputRef={emailInputRef}
+          />
+          <Button type="submit">Create Supplier</Button>
         </form>
       </div>
     </>
