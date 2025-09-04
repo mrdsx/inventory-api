@@ -6,6 +6,10 @@ class CreateSupplierSchema(BaseModel):
     contact_email: str
 
 
+class UpdateSupplierSchema(CreateSupplierSchema):
+    pass
+
+
 class SupplierSchema(BaseModel):
     id: int
     name: str

@@ -7,7 +7,7 @@ from .inventory_item import (
 from .order import CreateOrderSchema, OrderPublicSchema, OrderSchema, OrdersCountSchema
 from .order_item import CreateOrderItemSchema, OrderItemSchema, OrderItemPublicSchema
 from .response import PaginatedResponse
-from .supplier import CreateSupplierSchema, SupplierSchema
+from .supplier import CreateSupplierSchema, SupplierSchema, UpdateSupplierSchema
 
 
 __all__ = [
@@ -30,4 +30,5 @@ __all__ = [
     # * supplier
     "CreateSupplierSchema",
     "SupplierSchema",
+    "UpdateSupplierSchema",
 ]

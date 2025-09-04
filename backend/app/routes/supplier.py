@@ -12,7 +12,12 @@ from constants import (
     SupplierResponseMsg,
 )
 from models import Supplier
-from schemas import CreateSupplierSchema, PaginatedResponse, SupplierSchema
+from schemas import (
+    CreateSupplierSchema,
+    PaginatedResponse,
+    SupplierSchema,
+    UpdateSupplierSchema,
+)
 from services import find_supplier_by_id
 from validation import validate_supplier_not_exists
 
@@ -56,7 +61,7 @@ async def create_supplier(
 @router.put("/suppliers/{id}", response_model=SupplierSchema)
 async def update_supplier_by_id(
     id: int,
-    supplier: CreateSupplierSchema,
+    supplier: UpdateSupplierSchema,
     session: AsyncSession = Depends(get_session),
 ):
     db_supplier = await find_supplier_by_id(id, session)
